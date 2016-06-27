@@ -30,7 +30,6 @@
      document.write('<?php css('common', 'w9', '20160415');?>');
   }
 <![endif]-->
-
 </head>
 <body>
 <div id="top">
@@ -120,248 +119,50 @@
     </div>
 </div>
 <div class="navq" id="nav">
+    <?php $allCategory =  getAllCategory();?>
     <div class="w">
         <div class="lcat" id="bignav">
             <p class="nall hand">全部商品分类</p>
             <ul class="lnav" id="lnav">
+                <?php foreach ($allCategory as $key=>$item): ?>
                 <li>
                    <em class="f">&#xe64c;</em>
-                   <a class="lma" href="<?php echo $this->config->main_base_url;?>">
-                   	      男性用品
+                   <a class="lma" href="<?php echo site_url('goods/mallgoods/search?cid='.$item['cat_id']);?>">
+                   	    <?php echo $item['cat_name'];?>
                    </a>
+                   <?php if (!empty($item['childCat'])):?>
                    <div class="lra">
-                        <div class="lh3"><b class="left">男性用品</b><a href="<?php echo $this->config->main_base_url;?>" class="right" rel="nofollow">更多>></a></div>
+                        <div class="lh3">
+                            <b class="left"><?php echo $item['cat_name'];?></b>
+                            <a href="<?php echo site_url('goods/mallgoods/search?cid='.$item['cat_id']);?>" class="right" rel="nofollow">更多>></a>
+                        </div>
                         <p class="boa">
-                            <a href="<?php echo $this->config->main_base_url;?>">自慰飞机杯</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">女优名器</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">臀胸倒模</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">助勃增大器</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">延时喷剂</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">前列腺刺激</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">充气娃娃</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">锁精套环</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">实体玩偶</a>
+                            <?php foreach ($item['childCat'] as $i=>$val):?>
+                            <a href="<?php echo site_url('goods/mallgoods/search?cid='.$val['cat_id']);?>"><?php echo $val['cat_name'];?></a>
+                            <?php endforeach;?>
                         </p>
+                        <?php if(!empty($item['keyword'])):?>
                         <div class="lh3"><b class="left">本类热搜</b></div>
                         <p class="bom">
-                            <a href="<?php echo $this->config->main_base_url;?>">藏帝延时喷剂</a>	
-                            <a href="<?php echo $this->config->main_base_url;?>">电动增大器</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">波多野结衣系列</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">冰冰版娃娃</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">自动抽插飞机杯</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">大屁股倒模</a>
+                            <?php echo $item['keyword'];?>
                         </p>
+                        <?php endif;?>
                    </div>
+                   <?php endif;?>
                 </li>
-                <li><em class="f">&#xe64f;</em><a class="lma" href="<?php echo $this->config->main_base_url;?>">女性用品</a>
-                    <div class="lra">
-                        <div class="lh3"><b class="left">女性用品</b><a href="<?php echo $this->config->main_base_url;?>" class="right" rel="nofollow">更多>></a></div>
-                        <p class="boa">
-                            <a href="<?php echo $this->config->main_base_url;?>">多点按摩棒</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">仿真阳具</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">转珠棒</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">G点震动棒</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">性爱机器</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">跳蛋</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">情欲提升</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">AV震动棒</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">双乳刺激</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">后庭拉珠</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">充气男人</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">私处挑逗</a>
-                        </p>
-                        <div class="lh3"><b class="left">本类热搜</b></div>
-                            <p class="bom">
-                            <a href="<?php echo $this->config->main_base_url;?>">自动抽插阳具</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">抽插震动棒</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">炮机</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">强震跳蛋</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">土豪级男根</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">乳房增大</a>
-                        </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe643;</em><a class="lma" href="<?php echo $this->config->main_base_url;?>">延时助情</a>
-                    <div class="lra">
-                        <div class="lh3"><b class="left">延时助情</b><a href="<?php echo $this->config->main_base_url;?>" class="right" rel="nofollow">更多>></a></div>
-                        <p class="boa">
-                            <a href="<?php echo $this->config->main_base_url;?>">延时喷剂</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">情欲提升</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">助勃增大器</a>
-                        </p>
-                        <div class="lh3"><b class="left">本类热搜</b></div>
-                        <p class="bom">
-                            <a href="<?php echo $this->config->main_base_url;?>">纯植物延时</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">催欲香水</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">高潮液</a>
-                            <a href="<?php echo $this->config->main_base_url;?>">乳头兴奋霜</a>
-                        </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe644;</em><a class="lma" href="<?php echo $this->config->main_base_url;?>">情趣服饰</a>
-                    <div class="lra">
-                    <div class="lh3"><b class="left">情趣服饰</b><a href="<?php echo $this->config->main_base_url;?>" class="right" rel="nofollow">更多>></a></div>
-                    <p class="boa">
-                        <a href="<?php echo $this->config->main_base_url;?>">性感裙装</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">制服诱惑</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">三点激情</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">情趣内裤</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">连体网衣</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">情趣丝袜</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">男士内衣</a>
-                    </p>
-                    <div class="lh3"><b class="left">本类热搜</b></div>
-                    <p class="bom">
-                        <a href="<?php echo $this->config->main_base_url;?>">无缝包臀裙</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">女仆装</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">三点式</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">开档连身网衣</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">黑色丝袜</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">男用丁字裤</a>
-                    </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe64e;</em><a class="lma" href="<?php echo $this->config->main_base_url;?>">双人情趣</a>
-                    <div class="lra">
-                    <div class="lh3"><b class="left">双人情趣</b><a href="<?php echo $this->config->main_base_url;?>" class="right" rel="nofollow">更多>></a></div>
-                    <p class="boa">
-                        <a href="<?php echo $this->config->main_base_url;?>">体位道具</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">男女共振器</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">捆绑束缚</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">手脚拷环</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">项圈脖套</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">乳夹口塞</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">贞操裤</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">头套眼罩</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">同性用品</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">鞭打</a>
-                        <a href="<?php echo $this->config->main_base_url;?>">另类调教工具</a>
-                    </p>
-                    <div class="lh3"><b class="left">本类热搜</b></div>
-                    <p class="bom">
-                        <a href="/goods-7142.html">SM套装</a>
-                        <a href="/goods-4307.html">体位道具</a>
-                        <a href="/goods-5088.html">一起震</a>
-                        <a href="/goods-7247.html">滴蜡</a>
-                    </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe63f;</em><a class="lma" href="/runhuaye/">润滑液</a>
-                    <div class="lra">
-                    <div class="lh3"><b class="left">润滑液</b><a href="/runhuaye/" class="right" rel="nofollow">更多>></a></div>
-                    <p class="boa">
-                        <a href="/runhuaye/rtrhy/">人体润滑液</a>
-                        <a href="/runhuaye/cxrhy/">唇吸润滑液</a>
-                        <a href="/runhuaye/htrh/">后庭润滑液</a>
-                        <a href="/runhuaye/fgmrhy/">防过敏润滑液</a>
-                        <a href="/runhuaye/wjqxy/">玩具清洗液</a>
-                    </p>
-                    <div class="lh3"><b class="left">本类热搜</b></div>
-                    <p class="bom">
-                        <a href="/goods-4951.html">杜蕾斯牌</a>
-                        <a href="/runhuaye/cxrhy/">水果味</a>
-                        <a href="/goods-5175.html">高级润滑液</a>
-                        <a href="/goods-5174.html">进口品牌</a>
-                    </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe632;</em><a class="lma" href="/biyuntao/">避孕套</a>
-                    <div class="lra">
-                        <div class="lh3"><b class="left">避孕套</b><a href="/biyuntao/" class="right" rel="nofollow">更多>></a></div>
-                        <p class="boa">
-                            <a href="/biyuntao/chaobao/">超薄体贴</a>
-                            <a href="/biyuntao/luowen/">螺纹刺激</a>
-                            <a href="/biyuntao/chijiu/">超凡持久</a>
-                            <a href="/biyuntao/fudian/">浮点颗粒</a>
-                            <a href="/biyuntao/guowei/">冰火果味</a>
-                            <a href="/biyuntao/nybyt/">女用特色</a>
-                            <a href="/biyuntao/jinzhi/">紧致贴合</a>
-                            <a href="/biyuntao/beishuang/">倍爽润滑</a>
-                            <a href="/biyuntao/shishang/">创意时尚</a>
-                            <a href="/biyuntao/chaozhi/">超值组合</a>
-                        </p>
-                        <div class="lh3"><b class="left">本类热搜</b></div>
-                        <p class="bom">
-                            <a href="/brand/durex/">杜蕾斯</a>
-                            <a href="/brand/gangben/">冈本</a>
-                            <a href="/brand/dx/">大象</a>
-                            <a href="/brand/MIO/">米奥</a>
-                        </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe637;</em><a class="lma" href="/fengqing/">丰胸缩阴</a>
-                    <div class="lra">
-                        <div class="lh3"><b class="left">丰胸缩阴</b><a href="/fengqing/" class="right" rel="nofollow">更多>></a></div>
-                        <p class="boa">
-                            <a href="/fengqing/suoyin/">缩阴养颜</a>
-                            <a href="/fengqing/fxmx/">丰胸美胸</a>
-                            <a href="/fengqing/scxf/">私处护理</a>
-                        </p>
-                        <div class="lh3"><b class="left">本类热搜</b></div>
-                        <p class="bom">
-                            <a href="/goods-5752.html">缩阴球</a>
-                            <a href="/goods-7212.html">私处变粉嫩</a>
-                            <a href="/goods-7697.html">乳房坚挺</a>
-                        </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe633;</em><a class="lma" href="/brand/" rel="nofollow">情趣品牌</a>
-                    <div class="lra">
-                        <div class="lh3"><b class="left">情趣品牌</b><a href="/brand/" class="right" rel="nofollow">更多>></a></div>
-                        <p class="boa">
-                            <a href="/brand/esther/">以诗萜</a>
-                            <a href="/brand/ibzan/">以比赞</a>
-                            <a href="/brand/lelo/">LELO</a>
-                            <a href="/brand/funfactory/">FunFactory</a>
-                            <a href="/brand/omysky/">私享玩趣</a>
-                            <a href="/brand/gangben/">冈本</a>
-                            <a href="/brand/ailv/">爱侣</a>
-                            <a href="/brand/durex/">杜蕾斯</a>
-                            <a href="/brand/npg/">NPG</a>
-                            <a href="/brand/toughage/">TOUGHAGE</a>
-                            <a href="/brand/beilile/">倍力乐</a>
-                            <a href="/brand/baile/">百乐</a>
-                            <a href="/brand/tenga/">TENGA</a>
-                            <a href="/brand/shaki/">夏奇</a>
-                            <a href="/brand/jizhimei/">积之美</a>
-                            <a href="/brand/zhaobang/">兆邦NMC</a>
-                        </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe63a;</em><a class="lma" href="/topic/" rel="nofollow">专题活动</a>
-                    <div class="lra">
-                        <div class="lh3"><b class="left">专题活动</b><a href="/topic/" class="right" rel="nofollow">更多>></a></div>
-                        <p class="boa">
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">每周上新</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">特价抢购</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">AV女优倒模</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">成人用品排行</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">火爆情趣内衣</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">火爆延时喷剂</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">女性仿真倒模</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">女用自慰器</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">飞机杯自慰器</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">男根增大</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">安全套-避孕套</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">延时喷剂</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">火爆热销</a>
-                            <a target="_blank" rel="nofollow" href="<?php echo $this->config->main_base_url;?>">能否给我个家</a>
-                        </p>
-                    </div>
-                </li>
-                <li><em class="f">&#xe650;</em><a class="lma" href="<?php echo $this->config->main_base_url;?>" rel="nofollow">视频专区</a></li>
+                <?php endforeach;?>
             </ul>
         </div>
         <ul class="navs left">
-            <li><a href="<?php echo $this->config->main_base_url;?>" rel="nofollow">首页</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >女性用品</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >男性用品</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >延时助情</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >情趣内衣</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >飞机杯</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >G点棒</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >仿真阳具</a></li>
-            <li><a href="<?php echo $this->config->main_base_url;?>"  >土豪天堂</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>" rel="nofollow">首页</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >女性用品</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >男性用品</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >延时助情</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >情趣内衣</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >飞机杯</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >G点棒</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >仿真阳具</a></li>
+            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >土豪天堂</a></li>
         </ul>
         <div class="clear"></div>
     </div>

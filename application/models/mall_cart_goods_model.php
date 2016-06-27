@@ -13,6 +13,5 @@ class Mall_cart_goods_model extends CI_Model{
 		$this->db->order_by('creat_at','desc');
 		return $this->db->get($this->table);
 	}
-	
-	
+		
 }

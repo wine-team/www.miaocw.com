@@ -3,17 +3,18 @@ class Home extends MW_Controller{
 	
 	public function _init() {
 		
+		$this->load->model('advert_model','advert');
 		$this->load->model('cms_block_model','cms_block');
 		$this->load->model('mall_category_model','mall_category');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 	}
-	
-	
+		
 	/**
 	 **首页
 	*/
 	public function grid(){
 
+		$data['advert'] = $this->advert->findBySourceState($source_state=1);
 		$data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword'));
 		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0; 
 		$this->load->view('home/grid',$data);

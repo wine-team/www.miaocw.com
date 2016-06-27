@@ -92,6 +92,18 @@ function send_email($recipient, $subject = 'Test email', $message = 'Hello World
 	return mail($recipient, $subject, $message);
 }
 
+/**
+ * 获取所有的分类
+ * 菜单栏需要
+ */
+function getAllCategory(){
+	
+	$CI = & get_instance();
+	$CI->load->model('mall_category_model','mall_category');
+	$allCategory = $CI->mall_category->getAllCategory();
+	return $allCategory;
+}
+
 
 
 
