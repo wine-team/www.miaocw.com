@@ -14,9 +14,10 @@
 <?php css('common', 'common', '20160415');?>
 <?php css('miaow', 'reset', '20160415');?>
 
-<?php js('help', 'jquery-1.10.2');?>
-<?php js('help', 'jquery.validate.min');?>
-<?php js('help', 'jquery.validate.messages_zh');?>
+<?php js('miaow', 'jquery-1.10.2');?>
+<?php js('miaow', 'image.slide')?>
+<?php js('miaow', 'jquery.validate.min');?>
+<?php js('miaow', 'jquery.validate.messages_zh');?>
 
 <?php js('common','common', '20160415');?>
 <?php js('miaow', 'index');?>

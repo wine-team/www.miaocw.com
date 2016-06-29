@@ -15,7 +15,7 @@ class Home extends MW_Controller{
 	public function grid(){
 
 		$data['advert'] = $this->advert->findBySourceState($source_state=1);
-		$data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword'));
+		$data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','head_right_advert'));
 		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0; 
 		$this->load->view('home/grid',$data);
 	}
