@@ -122,7 +122,7 @@
 <div class="navq" id="nav">
     <?php $allCategory =  getAllCategory();?>
     <div class="w">
-        <div class="lcat" id="bignav">
+        <div class="lcat">
             <p class="nall hand">全部商品分类</p>
             <ul class="lnav" id="lnav">
                 <?php foreach ($allCategory as $key=>$item): ?>
