@@ -41,8 +41,8 @@
             </a>
             <span class="vline">|</span>
             <?php if($this->uid):?>
-                                         您好：<a class="c3" title="会员等级v1" href="<?php $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
-               <a class="pl5 c8" target="_blank" href="<?php $this->config->help_url;?>">（VIP折扣：9.8折）</a>
+                                         您好：<a class="c3" title="会员等级v1" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
+               <a class="pl5 c8" target="_blank" href="<?php echo $this->config->help_url;?>">（VIP折扣：9.8折）</a>
 			   <span class="vline">|</span>
 			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
             <?php else:?>
