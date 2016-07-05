@@ -4,18 +4,16 @@
 			<li class="m_li" id="minarg">
 				<a href="javacript:;">
 					<i class="f iconfont">&#xe603;</i>
-					<i id="carr_num">0</i>
+					<i id="carr_num"><?php echo isset($cart_num) ? $cart_num : '0';?></i>
 				</a>
 				<p class="rt_line"></p>
 				<div class="r_av m_tr" id="racar">
 					<em class="r_vt">◆</em>
-					<div id="rxcar">
-						<div class="ac_t alR clearfix">您的购物车是空的,赶紧选购吧！</div>
-					</div>
+					<div id="rxcar"></div>
 				</div>
 			</li>
 			<li class="m_li m_lih" id="minar">
-				<a href="javascript:;" onClick="jieshou()">
+				<a href="javascript:;">
 					<img src="http://s.qw.cc/themes/v4/css/ft/rkf.gif" width="28" height="29">
 					<em class="mr_wd">美女客服</em>
 				</a>
@@ -32,13 +30,13 @@
 				</div>
 			</li>
 			<li class="m_li">
-				<a href="javacript:;" target="blank" class="f">
+				<a href="<?php echo $this->config->ucenter_url;?>" target="blank" class="f">
 					<i class="iconfont">&#xe600;</i>
 				</a>
 				<p class="r_av m_tr">订单查询<em class="r_vt">◆</em></p>
 			</li>
 			<li class="m_li">
-				<a href="javascript:alert('请先登录');" class="f">
+				<a href="<?php echo $this->config->ucenter_url;?>" class="f">
 					<i class="iconfont">&#xe606;</i>
 				</a>
 				<p class="r_av m_tr">我的收藏<em class="r_vt">◆</em></p>
@@ -63,7 +61,7 @@
 				</p>
 			</li>
 			<li class="m_li">
-				<a href="<?php echo site_url('User_feedback/index');?>" class="f f20" target="_blank">
+				<a href="<?php echo $this->config->help_url.'User_feedback/index';?>" class="f f20" target="_blank">
 					<i class="iconfont">&#xe601;</i>
 				</a>
 				<p class="r_av m_tr">意见反馈

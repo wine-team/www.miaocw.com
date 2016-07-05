@@ -20,22 +20,5 @@ class Home extends MW_Controller{
 		$this->load->view('home/grid',$data);
 	}
 	
-	/**
-	**购物车的加载
-	*/
-	public function getCart(){
-		
-		if (empty($this->uid)) {
-		   $data = array();
-		   echo json_encode(array(
-		   	    'status' => true,
-		   		'html'   => $this->load->view('home/cartlist',$data,true)
-		   ));exit;
-		}
-		$data['cart_goods'] = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
-		echo json_encode(array(
-				'status' => true,
-				'html'   => $this->load->view('home/cartlist',$data,true)
-		));exit;
-	}
+	
 }
