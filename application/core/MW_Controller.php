@@ -6,15 +6,14 @@ class MW_Controller extends CI_Controller
     public $uid;
     public $userType;
     public $userName;
-   
+    
     public function __construct()
     {
         parent::__construct();
-        $frontUser = get_cookie('frontUser');
+        $frontUser = get_cookie('frontUser') ? get_cookie('frontUser') : $this->cache->memcached->get('frontUser');
         if($frontUser){
-        	$this->frontUser = unserialize(preg_replace_callback( '!s:(\d+):"(.*?)";!s', function($m){return 's:'.strlen($m[2]).':"'.$m[2].'";';}, $frontUser));
+        	$this->frontUser = unserialize( base64_decode($frontUser) );
             $this->uid = $this->frontUser['uid'];
-            $this->userType = $this->frontUser['userType'];
             $this->userName = $this->frontUser['userName'];
         }
         $this->_init(); //用着重载

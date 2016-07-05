@@ -40,11 +40,18 @@
             	<em class="f mt1 iconfont">&#xe60a;</em>首页
             </a>
             <span class="vline">|</span>
-            <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">登录</a>
-            <span class="vline">|</span>
-            <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url;?>">
-            	注册<em class="c9 pl10"><i class="org">送10元优惠券</i></em>
-            </a>
+            <?php if($this->uid):?>
+                                         您好：<a class="c3" title="会员等级v1" href="<?php $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
+               <a class="pl5 c8" target="_blank" href="<?php $this->config->help_url;?>">（VIP折扣：9.8折）</a>
+			   <span class="vline">|</span>
+			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
+            <?php else:?>
+               <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">登录</a>
+	           <span class="vline">|</span>
+	           <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url;?>">
+	            	注册<em class="c9 pl10"><i class="org">送10元优惠券</i></em>
+	           </a>                        
+            <?php endif;?>
         </div>
         <ul id="tul" class="tul right">
             <li>
