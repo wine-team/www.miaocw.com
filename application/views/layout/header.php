@@ -36,7 +36,7 @@
 <div id="top">
     <div class="w">
         <div class="left c8">
-            <a rel="nofollow" href="<?php echo site_url('home/home/grid');?>" class="c9">
+            <a rel="nofollow" href="<?php echo site_url();?>" class="c9">
             	<em class="f mt1 iconfont">&#xe60a;</em>首页
             </a>
             <span class="vline">|</span>
