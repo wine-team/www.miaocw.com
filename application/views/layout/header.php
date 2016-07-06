@@ -101,8 +101,8 @@
 <div id="header">
     <div class="w">
         <div class="rel left">
-            <a href="<?php echo site_url();?>" title="妙网商城,百变情趣,乐享生活" class="logo" rel="nofollow" target="_blank">
-            	<img src="help/images/logo_01.png" width="296" height="44" />
+            <a href="<?php echo site_url();?>" title="妙网商城,百变情趣,乐享生活" class="logo" rel="nofollow">
+            	<img src="help/images/logo_01.png" width="296" height="44"/>
             </a>
         </div>
         <div id="search" class="search left">
@@ -117,7 +117,7 @@
             <div id="s_box"></div>
         </div>
         <div class="tr_c right" id="tcar">
-            <a class="t_c" href="<?php echo site_url('cart/cart/grid');?>" rel="nofollow">
+            <a class="t_c" href="<?php echo site_url('cart/grid');?>" rel="nofollow">
                                                我的购物车
                  <p id="qcar"><?php echo isset($cart_num) ? $cart_num : '0';?></p><i class="ci_r">&gt;</i>
             </a>
