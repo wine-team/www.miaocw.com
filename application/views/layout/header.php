@@ -101,7 +101,7 @@
 <div id="header">
     <div class="w">
         <div class="rel left">
-            <a href="<?php echo site_url('home/home/grid');?>" title="妙网商城,百变情趣,乐享生活" class="logo" rel="nofollow" target="_blank">
+            <a href="<?php echo site_url();?>" title="妙网商城,百变情趣,乐享生活" class="logo" rel="nofollow" target="_blank">
             	<img src="help/images/logo_01.png" width="296" height="44" />
             </a>
         </div>
