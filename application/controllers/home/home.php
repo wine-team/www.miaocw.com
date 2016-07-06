@@ -20,5 +20,17 @@ class Home extends MW_Controller{
 		$this->load->view('home/grid',$data);
 	}
 	
+	 /**
+	 *历史记录
+	 */
+	public function getHistory(){
+		
+		$history = unserialize(base64_decode(get_cookie('history')));
+		$data['history'] = $history;
+		echo json_encode(array(
+				'status' => true,
+				'html'   => $this->load->view('home/historylist',$data,true)
+		));exit;
+	}
 	
 }
