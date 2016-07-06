@@ -14,8 +14,15 @@ class Home extends MW_Controller{
 	*/
 	public function grid(){
 
-		$data['advert'] = $this->advert->findBySourceState($source_state=1);
-		$data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','head_right_advert','head_today_recommend','head_recommend_down','head_hot_keyword'));
+		if (!$this->cache->memcached->get('hostHomePageCache')) {
+			$data = array(
+				'advert' => $this->advert->findBySourceState($source_state=1)->result_array(),
+			    'cms_block' => $this->cms_block->findByBlockIds(array('home_keyword','head_right_advert','head_today_recommend','head_recommend_down','head_hot_keyword')),
+			);
+			$this->cache->memcached->save('hostHomePageCache',$data);
+		} else {
+			$data = $this->cache->memcached->get('hostHomePageCache');
+		}
 		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0; 
 		$this->load->view('home/grid',$data);
 	}
@@ -29,8 +36,8 @@ class Home extends MW_Controller{
 		$history = unserialize(base64_decode(get_cookie('history')));
 		$data['history'] = $history;
 		$jsonData = json_encode(array(
-				'status' => true,
-				'html'   => $this->load->view('home/historylist',$data,true)
+			'status' => true,
+			'html'   => $this->load->view('home/historylist',$data,true)
 		));
 		echo $callback . '(' . $jsonData . ')';exit;
 	}

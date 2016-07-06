@@ -1,11 +1,11 @@
 <?php $this->load->view('layout/header');?>
-<?php if($advert->num_rows()>0):?>
+<?php if(count($advert)>0):?>
 <div id="focus" class="focus header-advert">
 	<ul class="f_ul">
-	    <?php foreach ($advert->result() as $key=>$item):?>
-	    <li lazy="<?php echo $this->config->show_image_url('advert',$item->picture);?>">
-	        <a target="_blank" href="<?php echo $item->url;?>">
-	            <img  src="<?php echo $this->config->show_image_url('advert',$item->picture);?>" />
+	    <?php foreach ($advert as $key=>$item):?>
+	    <li>
+	        <a target="_blank" href="<?php echo $item['url'];?>">
+	            <img  src="<?php echo $this->config->show_image_url('advert',$item['picture']);?>" />
 	        </a>
 	    </li>
 	    <?php endforeach;?>
