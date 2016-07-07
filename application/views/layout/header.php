@@ -98,7 +98,7 @@
         <div class="clear"></div>
     </div>
 </div>
-<div id="header">
+<div id="header" class="miao-header">
     <div class="w">
         <div class="rel left">
             <a href="<?php echo site_url();?>" title="妙网商城,百变情趣,乐享生活" class="logo" rel="nofollow">

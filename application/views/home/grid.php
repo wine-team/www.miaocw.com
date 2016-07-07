@@ -504,5 +504,18 @@
 		</div>
 	</div>
 </div>
-<div class="clear"></div>
+<div class="hs_t" id="home_top">
+	<div class="w">
+		<a href="javascript:;" class="mt5 left">
+			<img src="http://s.qw.cc/themes/v4/css/hlo.png" width="272" height="28" />
+		</a>
+		<div id="search" class="search left">
+			<form action="<?php echo site_url('goods/mallgoods/search');?>" method="get"  class="ov">
+				<input type="text"  name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="商品名称/货号" />
+				<input type="submit" class="left shr" title="点击搜索" value="搜索">
+			</form>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
 <?php $this->load->view('layout/footer');?>
