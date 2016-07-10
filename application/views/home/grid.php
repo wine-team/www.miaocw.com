@@ -474,33 +474,13 @@
 				<strong class="left">情趣品牌</strong>
 				<a href="javascript:;" target="_blank" class="fN gray" rel="nofollow">more></a>
 			</h3>
+			<?php if(count($brand)>0):?>
+			<?php foreach ($brand as $key=>$item):?>
 			<a href="javascript:;" class="h_brd" title="杜蕾斯" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1332236988948109070.jpg" width="90" height="40">
+				<img src="<?php echo $this->config->show_image_url('brand',$item['brand_logo']);?>" width="90" height="40" alt="<?php echo $item['brand_name'];?>"/>
 			</a>
-			<a href="javascript:;" class="h_brd" title="积之美" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1332236945812531445.jpg" width="90" height="40">
-			</a>
-			<a href="javascript:;" class="h_brd" title="FunFactory" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1332237491680056820.jpg" width="90" height="40">
-			</a>
-			<a href="javascript:;" class="h_brd" title="诺兰" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1442807201576592261.jpg" width="90" height="40">
-			</a>
-			<a href="javascript:;" class="h_brd" title="LELO" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1332237178310748384.jpg" width="90" height="40">
-			</a>
-			<a href="javascript:;" class="h_brd" title="冈本" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1332243221637448132.jpg" width="90" height="40">
-			</a>
-			<a href="javascript:;" class="h_brd" title="百乐" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1332244813781998166.jpg" width="90" height="40">
-			</a>
-			<a href="javascript:;" class="h_brd" title="Key" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1442807505282389251.jpg" width="90" height="40">
-			</a>
-			<a href="javascript:;" class="h_brd" title="瑟蓓绮" target="_blank">
-				<img src="http://img.qw.cc/data/brandlogo/1442807488969433993.jpg" width="90" height="40">
-			</a>
+			<?php endforeach;?>
+			<?php endif;?>
 		</div>
 	</div>
 </div>

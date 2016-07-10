@@ -106,7 +106,7 @@
             </a>
         </div>
         <div id="search" class="search left">
-            <form action="<?php echo site_url('goods/mallgoods/search');?>" method="get" class="ov" />
+            <form action="<?php echo site_url('goods/search');?>" method="get" class="ov" />
                 <input type="text" name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="商品名称/货号" />
                 <input type="submit" class="left shr" title="点击搜索" value="搜索" />
                 <div class="clear"></div>

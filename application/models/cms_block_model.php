@@ -1,5 +1,5 @@
 <?php
-class cms_block_model extends CI_Model
+class Cms_block_model extends CI_Model
 {
     private $table = 'cms_block';
     
