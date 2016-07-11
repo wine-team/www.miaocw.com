@@ -107,7 +107,7 @@
         </div>
         <div id="search" class="search left">
             <form action="<?php echo site_url('goods/search');?>" method="get" class="ov" />
-                <input type="text" name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="商品名称/货号" />
+                <input type="text" name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="想凉快吗？点我！" />
                 <input type="submit" class="left shr" title="点击搜索" value="搜索" />
                 <div class="clear"></div>
                 <p class="hotw">
@@ -135,18 +135,18 @@
                 <?php foreach ($allCategory as $key=>$item): ?>
                 <li>
                    <em class="f">&#xe64c;</em>
-                   <a class="lma" href="<?php echo site_url('goods/mallgoods/search?cid='.$item['cat_id']);?>">
+                   <a class="lma" href="<?php echo site_url('goods/search?cid='.$item['cat_id']);?>">
                    	    <?php echo $item['cat_name'];?>
                    </a>
                    <?php if (!empty($item['childCat'])):?>
                    <div class="lra">
                         <div class="lh3">
                             <b class="left"><?php echo $item['cat_name'];?></b>
-                            <a href="<?php echo site_url('goods/mallgoods/search?cid='.$item['cat_id']);?>" class="right" rel="nofollow">更多>></a>
+                            <a href="<?php echo site_url('goods/search?cid='.$item['cat_id']);?>" class="right" rel="nofollow">更多>></a>
                         </div>
                         <p class="boa">
                             <?php foreach ($item['childCat'] as $i=>$val):?>
-                            <a href="<?php echo site_url('goods/mallgoods/search?cid='.$val['cat_id']);?>"><?php echo $val['cat_name'];?></a>
+                            <a href="<?php echo site_url('goods/search?cid='.$val['cat_id']);?>"><?php echo $val['cat_name'];?></a>
                             <?php endforeach;?>
                         </p>
                         <?php if(!empty($item['keyword'])):?>
@@ -162,15 +162,15 @@
             </ul>
         </div>
         <ul class="navs left">
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>" rel="nofollow">首页</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >女性用品</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >男性用品</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >延时助情</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >情趣内衣</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >飞机杯</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >G点棒</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >仿真阳具</a></li>
-            <li><a href="<?php echo site_url('goods/mallgoods/search');?>"  >土豪天堂</a></li>
+            <li><a href="<?php echo site_url();?>" rel="nofollow">首页</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >女性用品</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >男性用品</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >延时助情</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >情趣内衣</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >飞机杯</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >G点棒</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >仿真阳具</a></li>
+            <li><a href="<?php echo site_url('goods/');?>"  >土豪天堂</a></li>
         </ul>
         <div class="clear"></div>
     </div>
