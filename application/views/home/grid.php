@@ -66,8 +66,8 @@
 			<h3 class="mb5">真人倒模</h3>
 			<a href="javascript:;"  class="c_zon"target="_blank">阴部</a>
 			<a href="javascript:;" target="_blank">臀部</a>
-			<a target="javascript:;" href="/man/daomo/" class="c_zon">AV女优</a>
-			<a target="javascript:;" href="/man/meitun/b0-min0-max0-chara26.html">真人呻吟</a>
+			<a href="javascript:;" target="_blank" class="c_zon">AV女优</a>
+			<a href="javascript:;" target="_blank" >真人呻吟</a>
 		</div>
 		<div class="h_cat">
 			<h3 class="mb5">其他</h3>
@@ -220,7 +220,6 @@
 			<a target="_blank" href="javascript:;" class="h_ha">延时助情</a>
 			<em class="gray pl5 f16">DELAY</em>
 		</h2>
-		
 		<p class="right">
 			<a href="javascript:;" target="_blank" class="gray">延时喷剂</a>
 			<em class="vline">|</em>
@@ -458,17 +457,21 @@
 				<img src="http://s.qw.cc/themes/v4/css/2/homewx.png" width="314" height="132" alt="查询物流、咨询售后、产品使用方法，请关注微信号:趣网">
 			</p>
 		</div>
+		
 		<div class="z3 mr10">
-			<h3 class="bl_red alR"><strong class="left">成人用品资讯</strong><a href="/article_cat-19.html" target="_blank" class="fN gray" rel="nofollow">more></a></h3>
+			<h3 class="bl_red alR">
+				<strong class="left">成人用品资讯</strong>
+				<a href="<?php echo $this->config->help_url;?>" target="_blank" class="fN gray" rel="nofollow">more></a>
+			</h3>
+			<?php if ($infor->num_rows()>0):?>
 			<ul class="h_zx">
-				<li><a href="javascript:;" target="_blank">百乐遥控情趣跳蛋派蒂菈智能遥控情趣卫生巾，双休震动+无线遥控+手机app</a></li>
-				<li><a href="javascript:;" target="_blank">情趣用品体验师：一次带17个样品回家吓呆男朋友</a></li>
-				<li><a href="javascript:;" target="_blank">那些年，我们使用过的自慰方法</a></li>
-				<li><a href="javascript:;" target="_blank">给你的女人一次终身难忘的高潮体验</a></li>
-				<li><a href="javascript:;" target="_blank">让你的女人喷射的几款性用品</a></li>
-				<li><a href="javascript:;" target="_blank">男性进补必不可少的几款壮阳菜</a></li>
+			    <?php foreach ($infor->result() as $item):?>
+				<li><a href="<?php echo $this->config->help_url.'Help_center/detail/'.$item->id;?>" target="_blank"><?php echo $item->sub_title;?></a></li>
+				<?php endforeach;?>
 			</ul>
+			<?php endif;?>
 		</div>
+		
 		<div class="z3">
 			<h3 class="bl_red alR">
 				<strong class="left">情趣品牌</strong>

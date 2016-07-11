@@ -6,6 +6,7 @@ class Home extends MW_Controller{
 		$this->load->model('advert_model','advert');
 		$this->load->model('cms_block_model','cms_block');
 		$this->load->model('mall_brand_model','mall_brand');
+		$this->load->model('help_center_model','help_center');
 		$this->load->model('mall_category_model','mall_category');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 	}
@@ -25,7 +26,7 @@ class Home extends MW_Controller{
 		} else {
 			$data = $this->cache->memcached->get('hostHomePageCache');
 		}
-
+        $data['infor'] = $this->help_center->getHelpCenter($limit=6);
 		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0; 
 		$this->load->view('home/grid',$data);
 	}
