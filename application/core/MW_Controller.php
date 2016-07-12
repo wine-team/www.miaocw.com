@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+require_once 'CS_Controller.php';
 class MW_Controller extends CI_Controller
 {
     protected $frontUser = false;
