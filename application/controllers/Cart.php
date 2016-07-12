@@ -1,9 +1,10 @@
 <?php
-class Cart extends CS_Controller{
+
+class Cart extends CS_Controller {
 
 	public function _init() {
 
-		
+		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 	}
 
 	  /**
@@ -11,6 +12,8 @@ class Cart extends CS_Controller{
 	  */
      public function grid(){
      	
+     	$data = array();
+     	$this->load->view('cart/grid',$data);
      }
 
 }
