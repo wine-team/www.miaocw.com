@@ -4,6 +4,7 @@ class Cart extends CS_Controller {
 
 	public function _init() {
 
+		$this->load->model('region_model', 'region');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 	}
 

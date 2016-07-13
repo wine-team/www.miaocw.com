@@ -14,7 +14,9 @@
 		        </tr>
                 <tr>
 			        <td> 
-			        	<a href="goods-6197.html" target="_blank"><img src="http://s.qw.cc/images/201512/thumb_img/6197_thumb_P220_1449128855593-60x60.jpg" title="日本Rends DIY编程智能旋转自慰飞机杯" width="60" height="60" /></a> 
+			        	<a href="goods-6197.html" target="_blank">
+			        		<img src="http://s.qw.cc/images/201512/thumb_img/6197_thumb_P220_1449128855593-60x60.jpg" title="日本Rends DIY编程智能旋转自慰飞机杯" width="60" height="60" />
+			            </a> 
 			        </td>
 			        <td> 
 	            		<a href="goods-6197.html" target="_blank" class="pr50">日本Rends DIY编程智能旋转自慰飞机杯<p class="green"></p></a> 
@@ -25,22 +27,24 @@
 		          	<td>            
 			            <input type="text" size="4" name="goods_number[22748726]" id="goods_number_22748726" data-id="22748726" value="1" onblur="chageCarnum(22748726)" r_buy="1" class="number left"/>
 			            <div class="amount left">
-			              <p class="increase" onclick="c_add(22748726)"></p>
-			              <p class="decrease" onclick="c_rem(22748726)"></p>
+			               <p class="increase"></p>
+			               <p class="decrease"></p>
 			            </div>
 		            </td>
           			<td class="g_xj">¥2547.02</td>
           			<td>
-          				<p><a class="c9" href="javascript:adfav(6197)">转为收藏</a></p>
-                    	<a href="javascript:" onClick="delgoods(22748726)" class="c9">删除</a>
+          				<p><a class="c9" href="javascript:;">转为收藏</a></p>
+                    	<a href="javascript:"  class="c9">删除</a>
                     </td>
         		</tr>
                 <tr>
 		          	<td> 
-			            <a href="goods-4971.html" target="_blank"><img src="http://s.qw.cc/images/201511/thumb_img/4971_thumb_P220_1446530875302-60x60.jpg" title="香港兆邦凯撒爱的摇篮充气式性爱床" width="60" height="60" /></a> 
+			            <a href="javascript:;" target="_blank">
+			            	<img src="http://s.qw.cc/images/201511/thumb_img/4971_thumb_P220_1446530875302-60x60.jpg" title="香港兆邦凯撒爱的摇篮充气式性爱床" width="60" height="60" />
+			            </a> 
 			        </td>
 		          	<td> 
-            			<a href="goods-4971.html" target="_blank" class="pr50">香港兆邦凯撒爱的摇篮充气式性爱床<p class="green"></p></a> 
+            			<a href="javascript:;" target="_blank" class="pr50">香港兆邦凯撒爱的摇篮充气式性爱床<p class="green"></p></a> 
              		</td>
           			<td>
           				<em class="q_price">¥2234.40</em>
@@ -120,21 +124,8 @@
           		<tr>
             		<td>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</td>
             		<td>
-            			<input type="hidden" name="address_id" value="8883416" />
-              			<select name="country" id="selCountries_" onchange="region.changed(this, 1, 'selProvinces}')" class="hid">
-                			<option value="0"></option>
-                			<option value="1" selected="selected">中国</option>
-              			</select>
-              			<select name="province" autocomplete="off" id="selProvinces" onchange="region.changed(this, 2, 'selCities')" class="left select mt5" errormsg="请选择所在省份！">
-                		    <option value="" selected="selected">选择省份</option>
-                            <option value="2" >北京市</option>
-                        </select>
-              			<select name="city" id="selCities" onchange="region.changed(this,3,'selDistricts')" class="left select mt5" errormsg="请选择所在地级市" style="">
-                			<option value="" selected="selected">选择地级市</option>
-                        </select>
-              			<select name="district" id="selDistricts" class="left select mt5" errormsg="请选择所在区县！" style="display:none">
-                			<option value="">选择区县</option>
-                        </select>
+            			<input type="hidden" name="address_id" value="8883416"/>
+              			<?php $this->load->view('cart/address')?>
               			<em class="red ert pl5" id="sero">必填</em>
               		</td>
           		</tr>
@@ -162,7 +153,7 @@
       <div class="pd4">
         <input type="hidden" id="discount" value="0.98"/>
         <input type="hidden" id="payment" name="payment" value="4"/>
-        <div class="ov" id="zhif">          
+        <div class="ov pay-type" id="zhif">          
         	<div class="zfu zon left"  data-id="4">
         		<b class="f14">支付宝</b>
             	<p>99元包邮</p>
