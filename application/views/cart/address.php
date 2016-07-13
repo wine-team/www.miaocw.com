@@ -39,7 +39,7 @@ $(document).ready(function() {
 
     var change_district = function(){
         $.ajax({
-            url: '<?php echo base_url()?>region/select_children/'+$('#city_id').val(),
+            url: '<?php echo base_url()?>Region/select_children/'+$('#city_id').val(),
             type: 'GET',
             dataType: 'json',
             success: function(district_json){
@@ -63,16 +63,16 @@ $(document).ready(function() {
 });
 </script>
 
-<select name="province_id"  id="province_id"  class="left select mt5 required" errormsg="请选择所在省份！">
+<select name="province_id"  id="province_id"  class="left select mt5 required">
     <option value="" >省份</option>
     <?php foreach($provinces as $key => $province): ?>
     <option value="<?php echo $province['region_id'];?>" <?php if ($province['region_id'] == $province_selected):?>selected="selected"<?php endif;?> ><?php echo $province['region_name']; ?></option>
     <?php endforeach; ?>
 </select>
-<select name="city_id" id="city_id"  class="left select mt5 required" errormsg="请选择所在地级市" >
+<select name="city_id" id="city_id"  class="left select mt5 required">
      <option value="">城市</option>
 </select>
-<select name="district_id" id="district_id" class="left select mt5 required" errormsg="请选择所在区县！">
+<select name="district_id" id="district_id" class="left select mt5 required">
      <option value="">县/区</option>
 </select>
 

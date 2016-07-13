@@ -28,7 +28,7 @@
 			<img src="http://s.qw.cc/themes/v4/css/ft/clogo.png" width="290" height="27">
 		</a>
 		<a href="javascript:;" class="xhb right">
-			<em class="f pr5 f14">&#xe63b;</em>联系客服
+			联系客服
 		</a>
 		<a href="<?php echo site_url();?>" class="xhb right mr10">继续购物</a>
 		<div class="clear"></div>
