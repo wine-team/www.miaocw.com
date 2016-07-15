@@ -25,7 +25,7 @@
 	          			<em class="q_price">¥2547.02</em>
 	          		</td>
 		          	<td>            
-			            <input type="text" size="4" name="goods_number[22748726]" id="goods_number_22748726" data-id="22748726" value="1" onblur="chageCarnum(22748726)" r_buy="1" class="number left"/>
+			            <input type="text" size="4" name="goods_number[22748726]" id="goods_number_22748726" data-id="22748726" value="1"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')"/>
 			            <div class="amount left">
 			               <p class="increase"></p>
 			               <p class="decrease"></p>
@@ -35,31 +35,6 @@
           			<td>
           				<p><a class="c9" href="javascript:;">转为收藏</a></p>
                     	<a href="javascript:"  class="c9">删除</a>
-                    </td>
-        		</tr>
-                <tr>
-		          	<td> 
-			            <a href="javascript:;" target="_blank">
-			            	<img src="http://s.qw.cc/images/201511/thumb_img/4971_thumb_P220_1446530875302-60x60.jpg" title="香港兆邦凯撒爱的摇篮充气式性爱床" width="60" height="60" />
-			            </a> 
-			        </td>
-		          	<td> 
-            			<a href="javascript:;" target="_blank" class="pr50">香港兆邦凯撒爱的摇篮充气式性爱床<p class="green"></p></a> 
-             		</td>
-          			<td>
-          				<em class="q_price">¥2234.40</em>
-          			</td>
-			        <td>            
-			            <input type="text" size="4" name="goods_number[22762056]" id="goods_number_22762056" data-id="22762056" value="1" onblur="chageCarnum(22762056)" r_buy="1" class="number left"/>
-			            <div class="amount left">
-			              <p class="increase" onclick="c_add(22762056)"></p>
-			              <p class="decrease" onclick="c_rem(22762056)"></p>
-			            </div>
-			        </td>
-          		    <td class="g_xj">¥2234.40</td>
-          			<td>  
-          				<p><a class="c9" href="javascript:adfav(4971)">转为收藏</a></p>
-                    	<a href="javascript:" onClick="delgoods(22762056)" class="c9">删除</a>
                     </td>
         		</tr>
                 <tr>
@@ -77,10 +52,10 @@
           				<em class="q_price">¥449.82</em>
           			</td>
           			<td>            
-			            <input type="text" size="4" name="goods_number[22763751]" id="goods_number_22763751" data-id="22763751" value="1" onblur="chageCarnum(22763751)" r_buy="1" class="number left"/>
+			            <input type="text" size="4" name="goods_number[22763751]" id="goods_number_22763751" data-id="22763751" value="1" onkeyup="this.value=this.value.replace(/\D/g,'')" class="number left"/>
 			            <div class="amount left">
-			              <p class="increase" onclick="c_add(22763751)"></p>
-			              <p class="decrease" onclick="c_rem(22763751)"></p>
+			              <p class="increase"></p>
+			              <p class="decrease"></p>
 			            </div>
             		</td>
           			<td class="g_xj">¥449.82</td>
@@ -104,7 +79,7 @@
           		<tr>
                 	<td width="80">您的姓名</td>
             		<td>
-            			<input type="text" errormsg="收货人姓名至少2个汉字,最多8个字符！" placeholder="请准确填写收货人" datatype="s" maxlength="8" m="2" name="consignee" size="30" class="yz ipt left" id="consignee" value="蒋主席"/>
+            			<input type="text" placeholder="请准确填写收货人" datatype="s" maxlength="8" m="2" name="consignee" size="30" class="yz ipt left" id="consignee" value="蒋主席"/>
               			<em class="red ert pl5">必填</em>
               	    </td>
           		</tr>
@@ -116,7 +91,7 @@
 		            </td>
 		        </tr>
           		<tr>
-            		<td>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</td>
+            		<td>地　　区</td>
             		<td>
             			<input type="hidden" name="address_id" value="8883416"/>
               			<?php $this->load->view('cart/address')?>
@@ -132,7 +107,7 @@
 	              	</td>
 	          	</tr>
           		<tr>
-		            <td><em class="gray">备注</em></td>
+		            <td>备　　注</td>
 		            <td>
 		            	<textarea name="postscript" rows="3" id="postscript" class="f12 c_bz"></textarea>
 		              	<span class="gray pl5">选填</span>
@@ -143,9 +118,9 @@
       </div>
     </div>
     <div class="bgwd">
-      <h2 class="c_t f16 lh30"><em>3</em>选择支付方式</h2>
-      <div class="pd4">
-        <div class="ov pay-type" id="zhif">          
+      　	   <h2 class="c_t f16 lh30"><em>3</em>选择支付方式</h2>
+       <div class="pd4">
+       	 <div class="ov pay-type" id="zhif">          
         	<div class="zfu zon left"  data-id="4">
         		<b class="f14">支付宝</b>
             	<p>99元包邮</p>
@@ -155,34 +130,30 @@
             	<p>99元包邮</p>
           	</div>
             <div class="zfu left"  data-id="13">
-            	<b class="f14">银行卡/信用卡</b>
+            	<b class="f14">银联支付</b>
             	<p>99元包邮</p>
           	</div>
-            <div class="zfu left" id="delivery" data-id="3">
-            	<b class="f14">货到付款</b>
-            	<p>198元包邮</p>
-          	</div>
-        </div>
-        <div class="clear"></div>
+         </div>
+         <div class="clear"></div>
       </div>
     </div>
     <div id="order_detail" class="bgwd">
       <h2 class="c_t f16 lh30"><em>4</em>结算</h2>
       <div class="pd4">
-        <div class="ov lh20 mb10 alR">
+         <div class="ov lh20 mb10 alR">
         	<b class="red right" id="amount">¥5231.24</b>
         	<em class="gray right">实付款：</em>
         	<em class="right ml10 pr10"> = </em>
 		 	<div class="right hid" id="computer">
           		<span class="right">满减<b class="red" id="computer_discount">¥0.00</b></span><i class="o_cut right"></i>
           	</div>
-          	<div class="right " id="favourable" class="free">
-				<select name="bonus" id="ECS_BONUS" class="right select-free" style="width:100px;">
+          	<div class="right free" id="favourable">
+				<select name="bonus" id="ECS_BONUS" class="right hid select-free" style="width:100px;">
             		<option value="0" selected>选择优惠券</option>
                    	<option value="1331926" >新注册送10元优惠券[¥10.00]</option>
                 </select>
-          		<label class="pr10 right check-box">
-            		<input type="checkbox" name="youhuiquan"/>
+          		<label class="pr10 right">
+            		<input type="checkbox" name="youhuiquan" class="youhuiquan"/>
             		使用优惠券(<em class="red">1</em>张可用)
             	</label>
           		<i class="right o_cut"></i>

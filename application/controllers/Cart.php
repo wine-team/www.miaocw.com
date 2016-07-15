@@ -1,5 +1,4 @@
 <?php
-
 class Cart extends CS_Controller {
 
 	public function _init() {
