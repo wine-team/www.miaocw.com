@@ -53,7 +53,7 @@
 					<a href="woman/bizhen/b41-min0-max0-chara0.html" >日暮里NPG名器</a>
 				</div>
 				<p class="wz_b"></p>
-				<p class="b_rmo hid" id="b_rmo" onClick="bdshow()">更多</p>
+				<p class="b_rmo hid" id="b_rmo">更多</p>
 			</dd>
 		</dl>
 		<dl class="sdl">
