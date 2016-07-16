@@ -21,5 +21,8 @@ class Goods extends MW_Controller{
 	}
 	
 	
+	
+	
+	
 
 }

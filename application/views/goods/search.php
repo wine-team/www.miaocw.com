@@ -1,5 +1,5 @@
 <?php $this->load->view('layout/header');?>
-<div id="content" class="w">
+<div id="content" class="w goods-list">
    	<div class="s_tl">
    		<span class="left">
    			<a href="/">首页</a>
@@ -34,7 +34,7 @@
 		</dl>
 		<dl class="sdl">
 			<dt>品牌</dt>
-			<dd id="brand_dl">
+			<dd id="brand_dl" class="brand_dl">
 				<div id="list_b" class="over">
 					<a href="woman/bizhen/b29-min0-max0-chara0.html" >爱侣情趣用品</a>
 					<a href="woman/bizhen/b65-min0-max0-chara0.html" >兆邦NMC</a>
@@ -116,7 +116,7 @@
 		<dl class="gl">
 			<dt>
 				<a href="javascript:;" target="_blank">
-					<img src="http://s.qw.cc/images/201604/goods_img/8806_P_1459839060126-270x270.jpg" width="270" height="270" class="sbm" alt="逼真 时尚 超长仿真阳具">
+					<img src="http://s.qw.cc/images/201604/goods_img/8806_P_1459839060126-270x270.jpg" width="270" height="270" class="sbm" alt="逼真 时尚 超长仿真阳具" />
 				</a>
 			</dt>
 			<dd class="simg">
