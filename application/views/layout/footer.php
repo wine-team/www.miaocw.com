@@ -133,7 +133,7 @@
 				订购热线 <span>400-660-0606</span>
 			</p>
 			<p>Copyright © 2015 ICP经营性许可证:浙ICP备8888888号-2</p>
-			<p>公司：妙网商城,电话：888-888-8888</p>
+			<p>公司：杭州小医仙网络科技有限公司,电话：888-888-8888</p>
 			<p class="mt10">
 				<a href="https://itunes.apple.com/us/app/qu-wang-qing-qu-shang-cheng/id934737326?mt=8" target="_blank" title="趣网商城iPhone,ipad版" rel="nofollow" class="ml5 mr5">
 					<img src="passport/images/sf2.png" width="110" height="30">

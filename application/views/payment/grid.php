@@ -1,5 +1,5 @@
 <?php $this->load->view('layout/cartHeader');?>
-<div class="w9" id="content"> 
+<div class="w9 payment" id="content"> 
 	<div class="bgwd over" style="padding:30px 30px 30px 80px;">
 		<div class="rel">
 			<p class="f green l_icon">&#xe638;</p>
