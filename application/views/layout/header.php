@@ -163,7 +163,7 @@
         </div>
         <ul class="navs left">
             <li><a href="<?php echo site_url();?>" rel="nofollow">首页</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >女性用品</a></li>
+            <li><a href="<?php echo site_url('Goods/femal');?>"  >女性用品</a></li>
             <li><a href="<?php echo site_url('goods/');?>"  >男性用品</a></li>
             <li><a href="<?php echo site_url('goods/');?>"  >延时助情</a></li>
             <li><a href="<?php echo site_url('goods/');?>"  >情趣内衣</a></li>
