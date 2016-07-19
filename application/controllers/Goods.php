@@ -31,7 +31,16 @@ class Goods extends MW_Controller{
 	    $this->load->view('goods/femal',$data);
 	}
 	
-	
+	 /**
+	 *产品详情
+	 */
+	public function detail(){
+		
+		$data['head_menu'] = 'on';
+		$data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key'));
+		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0;
+		$this->load->view('goods/detail',$data);
+	}
 	
 	
 	
