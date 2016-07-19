@@ -10,8 +10,8 @@
 	</div>
 	<div class="goods rel">
 		<div class="gd_l left" id="gd_l">
-			<img width="430" height="430" id="preview" rel="http://s.qw.cc//images/201603/source_img/9113_P_1456888624317.jpg" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" src="http://s.qw.cc//images/201603/goods_img/9113_P_1456888624440.jpg"/>
-			<ul id="spic" class="left">    
+			<img width="430" height="430" id="preview" class="goods-main-pic" rel="http://s.qw.cc//images/201603/source_img/9113_P_1456888624317.jpg" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" src="http://s.qw.cc//images/201603/goods_img/9113_P_1456888624440.jpg"/>
+			<ul id="spic" class="left goods-pic">    
 				<li class="on" data-src="http://s.qw.cc/images/201603/goods_img/9113_P_1456888624440.jpg">
 					<img src="http://s.qw.cc/images/201603/thumb_img2/9113_thumb_P60_1456888647703-50x50.jpg" height="50" width="50" />
 				</li>
