@@ -69,10 +69,10 @@
 								<em class="rdop"></em>
 							</p>
 							<div class="pes_z lh25">
-								<ul id="pes_ul">
+								<ul id="pes_ul" class="region">
 									<li class="on">省份</li>
 									<li>地级市</li>
-									<li style="display:none">区县</li>
+									<li>区县</li>
 								</ul>
 								<div id="pes_z">
 									<ul id="sel1" class="pes_o">
@@ -121,7 +121,7 @@
 										<li><a href="javascript:;" onClick="cgp(384,3,1,this)" >湖州市</a></li>
 										<li><a href="javascript:;" onClick="cgp(393,3,1,this)" >衢州市</a></li>
 									</ul>
-									<ul id="sel3" class="pes_o hid">
+									<ul id="sel3" class="pes_o">
 										<li><a href="javascript:;" onClick="cgp(3229,4,2,this)" >西湖区</a></li>
 										<li><a href="javascript:;" onClick="cgp(3242,4,2,this)" >淳安县</a></li>
 										<li><a href="javascript:;" onClick="cgp(3241,4,2,this)" >桐庐县</a></li>
@@ -168,7 +168,7 @@
 				<p class="lh16">&nbsp;</p>
 				<p class="bline"></p>
 				<p class="lh16">&nbsp;</p>
-				<div id="wrap" class="xcolor mb15">
+				<div id="wrap" class="xcolor mb15 additive">
 					<dl class="gdl dato">
 						<dt><span class="c5">款型</span></dt>
 						<dd>
@@ -220,22 +220,23 @@
 			</form>
 		</div>
 		<div class="kan">
-			<p class="lh35 mt10 c9">看了又看<a href="javascript:;" onClick="snx()" id="s_next" class="c9 nua kan_i">换一换</a></p>
+			<p class="lh35 mt10 c9">看了又看<a href="javascript:;" id="s_next" class="c9 nua kan_i">换一换</a></p>
 			<div id="wrapB" class="wrapb rel">
 				<ul class="ka_r">
 					<li>
-						<a href="/goods-5415.html" target="_blank" title="藏帝 高原植物延时喷剂 不麻木无依赖 15ml" class="ka_ra">
-							<img src="http://s.qw.cc//images/201604/thumb_img/5415_thumb_P220_1460455530090-130x130.jpg" width="130" height="130" /><p class="ka_rp">198.00</p>
+						<a href="javascript:;" target="_blank" title="藏帝 高原植物延时喷剂 不麻木无依赖 15ml" class="ka_ra">
+							<img src="http://s.qw.cc//images/201604/thumb_img/5415_thumb_P220_1460455530090-130x130.jpg" width="130" height="130" />
+							<p class="ka_rp">198.00</p>
 						</a>
 					</li>
 					<li>
-						<a href="/goods-6012.html" target="_blank" title="UZ诱芷 天然复方延时精油 安全无添加 10ml" class="ka_ra">
+						<a href="javascript:;" target="_blank" title="UZ诱芷 天然复方延时精油 安全无添加 10ml" class="ka_ra">
 							<img src="http://s.qw.cc//images/201509/thumb_img/6012_thumb_P220_1442303546050-130x130.jpg" width="130" height="130" />
 							<p class="ka_rp">238.00</p>
 						</a>
 					</li>
 					<li>
-						<a href="/goods-9108.html" target="_blank" title="雅迪克 华夏古方秘制延时喷剂 15ml" class="ka_ra">
+						<a href="javascript:;" target="_blank" title="雅迪克 华夏古方秘制延时喷剂 15ml" class="ka_ra">
 							<img src="http://s.qw.cc//images/201602/thumb_img/9108_thumb_P220_1456304222764-130x130.jpg" width="130" height="130" />
 							<p class="ka_rp">198.00</p>
 						</a>
@@ -249,10 +250,10 @@
 		<div class="jba">
 			<div id="jbar" class="jbar">
 				<ul id="tabbar" class="jbars">
-					<li class="on" rel="detail"><a href="#detail">产品介绍</a></li>
-					<li rel="comment"><a href="#comment">用户评论 <em class="blue">12</em></a></li>
-					<li rel="zhixun"><a href="#zhixun">用户咨询 </a></li>
-					<li rel="shouhou"><a href="#shouhou">优质服务</a></li>
+					<li class="on" rel="detail"><a href="<?php echo site_url('Goods/detail')?>#detail">产品介绍</a></li>
+					<li rel="comment"><a href="<?php echo site_url('Goods/detail')?>#comment">用户评论 <em class="blue">12</em></a></li>
+					<li rel="zhixun"><a href="<?php echo site_url('Goods/detail')?>#zhixun">用户咨询 </a></li>
+					<li rel="shouhou"><a href="<?php echo site_url('Goods/detail')?>#shouhou">优质服务</a></li>
 				</ul>
 				<a class="rbuy right hid" href="javascript:;" onClick="fbuy(9113)"><i class="f pr5">&#xe634;</i>立即订购</a>
 				<a href="javascript:;" onClick="jieshou()" class="right pr10 c9"><img src="http://s.qw.cc/themes/v4/css/ft/rkf1.png" width="21" height="44" class="mr5" >在线客服</a>
@@ -276,31 +277,6 @@
 					<img src2="http://s.qw.cc/themes/v4/css/ft/weixin01.png" width="750" height="110">
 				</p>
 			     <img src="http://s.qw.cc/images/upload/20160302/20160302111242_68677.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111242_14633.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111242_43125.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111243_68645.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111243_84320.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111243_81837.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111244_56249.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111244_27158.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111244_26054.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111244_61618.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111245_25816.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111247_68994.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111249_14166.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111251_25538.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111252_90705.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111254_24213.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111256_75285.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111258_69268.jpg" width="750" height="424" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111341_95618.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111341_82580.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111341_71506.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111341_81911.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111341_56550.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111341_38830.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_49533.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_66001.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
 			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_79982.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
 			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_21439.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
 			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_97727.jpg" width="750" height="111" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
@@ -333,7 +309,7 @@
 					<em class="f14">评论/晒单可赠送20/30积分</em>
 				</div>
 			</div>
-			<ul id="whatchoose" class="u_q clearfix">
+			<ul id="whatchoose" class="u_q clearfix comment-type">
 				<li data-id="0" class="first on" data-s="12">全部 (12)</li>
 				<li data-id="1" data-s="12">好评 (12)</li>
 				<li data-id="2" data-s="0" class="xline">中评 (0)</li>
@@ -585,7 +561,7 @@
 				<p>2H2D 倍力挺男性喷雾剂金尊版2ml组合装</p>
 				<b class="red f14">¥498.00</b>
 				<i class="i_new lh20">包邮</i><p class="bline mt5"></p>
-				<p class="pt5 alC"><a href="javascript:;" onClick="gotop()" class="nua f14"><i class="f pr5">&#xe64b;</i>返回顶部</a></p>
+				<p class="pt5 alC"><a href="javascript:;" class="nua f14"><i class="f pr5">&#xe64b;</i>返回顶部</a></p>
 			</div>
 		</div>
 	</div>
