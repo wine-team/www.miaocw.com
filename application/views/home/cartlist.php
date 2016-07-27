@@ -10,8 +10,8 @@
 			<p class="red"><?php echo $item->promote_price;?><b class="c5"> X </b><?php echo $item->goods_num;?></p>
 		</a>
 	</li>
-	<?php $num += $item->goods_num; ?>
-	<?php $total += bcmul($item->goods_num, $item->promote_price,2);?>
+	 <?php $num += $item->goods_num; ?>
+	 <?php $total += bcmul($item->goods_num, $item->promote_price,2);?>
 <?php endforeach;?>
 </ul>
 <div class="ac_t alR clearfix">

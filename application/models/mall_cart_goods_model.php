@@ -15,7 +15,7 @@ class Mall_cart_goods_model extends CI_Model{
 		$this->db->join('mall_goods_base','mall_goods_base.goods_id=mall_cart_goods.goods_id','inner');
 		$this->db->where('mall_cart_goods.uid',$uid);
 		$this->db->order_by('mall_cart_goods.creat_at','desc');
-		return $this->db->get();
+		 return $this->db->get();
 	}
 		
 }
