@@ -52,6 +52,7 @@ class Home extends MW_Controller{
 	public function getCart(){
 	
 		$callback = $this->input->get('callback');
+		
 		if (empty($this->uid)) {
 			$data = array();
 			$jsonData = json_encode(array(
