@@ -10,7 +10,7 @@
 <meta name="description"  content="<?php echo isset($headTittle)?$headTittle : '成人用品商城专业销售各类成人玩具、性保健品、情趣用品、情趣内衣、避孕套、成人玩具等高档情趣性用品。货到付款、全国保密配送，订购热线888-8888-888!';?>" />
 <title><?php echo isset($headTittle)?$headTittle:'【妙网商城】成人用品_情趣用品_成人用具_性用品_性保健品_正品成人用品网站';?></title> 
 <base href="<?php echo $this->config->skins_url;?>"/>
-<link type="image/x-icon" rel="shortcut icon" href="passport/images/logo02.png"/>
+<link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.png"/>
 <?php css('common', 'common', '20160415');?>
 <?php css('miaow', 'reset', '20160415');?>
 
@@ -48,7 +48,7 @@
             <?php else:?>
                <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">登录</a>
 	           <span class="vline">|</span>
-	           <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url;?>">
+	           <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url.'register';?>">
 	            	注册<em class="c9 pl10"><i class="org">送10元优惠券</i></em>
 	           </a>                        
             <?php endif;?>
@@ -100,9 +100,9 @@
 </div>
 <div id="header" class="miao-header">
     <div class="w">
-        <div class="rel left">
-            <a href="<?php echo site_url();?>" title="妙网商城,百变情趣,乐享生活" class="logo" rel="nofollow">
-            	<img src="help/images/logo_01.png" width="296" height="44"/>
+        <div class="rel left" style="height:70px;" >
+            <a href="<?php echo site_url();?>" title="妙处网,乐享生活" class="logo" rel="nofollow" style="height:100%;">
+            	<img src="miaow/images/mcw.png" height="60px"/>
             </a>
         </div>
         <div id="search" class="search left">
