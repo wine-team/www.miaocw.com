@@ -25,12 +25,6 @@
 <!--[if lt IE 10]>
 <?php //js('passport', 'placeholder');?>
 <![endif]-->
-<!--[if lt IE 9]>
-  var qwid=screen.width;
-  if(qwid <= 1220) {
-     document.write('<?php css('common', 'w9', '20160415');?>');
-  }
-<![endif]-->
 </head>
 <body>
 <div id="top">
@@ -43,7 +37,7 @@
             <?php else:?>
                <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">你好，请登录</a>
 	           <span class="vline">|</span>
-	           <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url.'register';?>">
+	           <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url.'register.html';?>">
 	            	免费注册<em class="c9 pl10"><i class="org">送10元优惠券</i></em>
 	           </a>                        
             <?php endif;?>
@@ -95,9 +89,9 @@
 </div>
 <div id="header" class="miao-header">
     <div class="w">
-        <div class="rel left" style="height:70px;" >
-            <a href="<?php echo site_url();?>" title="妙处网,乐享生活" class="logo" rel="nofollow" style="height:100%;">
-            	<img src="miaow/images/mcw.png" height="60px"/>
+        <div class="rel left" >
+            <a href="<?php echo site_url();?>" title="妙处网,乐享生活" class="logo" rel="nofollow">
+            	<img src="miaow/images/mcw.png"/>
             </a>
         </div>
         <div id="search" class="search left">
@@ -127,14 +121,14 @@
         <div class="lcat" <?php if(isset($head_menu)):?>id="bignav"<?php endif;?>>
             <p class="nall hand">全部商品分类</p>
             <ul class="lnav" id="lnav">
-                <?php foreach ($allCategory as $key=>$item): ?>
+                <?php foreach ($allCategory as $key=>$item):?>
                 <li>
-                   <em class="f">&#xe64c;</em>
+                   <em class="f">&nbsp;</em>
                    <a class="lma" href="<?php echo site_url('goods/search?cid='.$item['cat_id']);?>">
                    	    <?php echo $item['cat_name'];?>
                    </a>
                    <?php if (!empty($item['childCat'])):?>
-                   <div class="lra">
+                   <div class="lra" >
                         <div class="lh3">
                             <b class="left"><?php echo $item['cat_name'];?></b>
                             <a href="<?php echo site_url('goods/search?cid='.$item['cat_id']);?>" class="right" rel="nofollow">更多>></a>
@@ -158,14 +152,14 @@
         </div>
         <ul class="navs left">
             <li><a href="<?php echo site_url();?>" rel="nofollow">首页</a></li>
-            <li><a href="<?php echo site_url('Goods/femal');?>">女性用品</a></li>
-            <li><a href="<?php echo site_url('goods/');?>">男性用品</a></li>
-            <li><a href="<?php echo site_url('goods/');?>">延时助情</a></li>
-            <li><a href="<?php echo site_url('goods/');?>">情趣内衣</a></li>
-            <li><a href="<?php echo site_url('goods/');?>">飞机杯</a></li>
-            <li><a href="<?php echo site_url('goods/');?>">G点棒</a></li>
-            <li><a href="<?php echo site_url('goods/');?>">仿真阳具</a></li>
-            <li><a href="<?php echo site_url('goods/');?>">土豪天堂</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">女性用品</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">男性用品</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">延时助情</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">情趣内衣</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">飞机杯</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">G点棒</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">仿真阳具</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">土豪天堂</a></li>
         </ul>
         <div class="clear"></div>
     </div>
