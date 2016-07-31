@@ -13,6 +13,8 @@ class Mall_cart_goods_model extends CI_Model{
 		$this->db->select('mall_goods_base.goods_name,mall_goods_base.promote_price,mall_goods_base.goods_img,mall_cart_goods.goods_num');
 		$this->db->from($this->table);
 		$this->db->join('mall_goods_base','mall_goods_base.goods_id=mall_cart_goods.goods_id','inner');
+		$this->db->where('mall_goods_base.is_check','2');//审核通过
+		$this->db->where('mall_goods_base.is_on_sale','1');//上架
 		$this->db->where('mall_cart_goods.uid',$uid);
 		$this->db->order_by('mall_cart_goods.creat_at','desc');
 		return $this->db->get();

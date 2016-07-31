@@ -9,6 +9,7 @@ class Home extends MW_Controller{
 		$this->load->model('help_center_model','help_center');
 		$this->load->model('mall_category_model','mall_category');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
+		$this->load->model('mall_goods_base_model','mall_goods_base');
 	}
 		
 	/**
@@ -37,7 +38,8 @@ class Home extends MW_Controller{
 	public function getHistory(){
 		
 		$callback = $this->input->get('callback');
-		$history = unserialize(base64_decode(get_cookie('history')));
+		$history = unserialize(base64_decode(get_cookie('history')));  // 存取goods_id
+		$data['goods'] = empty($history) ? false : $this->mall_goods_base->getGoodsByGoodsId($history);
 		$data['history'] = $history;
 		$jsonData = json_encode(array(
 			'status' => true,

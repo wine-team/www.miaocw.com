@@ -27,7 +27,7 @@
 				</a>
 				<div class="r_av m_tr" id="ghis">
 					<em class="r_vt">◆</em>
-					<h4>浏览历史</h4>
+					<h4>我的足迹</h4>
 					<div id="hibx"></div>
 				</div>
 			</li>
