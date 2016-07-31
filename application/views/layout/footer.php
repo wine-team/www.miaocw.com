@@ -12,6 +12,7 @@
 					<div id="rxcar"></div>
 				</div>
 			</li>
+			<!--  
 			<li class="m_li m_lih" id="minar">
 				<a href="javascript:;">
 					<img src="http://s.qw.cc/themes/v4/css/ft/rkf.gif" width="28" height="29">
@@ -19,6 +20,7 @@
 				</a>
 				<p class="rt_line"></p>
 			</li>
+			-->
 			<li class="m_li" id="rhist">
 				<a href="javascript:;" class="f">
 					<i class="iconfont">&#xe602;</i>
@@ -36,7 +38,7 @@
 				<p class="r_av m_tr">订单查询<em class="r_vt">◆</em></p>
 			</li>
 			<li class="m_li">
-				<a href="<?php echo $this->config->ucenter_url;?>" class="f">
+				<a href="<?php echo $this->config->ucenter_url.'enshrine/index';?>" class="f">
 					<i class="iconfont">&#xe606;</i>
 				</a>
 				<p class="r_av m_tr">我的收藏<em class="r_vt">◆</em></p>
@@ -44,7 +46,7 @@
 		</ul>
 		<ul class="m_mid" id="m_fid">
 			<li class="m_li">
-				<a href="javascript:;" class="f r_ma">
+				<a href="javascript:;" class="f">
 					<i class="iconfont">&#xe607;</i>
 				</a>
 				<p class="r_av m_tr" id="m_fma">
@@ -52,19 +54,19 @@
 					<em class="r_vt">◆</em>
 				</p>
 			</li>
-			<li class="m_li m_tops">
-				<a href="javascript:;" class="f f20 top">
-					<i class="iconfont">&#xe604;</i>
-				</a>
-				<p class="r_av m_tr">返回顶部
-					<em class="r_vt">◆</em>
-				</p>
-			</li>
 			<li class="m_li">
-				<a href="<?php echo $this->config->help_url.'User_feedback/index';?>" class="f f20" target="_blank">
+				<a href="<?php echo $this->config->help_url.'user_feedback/index';?>" class="f" target="_blank">
 					<i class="iconfont">&#xe601;</i>
 				</a>
 				<p class="r_av m_tr">意见反馈
+					<em class="r_vt">◆</em>
+				</p>
+			</li>
+			<li class="m_li m_tops">
+				<a href="javascript:;" class="f top">
+					<i class="iconfont">&#xe604;</i>
+				</a>
+				<p class="r_av m_tr">返回顶部
 					<em class="r_vt">◆</em>
 				</p>
 			</li>
