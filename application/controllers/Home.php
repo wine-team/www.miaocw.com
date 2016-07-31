@@ -38,7 +38,7 @@ class Home extends MW_Controller{
 	public function getHistory(){
 		
 		$callback = $this->input->get('callback');
-		$history = unserialize(base64_decode(get_cookie('history')));  // 存取goods_id
+		$history = unserialize(base64_decode(get_cookie('history')));  // 存取goods_id数组
 		$data['goods'] = empty($history) ? false : $this->mall_goods_base->getGoodsByGoodsId($history);
 		$data['history'] = $history;
 		$jsonData = json_encode(array(
