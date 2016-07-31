@@ -5,10 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="renderer" content="webkit">
-<meta name="title"  content="<?php echo isset($headTittle) ? $headTittle : '成人用品玩具-男根增大延迟性保健品-夫妻情趣用品-秒网商城(全国货到付款 保密配送)';?>" />
-<meta name="keywords" content="<?php echo isset($headTittle) ? $headTittle : '成人用品,情趣用品,成人用具,性用品,性保健品,性生活用品,性爱用品,成人保健,夫妻保健品,妙网商城';?>" />
-<meta name="description"  content="<?php echo isset($headTittle)?$headTittle : '成人用品商城专业销售各类成人玩具、性保健品、情趣用品、情趣内衣、避孕套、成人玩具等高档情趣性用品。货到付款、全国保密配送，订购热线888-8888-888!';?>" />
-<title><?php echo isset($headTittle)?$headTittle:'【妙网商城】成人用品_情趣用品_成人用具_性用品_性保健品_正品成人用品网站';?></title> 
+<meta name="title"  content="<?php echo isset($headTittle) ? $headTittle : '妙处网,成人用品玩具-男根增大延迟性保健品-夫妻情趣用品-(全国货到付款 保密配送)';?>" />
+<meta name="keywords" content="<?php echo isset($headTittle) ? $headTittle : '妙处网.成人用品,情趣用品,成人用具,性用品,性保健品,性生活用品,性爱用品,成人保健,夫妻保健品';?>" />
+<meta name="description"  content="<?php echo isset($headTittle)?$headTittle : '妙处网,成人用品商城专业销售各类成人玩具、性保健品、情趣用品、情趣内衣、避孕套、成人玩具等高档情趣性用品,订购热线888-8888-888!';?>" />
+<title><?php echo isset($headTittle)?$headTittle:'妙处网,性用品,性保健品,正品成人用品网站';?></title> 
 <base href="<?php echo $this->config->skins_url;?>"/>
 <link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.png"/>
 <?php css('common', 'common', '20160415');?>
@@ -36,27 +36,29 @@
 <div id="top">
     <div class="w">
         <div class="left c8">
+            <!--  
             <a rel="nofollow" href="<?php echo site_url();?>" class="c9">
             	<em class="f mt1 iconfont">&#xe60a;</em>首页
             </a>
             <span class="vline">|</span>
+            -->
             <?php if($this->uid):?>
-                                         您好：<a class="c3" title="会员等级v1" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
+                                         你好：<a class="c3" title="会员等级v1" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
                <a class="pl5 c8" target="_blank" href="<?php echo $this->config->help_url;?>">（VIP折扣：9.8折）</a>
 			   <span class="vline">|</span>
 			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
             <?php else:?>
-               <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">登录</a>
+               <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">你好，请登录</a>
 	           <span class="vline">|</span>
 	           <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url.'register';?>">
-	            	注册<em class="c9 pl10"><i class="org">送10元优惠券</i></em>
+	            	免费注册<em class="c9 pl10"><i class="org">送10元优惠券</i></em>
 	           </a>                        
             <?php endif;?>
         </div>
         <ul id="tul" class="tul right">
             <li>
             	<a href="<?php echo $this->config->ucenter_url;?>" rel="nofollow">
-            		<em class="f f14 mr5 iconfont red">&#xe60c;</em>查询订单
+            		<em class="f f14 mr5 iconfont red">&#xe60c;</em>我的订单
             	</a>
             </li>
             <li class="nbt">
@@ -65,7 +67,7 @@
                 	<em class="rdop"></em>
                 </a>
                 <div class="tuln">
-                	<img src="help/images/tm31.png" width="188" height="124" />
+                	<img src="help/images/tm31.png" width="188" height="124"/>
                 </div>
             </li>
             <li class="nbt">
@@ -163,14 +165,14 @@
         </div>
         <ul class="navs left">
             <li><a href="<?php echo site_url();?>" rel="nofollow">首页</a></li>
-            <li><a href="<?php echo site_url('Goods/femal');?>"  >女性用品</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >男性用品</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >延时助情</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >情趣内衣</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >飞机杯</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >G点棒</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >仿真阳具</a></li>
-            <li><a href="<?php echo site_url('goods/');?>"  >土豪天堂</a></li>
+            <li><a href="<?php echo site_url('Goods/femal');?>">女性用品</a></li>
+            <li><a href="<?php echo site_url('goods/');?>">男性用品</a></li>
+            <li><a href="<?php echo site_url('goods/');?>">延时助情</a></li>
+            <li><a href="<?php echo site_url('goods/');?>">情趣内衣</a></li>
+            <li><a href="<?php echo site_url('goods/');?>">飞机杯</a></li>
+            <li><a href="<?php echo site_url('goods/');?>">G点棒</a></li>
+            <li><a href="<?php echo site_url('goods/');?>">仿真阳具</a></li>
+            <li><a href="<?php echo site_url('goods/');?>">土豪天堂</a></li>
         </ul>
         <div class="clear"></div>
     </div>

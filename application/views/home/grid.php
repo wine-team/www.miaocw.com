@@ -4,7 +4,7 @@
 	<ul class="f_ul">
 	    <?php foreach ($advert as $key=>$item):?>
 	    <li>
-	        <a target="_blank" href="<?php echo $item['url'];?>"  alt="成人用品，妙处网">
+	        <a target="_blank" href="<?php echo $item['url'];?>"  alt="妙处网，成人用品">
 	            <img  src="<?php echo $this->config->show_image_url('advert',$item['picture']);?>" />
 	        </a>
 	    </li>
