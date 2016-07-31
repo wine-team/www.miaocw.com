@@ -36,15 +36,8 @@
 <div id="top">
     <div class="w">
         <div class="left c8">
-            <!--  
-            <a rel="nofollow" href="<?php echo site_url();?>" class="c9">
-            	<em class="f mt1 iconfont">&#xe60a;</em>首页
-            </a>
-            <span class="vline">|</span>
-            -->
             <?php if($this->uid):?>
                                          你好：<a class="c3" title="会员等级v1" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
-               <a class="pl5 c8" target="_blank" href="<?php echo $this->config->help_url;?>">（VIP折扣：9.8折）</a>
 			   <span class="vline">|</span>
 			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
             <?php else:?>
@@ -75,10 +68,10 @@
                 	会员中心<em class="rdop"></em>
                 </a>
                 <div class="tuln">
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url;?>" target="_blank">个人信息</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url;?>" target="_blank">我的收藏</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url;?>" target="_blank">我的优惠券</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url;?>" target="_blank">收货地址</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'ucenter/user_info';?>" target="_blank">个人信息</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'enshrine';?>" target="_blank">我的收藏</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'user_coupon';?>" target="_blank">我的优惠券</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'address';?>" target="_blank">收货地址</a>
                 </div>
             </li>
             <li class="nbt">
