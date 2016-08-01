@@ -21,16 +21,6 @@
 				<p class="rt_line"></p>
 			</li>
 			-->
-			<li class="m_li" id="rhist">
-				<a href="javascript:;" class="f">
-					<i class="iconfont">&#xe602;</i>
-				</a>
-				<div class="r_av m_tr" id="ghis">
-					<em class="r_vt">◆</em>
-					<h4>我的足迹</h4>
-					<div id="hibx"></div>
-				</div>
-			</li>
 			<li class="m_li">
 				<a href="<?php echo $this->config->ucenter_url;?>" target="blank" class="f">
 					<i class="iconfont">&#xe600;</i>
@@ -43,22 +33,32 @@
 				</a>
 				<p class="r_av m_tr">我的收藏<em class="r_vt">◆</em></p>
 			</li>
+			<li class="m_li" id="rhist">
+				<a href="javascript:;" class="f">
+					<i class="iconfont">&#xe602;</i>
+				</a>
+				<div class="r_av m_tr" id="ghis">
+					<em class="r_vt">◆</em>
+					<h4>我的足迹</h4>
+					<div id="hibx"></div>
+				</div>
+			</li>
 		</ul>
 		<ul class="m_mid" id="m_fid">
+			<li class="m_li">
+				<a href="<?php echo $this->config->help_url.'user_feedback/index';?>" class="f" target="_blank">
+					<i class="iconfont">&#xe601;</i>
+				</a>
+				<p class="r_av m_tr">意见反馈
+					<em class="r_vt">◆</em>
+				</p>
+			</li>
 			<li class="m_li">
 				<a href="javascript:;" class="f">
 					<i class="iconfont">&#xe607;</i>
 				</a>
 				<p class="r_av m_tr" id="m_fma">
 					<img src="http://s.qw.cc/themes/v4/css/2/qapp02.png" width="120" height="135">
-					<em class="r_vt">◆</em>
-				</p>
-			</li>
-			<li class="m_li">
-				<a href="<?php echo $this->config->help_url.'user_feedback/index';?>" class="f" target="_blank">
-					<i class="iconfont">&#xe601;</i>
-				</a>
-				<p class="r_av m_tr">意见反馈
 					<em class="r_vt">◆</em>
 				</p>
 			</li>
@@ -76,7 +76,7 @@
 <div id="footer">
 	<div class="ft_t">
 		<p class="w over">
-			<img src="passport/images/fbz.png" width="1190" height="48">
+			<img src="miaow/images/service.png">
 		</p>
 	</div>
 	<div class="w">
