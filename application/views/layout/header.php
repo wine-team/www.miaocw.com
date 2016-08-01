@@ -25,6 +25,7 @@
 <!--[if lt IE 10]>
 <?php //js('passport', 'placeholder');?>
 <![endif]-->
+
 </head>
 <body>
 <div id="top">
@@ -91,7 +92,7 @@
     <div class="w">
         <div class="rel left" >
             <a href="<?php echo site_url();?>" title="妙处网,乐享生活" class="logo" rel="nofollow">
-            	<img src="miaow/images/mcw.png"/>
+            	<img src="miaow/images/mcw1.png"/>
             </a>
         </div>
         <div id="search" class="search left">

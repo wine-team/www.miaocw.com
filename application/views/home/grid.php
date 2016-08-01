@@ -503,9 +503,9 @@
 <div class="hs_t" id="home_top">
 	<div class="w">
 		<a href="javascript:;" class="mt5 left">
-			<img src="http://s.qw.cc/themes/v4/css/hlo.png" width="272" height="28" />
+			<img src="miaow/images/mcw2.png"  />
 		</a>
-		<div id="search" class="search left">
+		<div id="search" class="left" style="margin:0 110px;">
 			<form action="<?php echo site_url('goods/search');?>" method="get"  class="ov">
 				<input type="text"  name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="想凉快吗？点我！" />
 				<input type="submit" class="left shr" title="点击搜索" value="搜索">
