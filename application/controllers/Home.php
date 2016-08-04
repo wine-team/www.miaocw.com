@@ -48,7 +48,7 @@ class Home extends MW_Controller{
 		echo $callback . '(' . $jsonData . ')';exit;
 	}
 	
-	/**
+	 /**
 	 **头部购物车的加载
 	 */
 	public function getCart(){

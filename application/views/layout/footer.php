@@ -76,7 +76,7 @@
 <div id="footer">
 	<div class="ft_t">
 		<p class="w over">
-			<img src="miaow/images/service.png">
+			<img src="miaow/images/service.png"/>
 		</p>
 	</div>
 	<div class="w">

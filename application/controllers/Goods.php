@@ -3,6 +3,7 @@ class Goods extends MW_Controller{
 	
 	public function _init() {
 		
+		$this->load->model('advert_model','advert');
 		$this->load->model('cms_block_model','cms_block');
 		$this->load->model('mall_brand_model','mall_brand');
 		$this->load->model('mall_category_model','mall_category');
@@ -26,8 +27,9 @@ class Goods extends MW_Controller{
 	public function femal(){
 		
 	    $data['head_menu'] = 'on';
-	    $data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key'));
+	    $data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key','femal_head_recommend'));
 	    $data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0;
+	    $data['advert'] = $this->advert->findBySourceState($source_state=3);
 	    $this->load->view('goods/femal',$data);
 	}
 	

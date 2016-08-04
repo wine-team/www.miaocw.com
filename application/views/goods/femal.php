@@ -2,93 +2,79 @@
 <p class="lh35 hid" id="konav">&nbsp;</p>
 <div id="content" class="w">
 	<div class="bl_l left">
-		<a href="woman/sdcj/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/62-38x38.jpg" width="38" height="38" />
+		<a href="<?php echo site_url('goods/search?keyword=多点按摩棒');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/62-38x38.jpg" />
 			<p>多点按摩棒</p>
 		</a>
-		<a href="woman/bizhen/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/7-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=仿真阳具');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/7-38x38.jpg"/>
 			<p>仿真阳具</p>
 		</a>
-		<a href="woman/zhuanzhu/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/8-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=转珠棒');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/8-38x38.jpg"/>
 			<p>转珠棒</p>
 		</a>
-		<a href="woman/gdian/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/10-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=G点震动棒');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/10-38x38.jpg"/>
 			<p>G点震动棒</p>
 		</a>
-		<a href="woman/aidejiqi/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/54-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=性爱机器');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/54-38x38.jpg"/>
 			<p>性爱机器</p>
 		</a>
-		<a href="woman/tiaodan/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/64-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=跳蛋');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/64-38x38.jpg"/>
 			<p>跳蛋</p>
 		</a>
-		<a href="woman/mmsq/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/117-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=情欲提升');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/117-38x38.jpg"/>
 			<p>情欲提升</p>
 		</a>
-		<a href="woman/avb/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/115-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=多点按摩棒');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/115-38x38.jpg"/>
 			<p>AV震动棒</p>
 		</a>
-		<a href="woman/xbcj/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/53-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=双乳刺激');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/53-38x38.jpg"/>
 			<p>双乳刺激</p>
 		</a>
-		<a href="woman/houting/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/59-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=后庭拉珠');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/59-38x38.jpg"/>
 			<p>后庭拉珠</p>
 		</a>
-		<a href="xingai/ddam/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/118-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=男女共震器');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/118-38x38.jpg"/>
 			<p>男女共震器</p>
 		</a>
-		<a href="woman/sichu/" class="l_aa" target="_blank">
-			<img src="http://s.qw.cc/mobile/ui/c/39-38x38.jpg" width="38" height="38"/>
+		<a href="<?php echo site_url('goods/search?keyword=私处挑逗');?>" class="l_aa" target="_blank">
+			<img src="miaow/images/39-38x38.jpg"/>
 			<p>私处挑逗</p>
 		</a>
 		<div class="clear"></div>
 		<p class="lh16">&nbsp;</p>
-		<a href="/topic/jnxzw/" class="l_ab">自慰专场</a>
-		<a href="/goods-4971.html" class="l_ab">炮机</a>
-		<a href="/goods-4532.html" class="l_ab">强震跳蛋</a>
-		<a href="/goods-5842.html" class="l_ab">土豪级男根</a>
-		<a href="/fengqing/fxmx/" class="l_ab">乳房增大</a>
+		<a href="<?php echo site_url('goods/search?keyword=自慰专场');?>" class="l_ab">自慰专场</a>
+		<a href="<?php echo site_url('goods/search?keyword=炮机');?>" class="l_ab">炮机</a>
+		<a href="<?php echo site_url('goods/search?keyword=强震跳蛋');?>" class="l_ab">强震跳蛋</a>
+		<a href="<?php echo site_url('goods/search?keyword=土豪级男根');?>" class="l_ab">土豪级男根</a>
+		<a href="<?php echo site_url('goods/search?keyword=乳房增大');?>" class="l_ab">乳房增大</a>
 	</div>
 	<div class="bl_m left">
+	    <?php if($advert->num_rows()>0):?>
 		<div id="bl_m" class="goods-advert">
 			<ul class="s_ul">
+				<?php foreach ($advert->result() as $val):?>
 				<li>
-					<a href="/goods-8806.html" target="_blank">
-						<img width="890" height="320" src="http://s.qw.cc/data/afficheimg/1459845063844321453.jpg"/>
+					<a href="<?php echo $val->url;?>" target="_blank">
+						<img width="890" height="320" src="<?php echo $this->config->show_image_url('advert',$val->picture);?>"/>
 					</a>
 				</li>
-				<li>
-					<a href="/goods-5321.html" target="_blank">
-						<img width="890" height="320" src="http://s.qw.cc/data/afficheimg/1458704681350743838.gif"/>
-					</a>
-				</li>
-				<li>
-					<a href="/goods-5842.html" target="_blank">
-						<img width="890" height="320" src="http://s.qw.cc/data/afficheimg/1442909233705046875.jpg"/>
-					</a>
-				</li>
+				<?php endforeach;?>
 			</ul>
 			<a class="h_pres" href="javascript:;">&lt;</a>
 			<a class="h_nxts" href="javascript:;">&gt;</a>
 		</div>
-		<a href="/goods-5520.html" class="ll_r" target="_blank">
-			<img src="http://s.qw.cc/data/afficheimg/1442994989664455841.jpg" width="290" height="150">
-		</a>
-		<a href="/goods-5245.html" class="ll_r" target="_blank">
-			<img src="http://s.qw.cc/data/afficheimg/1459933336235573950.jpg" width="290" height="150">
-		</a>
-		<a href="/goods-6002.html" class="ll_r" target="_blank">
-			<img src="http://s.qw.cc/data/afficheimg/1442995001102578741.jpg" width="290" height="150">
-		</a>
+		<?php endif;?>
+		<?php echo $cms_block['femal_head_recommend'];?>
 	</div>	
 	<div class="clear"></div>
 	<div class="over mt35 wbox" id="wbox">
