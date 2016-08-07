@@ -48,6 +48,17 @@
             <?php endif;?>
         </div>
         <ul id="tul" class="tul right">
+            <li class="nbt"> 
+                <a rel="nofollow" href="<?php echo $this->config->ucenter_url;?>" target="_blank">
+                	我的妙处网<em class="rdop"></em>
+                </a>
+                <div class="tuln">
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'ucenter/user_info';?>" target="_blank">个人信息</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'enshrine';?>" target="_blank">我的收藏</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'user_coupon';?>" target="_blank">我的优惠券</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'address';?>" target="_blank">收货地址</a>
+                </div>
+            </li>
             <li>
             	<a href="<?php echo $this->config->ucenter_url;?>" rel="nofollow">
             		<em class="f f14 mr5 iconfont red">&#xe60c;</em>我的订单
@@ -63,26 +74,14 @@
                 </div>
             </li>
             <li class="nbt">
-                <a rel="nofollow" href="<?php echo $this->config->ucenter_url;?>" target="_blank">
-                	会员中心<em class="rdop"></em>
-                </a>
-                <div class="tuln">
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'ucenter/user_info';?>" target="_blank">个人信息</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'enshrine';?>" target="_blank">我的收藏</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'user_coupon';?>" target="_blank">我的优惠券</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'address';?>" target="_blank">收货地址</a>
-                </div>
-            </li>
-            <li class="nbt">
-                <a href="<?php echo $this->config->help_url;?>" rel="nofollow">帮助中心<em class="rdop"></em></a>
+                <a href="<?php echo $this->config->help_url;?>" rel="nofollow">客户服务<em class="rdop"></em></a>
                 <div class="tuln">
                 	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">如何订购</a>
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">货到付款</a>
                 	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">在线支付</a>
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">电话订购</a>
+                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">物流查询</a>
                 </div>
             </li>
-            <li><a href="<?php echo $this->config->help_url;?>" rel="nofollow" class="pr5" target="_blank">正品保障</a></li>
+            <li><a href="<?php echo $this->config->help_url;?>" rel="nofollow" class="pr5" target="_blank">商家服务</a></li>
             <li>
             	<a rel="nofollow" href="javascript:;" class="contact-kf">
             		<em class="f f14 iconfont mr5">&#xe605;</em>联系客服
