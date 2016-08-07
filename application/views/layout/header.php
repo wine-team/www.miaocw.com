@@ -13,6 +13,7 @@
 <link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.png"/>
 <?php css('common', 'common', '20160415');?>
 <?php css('miaow', 'reset', '20160415');?>
+<?php css('miaow', 'style', '20160415');?>
 
 <?php js('miaow', 'jquery-1.10.2');?>
 <?php js('miaow', 'image.slide')?>
@@ -21,13 +22,16 @@
 
 <?php js('common','common', '20160415');?>
 <?php js('miaow', 'index');?>
-
 <!--[if lt IE 10]>
 <?php //js('passport', 'placeholder');?>
 <![endif]-->
-
 </head>
 <body>
+<?php if (!empty($cms_block['homepage_advert'])):?>
+<div class="top-active">
+	<?php echo $cms_block['homepage_advert'];?>
+</div>
+<?php endif;?>
 <div id="top">
     <div class="w">
         <div class="left c8">

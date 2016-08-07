@@ -20,7 +20,7 @@ class Home extends MW_Controller{
 		if (!$this->cache->memcached->get('hostHomePageCache')) {
 			$data = array(
 				'advert' => $this->advert->findBySourceState($source_state=1)->result_array(),
-			    'cms_block' => $this->cms_block->findByBlockIds(array('home_keyword','head_right_advert','head_today_recommend','head_recommend_down','head_hot_keyword')),
+			    'cms_block' => $this->cms_block->findByBlockIds(array('home_keyword','head_right_advert','head_today_recommend','head_recommend_down','head_hot_keyword','homepage_advert')),
 			    'brand' => $this->mall_brand->findBrand($limit=6)->result_array()
 			);
 			$this->cache->memcached->save('hostHomePageCache',$data);
