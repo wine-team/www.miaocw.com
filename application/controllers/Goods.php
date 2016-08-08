@@ -8,6 +8,7 @@ class Goods extends MW_Controller{
 		$this->load->model('mall_brand_model','mall_brand');
 		$this->load->model('mall_category_model','mall_category');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
+		$this->load->model('mall_goods_base_model','mall_goods_base');
 	}
 		
 	 /**
@@ -22,14 +23,16 @@ class Goods extends MW_Controller{
 	}
 	
 	 /**
-	 * 女性
+	  *女性
 	 */
 	public function femal(){
 		
 	    $data['head_menu'] = 'on';
+	    $data['advert'] = $this->advert->findBySourceState($source_state=3);
 	    $data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key','femal_head_recommend'));
 	    $data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0;
-	    $data['advert'] = $this->advert->findBySourceState($source_state=3);
+	    $data['child_cat'] = $this->mall_category->getChildCat($cat_id=2);
+	    $data['recommend'] = $this->mall_goods_base->getGoodsBaseByReason(array('category_id'=>2,'hot_recommend'=>2));
 	    $this->load->view('goods/femal',$data);
 	}
 	

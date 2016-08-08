@@ -28,4 +28,17 @@ class Mall_category_model extends CI_Model{
 		}
 		return $firstCat;
 	}
+	
+	 /**
+	 * 获取下级分类ID
+	 * @param unknown $parent_id
+	 */
+	public function getChildCat($parent_id){
+		
+		$this->db->select('cat_name,cat_id');
+		$this->db->from($this->table);
+		$this->db->where('parent_id',$parent_id);
+		$this->db->where('is_show',1);
+	    return $this->db->get();
+	}
 }
