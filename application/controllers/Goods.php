@@ -32,7 +32,8 @@ class Goods extends MW_Controller{
 	    $data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key','femal_head_recommend'));
 	    $data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0;
 	    $data['child_cat'] = $this->mall_category->getChildCat($cat_id=2);
-	    $data['recommend'] = $this->mall_goods_base->getGoodsBaseByReason(array('category_id'=>2,'hot_recommend'=>2));
+	    $data['recommend'] = $this->mall_goods_base->getRecommendGoodsBase(array('category_id'=>2,'hot_recommend'=>2,'num'=>4));
+	    $data['mall_goods'] = $this->mall_goods_base->getGoodsBase(array('category_id'=>2,'num'=>40));
 	    $this->load->view('goods/femal',$data);
 	}
 	
