@@ -86,7 +86,7 @@
 		</div>
 		<?php foreach ($recommend->result() as $item):?>
 		<a href="<?php echo site_url('goods/detail?goods_id='.$item->goods_id);?>" class="dn_a" title="<?php echo $item->goods_name;?>">
-			<img src = "<?php echo $this->config->show_image_url('mall',strstr($item->goods_img,'|',true));?>" width="270" height="270" class="sbm"/>
+			<img src = "<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true));?>" width="270" height="270" class="sbm"/>
 			<div class="h250">
 				<p class="OverH"><?php echo $item->goods_name;?></p>
 				<p>
@@ -114,13 +114,13 @@
 		<dl class="gl">
 			<dt>
 				<a href="<?php echo site_url('goods/detail?goods_id='.$item->goods_id);?>" target="_blank">
-					<img src="<?php echo $this->config->show_image_url('mall',strstr($item->goods_img,'|',true))?>" width="270" height="270" class="sbm">
+					<img src="<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true))?>" width="270" height="270" class="sbm">
 				</a>
 			</dt>
 			<?php $img = array_filter(explode('|',$item->goods_img)); ?>
 			<dd class="simg">
 			    <?php foreach ( $img as $val):?>
-				<img src="<?php echo $this->config->show_image_thumb_url('mall',$val);?>" width="30" height="30" data-s="<?php echo $this->config->show_image_url('mall',$val);?>"/>
+				<img src="<?php echo $this->config->show_image_thumb_url('mall',$val,'60');?>" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$val);?>"/>
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb5">
