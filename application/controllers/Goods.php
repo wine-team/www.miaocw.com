@@ -23,7 +23,7 @@ class Goods extends MW_Controller{
 	    $config['total_rows'] = $this->mall_goods_base->searchTotal($this->input->get());
 	    $config['uri_segment'] = 3;
 	    $this->pagination->initialize($config);
-	    $data['pg_link'] = $this->pagination->create_links();
+	    $data['pg_link'] = $this->pagination->create_links(); 
 	    $data['page_list'] = $this->mall_goods_base->page_list($page_num, $num, $this->input->get())->result(); 
 	    $data['all_pg'] = ceil($config['total_rows']/$page_num);
 	    $data['all_rows'] = $config['total_rows'];

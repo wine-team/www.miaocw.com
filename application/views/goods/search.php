@@ -27,12 +27,12 @@
 					<?php if($pg_now==1) :?>
 					<a class="pr_a p_off" href="javascript:;" title="已经是第一页了">上一页</a> 
 					<?php else : ?>
-					<a class="pr_a" href="" >上一页</a> 
+					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now-1).'?keyword='.$this->input->get('keyword').'&order='.$this->input->get('order').'&order_price='.$this->input->get('order_price'));?>" >上一页</a> 
 					<?php endif;?>
 					<?php if($pg_now==$all_pg) :?>
 					<a class="pr_a p_off" href="javascript:;" title="已经是最后一页了">下一页</a>
 					<?php else :?>
-					<a class="pr_a" href="">下一页</a>
+					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now+1).'?keyword='.$this->input->get('keyword').'&order='.$this->input->get('order').'&order_price='.$this->input->get('order_price'));?>">下一页</a>
 					<?php endif;?>
 				</div>
 			</div>
@@ -41,41 +41,36 @@
 	<div class="gdls" id="gdls">
 	    <?php foreach ($page_list as $goods) :?>
 		<dl class="gl">
-			<dt>
-				<a href="javascript:;" target="_blank">
-					<img src="http://s.qw.cc/images/201604/goods_img/8806_P_1459839060126-270x270.jpg" width="270" height="270" class="sbm" alt="逼真 时尚 超长仿真阳具" />
+			<dt><?php $img_arr=explode('|',$goods->goods_img);?>
+				<a href="<?php echo $goods->goods_id;?>" target="_blank">
+					<img src="<?php echo $this->config->show_image_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm" alt="<?php echo $goods->goods_brief;?>" />
 				</a>
 			</dt>
 			<dd class="simg">
-				<img src="http://s.qw.cc/images/201604/thumb_img2/8806_thumb_P60_1459839066302-30x30.jpg" width="30" height="30" data-s="http://s.qw.cc/images/201604/source_img/8806_P_1459839060325-270x270.jpg"/>
-				<img src="http://s.qw.cc/images/201602/thumb_img2/8806_thumb_P60_1456282671557-30x30.jpg" width="30" height="30" data-s="http://s.qw.cc/images/201602/source_img/8806_P_1456282572597-270x270.jpg"/>
-				<img src="http://s.qw.cc/images/201604/thumb_img2/8806_thumb_P60_1459828835719-30x30.jpg" width="30" height="30" data-s="http://s.qw.cc/images/201604/source_img/8806_P_1459828743003-270x270.jpg"/>
-				<img src="http://s.qw.cc/images/201604/thumb_img2/8806_thumb_P60_1459828835300-30x30.jpg" width="30" height="30" data-s="http://s.qw.cc/images/201604/source_img/8806_P_1459828743923-270x270.jpg"/>
-				<img src="http://s.qw.cc/images/201604/thumb_img2/8806_thumb_P60_1459828835025-30x30.jpg" width="30" height="30" data-s="http://s.qw.cc/images/201604/source_img/8806_P_1459828743554-270x270.jpg"/>
+			    <?php foreach($img_arr as $img) :?>
+				<img src="<?php echo $this->config->show_image_thumb_url('mall',$img,60);?>" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
+			    <?php endforeach;?>
 			</dd>
 			<dd class="mb10">
-				<a href="javascript:;" class="gna" title="COC罗马大帝超长多频仿真阳具" target="_blank">COC罗马大帝超长多频仿真阳具</a>
-				<a href="./goods-8806.html" class="gna c9" title="逼真 时尚 超长仿真阳具" target="_blank">逼真 时尚 超长仿真阳具</a>
+				<a href="<?php echo $goods->goods_id;?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
+				<a href="<?php echo $goods->goods_id;?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
 			</dd>
 			<dd>
 				<em class="i_hot">热销</em>
 				<i class="rmb">¥</i>
-				<b class="xj">198</b>
-				<del>¥257.40</del>
+				<b class="xj"><?php echo $goods->promote_price;?></b>
+				<del>¥<?php echo $goods->market_price;?></del>
 			</dd>
 			<dd class="mt5">销量 
-				<em class="c_zon">13994</em>笔 | 评价 
-				<em class="c_blue">92</em>
+				<em class="c_zon"><?php echo $goods->sale_count;?></em>笔 | 评价 
+				<em class="c_blue"><?php echo $goods->review_count;?></em>
 			</dd>
 		</dl>
 		<?php endforeach;?>
 	</div>
 	<div class="page" id="pager">
-  		<span class="yemr">总计<b>46</b> 条记录</span>                     
-  		<a href="javascript:;"class="on">1</a>
-        <a href="woman/bizhen/b0-min0-max0-chara0-2-sort_order-DESC.html">2</a>
-        <a href="woman/bizhen/b0-min0-max0-chara0-3-sort_order-DESC.html">3</a>
-        <a href="woman/bizhen/b0-min0-max0-chara0-2-sort_order-DESC.html">下一页</a> 
+  		<span class="yemr">总计<b><?php echo $all_rows;?></b> 条记录</span>                     
+  		<?php echo $pg_link;?>
     </div>
     <div class="ftj mt35">
 		<b class="bl_red">热门推荐:</b>
