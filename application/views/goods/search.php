@@ -4,9 +4,21 @@
    		<span class="left">
    			<a href="<?php echo $this->config->main_base_url?>">首页</a>
    			<code class="lr3">></code>
-   			<a href="javascript:;">商品搜索  _</a>
-   			<b class="lr3"><?php echo $this->input->get('keyword');?></b>
-   		</span>
+   			<a href="javascript:;">关键字</a><code class="lr3">></code>
+   			<b class="lr3">“ <?php echo $this->input->get('keyword');?> ”</b>
+   		</span>	
+		<ul class="left s_sx">
+            <li><a class="d_xx" title="排序" href="<?php echo site_url('Goods/search?keyword='.$this->input->get('keyword'));?>">排序：
+            <?php 
+    		if($this->input->get('order')) echo $order_arr[$this->input->get('order')];
+    		$o_price=$this->input->get('order_price');
+    		if($o_price=='ASC')echo '价格从低到高';
+    		if($o_price=='DESC')echo '价格从高到低';
+    		if(empty($this->input->get('order')) && empty($o_price)) echo '默认';
+    		?>
+		    </a></li>
+        </ul>
+   		
    		<span class="right">共找<b class="c3"><?php echo $all_rows;?></b>件</span>
     </div>
 	
@@ -17,7 +29,7 @@
 					<form method="GET" class="sort"  name="listform">
 					    <a href="<?php echo site_url('Goods/search?keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if(empty($this->input->get('order_price')) && empty($this->input->get('order'))) echo 'sb_on'?>">默认</a>
 					    <a href="<?php echo site_url('Goods/search?order=goods_id&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order')=='goods_id') echo 'sb_on'?>">最新上架</a>
-					    <a href="<?php $o_price=$this->input->get('order_price');$order_price=($o_price=='ASC') ? 'DESC' : 'ASC';echo site_url('Goods/search?order_price='.$order_price.'&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order_price')=='ASC') echo 'sup';?> <?php if($this->input->get('order_price')) echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
+					    <a href="<?php $order_price=($o_price=='ASC') ? 'DESC' : 'ASC';echo site_url('Goods/search?order_price='.$order_price.'&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order_price')=='ASC') echo 'sup';?> <?php if($this->input->get('order_price')) echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
 					    <a href="<?php echo site_url('Goods/search?order=sale_count&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order')=='sale_count') echo 'sb_on'?>">热销</a>
 					    <a href="<?php echo site_url('Goods/search?order=tour_count&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order')=='tour_count') echo 'sb_on'?>">热门</a>
 					</form>

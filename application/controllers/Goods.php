@@ -28,7 +28,7 @@ class Goods extends MW_Controller{
 	    $data['all_pg'] = ceil($config['total_rows']/$page_num);
 	    $data['all_rows'] = $config['total_rows'];
 	    $data['pg_now'] = $pg;
-	    
+	    $data['order_arr'] = array('goods_id'=>'最新上架','sale_count'=>'热销','tour_count'=>'热门');
 		$data['head_menu'] = 'on';
 		$data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key'));
 		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0;
