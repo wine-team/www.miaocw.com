@@ -1,52 +1,39 @@
 <?php $this->load->view('layout/header');?>
 <div class="w" id="content">
-	<div class="s_tl">
-		<div class="left wov">
-			当前位置：<a href=".">首页</a><code class="lr3">></code>
-			       <a href="baojian/">延时助情</a><code class="lr3">></code>
-			       <a href="baojian/yanshi/">延时喷剂</a><code class="lr3">></code>
-			       2H2D 倍力挺男性喷雾剂金尊版2ml组合装
-	    </div>
-	</div>
 	<div class="goods rel">
-		<div class="gd_l left" id="gd_l">
-			<img width="430" height="430" id="preview" class="goods-main-pic" rel="http://s.qw.cc//images/201603/source_img/9113_P_1456888624317.jpg" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" src="http://s.qw.cc//images/201603/goods_img/9113_P_1456888624440.jpg"/>
-			<ul id="spic" class="left goods-pic">    
-				<li class="on" data-src="http://s.qw.cc/images/201603/goods_img/9113_P_1456888624440.jpg">
-					<img src="http://s.qw.cc/images/201603/thumb_img2/9113_thumb_P60_1456888647703-50x50.jpg" height="50" width="50" />
+	    <?php $images = array_filter(explode('|',$goods->goods_img));?>
+		<div class="gd_l left goods-image" id="gd_l">
+			<img width="430" height="430" id="preview" class="goods-main-pic"  alt="<?php echo $goods->goods_name;?>" src="<?php echo $this->config->show_image_url('mall',$images[0],400);?>"/>
+			<ul id="spic" class="left goods-pic">   
+			    <?php foreach ($images as $val):?>
+				<li class="on" data-src="<?php echo $this->config->show_image_url('mall',$val,400);?>">
+					<img src="<?php echo $this->config->show_image_url('mall',$val,60);?>" height="50" width="50" />
 				</li>
-				<li  data-src="http://s.qw.cc/images/201603/goods_img/9113_P_1456888624722.jpg">
-					<img src="http://s.qw.cc/images/201603/thumb_img2/9113_thumb_P60_1456888647147-50x50.jpg" height="50" width="50" />
-				</li>
-				<li  data-src="http://s.qw.cc/images/201603/goods_img/9113_P_1456888624451.jpg">
-					<img src="http://s.qw.cc/images/201603/thumb_img2/9113_thumb_P60_1456888647904-50x50.jpg" height="50" width="50" />
-				</li>
-				<li  data-src="http://s.qw.cc/images/201603/goods_img/9113_P_1456888624590.jpg">
-					<img src="http://s.qw.cc/images/201603/thumb_img2/9113_thumb_P60_1456888647225-50x50.jpg" height="50" width="50" />
-				</li>
-				<li  data-src="http://s.qw.cc/images/201603/goods_img/9113_P_1456888624764.jpg">
-					<img src="http://s.qw.cc/images/201603/thumb_img2/9113_thumb_P60_1456888647750-50x50.jpg" height="50" width="50" />
-				</li>
+				<?php endforeach;?>
 			</ul>
-			<a onclick="alert('请先登录')" href="javascript:;" class="afav left hand"><i class="f f18">&#xe636;</i><p>收藏</p></a>
+			<a href="javascript:;" class="afav left hand" goods-id="<?php echo base64_encode($goods->goods_id);?>">
+				<i class="f f18">&#xe636;</i><p>收藏</p>
+			</a>
 			<div class="clear"></div>
 		</div>
 		<div class="gd_r rel left">
-			<form action="javascript:addToCart(9113)" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+			<form action="javascript:addToCart(9113)" method="post">
 				<input type="hidden" id="referertype" name="referertype" value="0" />
 				<div class="wb">
-					<h1 class="gh1">2H2D 倍力挺男性喷雾剂金尊版2ml组合装</h1><span class="pl5 pr5 gh1"><em class="c_blue">(货号:<i id="ECS_GOODS_SKU">QZ9429</i>)</em></span>
+					<h1 class="gh1"><?php echo $goods->goods_name;?></h1><span class="pl5 pr5 gh1"><em class="c_blue">(货号:<i id="ECS_GOODS_SKU"><?php echo $goods->goods_sku;?></i>)</em></span>
 				</div>
-				<h2 class="gh2 yahei f14">草本配方，2ml</h2>
+				<h2 class="gh2 yahei f14"><?php echo $goods->goods_brief;?></h2>
 				<div class="cg_bg">
 					<dl class="gdl">
 						<dt class="mt5">售价</dt>
 						<dd>
 							<b class="yen">¥</b>
-							<b id="ECS_RANKPRICE_m" class="red f30">498.00</b>
+							<b id="ECS_RANKPRICE_m" class="red f30"><?php echo $goods->promote_price;?></b>
+							<?php if (($goods->freight_id==0)&&($goods->freight_cost==0)):?>
 							<i class="baoy lh20">包邮</i>
-							<em class="xline pl10">¥647.40</em> 
-							<a href="javascript:;" onClick="slog(1)" class="pl30 hid">
+							<?php endif;?>
+							<em class="xline pl10">¥<?php echo $goods->market_price;?></em> 
+							<a href="javascript:;" onClick="slog(1)" class="pl30">
 								<em class="U">登录</em> <em class="c9">享受会员价</em>
 							</a>
 						</dd>
@@ -54,9 +41,9 @@
 					<dl class="gdl">
 						<dt>统计</dt>
 						<dd>
-							已销售<b class="blue">654</b>件
+							已销售<b class="blue"><?php echo $goods->sale_count;?></b>件
 							<span class="vline">|</span>
-							<a href="#comment" onClick="tplun()" class="gray" rel="nofollow">(<b class="blue">12</b>人已评</a>)
+							<a href="#comment" onClick="tplun()" class="gray" rel="nofollow">(<b class="blue"><?php echo $goods->review_count;?></b>人已评</a>)
 						</dd>
 					</dl>
 				</div>
@@ -65,7 +52,7 @@
 					<dd>
 						<div class="pes left" id="pes">
 							<p class="pes_id hand">
-								<em id="pes_id">杭州市</em>
+								<em id="pes_id"><?php echo $address['city'];?></em>
 								<em class="rdop"></em>
 							</p>
 							<div class="pes_z lh25">
@@ -77,66 +64,12 @@
 								<div id="pes_z">
 									<ul id="sel1" class="pes_o">
 										<li><a href="javascript:;" onClick="cgp(2,2,0,this)" >北京市</a></li>
-										<li><a href="javascript:;" onClick="cgp(6,2,0,this)" >广东省</a></li>
-										<li><a href="javascript:;" onClick="cgp(16,2,0,this)" >江苏省</a></li>
-										<li><a href="javascript:;" onClick="cgp(31,2,0,this)" class="on">浙江省</a></li>
-										<li><a href="javascript:;" onClick="cgp(22,2,0,this)" >山东省</a></li>
-										<li><a href="javascript:;" onClick="cgp(11,2,0,this)" >河南省</a></li>
-										<li><a href="javascript:;" onClick="cgp(10,2,0,this)" >河北省</a></li>
-										<li><a href="javascript:;" onClick="cgp(26,2,0,this)" >四川省</a></li>
-										<li><a href="javascript:;" onClick="cgp(13,2,0,this)" >湖北省</a></li>
-										<li><a href="javascript:;" onClick="cgp(4,2,0,this)" >福建省</a></li>
-										<li><a href="javascript:;" onClick="cgp(24,2,0,this)" >陕西省</a></li>
-										<li><a href="javascript:;" onClick="cgp(3,2,0,this)" >安徽省</a></li>
-										<li><a href="javascript:;" onClick="cgp(18,2,0,this)" >辽宁省</a></li>
-										<li><a href="javascript:;" onClick="cgp(14,2,0,this)" >湖南省</a></li>
-										<li><a href="javascript:;" onClick="cgp(30,2,0,this)" >云南省</a></li>
-										<li><a href="javascript:;" onClick="cgp(23,2,0,this)" >山西省</a></li>
-										<li><a href="javascript:;" onClick="cgp(32,2,0,this)" >重庆市</a></li>
-										<li><a href="javascript:;" onClick="cgp(25,2,0,this)" >上海市</a></li>
-										<li><a href="javascript:;" onClick="cgp(8,2,0,this)" >贵州省</a></li>
-										<li><a href="javascript:;" onClick="cgp(7,2,0,this)" >广西壮族自治区</a></li>
-										<li><a href="javascript:;" onClick="cgp(17,2,0,this)" >江西省</a></li>
-										<li><a href="javascript:;" onClick="cgp(29,2,0,this)" >新疆维吾尔自治区</a></li>
-										<li><a href="javascript:;" onClick="cgp(12,2,0,this)" >黑龙江省</a></li>
-										<li><a href="javascript:;" onClick="cgp(19,2,0,this)" >内蒙古自治区</a></li>
-										<li><a href="javascript:;" onClick="cgp(5,2,0,this)" >甘肃省</a></li>
-										<li><a href="javascript:;" onClick="cgp(27,2,0,this)" >天津市</a></li>
-										<li><a href="javascript:;" onClick="cgp(15,2,0,this)" >吉林省</a></li>
-										<li><a href="javascript:;" onClick="cgp(9,2,0,this)" >海南省</a></li>
-										<li><a href="javascript:;" onClick="cgp(20,2,0,this)" >宁夏回族自治区</a></li>
-										<li><a href="javascript:;" onClick="cgp(21,2,0,this)" >青海省</a></li>
-										<li><a href="javascript:;" onClick="cgp(28,2,0,this)" >西藏自治区</a></li>
 									</ul>
 									<ul id="sel2" class="pes_o hid">
 										<li><a href="javascript:;" onClick="cgp(383,3,1,this)" >杭州市</a></li>
-										<li><a href="javascript:;" onClick="cgp(392,3,1,this)" >舟山市</a></li>
-										<li><a href="javascript:;" onClick="cgp(391,3,1,this)" >温州市</a></li>
-										<li><a href="javascript:;" onClick="cgp(390,3,1,this)" >台州市</a></li>
-										<li><a href="javascript:;" onClick="cgp(389,3,1,this)" >绍兴市</a></li>
-										<li><a href="javascript:;" onClick="cgp(388,3,1,this)" >宁波市</a></li>
-										<li><a href="javascript:;" onClick="cgp(387,3,1,this)" >丽水市</a></li>
-										<li><a href="javascript:;" onClick="cgp(386,3,1,this)" >金华市</a></li>
-										<li><a href="javascript:;" onClick="cgp(385,3,1,this)" >嘉兴市</a></li>
-										<li><a href="javascript:;" onClick="cgp(384,3,1,this)" >湖州市</a></li>
-										<li><a href="javascript:;" onClick="cgp(393,3,1,this)" >衢州市</a></li>
 									</ul>
-									<ul id="sel3" class="pes_o">
+									<ul id="sel3" class="pes_o hid">
 										<li><a href="javascript:;" onClick="cgp(3229,4,2,this)" >西湖区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3242,4,2,this)" >淳安县</a></li>
-										<li><a href="javascript:;" onClick="cgp(3241,4,2,this)" >桐庐县</a></li>
-										<li><a href="javascript:;" onClick="cgp(3240,4,2,this)" >临安市</a></li>
-										<li><a href="javascript:;" onClick="cgp(3239,4,2,this)" >富阳市</a></li>
-										<li><a href="javascript:;" onClick="cgp(3238,4,2,this)" >建德市</a></li>
-										<li><a href="javascript:;" onClick="cgp(3237,4,2,this)" >市郊</a></li>
-										<li><a href="javascript:;" onClick="cgp(3236,4,2,this)" >余杭区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3235,4,2,this)" >萧山区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3234,4,2,this)" >江干区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3233,4,2,this)" >滨江区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3232,4,2,this)" >拱墅区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3231,4,2,this)" >下城区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3230,4,2,this)" >上城区</a></li>
-										<li><a href="javascript:;" onClick="cgp(3661,4,2,this)" >下沙区</a></li>
 									</ul>
 								</div>
 							</div>
@@ -190,7 +123,7 @@
 							<p onclick="cdec()" class="decrease"></p>
 						</div>
 						<span class="gray">件</span>
-						<span class="hid">(库存200件)</span>
+						<span class="hid">(库存<?php echo $goods->in_stock;?>件)</span>
 				    </dd>
 				</dl>
 				<div class="bzone rel clearfix">

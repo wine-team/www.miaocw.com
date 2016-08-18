@@ -11,11 +11,12 @@
 <title><?php echo isset($headTittle)?$headTittle:'妙处网,性用品,性保健品,正品成人用品网站';?></title> 
 <base href="<?php echo $this->config->skins_url;?>"/>
 <link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.png"/>
-<?php css('common', 'common', '20160415');?>
+<?php css('common','common', '20160415');?>
 <?php css('miaow', 'reset', '20160415');?>
 <?php css('miaow', 'style', '20160415');?>
 
 <?php js('miaow', 'jquery-1.10.2');?>
+<?php js('miaow', 'layer/layer');?>
 <?php js('miaow', 'image.slide')?>
 <?php js('miaow', 'jquery.validate.min');?>
 <?php js('miaow', 'jquery.validate.messages_zh');?>

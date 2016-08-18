@@ -521,4 +521,17 @@ class MW_Controller extends CI_Controller
         return $imagesName;
     }
     
+    /**
+     * jsen输出
+     * @param unknown $message
+     * @param string $status
+     */
+    public function jsen($message,$status=false) {
+    	
+    	$data = array(
+    		'message' => $message,
+    		'status'  => $status 
+    	);
+    	echo json_encode($data);exit;
+    }
 }
