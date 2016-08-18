@@ -11,7 +11,7 @@ class Mall_goods_base_model extends CI_Model{
 	 */
 	public function getGoodsByGoodsId($goodsId){
 		
-		$this->db->select('goods_id,goods_name,promote_price,goods_img');
+		$this->db->select('goods_id,goods_name,promote_price,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,freight_id,in_stock,freight_cost,sale_count,review_count');
 		$this->db->from($this->table);
 		if(is_array($goodsId)){
 			$this->db->where_in('goods_id',$goodsId);
