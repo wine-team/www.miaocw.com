@@ -9,20 +9,32 @@
    		</span>	
 		<ul class="left s_sx">
 		    <?php if($this->input->get('category_id') && !empty($category_arr)) :?>
-		      <li><a class="d_xx" title="分类" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'category_id'));?>">分类：<?php echo $category_arr[$this->input->get('category_id')];?></a></li>
+		      <li>
+		          <a class="d_xx" title="分类" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'category_id'));?>">
+		           分类：<?php echo $category_arr[$this->input->get('category_id')];?>
+                  </a>
+              </li>
 		    <?php endif;?>
 		    <?php if($this->input->get('brand_id')) :?>
-		      <li><a class="d_xx" title="品牌" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'brand_id'));?>">品牌：<?php echo $this->input->get('brand_name');?></a></li>
+		      <li>
+		          <a class="d_xx" title="品牌" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'brand_id'));?>">
+		          品牌：<?php echo $this->input->get('brand_name');?>
+		          </a>
+	          </li>
 		    <?php endif;?>
 		    <?php if($this->input->get('price_range')) :?>
-		      <li><a class="d_xx" title="价格" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'price_range'));?>">价格：<?php echo $this->input->get('price_range');?></a></li>
+		      <li>
+    		      <a class="d_xx" title="价格" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'price_range'));?>">
+    		 价格：<?php echo $this->input->get('price_range');?>
+    		      </a>
+		      </li>
 		    <?php endif;?>
 		    
-            <li><a class="d_xx" title="排序" href="<?php echo site_url('Goods/search?keyword='.$this->input->get('keyword'));?>">排序：
-            <?php 
-    		echo empty($this->input->get('order')) ? '默认' : $order_arr[$this->input->get('order')];
-    		?>
-		    </a></li>
+            <li>
+                <a class="d_xx" title="排序" href="<?php echo site_url('Goods/search?keyword='.$this->input->get('keyword'));?>">
+                             排序：<?php echo empty($this->input->get('order')) ? '默认' : $order_arr[$this->input->get('order')];?>
+    		    </a>
+		    </li>
         </ul>
    		
    		<span class="right">共找<b class="c3"><?php echo $all_rows;?></b>件</span>
