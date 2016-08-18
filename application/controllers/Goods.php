@@ -5,6 +5,8 @@ class Goods extends MW_Controller{
 		
 		$this->load->helper('ip');
 	    $this->load->library('pagination');
+	    $this->load->library('qrcode',null,'QRcode');
+	    $this->load->model('region_model', 'region');
 		$this->load->model('advert_model','advert');
 		$this->load->model('cms_block_model','cms_block');
 		$this->load->model('mall_brand_model','mall_brand');
@@ -74,10 +76,52 @@ class Goods extends MW_Controller{
 		   $this->error('goods/search','','搜索无结果');
 		}
 		$goods = $res->row(0);
-		//$uidGoods = $this->mall_goods_base->getRecommend($goods->supplier_id,$goods->goods_id);
+		$recommond = $this->mall_goods_base->getRecommend($goods->supplier_id,$num=0,$pgNum=3);
+		if ($recommond->num_rows()<=0){
+			$recommond = $this->mall_goods_base->getRecommendGoodsBase();
+		}
 		$data['goods'] = $goods;
+		$data['recommond'] = $recommond;
 		$data['address'] = getIpLookup();
+		$data['ewm'] = $this->productEwm($goods_id);
+		$data['region'] = $this->region->findCityByParentId(1,1);
 		$this->load->view('goods/detail',$data);
+	}
+	
+	/**
+	 * 推荐产品
+	 */
+	public function ajaxMoreSee(){
+		
+		$uid = base64_decode($this->input->post('from',true));
+		$pg = $this->input->post('pg') ? (int)$this->input->post('pg') : 2;
+		$pgNum = 3;
+		$num = ($pg-1)*$pgNum;
+		$result = $this->mall_goods_base->getRecommend($uid,$num,$pgNum);
+		if( $result->num_rows() <= 0 ){
+			$pg = 1;
+			$result = $this->mall_goods_base->getRecommend($uid,0,$pgNum);
+		}
+		$data['recommond'] = $result;
+		echo json_encode(
+				array(
+						'status' => true,
+						'pg'     => $pg,
+						'html'   => $this->load->view('goods/moresee',$data,true)
+				));exit;
+	}
+	
+	/**
+	 * 二维码的生产
+	 * @param unknown $attr_id
+	 */
+	public function productEwm($goods_id){
+		 
+		$url = $this->config->main_base_url.'goods/detail?goods_id='.$goods_id.'.html';
+		$name = 'shangpin-'.$goods_id.'.png';
+		$path = $this->config->upload_image_path('common/ewm').$name;
+		$this->QRcode->png($url,$path,4,10);
+		return $name;
 	}
 	
 	 /**

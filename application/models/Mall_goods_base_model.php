@@ -11,7 +11,7 @@ class Mall_goods_base_model extends CI_Model{
 	 */
 	public function getGoodsByGoodsId($goodsId){
 		
-		$this->db->select('goods_id,goods_name,promote_price,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,freight_id,in_stock,freight_cost,sale_count,review_count');
+		$this->db->select('goods_id,goods_name,promote_price,supplier_id,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,freight_id,in_stock,freight_cost,sale_count,review_count');
 		$this->db->from($this->table);
 		if(is_array($goodsId)){
 			$this->db->where_in('goods_id',$goodsId);
@@ -21,20 +21,42 @@ class Mall_goods_base_model extends CI_Model{
 		return $this->db->get();
 	}
 	
+	 /**
+	 * 根据条件获取供应商产品
+	 * @param unknown $param
+	 */
+	public function getRecommend($uid,$num,$pgNum){ 
+		
+		$this->db->select('goods_id,goods_name,promote_price,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,freight_id,in_stock,freight_cost,sale_count,review_count');
+		$this->db->from($this->table);
+		$this->db->where('supplier_id',$uid);
+		$this->db->where('is_on_sale',1);
+		$this->db->where('is_check',2);
+		$this->db->order_by('tour_count','desc');
+		$this->db->limit($pgNum,$num);
+		return $this->db->get();
+	}
+	
 	/**
 	 * 获取分类页面的推荐产品
  	 * @param unknown $param
  	 * @param unknown $param
  	 */
-	public function getRecommendGoodsBase($param){
+	public function getRecommendGoodsBase($param=array()){
  	     $this->db->select('goods_id,goods_name,market_price,promote_price,goods_img,sale_count,review_count');
  	     $this->db->from($this->table);
  	     $this->db->where('is_on_sale',1);
  	     $this->db->where('is_check',2);
- 	     $this->db->where('category_id',$param['category_id']);
- 	     $this->db->where('hot_recommend',$param['hot_recommend']);
+ 	     if (!empty($param['category_id'])) {
+ 	     	$this->db->where('category_id',$param['category_id']);
+ 	     }
+ 	     if (!empty($param['hot_recommend'])) {
+ 	     	$this->db->where('hot_recommend',$param['hot_recommend']);
+ 	     }
  	     $this->db->order_by('tour_count','desc');
- 	     $this->db->limit($param['num']);
+ 	     if (!empty($param['num'])) {
+ 	     	$this->db->limit($param['num']);
+ 	     }
  	     return $this->db->get();
  	}
 	

@@ -53,7 +53,7 @@ class MW_Config extends CI_Config
      * $dirname 文件夹名称
      * $imageName 图片名称
      */
-    public function show_image_thumb_url($dirname, $imageName = '',$resize='360')
+    public function show_image_thumb_url($dirname, $imageName = '',$resize='400')
     {
         if (!empty($imageName)) {
             $imageName = $this->get_thumb_image_name($imageName,$resize);

@@ -63,7 +63,9 @@
 								</ul>
 								<div id="pes_z">
 									<ul id="sel1" class="pes_o">
-										<li><a href="javascript:;" onClick="cgp(2,2,0,this)" >北京市</a></li>
+									    <?php foreach ($region->result() as $val):?>
+										<li><a href="javascript:;"><?php echo $val->region_name;?></a></li>
+										<?php endforeach;?>
 									</ul>
 									<ul id="sel2" class="pes_o hid">
 										<li><a href="javascript:;" onClick="cgp(383,3,1,this)" >杭州市</a></li>
@@ -153,27 +155,10 @@
 			</form>
 		</div>
 		<div class="kan">
-			<p class="lh35 mt10 c9">看了又看<a href="javascript:;" id="s_next" class="c9 nua kan_i">换一换</a></p>
+			<p class="lh35 mt10 c9">看了又看<a href="javascript:;" id="s_next" class="c9 nua kan_i change" from="<?php echo base64_encode($goods->supplier_id);?>" pg="1">换一换</a></p>
 			<div id="wrapB" class="wrapb rel">
-				<ul class="ka_r">
-					<li>
-						<a href="javascript:;" target="_blank" title="藏帝 高原植物延时喷剂 不麻木无依赖 15ml" class="ka_ra">
-							<img src="http://s.qw.cc//images/201604/thumb_img/5415_thumb_P220_1460455530090-130x130.jpg" width="130" height="130" />
-							<p class="ka_rp">198.00</p>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;" target="_blank" title="UZ诱芷 天然复方延时精油 安全无添加 10ml" class="ka_ra">
-							<img src="http://s.qw.cc//images/201509/thumb_img/6012_thumb_P220_1442303546050-130x130.jpg" width="130" height="130" />
-							<p class="ka_rp">238.00</p>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;" target="_blank" title="雅迪克 华夏古方秘制延时喷剂 15ml" class="ka_ra">
-							<img src="http://s.qw.cc//images/201602/thumb_img/9108_thumb_P220_1456304222764-130x130.jpg" width="130" height="130" />
-							<p class="ka_rp">198.00</p>
-						</a>
-					</li>
+				<ul class="ka_r recommend">
+				    <?php $this->load->view('goods/moresee');?>
 				</ul>
 			</div>
 		</div>
@@ -400,7 +385,7 @@
 		</p>
 		<div class="glb alC">
 			<a title="扫一扫手机购买" href="http://vip.anqihao.com/mobile/goods-9113.html" target="_blank" class="op6" rel="nofollow">
-				<img width="130" height="130" src="http://api.qrserver.com/v1/create-qr-code/?size=130×130&data=http://vip.anqihao.com/mobile/goods-9113.html">
+				<img width="160" height="160" src="<?php echo $this->config->show_image_url('common/ewm',$ewm);?>">
 		    </a>
 		</div>
 		<p class="glh3">
