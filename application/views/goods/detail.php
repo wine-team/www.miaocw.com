@@ -180,38 +180,14 @@
 		<div class="des" id="detail">
 			<div id="description" class="gdes lh25">
 				<div class="g_attr mb10">
-					<p title="商品品牌:2H2D">品牌：<a href="brand/2h2d/" target="_blank"><strong class="blue">2H2D</strong></a></p><p title="产地：上海">产地：上海</p>
-					<p title="容量：2ml">容量：2ml</p>
-					<p title="主要成分：丁香提取物、紫霄花溶液、桂皮提取物等">主要成分：丁香提取物、紫霄花溶液、桂皮提取物等</p>
-					<p title="使用方法：将本品均匀喷洒在私处冠状沟部位以及靠近根部3cm区域">使用方法：将本品均匀喷洒在私处冠状沟部位以及靠近根部3cm区域</p>
-					<p title="特色：植物成分">特色：植物成分</p>
-					<p title="有效期：2年（生产日期在盒子底部）">有效期：2年（生产日期在盒子底部）</p>
-					<p title="类型：喷洒型">类型：喷洒型</p>
-					<p title="包装清单：喷雾剂*1">包装清单：喷雾剂*1</p>
-					<p title="功效：延时助情">功效：延时助情</p>
+				    <?php foreach ($spec->result() as $val):?>
+					<p title="<?php echo $val->attr_value;?>"><?php echo $val->attr_name;?>：<?php echo $val->attr_value;?></p>
+					<?php endforeach;?>
 					<div class="clear"></div>
 				</div>
-				<p class="mb5">
-					<img src2="http://s.qw.cc/themes/v4/css/ft/weixin01.png" width="750" height="110">
-				</p>
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111242_68677.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_79982.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_21439.jpg" width="750" height="500" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <img src="http://s.qw.cc/images/upload/20160302/20160302111342_97727.jpg" width="750" height="111" alt="2H2D 倍力挺男性喷雾剂金尊版2ml组合装" />
-			     <div class="clear"></div>
-			     <p><img src="http://s.qw.cc//data/brandlogo/1452588241142855174.jpg" width="750"/></p>
-				 <div class="brand_des lh24">
-				    <img src="http://s.qw.cc//data/brandlogo/1332233253553436531.jpg" width="150" height="150" class="left mr10" />
-				    <p class="red fB f14">2H2D介绍：</p>
-					   来自日本的2H＆2D，蕴含着对性的崇尚理念，为了满足人们对性爱的极致追求而生；精致炫目的红色，蕴藏着男性阳刚、蓄势待发的热情与活力；“精の自信”，来自日本的自信，天然植物的自信，更来自于您身体力量的自信，体现在情趣生活中的如鱼得水，让您随心掌控自己的快感生活；
-					<div class="clear"></div>
-				 </div>
-				 <p class="lh20">&nbsp;</p>
-				 <p class="lh35">
-				 	<b class="red">为了您的隐私，我们将会用不透明材料封装，快递单上统一标注为【礼品】,100%确保您的信息不会被他人知晓</b>
-				 </p>
-				 <img src="http://s.qw.cc/themes/v4/css/ft/baozhuang.jpg" width="730" height="179" class="mt10">
-			<!--<a href="javascript:;" onClick="jieshou()"><img src2="http://s.qw.cc/themes/v4/css/ft/gbkf2.png" width="750" height="110" class="mt35"></a>-->
+				<div class="des">
+				    <?php echo $goods->goods_desc;?>  
+				</div>
 			</div>
 		</div>
 		<div id="comment" class="des rel">

@@ -14,6 +14,7 @@ class Goods extends MW_Controller{
 		$this->load->model('mall_category_model','mall_category');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
+		$this->load->model('mall_goods_attr_value_model','mall_goods_attr_value');
 	}
 		
 	 /**
@@ -84,6 +85,7 @@ class Goods extends MW_Controller{
 		$data['recommond'] = $recommond;
 		$data['address'] = getIpLookup();
 		$data['ewm'] = $this->productEwm($goods_id);
+		$data['spec'] = $this->mall_goods_attr_value->findByRes(array('goods_id'=>$goods_id));
 		$data['region'] = $this->region->findCityByParentId(1,1);
 		$this->load->view('goods/detail',$data);
 	}
