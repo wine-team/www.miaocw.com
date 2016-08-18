@@ -104,7 +104,18 @@ function getAllCategory(){
 	return $allCategory;
 }
 
-
-
+/**
+ * 获取url ? 后参数
+ * */
+function create_suffix($arr, $key='')
+{
+    if (!empty($key)) {
+        $key_arr = explode(',', $key);
+        foreach ($key_arr as $val) {
+            if (isset($arr[$val])) unset($arr[$val]);
+        }
+    }
+    return http_build_query($arr);
+}
 
 

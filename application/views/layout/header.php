@@ -100,7 +100,7 @@
         </div>
         <div id="search" class="search left">
             <form action="<?php echo site_url('goods/search');?>" method="get" class="ov" />
-                <input type="text" name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="想凉快吗？点我！" />
+                <input type="text" name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="想凉快吗？点我！" value="<?php echo $this->input->get('keyword');?>" />
                 <input type="submit" class="left shr" title="点击搜索" value="搜索" />
                 <div class="clear"></div>
                 <p class="hotw">

@@ -3,6 +3,7 @@ class Mall_goods_base_model extends CI_Model{
 	
 	private $table = 'mall_goods_base';
 	private $table1 = 'mall_brand';
+	private $table2 = 'mall_category';
 	
 	 /**
 	 * 获取购物车内容
@@ -61,17 +62,27 @@ class Mall_goods_base_model extends CI_Model{
 	 * */
 	public function searchTotal($search)
 	{
-	    $this->db->select('mall_goods_base.goods_id');
+	    $this->db->select('mall_goods_base.goods_id, mall_goods_base.category_id, mall_category.cat_name');
 	    $this->db->from($this->table);
 	    $this->db->join($this->table1, 'mall_goods_base.brand_id = mall_brand.brand_id', 'left');
+	    $this->db->join($this->table2, 'mall_goods_base.category_id = mall_category.cat_id', 'left');
 	    if (!empty($search['keyword'])) {
-	        $this->db->like('goods_name', $search['keyword']);
-	        $this->db->or_like('goods_name', $search['keyword']);
-	        $this->db->or_like('brand_name', $search['keyword']);
+	        $this->db->where("((`mall_goods_base`.`goods_name` LIKE '%{$search['keyword']}%') OR (`mall_goods_base`.`goods_sku`='{$search['keyword']}') OR (`mall_brand`.`brand_name`='{$search['keyword']}'))");
 	    }
-	    $this->db->where('is_on_sale',1);
-	    $this->db->where('is_check',2);
-	    return $this->db->count_all_results();
+	    if (!empty($search['category_id'])) {
+	        $this->db->where('category_id', $search['category_id']);
+	    }
+	    if (!empty($search['price_range'])) {
+	        $price_arr = explode('-', $search['price_range']);
+	        $this->db->where('promote_price >=', $price_arr[0]);
+	        if (is_numeric($price_arr[1])) $this->db->where('promote_price <', $price_arr[1]);
+	    }
+	    if (!empty($search['brand_id'])) {
+	        $this->db->where('mall_goods_base.brand_id', $search['brand_id']);
+	    }
+	    $this->db->where('is_on_sale', 1);
+	    $this->db->where('is_check', 2);
+	    return $this->db->get();
 	}
 	
 	/**
@@ -83,18 +94,31 @@ class Mall_goods_base_model extends CI_Model{
 	    $this->db->select('mall_goods_base.*');
 	    $this->db->from($this->table);
 	    $this->db->join($this->table1, 'mall_goods_base.brand_id = mall_brand.brand_id', 'left');
+	    $this->db->join($this->table2, 'mall_goods_base.category_id = mall_category.cat_id', 'left');
 	    if (!empty($search['keyword'])) {
-	        $this->db->like('goods_name', $search['keyword']);
-	        $this->db->or_like('goods_name', $search['keyword']);
-	        $this->db->or_like('brand_name', $search['keyword']);
+	        $this->db->where("((`mall_goods_base`.`goods_name` LIKE '%{$search['keyword']}%') OR (`mall_goods_base`.`goods_sku`='{$search['keyword']}') OR (`mall_brand`.`brand_name`='{$search['keyword']}'))");
 	    }
-	    $this->db->where('is_on_sale',1);
-	    $this->db->where('is_check',2);
+	    if (!empty($search['category_id'])) {
+	        $this->db->where('category_id', $search['category_id']);
+	    }
+	    if (!empty($search['price_range'])) {
+	        $price_arr = explode('-', $search['price_range']);
+	        $this->db->where('promote_price >=', $price_arr[0]);
+	        if (is_numeric($price_arr[1])) $this->db->where('promote_price <', $price_arr[1]);
+	    }
+	    if (!empty($search['brand_id'])) {
+	        $this->db->where('mall_goods_base.brand_id', $search['brand_id']);
+	    }
+	    $this->db->where('is_on_sale', 1);
+	    $this->db->where('is_check', 2);
 	    if (!empty($search['order'])) {
-	        $this->db->order_by($search['order'], 'DESC');
-	    }
-	    if (!empty($search['order_price'])) {
-	        $this->db->order_by('promote_price', $search['order_price']);
+	        if ($search['order'] == 'price_asc') {
+	            $this->db->order_by('promote_price', 'ASC');
+	        } else if ($search['order'] == 'price_desc') {
+	            $this->db->order_by('promote_price', 'DESC');
+	        } else{
+	            $this->db->order_by($search['order'], 'DESC');
+	        }
 	    }
 	    $this->db->order_by('mall_goods_base.sort_order', 'ASC');
 	    $this->db->limit($page_num, $num);

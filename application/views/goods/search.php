@@ -8,30 +8,73 @@
    			<b class="lr3">“ <?php echo $this->input->get('keyword');?> ”</b>
    		</span>	
 		<ul class="left s_sx">
+		    <?php if($this->input->get('category_id') && !empty($category_arr)) :?>
+		      <li><a class="d_xx" title="分类" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'category_id'));?>">分类：<?php echo $category_arr[$this->input->get('category_id')];?></a></li>
+		    <?php endif;?>
+		    <?php if($this->input->get('brand_id')) :?>
+		      <li><a class="d_xx" title="品牌" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'brand_id'));?>">品牌：<?php echo $this->input->get('brand_name');?></a></li>
+		    <?php endif;?>
+		    <?php if($this->input->get('price_range')) :?>
+		      <li><a class="d_xx" title="价格" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'price_range'));?>">价格：<?php echo $this->input->get('price_range');?></a></li>
+		    <?php endif;?>
+		    
             <li><a class="d_xx" title="排序" href="<?php echo site_url('Goods/search?keyword='.$this->input->get('keyword'));?>">排序：
             <?php 
-    		if($this->input->get('order')) echo $order_arr[$this->input->get('order')];
-    		$o_price=$this->input->get('order_price');
-    		if($o_price=='ASC')echo '价格从低到高';
-    		if($o_price=='DESC')echo '价格从高到低';
-    		if(empty($this->input->get('order')) && empty($o_price)) echo '默认';
+    		echo empty($this->input->get('order')) ? '默认' : $order_arr[$this->input->get('order')];
     		?>
 		    </a></li>
         </ul>
    		
    		<span class="right">共找<b class="c3"><?php echo $all_rows;?></b>件</span>
     </div>
+    
+    <?php if(count($page_list) > 0) :?>
+    <div class="scat over">
+		<dl class="sdl sfst">
+			<dt><b class="red">分类</b></dt> 
+			<dd id="" class="brand_dl">
+				<div id="list_b" class="over">
+				    <?php foreach ($category_arr as $cat_id=>$cat_name) :?>
+    				<a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'category_id').'&category_id='.$cat_id);?>" class="<?php if($this->input->get('category_id')==$cat_id) echo 'on';?>"><?php echo $cat_name;?></a>
+    			    <?php endforeach;?>
+				</div>
+				<p class="wz_b"></p>
+				<p class="b_rmo <?php if(count($category_arr)<14) echo 'hid';?>" id="">更多</p>
+			</dd>
+		</dl>
+		<dl class="sdl">
+			<dt>品牌</dt>
+			<dd id="brand_dl" class="brand_dl">
+				<div id="list_b" class="over">
+				    <?php foreach ($brand_arr as $brand) :?>
+					<a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'brand_id,brand_name').'&brand_id='.$brand->brand_id.'&brand_name='.$brand->brand_name);?>" class="<?php if($this->input->get('brand_id')==$brand->brand_id) echo 'on';?>"><?php echo $brand->brand_name;?></a>
+					<?php endforeach;?>
+				</div>
+				<p class="wz_b"></p>
+				<p class="b_rmo <?php if(count($brand_arr)<14) echo 'hid';?>" id="b_rmo">更多</p>
+			</dd>
+		</dl>
+		<dl class="sdl">
+			<dt>价格</dt>
+			<dd>
+			    <?php foreach ($price_arr as $price) :?>
+			    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'price_range').'&price_range='.$price);?>" class="<?php if($this->input->get('price_range')==$price) echo 'on';?>"><?php echo $price;?></a>
+			    <?php endforeach;?>
+			</dd>
+		</dl>
+    </div>
+	<?php endif;?>
 	
 	<div class="sxbox">
 		<div class="ls_cat" id="ls_cat">
 			<div class="w">
 				<div class="left pl10">
 					<form method="GET" class="sort"  name="listform">
-					    <a href="<?php echo site_url('Goods/search?keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if(empty($this->input->get('order_price')) && empty($this->input->get('order'))) echo 'sb_on'?>">默认</a>
-					    <a href="<?php echo site_url('Goods/search?order=goods_id&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order')=='goods_id') echo 'sb_on'?>">最新上架</a>
-					    <a href="<?php $order_price=($o_price=='ASC') ? 'DESC' : 'ASC';echo site_url('Goods/search?order_price='.$order_price.'&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order_price')=='ASC') echo 'sup';?> <?php if($this->input->get('order_price')) echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
-					    <a href="<?php echo site_url('Goods/search?order=sale_count&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order')=='sale_count') echo 'sb_on'?>">热销</a>
-					    <a href="<?php echo site_url('Goods/search?order=tour_count&keyword='.$this->input->get('keyword'))?>" class="sb_a <?php if($this->input->get('order')=='tour_count') echo 'sb_on'?>">热门</a>
+					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()))?>" class="sb_a <?php if(empty($this->input->get('order'))) echo 'sb_on'?>">默认</a>
+					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order=goods_id')?>" class="sb_a <?php if($this->input->get('order')=='goods_id') echo 'sb_on'?>">最新上架</a>
+					    <a href="<?php $order_price=($this->input->get('order')=='price_asc') ? 'price_desc' : 'price_asc';echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order='.$order_price)?>" class="sb_a <?php if($this->input->get('order')=='price_asc') echo 'sup';?> <?php if($this->input->get('order')=='price_asc' || $this->input->get('order')=='price_desc') echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
+					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order=sale_count')?>" class="sb_a <?php if($this->input->get('order')=='sale_count') echo 'sb_on'?>">热销</a>
+					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order=tour_count')?>" class="sb_a <?php if($this->input->get('order')=='tour_count') echo 'sb_on'?>">热门</a>
 					</form>
 				</div>
 				<div class="prt right"> 
@@ -39,12 +82,12 @@
 					<?php if($pg_now==1) :?>
 					<a class="pr_a p_off" href="javascript:;" title="已经是第一页了">上一页</a> 
 					<?php else : ?>
-					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now-1).'?keyword='.$this->input->get('keyword').'&order='.$this->input->get('order').'&order_price='.$this->input->get('order_price'));?>" >上一页</a> 
+					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now-1).'?'.create_suffix($this->input->get()));?>" >上一页</a> 
 					<?php endif;?>
 					<?php if($pg_now==$all_pg) :?>
 					<a class="pr_a p_off" href="javascript:;" title="已经是最后一页了">下一页</a>
 					<?php else :?>
-					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now+1).'?keyword='.$this->input->get('keyword').'&order='.$this->input->get('order').'&order_price='.$this->input->get('order_price'));?>">下一页</a>
+					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now+1).'?'.create_suffix($this->input->get()));?>">下一页</a>
 					<?php endif;?>
 				</div>
 			</div>

@@ -15,12 +15,16 @@ class Goods extends MW_Controller{
 	 * 搜索页
 	 */
 	public function search($pg = 1){
+	    if(empty($this->input->get('keyword'))) {
+	        $this->alertJumpPre('请输入关键字');
+	    }
 	    $page_num = 20;
 	    $num = ($pg-1)*$page_num;
+	    $searchTotal = $this->mall_goods_base->searchTotal($this->input->get());
 	    $config['first_url'] = base_url('Goods/search').$this->pageGetParam($this->input->get());
 	    $config['suffix'] = $this->pageGetParam($this->input->get());
 	    $config['base_url'] = base_url('Goods/search');
-	    $config['total_rows'] = $this->mall_goods_base->searchTotal($this->input->get());
+	    $config['total_rows'] = $searchTotal->num_rows();
 	    $config['uri_segment'] = 3;
 	    $this->pagination->initialize($config);
 	    $data['pg_link'] = $this->pagination->create_links(); 
@@ -28,7 +32,16 @@ class Goods extends MW_Controller{
 	    $data['all_pg'] = ceil($config['total_rows']/$page_num);
 	    $data['all_rows'] = $config['total_rows'];
 	    $data['pg_now'] = $pg;
-	    $data['order_arr'] = array('goods_id'=>'最新上架','sale_count'=>'热销','tour_count'=>'热门');
+	    $category = array(); 
+	    foreach ($searchTotal->result() as $s) {
+	        if (!isset($category[$s->category_id])) {
+	            $category[$s->category_id] = $s->cat_name;
+	        }
+	    }
+	    $data['category_arr'] = $category;
+	    $data['price_arr'] = array('0-100', '100-500', '500-1000', '1000-2500', '2500-以上');
+	    $data['brand_arr'] = $this->mall_brand->findBrand()->result();
+	    $data['order_arr'] = array('goods_id'=>'最新上架','sale_count'=>'热销','tour_count'=>'热门', 'price_asc'=>'价格从低到高', 'price_desc'=>'价格从高到低');
 		$data['head_menu'] = 'on';
 		$data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key'));
 		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0;
