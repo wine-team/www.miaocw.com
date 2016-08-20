@@ -1,7 +1,7 @@
 <?php if (count($history)>0 && !empty($goods) ) :?>
 <?php foreach ($goods->result() as $key=>$item):?>
 <?php $goodsImage = array_filter(explode('|',$item->goods_img));?>
-<a title="<?php echo $item->goods_name;?>" class="hs_ra" target="_blank" href="">
+<a title="<?php echo $item->goods_name;?>" class="hs_ra" target="_blank" href="<?php echo site_url('goods/detail?goods_id='.$item->goods_id)?>">
 	<img width="70" height="70" src="<?php echo $this->config->show_image_thumb_url('mall',$goodsImage[0]);?>">
 	<p>¥<?php echo $item->promote_price;?></p>
 </a>
