@@ -4,7 +4,7 @@
 		<div class="ucom">
 			<div class="ucoml">
 				<p>
-					<img src="<?php $this->config->show_image_url('common/touxiang',$item->photo)?>" width="50" height="50">
+					<img class="lazy" src="miaow/images/load.jpg"  data-original="<?php $this->config->show_image_url('common/touxiang',$item->photo)?>" width="50" height="50">
 				</p>
 			</div>
 			<div class="ucomr">
