@@ -1,4 +1,3 @@
-
 <?php $this->load->view('layout/header');?>
 <div class="w" id="content">
 	<div class="goods rel">
@@ -12,7 +11,7 @@
 				</li>
 				<?php endforeach;?>
 			</ul>
-			<a href="javascript:;" class="afav left hand" goods-id="<?php echo base64_encode($goods->goods_id);?>">
+			<a href="javascript:;" class="afav left hand <?php if($enshrine):?>active<?php endif;?>" goods-id="<?php echo base64_encode($goods->goods_id);?>">
 				<i class="f f18">&#xe636;</i><p>收藏</p>
 			</a>
 			<div class="clear"></div>

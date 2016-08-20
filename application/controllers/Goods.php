@@ -22,6 +22,7 @@ class Goods extends MW_Controller{
 	 * 搜索页
 	 */
 	public function search($pg = 1){
+		
 	    if(empty($this->input->get('keyword'))) {
 	        $this->alertJumpPre('请输入关键字');
 	    }
@@ -88,6 +89,7 @@ class Goods extends MW_Controller{
 		$data['recommond'] = $recommond;
 		$data['address'] = getIpLookup();;
 		$data['ewm'] = $this->productEwm($goods_id);
+		$data['enshrine'] = $this->isEnshrine($goods_id);
 		$data['spec'] = $this->mall_goods_attr_value->findByRes(array('goods_id'=>$goods_id));
 		$data['region'] = $this->region->findCityByParentId(1,1);
 		$data['countReviews'] = $this->getReviewsArray($goods_id);
@@ -115,6 +117,22 @@ class Goods extends MW_Controller{
 						'pg'     => $pg,
 						'html'   => $this->load->view('goods/moresee',$data,true)
 				));exit;
+	}
+	
+	 /**
+	 * 是否收藏
+	 * @param unknown $goods_id
+	 */
+	public function isEnshrine($goods_id) {
+		
+		if (empty($this->uid)) {
+		   return false; 
+		}
+		$result = $this->mall_enshrine->findByEnshrine(array('uid'=>$this->uid, 'goods_id'=>$goods_id));
+	    if ($result->num_rows()>0) {
+	    	return true;
+	    }
+	    return false;
 	}
 	
 	 /**
@@ -205,11 +223,26 @@ class Goods extends MW_Controller{
 				  'message' => $this->config->passport_url
 			));exit;
 		}
-		$res = $this->mall_enshrine->insert($uid,$goods_id);
-		if ($res) {
-			$this->jsen('收藏成功',true);
+		$insert = false;
+		$delete = false;
+		$result = $this->mall_enshrine->findByEnshrine(array('uid'=>$uid, 'goods_id'=>$goods_id));
+		if ($result->num_rows() > 0) {
+			$delete = $this->mall_enshrine->deleteByEnshrine(array('uid'=>$uid, 'goods_id'=>$goods_id));
+		} else {
+			$insert = $this->mall_enshrine->insert($uid,$goods_id);
 		}
-		$this->jsen('收藏失败');
+		if ($insert || $delete) {
+			echo json_encode(array(
+					'status'   => true,
+					'isShrine' => $insert ? true : false,
+					'message'  => $insert ? '收藏成功' : '取消收藏成功',
+			));exit;
+		} else {
+			echo json_encode(array(
+					'status'   => false,
+					'message' => '服务器异常，请稍候再试'
+			));exit;
+		}
 	}
 	
 	/**
