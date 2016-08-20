@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Reviews extends MW_Controller
 {
     public function _init()
