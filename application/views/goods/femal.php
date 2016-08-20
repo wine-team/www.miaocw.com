@@ -70,8 +70,6 @@
 				</li>
 				<?php endforeach;?>
 			</ul>
-			<a class="h_pres" href="javascript:;">&lt;</a>
-			<a class="h_nxts" href="javascript:;">&gt;</a>
 		</div>
 		<?php endif;?>
 		<?php echo $cms_block['femal_head_recommend'];?>

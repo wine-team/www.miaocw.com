@@ -17,6 +17,7 @@
 
 <?php js('miaow', 'jquery-1.10.2');?>
 <?php js('miaow', 'layer/layer');?>
+<?php js('miaow', 'jquery.lazyload.min');?>
 <?php js('miaow', 'jquery.validate.min');?>
 <?php js('miaow', 'jquery.validate.messages_zh');?>
 <?php js('miaow', 'index');?>
