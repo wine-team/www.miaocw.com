@@ -5,8 +5,8 @@
 		<div class="gd_l left goods-image" id="gd_l">
 			<img width="430" height="430" id="preview" class="goods-main-pic"  alt="<?php echo $goods->goods_name;?>" src="<?php echo $this->config->show_image_url('mall',$images[0],400);?>"/>
 			<ul id="spic" class="left goods-pic">   
-			    <?php foreach ($images as $val):?>
-				<li class="on" data-src="<?php echo $this->config->show_image_url('mall',$val,400);?>">
+			    <?php foreach ($images as $key=>$val):?>
+				<li <?php if($key==0):?>class="on"<?php endif;?> data-src="<?php echo $this->config->show_image_url('mall',$val,400);?>">
 					<img src="<?php echo $this->config->show_image_url('mall',$val,60);?>" height="50" width="50" />
 				</li>
 				<?php endforeach;?>
@@ -33,9 +33,6 @@
 							<i class="baoy lh20">包邮</i>
 							<?php endif;?>
 							<em class="xline pl10">¥<?php echo $goods->market_price;?></em> 
-							<a href="javascript:;" onClick="slog(1)" class="pl30">
-								<em class="U">登录</em> <em class="c9">享受会员价</em>
-							</a>
 						</dd>
 					</dl>
 					<dl class="gdl">
@@ -43,7 +40,7 @@
 						<dd>
 							已销售<b class="blue"><?php echo $goods->sale_count;?></b>件
 							<span class="vline">|</span>
-							<a href="javascript:;"  class="gray" rel="nofollow">(<b class="blue"><?php echo $goods->review_count;?></b>人已评</a>)
+							<a href="javascript:;"  class="gray <?php if($goods->review_count>0):?>review-count<?php endif;?>" rel="nofollow">(<b class="blue"><?php echo $goods->review_count;?></b>人已评</a>)
 						</dd>
 					</dl>
 				</div>
@@ -80,7 +77,7 @@
 						<div class="dx_d lh18" id="dx_d">
 							<h4 class="red f14">短信订购指南</h4>
 							<p>&nbsp;</p>
-							<p>用短信编辑以下内容发送到：138-838-73375</p>
+							<p>用短信编辑以下内容发送到：159-8817-3721</p>
 							<p class="red">商品货号#数量#规格#收件人姓名#收件地址</p>
 							<p>&nbsp;</p>
 							<p class="bg_gray">例如： Q8164#1#白色#张三#北京朝阳区XX路XX小区XX号</p>
@@ -149,7 +146,7 @@
 					<a href="javascript:;" onClick="tobuy(9113)" class="fu_btn" id="bigadd" title="点击加入购物车">加入购物车</a>
 				    <a href="javascript:;" onClick="fbuy(9113)" class="red_btn" id="thunder" title="点击立即购买，直接结算">立即订购</a>
 				</div>
-				<div class="lh25 c9 yahei f14 pl10">订购电话: <em title="您可以拨打我们的全国免费服务热线:888-8888-8888" class="f16 red">400-660-0606</em>
+				<div class="lh25 c9 yahei f14 pl10">订购电话: <em title="您可以拨打我们的全国免费服务热线:888-8888-8888" class="f16 red">888-8888-8888</em>
 				<span class="dx_tip hand" id="dx_tip">短信订购：<em class="tre f16">15988173721</em></span></div>
 			</form>
 		</div>
@@ -167,9 +164,21 @@
 		<div class="jba">
 			<div id="jbar" class="jbar">
 				<ul id="tabbar" class="jbars">
-					<li class="on" rel="detail"><a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id)?>#detail">产品介绍</a></li>
-					<li rel="comment"><a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id)?>#comment">用户评论 <em class="blue"><?php echo $goods->review_count;?></em></a></li>
-					<li rel="shouhou"><a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id)?>#shouhou">优质服务</a></li>
+					<li class="on" rel="detail">
+						<a href="javascript:;">
+							产品介绍
+						</a>
+					</li>
+					<li  rel="comment">
+						<a href="javascript:;">
+							用户评论 <em class="blue"><?php echo $goods->review_count;?></em>
+						</a>
+					</li>
+					<li rel="shouhou">
+						<a href="javascript:;">
+							优质服务
+						</a>
+					</li>
 				</ul>
 				<a class="rbuy right hid" href="javascript:;" onClick="fbuy(9113)"><i class="f pr5">&#xe634;</i>立即订购</a>
 				<a href="javascript:;" onClick="jieshou()" class="right pr10 c9">
