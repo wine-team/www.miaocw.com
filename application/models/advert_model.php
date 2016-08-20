@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Advert_model extends CI_Model
 {
     private $table = 'advert';

@@ -1,4 +1,4 @@
-<?php $this->load->view('layout/header');?>
+ <?php $this->load->view('layout/header');?>
 <p class="lh35 hid" id="konav">&nbsp;</p>
 <div id="content" class="w">
 	<div class="bl_l left">

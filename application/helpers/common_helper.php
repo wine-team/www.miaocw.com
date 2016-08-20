@@ -1,4 +1,4 @@
-<?php
+ <?php
 function js($dirname, $file_name, $version=1.0)
 {
 	echo '<script type="text/javascript" src="'.$dirname.'/js/'.$file_name.'.js?v='.$version.'"></script>';

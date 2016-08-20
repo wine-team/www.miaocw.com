@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Region_model extends CI_Model
 {
     private $table = 'region';

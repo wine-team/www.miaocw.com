@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Mall_enshrine_model extends CI_Model{
 	
 	private $table = 'mall_enshrine';

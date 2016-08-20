@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Mall_brand_model extends CI_Model{
 	
 	private $table = 'mall_brand';

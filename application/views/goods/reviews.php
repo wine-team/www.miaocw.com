@@ -1,4 +1,4 @@
-<?php if ($page_list->num_rows() > 0): ?>
+ <?php if ($page_list->num_rows() > 0): ?>
 <div class="over" id="wpl">
         <?php foreach ($page_list->result() as $item):?>
 		<div class="ucom">

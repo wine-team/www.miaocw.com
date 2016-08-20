@@ -1,3 +1,4 @@
+
 <?php $this->load->view('layout/header');?>
 <div class="w" id="content">
 	<div class="goods rel">
