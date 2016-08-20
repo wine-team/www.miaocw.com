@@ -14,6 +14,7 @@ class Goods extends MW_Controller{
 		$this->load->model('mall_category_model','mall_category');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
+		$this->load->model('mall_order_reviews_model','mall_order_reviews');
 		$this->load->model('mall_goods_attr_value_model','mall_goods_attr_value');
 	}
 		
@@ -77,16 +78,19 @@ class Goods extends MW_Controller{
 		   $this->error('goods/search','','搜索无结果');
 		}
 		$goods = $res->row(0);
+		$this->seeHistory($goods);
+		$this->mall_goods_base->setMallCount($goods_id);
 		$recommond = $this->mall_goods_base->getRecommend($goods->supplier_id,$num=0,$pgNum=3);
 		if ($recommond->num_rows()<=0){
 			$recommond = $this->mall_goods_base->getRecommendGoodsBase();
 		}
 		$data['goods'] = $goods;
 		$data['recommond'] = $recommond;
-		$data['address'] = getIpLookup();
+		$data['address'] = getIpLookup();;
 		$data['ewm'] = $this->productEwm($goods_id);
 		$data['spec'] = $this->mall_goods_attr_value->findByRes(array('goods_id'=>$goods_id));
 		$data['region'] = $this->region->findCityByParentId(1,1);
+		$data['countReviews'] = $this->getReviewsArray($goods_id);
 		$this->load->view('goods/detail',$data);
 	}
 	
@@ -113,6 +117,32 @@ class Goods extends MW_Controller{
 				));exit;
 	}
 	
+	 /**
+	 * 添加评论数组
+	 * @param unknown $attr_id
+	 */
+	public function getReviewsArray($goods_id){
+		 
+		$up = 0;
+		$middle = 0;
+		$low = 0;
+		$totalResult =  $this->mall_order_reviews->countReviewsTotal($goods_id);
+		if($totalResult->num_rows() > 0){
+			 
+			foreach ($totalResult->result() as $item){
+				switch ($item->score){
+					case '5' :
+					case '4' : $up += $item->total;break; //好评
+					case '3' : $middle += $item->total;break;//中评
+					case '2' :
+					case '1' : $low += $item->total;break; //差评
+				}
+			}
+			return array('up'=>$up,'middle'=>$middle,'low'=>$low,'all'=>$up+$middle+$low);
+		}
+		return array();
+	}
+	
 	/**
 	 * 二维码的生产
 	 * @param unknown $attr_id
@@ -124,6 +154,42 @@ class Goods extends MW_Controller{
 		$path = $this->config->upload_image_path('common/ewm').$name;
 		$this->QRcode->png($url,$path,4,10);
 		return $name;
+	}
+	
+	/**
+	 * 浏览记录
+	 * @param unknown $tourismGoods
+	 */
+	public function seeHistory($mallGoods){
+		 
+		$historyPram = array();
+		$historyCookie = get_cookie('historyPram');
+		if( !empty($historyCookie) ){
+			$historyPram = unserialize(base64_decode($historyCookie));
+			if( !in_array($mallGoods->goods_id,$historyPram) ){
+				array_unshift($historyPram, $mallGoods->goods_id);
+			}
+			if( count($historyPram)>16 ){
+				array_pop($historyPram);
+			}
+		}else{
+			$historyPram[] = $mallGoods->goods_id;
+		}
+		set_cookie('historyPram',base64_encode(serialize($historyPram)),14400);
+	}
+	
+	 /**
+	 *获取特卖产品
+	 */
+	public function getHot(){
+		
+		$param['num'] = 5;
+		$param['category_id'] = base64_decode($this->input->post('cat',true));
+		$data['goods'] = $this->mall_goods_base->getRecommendGoodsBase($param);
+	    echo json_encode(array(
+	    	'status' => true,
+	        'html'   => $this->load->view('goods/hot',$data,true)
+	    )); exit;
 	}
 	
 	 /**
