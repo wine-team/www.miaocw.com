@@ -32,6 +32,99 @@ class Home extends MW_Controller{
 		$this->load->view('home/grid',$data);
 	}
 	
+	/**
+	 * 加入购物车
+	 */
+	public function addToCart(){
+		
+		$uid = $this->uid;
+		$callback = $this->input->get('callback');
+		if (!$uid) {
+			$jsonData = json_encode(array(
+					'status' => 1,
+					'msg'    => '请先登录'
+			));
+			echo $callback . '(' . $jsonData . ')';exit;
+		}
+		$specArray = '';
+		$spec_id = $this->input->get('spec');
+		$param['uid'] = $uid;
+		$param['goods_id'] = $this->input->get('goods_id') ? (int)(base64_decode($this->input->get('goods_id'))) : 0;
+		$param['qty'] = $this->input->get('qty') ? (int)$this->input->get('qty') : 0;
+		if (!$param['goods_id'] || !$param['qty']) {
+			$jsonData = json_encode(array(
+					'status' => 0,
+					'msg' => '找不到该商品的信息'
+			));
+			echo $callback . '(' . $jsonData . ')';exit;
+		}
+		if (!empty($spec_id)) {
+			/*
+			$specValue = $this->mall_goods_category_spec->getSpecification(array('spec_array'=>$spec_id));
+			if ($specValue->num_rows()>0) {
+				foreach ($specValue->result() as $item) {
+					$spec[] = $item->attribute_value;
+				}
+				$specArray = join(',',$spec); //选择规格属性
+			}*/
+			$specArray = '5支装,刺激';
+		}
+		$result = $this->mall_goods_base->getGoodsByGoodsId($param['goods_id'])->row(0);
+		$limit_num = $result->limit_num;
+		if ($result->limit_num > 0){
+			if($result->limit_num < $param['qty']){
+				$jsonData = json_encode(array(
+						'status' => 0,
+						'msg'    => '限购'.$result->limit_num.'件'
+				));
+				echo $callback . '(' . $jsonData . ')';exit;
+			}
+		}
+		//判断是否存在该商品 且商品仍然有库存
+		if (!isset($result->in_stock) || $result->in_stock < $param['qty']) {
+			$jsonData = json_encode(array(
+					'status' => 0,
+					'msg' => '库存不足'
+			));
+			echo $callback . '(' . $jsonData . ')';exit;
+		}
+		
+		//加入商品价格记录 判断商品是否重复
+		$info = $this->mall_cart_goods->getCartGoods($param);
+		if (isset($info->id)) {
+			if ($info->goods_num + $param['qty'] < $result->in_stock){
+				if ( ($info->goods_num >= $limit_num) && ($limit_num>0)) {
+					$status = $this->mall_cart_goods->updateCart($info->id,$limit_num,$specArray);
+				} else {
+					$param['qty'] = $limit_num > 0 ? ( (($info->goods_num + $param['qty']) >= $limit_num ) ? ($limit_num-($info->goods_num)) : $param['qty'] ) :  $param['qty'];
+					$status = $this->mall_cart_goods->updateQty($info->id,$param['qty'],$specArray);
+				}
+			} else {
+				$status = $this->mall_cart_goods->updateCart($info->id,$result->in_stock,$specArray);
+			}
+		} else {
+			$params['uid'] = $uid;
+			$params['attribute_value'] = $specArray;
+			$params['goods_id'] = $param['goods_id'];
+			$params['goods_num'] = $param['qty'];
+			$status = $this->mall_cart_goods->addQty($params);
+		}
+		if ($status) {
+			$jsonData = json_encode(array(
+					'status' => 2,
+					'msg'    => '加入成功'
+			));
+			echo $callback . '(' . $jsonData . ')';exit;
+		}
+		$jsonData = json_encode(array(
+				'status' => 0,
+				'msg'    => '加入购物车失败'
+		));
+		echo $callback . '(' . $jsonData . ')';exit;
+		
+	}
+	
+	
 	 /**
 	 *历史记录
 	 */
@@ -47,6 +140,10 @@ class Home extends MW_Controller{
 		));
 		echo $callback . '(' . $jsonData . ')';exit;
 	}
+	
+	
+	
+	
 	
 	 /**
 	 **头部购物车的加载
@@ -68,6 +165,31 @@ class Home extends MW_Controller{
 				'html'   => $this->load->view('home/cartlist',$data,true)
 		));
 		echo $callback . '(' . $jsonData . ')';exit;
+	}
+	
+	/**
+	 *  
+	 */
+	public function getCartInfor() {
+		
+		if (empty($this->uid)) {
+			echo json_encode(array(
+				'status' => false,
+				'msg'    => '没有登陆'
+			));exit;
+		}
+		$res = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
+		$num = 0;
+		$sum = 0;
+		foreach ($res->result() as $item) {
+			$num += $item->goods_num;
+			$sum += bcmul($item->promote_price,$item->goods_num,2);
+		}
+		echo json_encode(array(
+				'status' => true,
+				'num' => $num,
+				'sum' => $sum
+		));exit;
 	}
 	
 }

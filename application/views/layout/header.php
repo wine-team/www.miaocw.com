@@ -19,6 +19,8 @@
 <?php js('miaow', 'layer/layer');?>
 <?php js('miaow', 'image.slide')?>
 <?php js('miaow', 'jquery.lazyload.min');?>
+<?php js('miaow', 'jquery.validate.min');?>
+<?php js('miaow', 'jquery.validate.messages_zh');?>
 
 <?php js('common','common', '20160415');?>
 <?php js('miaow', 'index');?>

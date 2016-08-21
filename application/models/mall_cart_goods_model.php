@@ -19,5 +19,60 @@ class Mall_cart_goods_model extends CI_Model{
 		$this->db->order_by('mall_cart_goods.creat_at','desc');
 		return $this->db->get();
 	}
+	
+	 /**
+	 * 购物车的添加
+	 * @param unknown $param
+	 */
+	public function addQty($param=array()){
+		
+	    $data = array(
+	    	'uid'  => $param['uid'],
+	        'goods_id' => $param['goods_id'],
+	    	'attribute_value' => $param['attribute_value'],
+	        'goods_num' => $param['goods_num'],
+	    	'creat_at'  => date('Y-m-d H:i:s')
+	    );
+	    return $this->db->insert($this->table,$data);
+	}
+	
+	/**
+	 * 查询么个商品是否存在
+	 * @param unknown $param
+	 */
+	public function getCartGoods($param=array()) {
+		
+		$this->db->where('uid',$param['uid']);
+		$this->db->where('goods_id',$param['goods_id']);
+		return $this->db->get($this->table);
+	}
+	
+	 /**  
+	 * 更新购物车
+	 * @param unknown $id
+	 * @param unknown $qty
+	 * @param unknown $spec
+	 */
+	public function updateCart($id, $qty,$spec)
+	{
+		$data['goods_num'] = $qty;
+		$data['attribute_value'] = $spec;
+		$this->db->where('id', $id);
+		return $this->db->update($this->table,$data);
+	}
+	
+	/**
+	 * 更新数量
+	 * @param unknown $id
+	 * @param unknown $qty
+	 * @param unknown $spec
+	 */
+	public function updateQty($id, $qty ,$spec)
+	{
+		$this->db->set('goods_num', 'goods_num+' . $qty, FALSE);
+		$this->db->set('attribute_value', $spec);
+		$this->db->where('id', $id);
+		return $this->db->update($this->table);
+	}
 		
 }

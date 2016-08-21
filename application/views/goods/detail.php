@@ -17,8 +17,6 @@
 			<div class="clear"></div>
 		</div>
 		<div class="gd_r rel left">
-			<form action="javascript:addToCart(9113)" method="post">
-				<input type="hidden" id="referertype" name="referertype" value="0" />
 				<div class="wb">
 					<h1 class="gh1"><?php echo $goods->goods_name;?></h1><span class="pl5 pr5 gh1"><em class="c_blue">(货号:<i id="ECS_GOODS_SKU"><?php echo $goods->goods_sku;?></i>)</em></span>
 				</div>
@@ -104,8 +102,12 @@
 						<dt><span class="c5">款型</span></dt>
 						<dd>
 							<div class="catt over">
-								<a href="javascript:;" data-h="QZ9429-1" data-p="258" title="¥258.00" class="xc_a" rel="nofollow">5只装<input type="radio" class="hid" value="89068" name="spec_74" autocomplete="off"></a>
-								<a href="javascript:;" data-h="QZ9429-2" data-p="498" title="¥498.00" class="xc_a" rel="nofollow">10只装<input type="radio" class="hid" value="89073" name="spec_74" autocomplete="off"></a>
+								<a href="javascript:;"  class="xc_a hover" rel="nofollow" data-pic="images/attrpic/20160810/20160810080841_98068.jpg">
+									5只装<input type="radio" class="hid spec" value="89068" name="spec[1]" autocomplete="off" checked="checked" />
+								</a>
+								<a href="javascript:;"  class="xc_a" rel="nofollow" data-pic="images/attrpic/20160810/20160810080838_74304.jpg">
+									10只装<input type="radio" class="hid spec" value="89073" name="spec[1]" autocomplete="off" />
+								</a>
 							</div>
 						</dd>
 					</dl>
@@ -114,41 +116,48 @@
 					<dt class="lh40">
 						<span class="c5">数量</span>
 					</dt>
-					<dd>
-						<input type="text" size="4" value="1" id="number" name="number" class="number left">
+					<dd class="purchase" >
+						<input type="text" size="4" value="1" id="number" class="number left" onkeyup="this.value=this.value.replace(/\D/g,'')" class="number left" goods-num="<?php echo $goods->in_stock;?>" limit-num="<?php echo $goods->limit_num;?>" onblur="javascript:goodsQtyChange($(this))"/>
 						<div class="amount left">
-							<p onclick="cadd()" class="increase"></p>
-							<p onclick="cdec()" class="decrease"></p>
+							<p onclick="javascript:goodsQtyUpdate('up',$(this))" class="increase"></p>
+							<p onclick="javascript:goodsQtyUpdate('down',$(this))" class="decrease"></p>
 						</div>
 						<span class="gray">件</span>
 						<span class="hid">(库存<?php echo $goods->in_stock;?>件)</span>
 				    </dd>
 				</dl>
-				<div class="bzone rel clearfix">
-					<div id="tishi" class="tishi">
-						<a href="javascript:closeT();" class="g_close">X</a>
+				<div class="bzone rel clearfix ">
+					<div id="tishi" class="tishi hid">
+						<a href="javascript:;" class="g_close close">X</a>
 						<table width="100%" border="0" align="center">
-							<tbody><tr><td width="30" valign="top" rowspan="3"><p class="f green f24">&#xe638;</p></td><td><h4 class="f16px c3">恭喜，您已成功将该商品加入购物车！</h4></td></tr>
+							<tbody>
+								<tr>
+									<td width="30" valign="top" rowspan="3">
+										<p class="f green f24">&#xe638;</p>
+									</td>
+									<td>
+										<h4 class="f16px c3">恭喜，您已成功将该商品加入购物车！</h4>
+									</td>
+								</tr>
 								<tr>
 									<td>
-										<p id="g_cts" class="c5">您的购物车中有0件商品，总计￥0</p>
+										<p id="g_cts" class="c5 cat-infor"></p>
 									</td>
 								</tr>
 								<tr>
 									<td height="50">
-										<a href="/flow.php" class="redb left mr10">去购物车结算&gt;&gt;</a>
-										<a href="javascript:;" onClick="closeT()" class="huib ml10 left">继续购物&gt;&gt;</a>
+										<a href="<?php echo site_url('cart/grid');?>" class="redb left mr10">去购物车结算&gt;&gt;</a>
+										<a href="javascript:;" class="huib ml10 left close">继续购物&gt;&gt;</a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<a href="javascript:;" onClick="tobuy(9113)" class="fu_btn" id="bigadd" title="点击加入购物车">加入购物车</a>
-				    <a href="javascript:;" onClick="fbuy(9113)" class="red_btn" id="thunder" title="点击立即购买，直接结算">立即订购</a>
+					<a href="javascript:;" class="fu_btn add_to_cart"  title="点击加入购物车">加入购物车</a>
+				    <a href="javascript:;" class="red_btn shopping-s-submit"  title="点击立即购买，直接结算">立即订购</a>
 				</div>
 				<div class="lh25 c9 yahei f14 pl10">订购电话: <em title="您可以拨打我们的全国免费服务热线:888-8888-8888" class="f16 red">888-8888-8888</em>
 				<span class="dx_tip hand" id="dx_tip">短信订购：<em class="tre f16">15988173721</em></span></div>
-			</form>
 		</div>
 		<div class="kan">
 			<p class="lh35 mt10 c9">看了又看<a href="javascript:;" id="s_next" class="c9 nua kan_i change" from="<?php echo base64_encode($goods->supplier_id);?>" pg="1">换一换</a></p>
@@ -283,10 +292,10 @@
 			<p class="f18 c3"><b>任何质量问题无条件免费退换</b></p>
 			<p>如果您收到的商品有质量问题，请在签收后48小时内联系我们，我们将为您提供一次免费更换的服务，更换时请确保产品没有使用过且包装完好无损。为了保证您和其他消费者的健康，对因质量问题而退回的产品，将一律销毁，绝不二次销售。</p>
 			<p class="f18 c3"><b>360°购物保障，放心购买，安心使用</b></p>
-			<p>妙处网打造完美服务，精选正规商品，确保每一位用户都买得安心，用得放心，如果您对趣网服务方面有任何疑问，欢迎致电趣网商城电话888-888-8889，或点击网站上方"联系客服"栏详细了解，我们竭诚为你服务！</p>
+			<p>妙处网打造完美服务，精选正规商品，确保每一位用户都买得安心，用得放心，如果您对趣网服务方面有任何疑问，欢迎致电妙处网电话888-888-8889，或点击网站上方"联系客服"栏详细了解，我们竭诚为你服务！</p>
 			<p>&nbsp;</p>
 			</div>
-			<p class="alC"><img src2="http://s.qw.cc/themes/v4/css/ft/fuwu.png" width="690" height="552"></p>
+			<p class="alC"><img src="http://s.qw.cc/themes/v4/css/ft/fuwu.png" width="690" height="552"></p>
 			</div>
 		</div>
 	</div>
@@ -346,6 +355,42 @@
 	<div class="fa_l clearfix mt35">
 		<?php echo $cms_block['foot_speed_key'];?>
 	</div>
-
 </div>
+<div id="pbox" class="pbox lh35 hid">
+	<p onclick="pclose()" class="g_b hand alC">关闭</p>
+	<h2 class="c3 f14">请选择产品附加属性</h2>
+	<div id="ECS_FORMBUY2">
+		<div id="wrapg" class="xcolor"></div>
+		<p>&nbsp;</p>
+		<input type="button" class="redb left" value="确认选择" onclick="shux()">
+	</div>
+</div>
+<div class="pbox hid denglu" id="denglu">
+	<p class="g_b hand alC close">关闭</p>
+	<form class="lh35 loginform" id="loginform">
+		<h3 class="f16 c3">会员登录    <span class="goods-error hid">错误信息</span></h3>
+		<table width="100%" border="0">
+			<tbody>
+			  <tr>
+				 <td class="pt10">
+				 	<input type="text" class="lpt u_zh left"  name="username" id="username" placeholder="手机/邮箱" />
+				 </td>
+			  </tr>
+			  <tr>
+			     <td class="pt10">
+			     	<input type="password" id="password" autocomplete="off" class="lpt u_mm left" name="password" placeholder="密码" />
+			     </td>
+			  </tr>
+			  <tr>
+				 <td>
+					<p>&nbsp;</p>
+					<input type="button"  class="wwbtn wwbtno hand close" value="返回并关闭" /><input type="submit" class="wwbtn ml10 hand d-login" value="登 录" name="submit" />
+					<p><a href="<?php echo $this->config->passport_url.'register/index?backurl='.site_url('goods/detail?goods_id='.$goods->goods_id);?>">还没帐户，免费注册</a></p>
+				 </td>
+			  </tr>
+			 </tbody>
+		</table>
+	</form>
+</div>
+<p id="mask" class="mask hid"></p>
 <?php $this->load->view('layout/footer');?>
