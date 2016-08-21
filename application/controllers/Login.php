@@ -44,49 +44,4 @@ class Login extends MW_Controller
     	$this->user->insertUserLog($param);
     	$this->jsonMessage('','登录成功');
     }
-    
-     /**
-     * 退出登陆
-     */
-    public function logout()
-    {
-        if (get_cookie('frontUser')) {
-            delete_cookie('frontUser');
-        }
-        $this->cache->memcached->delete('frontUser');
-        $this->redirect($this->config->main_base_url);
-    }
-    
-    
-     /**
-     * 验证登录页手机动态码
-     * cyl
-     */
-    public function checkPhone()
-    {
-        $phone = $this->input->post('phone');
-        $captcha = $this->input->post('captcha');
-    
-        if (strtoupper($captcha) != strtoupper(get_cookie('captcha'))) {
-            $this->jsonMessage('验证码不正确');
-        }
-        if (!valid_mobile($phone)) {
-            $this->jsonMessage('手机号码有误');
-        }
-        $code = mt_rand(1000, 9999);
-        $this->db->trans_start();
-        $result = $this->getpwd_phone->validateName(array('mobile_phone'=>$phone));
-        if ($result->num_rows() > 0) {
-            $result1 = $this->getpwd_phone->updateGetpwdPhone(array('mobile_phone'=>$phone, 'code'=>$code));
-        } else {
-            $result1 = $this->getpwd_phone->insertGetpwdPhone(array('mobile_phone'=>$phone, 'code'=>$code));
-        }
-        $this->sendToSms($phone, '您于'.date('Y-m-d H:i:s').'正在使用验证码登录会员，验证码为:'.$code.'，有效期为10分钟，请勿向他人泄漏。');
-        $this->db->trans_complete();
-        if ($this->db->trans_status() === TRUE) {
-            echo json_encode(array('status'=> true));exit;
-        } else {
-            $this->jsonMessage('网络繁忙，请稍后重新获取验证码');
-        }
-    }
 }

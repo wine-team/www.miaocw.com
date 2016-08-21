@@ -69,7 +69,15 @@ class Home extends MW_Controller{
 			}*/
 			$specArray = '5支装,刺激';
 		}
-		$result = $this->mall_goods_base->getGoodsByGoodsId($param['goods_id'])->row(0);
+		$result = $this->mall_goods_base->getGoodsByGoodsId($param['goods_id']);
+		if ($result->num_rows()<=0) {
+			$jsonData = json_encode(array(
+					'status' => 0,
+					'msg' => '找不到该商品的信息'
+			));
+			echo $callback . '(' . $jsonData . ')';exit;
+		}
+		$result = $result->row(0);
 		$limit_num = $result->limit_num;
 		if ($result->limit_num > 0){
 			if($result->limit_num < $param['qty']){
@@ -91,7 +99,8 @@ class Home extends MW_Controller{
 		
 		//加入商品价格记录 判断商品是否重复
 		$info = $this->mall_cart_goods->getCartGoods($param);
-		if (isset($info->id)) {
+		if ($info->num_rows()>0) {
+			$info = $info->row(0);
 			if ($info->goods_num + $param['qty'] < $result->in_stock){
 				if ( ($info->goods_num >= $limit_num) && ($limit_num>0)) {
 					$status = $this->mall_cart_goods->updateCart($info->id,$limit_num,$specArray);

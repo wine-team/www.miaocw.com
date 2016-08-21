@@ -246,6 +246,107 @@ class Goods extends MW_Controller{
 	}
 	
 	/**
+	 *立即购买
+	*/
+	public function purchase_confirm()
+	{
+		delete_cookie('cart');
+		$uid = $this->uid;
+		if (!$uid) {
+			echo json_encode(array(
+					'status' => 1,
+					'msg'    => '请先登录'
+			)); exit;
+		}
+		$specArray = '';
+		$spec_id = $this->input->post('spec');
+		$goods_id = $this->input->post('goods_id') ? (int)(base64_decode($this->input->post('goods_id'))) : 0;
+		$qty = $this->input->post('qty') ? (int)$this->input->post('qty') : 0;
+		if (!empty($spec_id)) {
+			/*
+			$specValue = $this->mall_goods_category_spec->getSpecification(array('spec_array'=>$spec_id));
+			if ($specValue->num_rows()>0) {
+				foreach ($specValue->result() as $item) {
+					$spec[] = $item->attribute_value;
+				}
+				$specArray = join(',',$spec); //选择规格属性
+			}*/
+			$specArray = '5支装,刺激';
+		}
+		if (!$goods_id || !$qty) {
+			echo json_encode(array(
+					'status' => 0,
+					'msg'    => '找不到该商品的信息'
+			));exit;
+		}
+		//判断是否存在该商品 且商品仍然有库存  和 是否限购
+		$result = $this->mall_goods_base->getGoodsByGoodsId($goods_id);
+		if ($result->num_rows()<=0) {
+			echo json_encode(array(
+					'status' => 0,
+					'msg'    => '找不到该商品的信息'
+			));exit;
+		}
+		$result = $result->row(0);
+		if ($result->limit_num > 0){
+			if($result->limit_num < $qty){
+				echo json_encode(array(
+						'status' => 0,
+						'msg'    => '限购'.$result->limit_num.'件'
+				));exit;
+			}
+		}
+		if ($result->in_stock < $qty) {
+			echo json_encode(array(
+					'status' => 0,
+					'msg'    => '库存不足'
+			));exit;
+		}
+		//加入商品价格记录 判断商品是否重复
+		$limit_num = $result->limit_num;
+		$param['uid'] = $uid;
+		$param['goods_id'] = $goods_id;
+		$info = $this->mall_cart_goods->getCartGoods($param);
+		if ($info->num_rows()>0) {
+			$info = $info->row(0);
+			if ($info->goods_num + $qty < $result->in_stock){
+				if ( ($info->goods_num >= $limit_num) && ($limit_num>0)) {
+					$status = $this->mall_cart_goods->updateCart($info->id,$limit_num,$specArray);
+				} else {
+					$qty = $limit_num > 0 ? ( (($info->goods_num + $qty) >= $limit_num ) ? ($limit_num-($info->goods_num)) : $qty ) :  $qty;
+					$status = $this->mall_cart_goods->updateQty($info->id,$qty,$specArray);
+				}
+			} else {
+				$status = $this->mall_cart_goods->updateCart($info->id,$result->in_stock,$specArray);
+			}
+			$cartId = $info->id;
+		} else {
+			$params['uid'] = $uid;
+			$params['attribute_value'] = $specArray;
+			$params['goods_id'] = $goods_id;
+			$params['goods_num'] = $qty;
+			$cartId = $this->tourism_cart_goods->addQty($params);
+		}
+		if ($cartId) {
+			$cookie_param = array();
+			$cookie_param['from'] = 'detail';
+			$cookie_param['id'][$cartId] = $cartId;
+			$cookie_param['qty'][$cartId] = $qty;
+			$cookie_param['goods_id'][$cartId] = $goods_id;
+			set_cookie('cart', base64_encode(serialize($cookie_param)), 86500);
+			echo json_encode(array(
+					'status' => 2,
+					'msg'    => site_url('cart/grid')
+			));exit;
+		}
+		echo json_encode(array(
+				'status' => 0,
+				'msg'    => '立即购买失败,请刷新后尝试'
+		));exit;
+	}
+	
+	
+	/**
 	 * 公用的方法 
 	 */
 	public function common(){
