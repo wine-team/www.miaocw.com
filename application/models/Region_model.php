@@ -10,7 +10,7 @@ class Region_model extends CI_Model
      */
     public function findCityByParentId($parent_id, $region_type){
     	 
-    	$this->db->select('region_id,parent_id,region_name');
+    	$this->db->select('region_id,parent_id,region_name,region_type');
     	$this->db->from($this->table);
     	$this->db->where('parent_id',$parent_id);
     	$this->db->where('region_type',$region_type);

@@ -59,11 +59,13 @@
 								<div id="pes_z">
 									<ul id="sel1" class="pes_o">
 									    <?php foreach ($region->result() as $val):?>
-										<li><a href="javascript:;"><?php echo $val->region_name;?></a></li>
+										<li region-id="<?php echo $val->region_id;?>" region-type="<?php echo $val->region_type;?>">
+											<a href="javascript:;"><?php echo $val->region_name;?></a>
+										</li>
 										<?php endforeach;?>
 									</ul>
 									<ul id="sel2" class="pes_o hid">
-										<li><a href="javascript:;" onClick="cgp(383,3,1,this)" >杭州市</a></li>
+										<li><a href="javascript:;" onClick="cgp(383,3,1,this)" ><?php echo ?></a></li>
 									</ul>
 									<ul id="sel3" class="pes_o hid">
 										<li><a href="javascript:;" onClick="cgp(3229,4,2,this)" >西湖区</a></li>
