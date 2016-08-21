@@ -51,7 +51,7 @@ class Mall_goods_base_model extends CI_Model{
  	     	$this->db->where('category_id',$param['category_id']);
  	     }
  	     if (!empty($param['hot_recommend'])) {
- 	     	$this->db->where('hot_recommend',$param['hot_recommend']);
+ 	     	//$this->db->where('hot_recommend',$param['hot_recommend']);
  	     }
  	     $this->db->order_by('tour_count','desc');
  	     if (!empty($param['num'])) {
@@ -71,7 +71,7 @@ class Mall_goods_base_model extends CI_Model{
 		$this->db->where('is_on_sale',1);
 		$this->db->where('is_check',2);
 		$this->db->where('category_id',$param['category_id']);
-		$this->db->where('hot_recommend !=',2);
+		//$this->db->where('hot_recommend !=',2);
 		$this->db->order_by('sort_order','desc');
 		$this->db->limit($param['num']);
 		return $this->db->get();
