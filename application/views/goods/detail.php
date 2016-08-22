@@ -65,7 +65,7 @@
 										<?php endforeach;?>
 									</ul>
 									<ul id="sel2" class="pes_o hid">
-										<li><a href="javascript:;" onClick="cgp(383,3,1,this)" ><?php echo ?></a></li>
+										<li><a href="javascript:;" onClick="cgp(383,3,1,this)" ><?php echo '';?></a></li>
 									</ul>
 									<ul id="sel3" class="pes_o hid">
 										<li><a href="javascript:;" onClick="cgp(3229,4,2,this)" >西湖区</a></li>
