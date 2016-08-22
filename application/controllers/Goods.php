@@ -87,11 +87,9 @@ class Goods extends MW_Controller{
 		}
 		$data['goods'] = $goods;
 		$data['recommond'] = $recommond;
-		$data['address'] = getIpLookup();;
 		$data['ewm'] = $this->productEwm($goods_id);
 		$data['enshrine'] = $this->isEnshrine($goods_id);
 		$data['spec'] = $this->mall_goods_attr_value->findByRes(array('goods_id'=>$goods_id));
-		$data['region'] = $this->region->findCityByParentId(1,1);
 		$data['countReviews'] = $this->getReviewsArray($goods_id);
 		$this->load->view('goods/detail',$data);
 	}

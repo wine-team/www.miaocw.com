@@ -27,4 +27,18 @@ class Region_model extends CI_Model
     	return array();
     }
     
+     /**
+     * 获取城市
+     * @param unknown $region_name
+     * @param unknown $region_type
+     */
+    public function getChildByRegionName($region_name,$region_type){
+    	 
+    	$region_name = trim(addslashes($region_name));
+    	$this->db->select('region_id,region_name,region_type');
+    	$this->db->from($this->table);
+    	$this->db->where('parent_id IN(SELECT `region_id` FROM region WHERE region_type='.$region_type.' AND region_name LIKE '."'%{$region_name}%'".')');
+    	return $this->db->get();
+    }
+    
 }

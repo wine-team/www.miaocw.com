@@ -45,35 +45,7 @@
 				<dl class="rel gdl ren">
 					<dt>配送至</dt>
 					<dd>
-						<div class="pes left" id="pes">
-							<p class="pes_id hand">
-								<em id="pes_id"><?php echo $address['city'];?></em>
-								<em class="rdop"></em>
-							</p>
-							<div class="pes_z lh25">
-								<ul id="pes_ul" class="region">
-									<li class="on">省份</li>
-									<li>地级市</li>
-									<li>区县</li>
-								</ul>
-								<div id="pes_z">
-									<ul id="sel1" class="pes_o">
-									    <?php foreach ($region->result() as $val):?>
-										<li region-id="<?php echo $val->region_id;?>" region-type="<?php echo $val->region_type;?>">
-											<a href="javascript:;"><?php echo $val->region_name;?></a>
-										</li>
-										<?php endforeach;?>
-									</ul>
-									<ul id="sel2" class="pes_o hid">
-										<li><a href="javascript:;" onClick="cgp(383,3,1,this)" ><?php echo '';?></a></li>
-									</ul>
-									<ul id="sel3" class="pes_o hid">
-										<li><a href="javascript:;" onClick="cgp(3229,4,2,this)" >西湖区</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<span class="pl10 c9">预计<em id="yuji">5月6日(周五)</em>送达</span>
+						<?php $this->load->view('goods/region');?>
 						<div class="dx_d lh18" id="dx_d">
 							<h4 class="red f14">短信订购指南</h4>
 							<p>&nbsp;</p>
