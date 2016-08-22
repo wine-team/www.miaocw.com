@@ -163,7 +163,7 @@
 						</a>
 					</li>
 				</ul>
-				<a class="rbuy right hid" href="javascript:;" onClick="fbuy(9113)"><i class="f pr5">&#xe634;</i>立即订购</a>
+				<a class="rbuy right hid " href="javascript:;"><i class="f pr5">&#xe634;</i>立即订购</a>
 				<a href="javascript:;" onClick="jieshou()" class="right pr10 c9">
 					<img src="http://s.qw.cc/themes/v4/css/ft/rkf1.png" width="21" height="44" class="mr5" >在线客服
 				</a>
