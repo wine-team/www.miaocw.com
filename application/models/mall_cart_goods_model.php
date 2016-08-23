@@ -10,7 +10,7 @@ class Mall_cart_goods_model extends CI_Model{
 	 */
 	public function getCartGoodsByUid($uid){
 		
-		$this->db->select('mall_goods_base.goods_name,mall_goods_base.promote_price,mall_goods_base.goods_img,mall_cart_goods.goods_num');
+		$this->db->select('mall_goods_base.goods_name,mall_goods_base.promote_price,mall_goods_base.goods_img,mall_goods_base.in_stock,mall_goods_base.limit_num,mall_cart_goods.goods_id,mall_cart_goods.goods_num,mall_cart_goods.attribute_value');
 		$this->db->from($this->table);
 		$this->db->join('mall_goods_base','mall_goods_base.goods_id=mall_cart_goods.goods_id','inner');
 		$this->db->where('mall_goods_base.is_check','2');//审核通过

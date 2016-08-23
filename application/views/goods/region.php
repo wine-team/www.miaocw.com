@@ -60,4 +60,4 @@
 		</div>
 	</div>
 </div>
-<span class="pl10 c9">预计<em id="yuji">5月6日(周五)</em>送达</span>
+<span class="pl10 c9">运费<em id="yuji">0.00</em></span>

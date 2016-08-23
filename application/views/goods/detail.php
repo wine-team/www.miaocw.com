@@ -164,7 +164,7 @@
 					</li>
 				</ul>
 				<a class="rbuy right hid " href="javascript:;"><i class="f pr5">&#xe634;</i>立即订购</a>
-				<a href="javascript:;" onClick="jieshou()" class="right pr10 c9">
+				<a href="javascript:;" class="right pr10 c9">
 					<img src="http://s.qw.cc/themes/v4/css/ft/rkf1.png" width="21" height="44" class="mr5" >在线客服
 				</a>
 			</div>
@@ -190,7 +190,7 @@
 				</div>
 				<div class="right c9">
 					<em class="c3 f14">好评度：</em>
-					<b class="red">100%</b>
+					<b class="red"><?php echo count($countReviews) > 0 ? (bcdiv($countReviews['up'],$countReviews['all'],2)*100).'%' : 0;?></b>
 					<em class="vline f12">|</em>
 					<em class="f14">评论/晒单可赠送20/30积分</em>
 				</div>

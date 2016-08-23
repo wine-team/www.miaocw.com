@@ -3,7 +3,7 @@
 	<div class="bgwd">
     	<h2 class="c_t f16 lh30"><em>1</em>我的购物车</h2>
     	<div class="pd4">
-      		<table width="100%" border="0" class="tb_c lh20">
+      		<table width="100%" border="0" class="tb_c lh20 cart">
 		        <tr>
 			        <th width="70">商品名称</th>
 			        <th width="300"></th>
@@ -12,61 +12,45 @@
 			        <th width="150">小计</th>
 			        <th>操作</th>
 		        </tr>
+		        <?php if($cart->num_rows()>0):?>
+		        <?php $total=0;?>
+		        <?php foreach ($cart->result() as $val):?>
                 <tr>
 			        <td> 
-			        	<a href="javacript:;" target="_blank">
-			        		<img src="http://s.qw.cc/images/201512/thumb_img/6197_thumb_P220_1449128855593-60x60.jpg" title="日本Rends DIY编程智能旋转自慰飞机杯" width="60" height="60" />
+			        	<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank">
+			        		<img class="lazy" src="miaow/images/load.jpg"  data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($val->goods_img,'|',true),'60')?>" title="<?php echo $val->goods_name;?>" width="60" height="60" />
 			            </a> 
 			        </td>
 			        <td> 
-	            		<a href="javacript:;" target="_blank" class="pr50">日本Rends DIY编程智能旋转自慰飞机杯<p class="green"></p></a> 
+	            		<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank" class="pr50">
+		            		<?php echo $val->goods_name;?>
+		            		<?php if(!empty($val->attribute_value)):?>
+		            			<p class="green"><?php echo $val->attribute_value;?></p>
+		            		<?php endif;?>
+	            	    </a> 
 	            	</td>
 	          		<td>
-	          			<em class="q_price">¥2547.02</em>
+	          			<em class="q_price">¥<?php echo $val->promote_price;?></em>
 	          		</td>
 		          	<td>            
-			            <input type="text" size="4" name="goods_number[22748726]" id="goods_number_22748726" data-id="22748726" value="1"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')"/>
+			            <input type="text" name="goods_number[<?php echo $val->goods_id;?>]" goods_num="<?php echo $val->in_stock;?>" limit-num="<?php echo $val->limit_num;?>" data-id="<?php echo $val->goods_id;?>" value="<?php echo $val->goods_num;?>"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')"/>
 			            <div class="amount left">
-			               <p class="increase"></p>
-			               <p class="decrease"></p>
+			               <p class="increase" ></p>
+			               <p class="decrease" ></p>
 			            </div>
 		            </td>
-          			<td class="g_xj">¥2547.02</td>
+          			<td class="g_xj">¥<?php echo bcmul($val->goods_num,$val->promote_price,2);?></td>
+          			<?php $total +=  bcmul($val->goods_num,$val->promote_price,2);?>
           			<td>
-          				<p><a class="c9" href="javascript:;">转为收藏</a></p>
-                    	<a href="javascript:"  class="c9">删除</a>
+          				<p><a class="c9 enshirne" href="javascript:;" goods-id="<?php echo $val->goods_id?>">转为收藏</a></p>
+                    	<a href="javascript:"  class="c9" >删除</a>
                     </td>
         		</tr>
-                <tr>
-			        <td> 
-			        	<a href="javacript:;" target="_blank">
-			        		<img src="http://s.qw.cc/images/201601/thumb_img/7577_thumb_P220_1453100833465-60x60.jpg" title="UNIMAT 电动夹吸飞机杯式阴茎增大器" width="60" height="60" />
-			            </a> 
-			        </td>
-			        <td> 
-            			<a href="javacript:;" target="_blank" class="pr50">UNIMAT 电动夹吸飞机杯式阴茎增大器
-            				<p class="green">选择颜色:精装版白色 </p>
-            		    </a> 
-             		</td>
-          			<td>
-          				<em class="q_price">¥449.82</em>
-          			</td>
-          			<td>            
-			            <input type="text" size="4" name="goods_number[22763751]" id="goods_number_22763751" data-id="22763751" value="1" onkeyup="this.value=this.value.replace(/\D/g,'')" class="number left"/>
-			            <div class="amount left">
-			              <p class="increase"></p>
-			              <p class="decrease"></p>
-			            </div>
-            		</td>
-          			<td class="g_xj">¥449.82</td>
-          			<td>
-          				<p><a class="c9" href="javascript:adfav(7577)">转为收藏</a></p>
-                    	<a href="javascript:" onClick="delgoods(22763751)" class="c9">删除</a>
-                    </td>
-        		</tr>
+        		<?php endforeach;?>
+                <?php endif;?>
                 <tr>
 			        <td colspan="3"></td>
-			        <td colspan="3" align="right">商品总价 &nbsp;<b class="red" id="q_xj" >¥5231.24</b></td>
+			        <td colspan="3" align="right">商品总价 &nbsp;<b class="red" id="q_xj" >¥<?php echo bcadd($total,0,2);?></b></td>
         		</tr>
       		</table>
     	</div>
@@ -75,18 +59,19 @@
 	  <div class="bgwd p_bg">
       	 <h2 class="c_t f16 lh30"><em>2</em>填写订购信息</h2>
          <div class="pd4 bgcr">
+            <input type="hidden" name="address_id" value="<?php echo isset($address->address_id) ? $address->address_id : '';?>">  
         	<table width="100%" border="0" class="p_td mt10 lh30">
           		<tr>
                 	<td width="80">您的姓名</td>
-            		<td>
-            			<input type="text" placeholder="请准确填写收货人" datatype="s" maxlength="8" m="2" name="consignee" size="30" class="yz ipt left" id="consignee" value="蒋主席"/>
+            		<td>  
+            			<input type="text" placeholder="请准确填写收货人" datatype="s" maxlength="8" m="2" name="consignee" size="30" class="yz ipt left" id="consignee" value="<?php echo isset($address->receiver_name) ? $address->receiver_name : '';?>"/>
               			<em class="red ert pl5">必填</em>
               	    </td>
           		</tr>
 		        <tr>
 		            <td>手机号码</td>
 		            <td>
-		            	<input type="text"  placeholder="11位手机号码" maxlength="15"  name="mobile" class="ipt left" size="30" id="mobile" value="15988173722"/>
+		            	<input type="text"  placeholder="11位手机号码" maxlength="15"  name="mobile" class="ipt left" size="30" id="mobile" value="<?php echo isset($address->tel) ? $address->tel : '';?>"/>
 		              	<em class="red pl5 ert">必填</em>
 		            </td>
 		        </tr>
@@ -102,14 +87,14 @@
 	            	<td>详细地址</td>
 	            	<td>
 	            		<em id="x_p" class="left"></em><em id="x_c" class="left"></em><em id="x_z" class="left"></em>
-	              		<input type="text" errormsg="街道地址至少4个字！" datatype="s" placeholder="镇、街道、小区名、门牌号" maxlength="30" style="width:350px;" m="4" class="yz ipt left" name="address" id="address" value="台湾省高雄市"/>
+	              		<input type="text" errormsg="街道地址至少4个字！" datatype="s" placeholder="镇、街道、小区名、门牌号" maxlength="30" style="width:350px;" m="4" class="yz ipt left" name="address" id="address" value="<?php echo isset($address->detailed) ? $address->detailed : '';?>"/>
 	              		<em class="red pl5 ert">必填</em>
 	              	</td>
 	          	</tr>
           		<tr>
 		            <td>备　　注</td>
 		            <td>
-		            	<textarea name="postscript" rows="3" id="postscript" class="f12 c_bz"></textarea>
+		            	<textarea name="order_note" rows="3" id="postscript" class="f12 c_bz"></textarea>
 		              	<span class="gray pl5">选填</span>
 		            </td>
           		</tr>
