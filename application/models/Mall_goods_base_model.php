@@ -11,7 +11,7 @@ class Mall_goods_base_model extends CI_Model{
 	 */
 	public function getGoodsByGoodsId($goodsId){
 		
-		$this->db->select('goods_id,category_id,goods_name,promote_price,supplier_id,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,limit_num,freight_id,in_stock,freight_cost,sale_count,review_count');
+		$this->db->select('goods_id,goods_name,promote_price,supplier_id,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,limit_num,freight_id,in_stock,freight_cost,sale_count,review_count');
 		$this->db->from($this->table);
 		if(is_array($goodsId)){
 			$this->db->where_in('goods_id',$goodsId);
@@ -48,7 +48,7 @@ class Mall_goods_base_model extends CI_Model{
  	     $this->db->where('is_on_sale',1);
  	     $this->db->where('is_check',2);
  	     if (!empty($param['category_id'])) {
- 	     	$this->db->where('category_id',$param['category_id']);
+ 	     	//$this->db->where('category_id',$param['category_id']);
  	     }
  	     if (!empty($param['hot_recommend'])) {
  	     	//$this->db->where('hot_recommend',$param['hot_recommend']);
@@ -70,7 +70,7 @@ class Mall_goods_base_model extends CI_Model{
 		$this->db->from($this->table);
 		$this->db->where('is_on_sale',1);
 		$this->db->where('is_check',2);
-		$this->db->where('category_id',$param['category_id']);
+		//$this->db->where('category_id',$param['category_id']);
 		//$this->db->where('hot_recommend !=',2);
 		$this->db->order_by('sort_order','desc');
 		$this->db->limit($param['num']);
