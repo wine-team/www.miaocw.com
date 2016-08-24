@@ -2,57 +2,8 @@
 <div class="w9 cart" id="content">
 	<div class="bgwd">
     	<h2 class="c_t f16 lh30"><em>1</em>我的购物车</h2>
-    	<div class="pd4">
-      		<table width="100%" border="0" class="tb_c lh20 cart">
-		        <tr>
-			        <th width="70">商品名称</th>
-			        <th width="300"></th>
-			        <th width="150">单价</th>
-			        <th width="150">数量</th>
-			        <th width="150">小计</th>
-			        <th>操作</th>
-		        </tr>
-		        <?php if($cart->num_rows()>0):?>
-		        <?php $total=0;?>
-		        <?php foreach ($cart->result() as $val):?>
-                <tr>
-			        <td> 
-			        	<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank">
-			        		<img class="lazy" src="miaow/images/load.jpg"  data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($val->goods_img,'|',true),'60')?>" title="<?php echo $val->goods_name;?>" width="60" height="60" />
-			            </a> 
-			        </td>
-			        <td> 
-	            		<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank" class="pr50">
-		            		<?php echo $val->goods_name;?>
-		            		<?php if(!empty($val->attribute_value)):?>
-		            			<p class="green"><?php echo $val->attribute_value;?></p>
-		            		<?php endif;?>
-	            	    </a> 
-	            	</td>
-	          		<td>
-	          			<em class="q_price">¥<?php echo $val->promote_price;?></em>
-	          		</td>
-		          	<td>            
-			            <input type="text" name="goods_number[<?php echo $val->goods_id;?>]" goods_num="<?php echo $val->in_stock;?>" limit-num="<?php echo $val->limit_num;?>" data-id="<?php echo $val->goods_id;?>" value="<?php echo $val->goods_num;?>"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')"/>
-			            <div class="amount left">
-			               <p class="increase" ></p>
-			               <p class="decrease" ></p>
-			            </div>
-		            </td>
-          			<td class="g_xj">¥<?php echo bcmul($val->goods_num,$val->promote_price,2);?></td>
-          			<?php $total +=  bcmul($val->goods_num,$val->promote_price,2);?>
-          			<td>
-          				<p><a class="c9 enshirne" href="javascript:;" goods-id="<?php echo $val->goods_id?>">转为收藏</a></p>
-                    	<a href="javascript:"  class="c9" >删除</a>
-                    </td>
-        		</tr>
-        		<?php endforeach;?>
-                <?php endif;?>
-                <tr>
-			        <td colspan="3"></td>
-			        <td colspan="3" align="right">商品总价 &nbsp;<b class="red" id="q_xj" >¥<?php echo bcadd($total,0,2);?></b></td>
-        		</tr>
-      		</table>
+    	<div class="pd4 cart-content">
+    	    <?php //$this->load->view('cart/main')?>
     	</div>
    </div>
    <form  name="theForm" id="theForm" class="quform" >
@@ -158,4 +109,22 @@
     </div>
   </form>
 </div>
+<script type="text/javascript">
+jQuery(function(){
+	cart();
+})
+function cart() {
+	$.ajax({
+		type: 'post',
+        async: false,
+        dataType : 'json',
+        url: home.url()+'/cart/main',
+        success: function(json) {
+           $('.cart-content').html(json.html);
+           $('img.lazy').lazyload();
+        }
+	})
+}
+
+</script>
 <?php $this->load->view('layout/cartFooter');?>

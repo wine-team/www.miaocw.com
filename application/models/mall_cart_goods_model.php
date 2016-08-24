@@ -75,4 +75,18 @@ class Mall_cart_goods_model extends CI_Model{
 		return $this->db->update($this->table);
 	}
 		
+	 /**
+	 * 删除
+	 * @param unknown $param
+	 */
+    public function deleteCartGoods($param=array()){
+    	
+    	if (!empty($param['uid'])) {
+    		$this->db->where('uid',$param['uid']);
+    	}
+    	if (!empty($param['goods_id'])) {
+    		$this->db->where('goods_id',$param['goods_id']);
+    	}
+    	return $this->db->delete($this->table);
+    }
 }
