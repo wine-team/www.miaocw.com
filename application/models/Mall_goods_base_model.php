@@ -84,15 +84,15 @@ class Mall_goods_base_model extends CI_Model{
 	 * */
 	public function searchTotal($search)
 	{
-	    $this->db->select('mall_goods_base.goods_id, mall_goods_base.category_id, mall_category.cat_name');
+	    $this->db->select('mall_goods_base.goods_id, t.category_id, t.cat_name');
 	    $this->db->from($this->table);
 	    $this->db->join($this->table1, 'mall_goods_base.brand_id = mall_brand.brand_id', 'left');
-	    $this->db->join($this->table2, 'mall_goods_base.category_id = mall_category.cat_id', 'left');
+	    $this->db->join("(SELECT mall_category_product.category_id,mall_category_product.goods_id,mall_category.cat_name FROM mall_category_product LEFT JOIN mall_category ON mall_category_product.category_id = mall_category.cat_id ) t", 'mall_goods_base.goods_id = t.goods_id', 'left');
 	    if (!empty($search['keyword'])) {
 	        $this->db->where("((`mall_goods_base`.`goods_name` LIKE '%{$search['keyword']}%') OR (`mall_goods_base`.`goods_sku`='{$search['keyword']}') OR (`mall_brand`.`brand_name`='{$search['keyword']}'))");
 	    }
 	    if (!empty($search['category_id'])) {
-	        $this->db->where('category_id', $search['category_id']);
+	        $this->db->where('t.category_id', $search['category_id']);
 	    }
 	    if (!empty($search['price_range'])) {
 	        $price_arr = explode('-', $search['price_range']);
@@ -114,14 +114,15 @@ class Mall_goods_base_model extends CI_Model{
 	public function page_list($page_num, $num, $search=array())
 	{
 	    $this->db->select('mall_goods_base.*');
+// 	    $this->db->select('mall_goods_base.goods_id, t.category_id, t.cat_name');
 	    $this->db->from($this->table);
 	    $this->db->join($this->table1, 'mall_goods_base.brand_id = mall_brand.brand_id', 'left');
-	    $this->db->join($this->table2, 'mall_goods_base.category_id = mall_category.cat_id', 'left');
+	    $this->db->join("(SELECT mall_category_product.category_id,mall_category_product.goods_id,mall_category.cat_name FROM mall_category_product LEFT JOIN mall_category ON mall_category_product.category_id = mall_category.cat_id ) t", 'mall_goods_base.goods_id = t.goods_id', 'left');
 	    if (!empty($search['keyword'])) {
 	        $this->db->where("((`mall_goods_base`.`goods_name` LIKE '%{$search['keyword']}%') OR (`mall_goods_base`.`goods_sku`='{$search['keyword']}') OR (`mall_brand`.`brand_name`='{$search['keyword']}'))");
 	    }
 	    if (!empty($search['category_id'])) {
-	        $this->db->where('category_id', $search['category_id']);
+	        $this->db->where('t.category_id', $search['category_id']);
 	    }
 	    if (!empty($search['price_range'])) {
 	        $price_arr = explode('-', $search['price_range']);

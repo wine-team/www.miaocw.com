@@ -43,10 +43,10 @@ class Goods extends MW_Controller{
 	    $data['pg_now'] = $pg;
 	    $category = array(); 
 	    foreach ($searchTotal->result() as $s) {
-	        if (!isset($category[$s->category_id])) {
+	        if (!isset($category[$s->category_id]) && !empty($s->category_id)) {
 	            $category[$s->category_id] = $s->cat_name;
 	        }
-	    }
+	    } 
 	    $data['category_arr'] = $category;
 	    $data['price_arr'] = array('0-100', '100-500', '500-1000', '1000-2500', '2500-以上');
 	    $data['brand_arr'] = $this->mall_brand->findBrand()->result();

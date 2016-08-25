@@ -46,7 +46,7 @@
 			<dt><b class="red">分类</b></dt> 
 			<dd id="" class="brand_dl">
 				<div id="list_b" class="over">
-				    <?php foreach ($category_arr as $cat_id=>$cat_name) :?>
+				    <?php foreach ($category_arr as $cat_id=>$cat_name) : ?>
     				<a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'category_id').'&category_id='.$cat_id);?>" class="<?php if($this->input->get('category_id')==$cat_id) echo 'on';?>"><?php echo $cat_name;?></a>
     			    <?php endforeach;?>
 				</div>
@@ -109,7 +109,7 @@
 	    <?php foreach ($page_list as $goods) :?>
 		<dl class="gl">
 			<dt><?php $img_arr=explode('|',$goods->goods_img);?>
-				<a href="<?php echo $goods->goods_id;?>" target="_blank">
+				<a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
 					<img src="<?php echo $this->config->show_image_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm" alt="<?php echo $goods->goods_brief;?>" />
 				</a>
 			</dt>
@@ -119,8 +119,8 @@
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb10">
-				<a href="<?php echo $goods->goods_id;?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
-				<a href="<?php echo $goods->goods_id;?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
+				<a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id);?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
+				<a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id);?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
 			</dd>
 			<dd>
 				<em class="i_hot">热销</em>
