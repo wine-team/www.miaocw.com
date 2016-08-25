@@ -89,4 +89,17 @@ class Mall_cart_goods_model extends CI_Model{
     	}
     	return $this->db->delete($this->table);
     }
+    
+     /**
+     * 更新购物车的数量
+     * @param unknown $param
+     * @param unknown $qty
+     */
+    public function updateCartQty($param=array(),$qty){
+    	
+    	$this->db->set('goods_num','goods_num'+$qty,false);
+    	$this->db->where('uid',$param['uid']);
+    	$this->db->where('goods_id',$param['goods_id']);
+    	return $this->db->update($this->table);
+    }
 }

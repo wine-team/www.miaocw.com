@@ -28,7 +28,7 @@
           			<em class="q_price">¥<?php echo $val->promote_price;?></em>
            </td>
 	       <td class="cart-solve">            
-		            <input type="text" name="goods_number[<?php echo $val->goods_id;?>]" goods-num="<?php echo $val->in_stock;?>" limit-num="<?php echo $val->limit_num;?>" data-id="<?php echo $val->goods_id;?>" value="<?php echo $val->goods_num;?>"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="javascript:cartQtyChange($(this))"/>
+		            <input type="text" name="goods_number[<?php echo $val->goods_id;?>]" goods-num="<?php echo $val->in_stock;?>" limit-num="<?php echo $val->limit_num;?>" goods-id="<?php echo base64_encode($val->goods_id);?>" value="<?php echo $val->goods_num;?>"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="javascript:cartQtyChange($(this))"/>
 			        <div class="amount left">
 			             <p class="increase" onclick="javascript:cartQtyUpdate('up',$(this))" ></p>
 			             <p class="decrease" onclick="javascript:cartQtyUpdate('down',$(this))"></p>
@@ -86,8 +86,10 @@ $('.operate').on('click','a.delete',function(e){
 })
 
 function cartQtyUpdate(kind, obj) {
+
     var qtyObj = obj.parents('.cart-solve').find('.number');
     var limit_num =  qtyObj.attr('limit-num');
+    var goods_id = qtyObj.attr('goods-id');
     var n = qtyObj.attr('goods-num');
     var c = qtyObj.val();
     if (kind == "up") {
@@ -107,12 +109,14 @@ function cartQtyUpdate(kind, obj) {
         }
     }
     qtyObj.val(parseInt(c));
+    ajaxGoods(goods_id,c);
 }
 
 function cartQtyChange(obj) {
 	
     var c = obj.val();
     var n = obj.attr('goods-num');
+    var goods_id = obj.attr('goods-id');
     var limit_num =  obj.attr('limit-num');
     c = parseInt(c);
     n = parseInt(n);
@@ -131,5 +135,24 @@ function cartQtyChange(obj) {
 	    }
     }
     obj.val(c);
+    ajaxGoods(goods_id,c);
+}
+
+function ajaxGoods(goods_id,qty){
+
+	$.ajax({
+        type: 'post',
+        async: false,
+        dataType : 'json',
+        url: home.url()+'/cart/ajaxGoods',
+        data:{goods_id:goods_id,qty:qty},
+        success: function(json) {
+            if (json.status) {
+            	cart();
+            } else {
+            	layer.msg(json.message);
+            }
+        }
+    });
 }
 </script>
