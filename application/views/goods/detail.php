@@ -308,7 +308,7 @@
 			<em class="f f16">&#xe636;</em> 
 		    <b>同类热卖</b>
 		</p>
-		<div class="glb same-hot" cat="<?php echo base64_encode($goods->category_id)?>">
+		<div class="glb same-hot" cat="<?php //echo base64_encode($goods->category_id)?>">
 			 <?php //$this->load->view('goods/hot');?>
 		</div>
 		<p class="glh3">
