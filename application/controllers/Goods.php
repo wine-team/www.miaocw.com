@@ -23,9 +23,9 @@ class Goods extends MW_Controller{
 	 */
 	public function search($pg = 1){
 		
-	    if(empty($this->input->get('keyword'))) {
-	        $this->alertJumpPre('请输入关键字');
-	    }
+// 	    if(empty($this->input->get('keyword'))) {
+// 	        $this->alertJumpPre('请输入关键字');
+// 	    }
 	    $page_num = 20;
 	    $num = ($pg-1)*$page_num;
 	    $searchTotal = $this->mall_goods_base->searchTotal($this->input->get());
