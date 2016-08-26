@@ -5,7 +5,7 @@
    			<a href="<?php echo $this->config->main_base_url?>">首页</a>
    			<code class="lr3">></code>
    			<a href="javascript:;">关键字</a><code class="lr3">></code>
-   			<b class="lr3">“ <?php echo $this->input->get('keyword');?> ”</b>
+   			<b class="lr3"> <?php echo $this->input->get('keyword');?> </b>
    		</span>	
 		<ul class="left s_sx">
 		    <?php if($this->input->get('category_id') && !empty($category_arr)) :?>
@@ -110,12 +110,12 @@
 		<dl class="gl">
 			<dt><?php $img_arr=explode('|',$goods->goods_img);?>
 				<a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
-					<img src="<?php echo $this->config->show_image_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm" alt="<?php echo $goods->goods_brief;?>" />
+					<img class="lazy" src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm" alt="<?php echo $goods->goods_brief;?>" />
 				</a>
 			</dt>
 			<dd class="simg">
 			    <?php foreach($img_arr as $img) :?>
-				<img src="<?php echo $this->config->show_image_thumb_url('mall',$img,60);?>" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
+				<img class="lazy" src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img,60);?>" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb10">
