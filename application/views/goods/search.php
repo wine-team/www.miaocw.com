@@ -10,28 +10,28 @@
 		<ul class="left s_sx">
 		    <?php if($this->input->get('category_id') && !empty($category_arr)) :?>
 		      <li>
-		          <a class="d_xx" title="分类" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'category_id'));?>">
+		          <a class="d_xx" title="分类" href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'category_id'));?>">
 		           分类：<?php echo $category_arr[$this->input->get('category_id')];?>
                   </a>
               </li>
 		    <?php endif;?>
 		    <?php if($this->input->get('brand_id')) :?>
 		      <li>
-		          <a class="d_xx" title="品牌" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'brand_id'));?>">
+		          <a class="d_xx" title="品牌" href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'brand_id'));?>">
 		          品牌：<?php echo $this->input->get('brand_name');?>
 		          </a>
 	          </li>
 		    <?php endif;?>
 		    <?php if($this->input->get('price_range')) :?>
 		      <li>
-    		      <a class="d_xx" title="价格" href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'price_range'));?>">
+    		      <a class="d_xx" title="价格" href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'price_range'));?>">
     		 价格：<?php echo $this->input->get('price_range');?>
     		      </a>
 		      </li>
 		    <?php endif;?>
 		    
             <li>
-                <a class="d_xx" title="排序" href="<?php echo site_url('Goods/search?keyword='.$this->input->get('keyword'));?>">
+                <a class="d_xx" title="排序" href="<?php echo site_url('goods/search?keyword='.$this->input->get('keyword'));?>">
                              排序：<?php echo empty($this->input->get('order')) ? '默认' : $order_arr[$this->input->get('order')];?>
     		    </a>
 		    </li>
@@ -47,7 +47,7 @@
 			<dd id="" class="brand_dl">
 				<div id="list_b" class="over">
 				    <?php foreach ($category_arr as $cat_id=>$cat_name) : ?>
-    				<a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'category_id').'&category_id='.$cat_id);?>" class="<?php if($this->input->get('category_id')==$cat_id) echo 'on';?>"><?php echo $cat_name;?></a>
+    				<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'category_id').'&category_id='.$cat_id);?>" class="<?php if($this->input->get('category_id')==$cat_id) echo 'on';?>"><?php echo $cat_name;?></a>
     			    <?php endforeach;?>
 				</div>
 				<p class="wz_b"></p>
@@ -59,7 +59,7 @@
 			<dd id="brand_dl" class="brand_dl">
 				<div id="list_b" class="over">
 				    <?php foreach ($brand_arr as $brand) :?>
-					<a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'brand_id,brand_name').'&brand_id='.$brand->brand_id.'&brand_name='.$brand->brand_name);?>" class="<?php if($this->input->get('brand_id')==$brand->brand_id) echo 'on';?>"><?php echo $brand->brand_name;?></a>
+					<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'brand_id,brand_name').'&brand_id='.$brand->brand_id.'&brand_name='.$brand->brand_name);?>" class="<?php if($this->input->get('brand_id')==$brand->brand_id) echo 'on';?>"><?php echo $brand->brand_name;?></a>
 					<?php endforeach;?>
 				</div>
 				<p class="wz_b"></p>
@@ -70,7 +70,7 @@
 			<dt>价格</dt>
 			<dd>
 			    <?php foreach ($price_arr as $price) :?>
-			    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get(), 'price_range').'&price_range='.$price);?>" class="<?php if($this->input->get('price_range')==$price) echo 'on';?>"><?php echo $price;?></a>
+			    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'price_range').'&price_range='.$price);?>" class="<?php if($this->input->get('price_range')==$price) echo 'on';?>"><?php echo $price;?></a>
 			    <?php endforeach;?>
 			</dd>
 		</dl>
@@ -82,11 +82,11 @@
 			<div class="w">
 				<div class="left pl10">
 					<form method="GET" class="sort"  name="listform">
-					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()))?>" class="sb_a <?php if(empty($this->input->get('order'))) echo 'sb_on'?>">默认</a>
-					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order=goods_id')?>" class="sb_a <?php if($this->input->get('order')=='goods_id') echo 'sb_on'?>">最新上架</a>
-					    <a href="<?php $order_price=($this->input->get('order')=='price_asc') ? 'price_desc' : 'price_asc';echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order='.$order_price)?>" class="sb_a <?php if($this->input->get('order')=='price_asc') echo 'sup';?> <?php if($this->input->get('order')=='price_asc' || $this->input->get('order')=='price_desc') echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
-					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order=sale_count')?>" class="sb_a <?php if($this->input->get('order')=='sale_count') echo 'sb_on'?>">热销</a>
-					    <a href="<?php echo site_url('Goods/search?'.create_suffix($this->input->get()).'&order=tour_count')?>" class="sb_a <?php if($this->input->get('order')=='tour_count') echo 'sb_on'?>">热门</a>
+					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()))?>" class="sb_a <?php if(empty($this->input->get('order'))) echo 'sb_on'?>">默认</a>
+					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=goods_id')?>" class="sb_a <?php if($this->input->get('order')=='goods_id') echo 'sb_on'?>">最新上架</a>
+					    <a href="<?php $order_price=($this->input->get('order')=='price_asc') ? 'price_desc' : 'price_asc';echo site_url('goods/search?'.create_suffix($this->input->get()).'&order='.$order_price)?>" class="sb_a <?php if($this->input->get('order')=='price_asc') echo 'sup';?> <?php if($this->input->get('order')=='price_asc' || $this->input->get('order')=='price_desc') echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
+					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=sale_count')?>" class="sb_a <?php if($this->input->get('order')=='sale_count') echo 'sb_on'?>">热销</a>
+					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=tour_count')?>" class="sb_a <?php if($this->input->get('order')=='tour_count') echo 'sb_on'?>">热门</a>
 					</form>
 				</div>
 				<div class="prt right"> 
@@ -94,12 +94,12 @@
 					<?php if($pg_now==1) :?>
 					<a class="pr_a p_off" href="javascript:;" title="已经是第一页了">上一页</a> 
 					<?php else : ?>
-					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now-1).'?'.create_suffix($this->input->get()));?>" >上一页</a> 
+					<a class="pr_a" href="<?php echo site_url('goods/search/'.($pg_now-1).'?'.create_suffix($this->input->get()));?>" >上一页</a> 
 					<?php endif;?>
 					<?php if($pg_now==$all_pg) :?>
 					<a class="pr_a p_off" href="javascript:;" title="已经是最后一页了">下一页</a>
 					<?php else :?>
-					<a class="pr_a" href="<?php echo site_url('Goods/search/'.($pg_now+1).'?'.create_suffix($this->input->get()));?>">下一页</a>
+					<a class="pr_a" href="<?php echo site_url('goods/search/'.($pg_now+1).'?'.create_suffix($this->input->get()));?>">下一页</a>
 					<?php endif;?>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 	    <?php foreach ($page_list as $goods) :?>
 		<dl class="gl">
 			<dt><?php $img_arr=explode('|',$goods->goods_img);?>
-				<a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
+				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
 					<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_brief;?>" />
 				</a>
 			</dt>
@@ -121,8 +121,8 @@
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb10">
-				<a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id);?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
-				<a href="<?php echo site_url('Goods/detail?goods_id='.$goods->goods_id);?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
+				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
+				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
 			</dd>
 			<dd>
 				<em class="i_hot">热销</em>
