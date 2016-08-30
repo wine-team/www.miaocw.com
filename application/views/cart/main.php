@@ -8,7 +8,6 @@
 	        <th width="150">小计</th>
 	        <th>操作</th>
         </tr>
-        <?php $total=0;?>
        	<?php foreach ($cart  as $item):?>
        	<?php foreach ($item['goods'] as $val):?>
         <tr>
@@ -36,7 +35,6 @@
 			        </div>
 		   </td>
            <td class="g_xj">¥<?php echo bcmul($val->goods_num,$val->promote_price,2);?></td>
-           <?php $total +=  bcmul($val->goods_num,$val->promote_price,2);?>
            <td class="operate">
           			<p><a class="c9 enshirne" href="javascript:;" goods-id="<?php echo base64_encode($val->goods_id);?>">收藏</a></p>
                     <a class="c9 delete" href="javascript:;" goods-id="<?php echo base64_encode($val->goods_id);?>">删除</a>

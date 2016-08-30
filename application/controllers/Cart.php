@@ -4,6 +4,7 @@ class Cart extends CS_Controller {
 	public function _init() {
 
 		$this->load->model('region_model', 'region');
+		$this->load->model('mall_freight_price_model','mall_freight_price');
 		$this->load->model('user_coupon_get_model','user_coupon_get');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
@@ -24,7 +25,6 @@ class Cart extends CS_Controller {
             $data['city_id'] = $address->row(0)->city_id;
             $data['district_id'] = $address->row(0)->district_id;
      	}
-     	$data['coupon'] = $this->user_coupon_get->getCouponByUid($this->uid);
         $this->load->view('cart/grid',$data);
      }
      
@@ -34,10 +34,16 @@ class Cart extends CS_Controller {
      public function main(){
      	
      	$cart = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
-     	$data['cart'] = $this->encrypt($cart);
+     	$data['coupon'] = $this->user_coupon_get->getCouponByUid($this->uid);
+     	$cartData = $this->encrypt($cart);
+     	$data['cart'] = $cartData['cart'];
+     	$data['total'] = $cartData['total'];
+     	$data['actual_price'] = $cartData['actual_price'];
+     	$data['transport_cost'] = $cartData['transport_cost'];
      	echo json_encode(array(
      		'status' => true,
-     		'html'   => $this->load->view('cart/main',$data,true)
+     		'html'   => $this->load->view('cart/main',$data,true),
+     		'amount' => $this->load->view('cart/amount',$data,true)
      	));exit;
      }
      
@@ -46,13 +52,24 @@ class Cart extends CS_Controller {
      */
      public function encrypt($cart) {
      	
+     	$free = 0 ;// 优惠价
+     	$total = 0; // 订单销售价
+     	$actual_price = 0; // 积极支付价
+     	$transport_cost = 0; // 运费价格
      	$cartArr = array();
      	foreach ($cart->result() as $val){
      		$cartArr[$val->supplier_id]['supplier_id'] = $val->supplier_id;
      		$cartArr[$val->supplier_id]['shop_name'] = $val->alias_name;
      		$cartArr[$val->supplier_id]['goods'][] = $val;
+     		$total += bcmul($val->goods_num,$val->promote_price,2);
      	}
-     	return $cartArr;
+     	$actual_price = bcsub(bcadd($total,$transport_cost,2),$free,2);
+     	return array(
+     			 'cart'   =>  $cartArr,
+     			 'total'  =>  $total,
+     			 'transport_cost' => $transport_cost,
+     			 'actual_price'   => $actual_price
+     	        );
      }
      
       /**
