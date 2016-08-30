@@ -4,6 +4,7 @@ class Cart extends CS_Controller {
 	public function _init() {
 
 		$this->load->model('region_model', 'region');
+		$this->load->model('user_coupon_get_model','user_coupon_get');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_enshrine_model','mall_enshrine');
@@ -23,6 +24,7 @@ class Cart extends CS_Controller {
             $data['city_id'] = $address->row(0)->city_id;
             $data['district_id'] = $address->row(0)->district_id;
      	}
+     	$data['coupon'] = $this->user_coupon_get->getCouponByUid($this->uid);
         $this->load->view('cart/grid',$data);
      }
      
@@ -31,11 +33,26 @@ class Cart extends CS_Controller {
       */
      public function main(){
      	
-     	$data['cart'] = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
+     	$cart = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
+     	$data['cart'] = $this->encrypt($cart);
      	echo json_encode(array(
      		'status' => true,
      		'html'   => $this->load->view('cart/main',$data,true)
      	));exit;
+     }
+     
+     /**
+      *--产品的循环处理
+     */
+     public function encrypt($cart) {
+     	
+     	$cartArr = array();
+     	foreach ($cart->result() as $val){
+     		$cartArr[$val->supplier_id]['supplier_id'] = $val->supplier_id;
+     		$cartArr[$val->supplier_id]['shop_name'] = $val->alias_name;
+     		$cartArr[$val->supplier_id]['goods'][] = $val;
+     	}
+     	return $cartArr;
      }
      
       /**

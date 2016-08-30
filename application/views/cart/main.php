@@ -1,4 +1,4 @@
-<?php if($cart->num_rows()>0):?>
+<?php if(!empty($cart)):?>
 <table width="100%" border="0" class="tb_c lh20 cart">
         <tr>
 	        <th width="70">商品名称</th>
@@ -9,26 +9,27 @@
 	        <th>操作</th>
         </tr>
         <?php $total=0;?>
-       	<?php foreach ($cart->result() as $val):?>
+       	<?php foreach ($cart  as $item):?>
+       	<?php foreach ($item['goods'] as $val):?>
         <tr>
 			<td> 
 			        <a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank">
-        					<img class="lazy" src="miaow/images/load.jpg"  data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($val->goods_img,'|',true),'60')?>" title="<?php echo $val->goods_name;?>" width="60" height="60" />
+        				<img class="lazy" src="miaow/images/load.jpg"  data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($val->goods_img,'|',true),'60')?>" title="<?php echo $val->goods_name;?>" width="60" height="60" />
 		            </a> 
 		    </td>
 		    <td> 
             		<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank" class="pr50">
-            		<?php echo $val->goods_name;?>
-            		<?php if(!empty($val->attribute_value)):?>
-            			<p class="green"><?php echo $val->attribute_value;?></p>
-            		<?php endif;?>
+	            		<?php echo $val->goods_name;?>
+	            		<?php if(!empty($val->attribute_value)):?>
+	            			<p class="green"><?php echo $val->attribute_value;?></p>
+	            		<?php endif;?>
             	    </a> 
            </td>
            <td>
           			<em class="q_price">¥<?php echo $val->promote_price;?></em>
            </td>
 	       <td class="cart-solve">            
-		            <input type="text" name="goods_number[<?php echo $val->goods_id;?>]" goods-num="<?php echo $val->in_stock;?>" limit-num="<?php echo $val->limit_num;?>" goods-id="<?php echo base64_encode($val->goods_id);?>" value="<?php echo $val->goods_num;?>"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="javascript:cartQtyChange($(this))"/>
+		            <input type="text" name="goods[<?php echo $val->goods_id;?>]" goods-num="<?php echo $val->in_stock;?>" limit-num="<?php echo $val->limit_num;?>" goods-id="<?php echo base64_encode($val->goods_id);?>" value="<?php echo $val->goods_num;?>"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="javascript:cartQtyChange($(this))"/>
 			        <div class="amount left">
 			             <p class="increase" onclick="javascript:cartQtyUpdate('up',$(this))" ></p>
 			             <p class="decrease" onclick="javascript:cartQtyUpdate('down',$(this))"></p>
@@ -38,9 +39,10 @@
            <?php $total +=  bcmul($val->goods_num,$val->promote_price,2);?>
            <td class="operate">
           			<p><a class="c9 enshirne" href="javascript:;" goods-id="<?php echo base64_encode($val->goods_id);?>">收藏</a></p>
-                    <a href="javascript:;"  class="c9 delete" goods-id="<?php echo base64_encode($val->goods_id);?>">删除</a>
+                    <a class="c9 delete" href="javascript:;" goods-id="<?php echo base64_encode($val->goods_id);?>">删除</a>
             </td>
        </tr>
+       <?php endforeach;?>
        <?php endforeach;?>
        <tr>
 	        <td colspan="3"></td>

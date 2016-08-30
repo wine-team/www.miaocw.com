@@ -12,9 +12,9 @@
 		<a href="javascript:;" rel="nofollow" target="_blank">延时喷剂</a>
 		<span class="vline">|</span>
 		<a href="javascript:;" rel="nofollow" target="_blank">情趣内衣</a>
-		<span class="vline">|</span>订购热线 <span class="red">400-660-0606</span>
+		<span class="vline">|</span>订购热线 <span class="red">8888888888</span>
 	</p>
-	<p class="alC gray">Copyright © 2015 ICP经营性许可证:蜀ICP备11022411号-2</p>
+	<p class="alC gray">Copyright © 2016 ICP经营性许可证:8888888888</p>
 </div>
 </body>
 </html>
