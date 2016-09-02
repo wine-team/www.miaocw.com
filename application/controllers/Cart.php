@@ -4,6 +4,7 @@ class Cart extends CS_Controller {
 	public function _init() {
 
 		$this->load->model('region_model', 'region');
+		$this->load->model('mall_freight_tpl_model','mall_freight_tpl');
 		$this->load->model('mall_freight_price_model','mall_freight_price');
 		$this->load->model('user_coupon_get_model','user_coupon_get');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
@@ -33,12 +34,17 @@ class Cart extends CS_Controller {
       */
      public function main(){
      	
+     	$area = $this->input->post('area',true);
+     	$couponId = $this->input->post('coupon') ? $this->input->post('coupon') : 0;
      	$cart = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
-     	$data['coupon'] = $this->user_coupon_get->getCouponByUid($this->uid);
-     	$cartData = $this->encrypt($cart);
+     	$cartData = $this->encrypt($cart,$area);
+     	$data['couponId'] = $couponId;//优惠劵
      	$data['cart'] = $cartData['cart'];
      	$data['total'] = $cartData['total'];
-     	$data['actual_price'] = $cartData['actual_price'];
+     	$couponRes = $this->user_coupon_get->getCouponByRes(array('uid'=>$this->uid,'condition'=>$data['total'])); // 优惠劵使用条件
+     	$yhqTotal = ($couponId && count($couponRes)>0) ?  $couponRes[$couponId]->amount : 0;
+     	$data['coupon'] = $couponRes;
+     	$data['actual_price'] = bcsub($cartData['actual_price'],$yhqTotal,2);
      	$data['transport_cost'] = $cartData['transport_cost'];
      	echo json_encode(array(
      		'status' => true,
@@ -50,7 +56,7 @@ class Cart extends CS_Controller {
      /**
       *--产品的循环处理
      */
-     public function encrypt($cart) {
+     public function encrypt($cart,$area) {
      	
      	$free = 0 ;// 优惠价
      	$total = 0; // 订单销售价
@@ -63,6 +69,7 @@ class Cart extends CS_Controller {
      		$cartArr[$val->supplier_id]['goods'][] = $val;
      		$total += bcmul($val->goods_num,$val->promote_price,2);
      	}
+     	$transport_cost = $this->getFreight($cartArr,$area); //算运费
      	$actual_price = bcsub(bcadd($total,$transport_cost,2),$free,2);
      	return array(
      			 'cart'   =>  $cartArr,
@@ -71,6 +78,94 @@ class Cart extends CS_Controller {
      			 'actual_price'   => $actual_price
      	        );
      }
+     
+      /**
+      * 获取运维信息
+      * @param unknown $cartArr
+      */
+     public function getFreight($cartArr,$area) {
+     	  
+     	$freight = array(); //获取商品是哪个模板 哪个地区 是否是
+     	foreach ($cartArr as $key => $item) { 
+     		foreach ($item['goods'] as $val) {//循环店铺
+     			$tid = $val->freight_id;
+     			$freight[$key][$tid]['supplier_id'] = $val->supplier_id;
+     			if ($tid==0) {
+     				//没有使用模板 使用默认金额
+     				$freight[$key][$tid]['total_qty'][] = $val->goods_num;
+     				$freight[$key][$tid]['freight_cost'] = $val->freight_cost;
+     			} else {
+                    //计算总件数
+                    $freight[$key][$tid]['total_qty'][] = $val->goods_num;
+                    //计算总重量
+                    $freight[$key][$tid]['total_weight'][] = $val->goods_num * $val->goods_weight;
+                    $freight[$key][$tid]['total_price'][] = bcmul($val->goods_num,$val->promote_price,2);
+                }
+     		}
+     	}
+     	foreach ($freight as $key => $items) {
+     		
+     		$sub = 0;
+     		foreach ($items as $freight_id => $item) {  //店铺下运费模版的计算
+     			if ($freight_id == 0) {
+     				$sub += $item['freight_cost'];
+     			}
+     			$result = $this->mall_freight_tpl->getTransports(array('freight_id'=>$freight_id,'uid'=>$item['supplier_id']));
+     			if (isset($result->methods)) {
+     				//根据收货地址获取模板计算规则
+     				$param['area'] = $area;
+     				$param['freight_id'] = $freight_id;
+     				$transport = $this->mall_freight_price->getFreightRow($param);
+     				if ($result->methods == 1) { //按件计算
+     					$total_qty = 0;
+     					foreach ($item['total_qty'] as $freight_val) {
+     						$total_qty += $freight_val; //总件数
+     					}
+     					if ($transport->add_unit == 0) {
+     						$sub += $transport->first_price;
+     					} else {
+     						if ($total_qty <= $transport->first_unit) {//总件数小于首件
+     							$sub += $transport->first_price;
+     						} else {
+     							//计算超出部分
+     							$over_unit = $total_qty - $transport->first_unit;
+     							//超出部分价格
+     							$over_price = ceil($over_unit / $transport->add_unit) * $transport->add_price;
+     							$sub += $over_price + $transport->first_price;
+     						}
+     					}
+     			    }
+     			    if ($result->methods == 2) { //按重量计算
+     			    	
+     			    	$total_weight = 0;
+     			    	$total_price = 0;
+     			    	foreach ($item['total_weight'] as $freight_val) {
+     			    		$total_weight += $freight_val;// 总重量
+     			    	}
+     			    	if ($transport->add_unit == 0) {
+     			    		$sub += $transport->first_price;
+     			    	} else {
+     			    		if ($total_weight <= $transport->first_unit) {//重量小于首重
+     			    			$sub += $transport->first_price;
+     			    		} else {//重量大于首重
+     			    				//计算超出部分
+     			    			$over_weight = $total_weight - $transport->first_unit;
+     			    				//超出部分价格
+     			    			$over_price = ceil($over_weight / $transport->add_unit) * $transport->add_price;
+     			    			$sub += $over_price + $transport->first_price;
+     			    		}
+     			    	 }
+     			     }
+     			   }
+     		    }
+     		  $order[$key]['sub'] = $sub;  //每个供应商下的产品的运费
+     		}
+     		$tranCost = 0; //总运费
+     	    foreach ($order as $seller_uid=>$val) {
+     	    	$tranCost += $val['sub'];
+     	    }
+     	    return $tranCost;
+     	}
      
       /**
       * 收藏

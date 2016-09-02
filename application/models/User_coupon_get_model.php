@@ -7,16 +7,27 @@ class User_coupon_get_model extends CI_Model
 	 * 获取优惠劵
 	 * @param unknown $uid
 	 */
-	public function getCouponByUid($uid) {
+	public function getCouponByRes($param=array()) {
 		
-		$this->db->select('user_coupon_get.*');
+		$this->db->select('coupon_get_id,coupon_set_id,coupon_name,uid,amount,condition');
 		$this->db->from($this->table);
-		//$this->db->join('user_coupon_set','user_coupon_set.coupon_set_id=user_coupon_get.coupon_set_id');
-	    $this->db->where('user_coupon_get.uid',$uid);
 	    $this->db->where('user_coupon_get.status',1);
 	    $this->db->where('user_coupon_get.start_time<=',date('Y-m-d H:i:s'));
-	    //$this->db->where('user_coupon_get.end_time>=',date('Y-m-d H:i:s'));
-	    return $this->db->get();
+	    $this->db->where('user_coupon_get.end_time>=',date('Y-m-d H:i:s'));
+	    if (!empty($param['uid'])) {
+	    	$this->db->where('user_coupon_get.uid',$param['uid']);
+	    }
+	    if (!empty($param['condition'])) {
+	    	$this->db->where('user_coupon_get.condition <= ',$param['condition']);
+	    }
+	    $result = $this->db->get();
+	    $couponArr = array();
+	    if ($result->num_rows()>0) {
+	    	foreach ($result->result() as $key=>$item) {
+	    		$couponArr[$item->coupon_get_id] = $item;
+	    	}
+	    }
+	    return  $couponArr;
 	}
 	
 }

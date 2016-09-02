@@ -66,7 +66,7 @@ $(document).ready(function() {
 <select name="province_id"  id="province_id"  class="left select mt5 required">
     <option value="" >省份</option>
     <?php foreach($provinces as $key => $province): ?>
-    <option value="<?php echo $province['region_id'];?>" <?php if ($province['region_id'] == $province_selected):?>selected="selected"<?php endif;?> ><?php echo $province['region_name']; ?></option>
+    <option value="<?php echo $province['region_id'];?>" <?php if ($province['region_id'] == $province_selected):?>selected="selected"<?php endif;?>  province="<?php echo $province['region_name'];?>"><?php echo $province['region_name']; ?></option>
     <?php endforeach; ?>
 </select>
 <select name="city_id" id="city_id"  class="left select mt5 required">
