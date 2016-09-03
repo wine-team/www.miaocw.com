@@ -3,7 +3,7 @@ class Payment extends CS_Controller {
 
 	public function _init() {
 		
-		
+		$this->load->model('mall_goods_base_model','mall_goods_base');
 	}
 
 	 /**
@@ -13,11 +13,41 @@ class Payment extends CS_Controller {
      	
      	$postData = $this->input->post();
      	$this->validate($postData);
+     	$this->checkGoods($postData['goods']);// 检验商品数量和限制购买数量
+     	
+     	
      	
      	
      	$this->load->view('payment/grid');
      }
 
+     /**
+      * 校验产品数量
+      * @param unknown $goods
+      */
+     public function checkGoods($goods) {
+     	
+     	$goodsIdArr = array_keys($goods);
+     	$goodsRes = $this->mall_goods_base->getGoodsByGoodsId($goodsIdArr);
+     	if ($goodsRes->num_rows()<=0) {
+     		$this->jsen('产品不存在');
+     	}
+     	foreach ($goodsRes->result() as $item) {
+     		
+     		if ($item->in_stock<=0) {
+     			$this->jsonMessage('商品' . $item->goods_name . '库存为零');
+     		} 
+     		if ($goods[$item->goods_id] > $item->in_stock) {
+     			$this->jsonMessage('商品' . $item->goods_name . '库存不足，最多可购买'. $item->in_stock . '件' );
+     		}
+     		if ($item->limit_num>0) {
+     			if ($goods[$item->goods_id] > $item->limit_num ) {
+     				$this->jsen('商品' . $item->goods_name . '（一个用户限购' . $item->limit_num . '件）');
+     			}
+     		}
+     	}
+     }
+      
       /**
       * 订单验证
       * @param unknown $postData
