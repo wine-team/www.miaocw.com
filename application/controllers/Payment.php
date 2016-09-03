@@ -2,7 +2,7 @@
 class Payment extends CS_Controller {
 
 	public function _init() {
-
+		
 		
 	}
 
@@ -12,8 +12,8 @@ class Payment extends CS_Controller {
      public function grid(){
      	
      	$postData = $this->input->post();
-     	var_dump($postData);exit;
      	$this->validate($postData);
+     	
      	
      	$this->load->view('payment/grid');
      }
@@ -35,6 +35,9 @@ class Payment extends CS_Controller {
      	}
      	if (empty($postData['tel'])) {
      		$this->jsen('请传联系方式');
+     	}
+     	if (!valid_mobile($postData['tel'])) {
+     		$this->jsen('请填正确的手机号码');
      	}
      	if (empty($postData['province_id'])) {
      		$this->jsen('请传省份ID');

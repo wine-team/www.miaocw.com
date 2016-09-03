@@ -22,9 +22,8 @@
 <span class="right">邮费<b class="red" id="yf">¥<?php echo bcadd($transport_cost,0,2);?></b></span>
 <i class="o_add right"></i>
 <span class="right">商品总价<b class="red" id="zj">¥<?php echo bcadd($total,0,2);?></b></span>
-
-
 <script type="text/javascript">
+
 $('.free').on('click','.youhuiquan',function(e){ //优惠券
    var selectFlag = $(this).parents('.free').find('.select-free');
    if ($(this).is(':checked')) {
@@ -35,6 +34,7 @@ $('.free').on('click','.youhuiquan',function(e){ //优惠券
   	 $('.select-free').trigger('change');// 触发选择事件
    }
 })
+
 $('.free').on('change','.select-free',function(e){
 	var area = $('select[name="province_id"]').find("option:selected").attr('province');
 	var coupon = $(this).val();
@@ -43,7 +43,7 @@ $('.free').on('change','.select-free',function(e){
         async: false,
         dataType : 'json',
         data:{area:area,coupon:coupon},
-        url: home.url()+'/cart/main',
+        url: hostUrl()+'/cart/main',
         success: function(json) {
            $('.pay-order').html(json.amount);
            $('.cart-content').html(json.html);
@@ -51,4 +51,5 @@ $('.free').on('change','.select-free',function(e){
         }
 	})
 })
+
 </script>

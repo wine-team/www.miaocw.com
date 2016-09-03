@@ -55,7 +55,7 @@ $('.operate').delegate('a.enshirne','click',function(e){
         type: 'post',
         async: false,
         dataType : 'json',
-        url: home.url()+'/cart/enshrine',
+        url: hostUrl()+'/cart/enshrine',
         data:{goods_id:goods_id},
         success: function(json) {
             layer.msg(json.message);
@@ -72,7 +72,7 @@ $('.operate').on('click','a.delete',function(e){
             type: 'post',
             async: false,
             dataType : 'json',
-            url: home.url()+'/cart/delete',
+            url: hostUrl()+'/cart/delete',
             data:{goods_id:goods_id},
             success: function(json) {
                 if (json.status) {
@@ -144,7 +144,7 @@ function ajaxGoods(goods_id,qty){
         type: 'post',
         async: false,
         dataType : 'json',
-        url: home.url()+'/cart/ajaxGoods',
+        url: hostUrl()+'/cart/ajaxGoods',
         data:{goods_id:goods_id,qty:qty},
         success: function(json) {
             if (json.status) {
