@@ -142,7 +142,7 @@ $('.cart').on('submit','form.order-form',function(e){ // 购物车提交
     	type:'post',
         dataType:'json',
         async: false,
-        url: hostUrl()+'/payment/grid',
+        url: hostUrl()+'/payment/create_order',
         data: $('form.order-form').serialize(),
         beforeSend: function() {
             $('.order-form input[type="submit"]').val('正在提交');

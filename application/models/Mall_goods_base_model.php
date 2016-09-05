@@ -11,7 +11,7 @@ class Mall_goods_base_model extends CI_Model{
 	 */
 	public function getGoodsByGoodsId($goodsId){
 		
-		$this->db->select('goods_id,goods_name,promote_price,supplier_id,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,limit_num,freight_id,in_stock,freight_cost,sale_count,review_count');
+		$this->db->select('goods_id,goods_name,goods_weight,promote_price,supplier_id,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,limit_num,freight_id,in_stock,freight_cost,sale_count,review_count');
 		$this->db->from($this->table);
 		if(is_array($goodsId)){
 			$this->db->where_in('goods_id',$goodsId);
@@ -159,5 +159,14 @@ class Mall_goods_base_model extends CI_Model{
 		return $this->db->update($this->table);
 	}
 	
-	
+	/**
+	 * 商品修改 创建订单时候使用变更库存
+	 * @param unknown $param
+	 */
+	public function setMallNum($param)
+	{
+		$this->db->where('goods_id', $param['goods_id']);
+		$this->db->set('in_stock', 'in_stock-' . $param['goods_num'], FALSE);
+		return $this->db->update($this->table);
+	}
 }

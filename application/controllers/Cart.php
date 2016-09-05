@@ -36,7 +36,7 @@ class Cart extends CS_Controller {
      	
      	$area = $this->input->post('area',true);
      	$couponId = $this->input->post('coupon') ? $this->input->post('coupon') : 0;
-     	$cart = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
+     	$cart = $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid));
      	$cartData = $this->encrypt($cart,$area);
      	$data['couponId'] = $couponId;//优惠劵
      	$data['cart'] = $cartData['cart'];
@@ -58,10 +58,9 @@ class Cart extends CS_Controller {
      */
      public function encrypt($cart,$area) {
      	
-     	$free = 0 ;// 优惠价
      	$total = 0; // 订单销售价
      	$actual_price = 0; // 积极支付价
-     	$transport_cost = 0; // 运费价格
+     	$transport_cost = 0; //总运费价格
      	$cartArr = array();
      	foreach ($cart->result() as $val){
      		$cartArr[$val->supplier_id]['supplier_id'] = $val->supplier_id;
@@ -70,7 +69,7 @@ class Cart extends CS_Controller {
      		$total += bcmul($val->goods_num,$val->promote_price,2);
      	}
      	$transport_cost = $this->getFreight($cartArr,$area); //算运费
-     	$actual_price = bcsub(bcadd($total,$transport_cost,2),$free,2);
+     	$actual_price = bcadd($total,$transport_cost,2);
      	return array(
      			 'cart'   =>  $cartArr,
      			 'total'  =>  $total,
@@ -158,10 +157,10 @@ class Cart extends CS_Controller {
      			     }
      			   }
      		    }
-     		  $order[$key]['sub'] = $sub;  //每个供应商下的产品的运费
+     		  $cartArr[$key]['sub'] = $sub;  //每个供应商下的产品的运费
      		}
      		$tranCost = 0; //总运费
-     	    foreach ($order as $seller_uid=>$val) {
+     	    foreach ($cartArr as $seller_uid=>$val) {
      	    	$tranCost += $val['sub'];
      	    }
      	    return $tranCost;

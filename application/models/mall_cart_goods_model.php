@@ -8,15 +8,20 @@ class Mall_cart_goods_model extends CI_Model{
 	 * 获取购物车内容
 	 * @param unknown $uid
 	 */
-	public function getCartGoodsByUid($uid){
+	public function getCartGoodsByRes($param=array()){
 		
-		$this->db->select('mall_goods_base.goods_name,mall_goods_base.supplier_id,mall_goods_base.promote_price,mall_goods_base.goods_img,mall_goods_base.in_stock,mall_goods_base.limit_num,mall_goods_base.goods_weight,mall_goods_base.freight_cost,mall_goods_base.freight_id,mall_cart_goods.goods_id,mall_cart_goods.goods_num,mall_cart_goods.attribute_value,user.alias_name');
+		$this->db->select('mall_goods_base.goods_name,mall_goods_base.supplier_id,mall_goods_base.promote_price,market_price,shop_price,provide_price,mall_goods_base.goods_img,mall_goods_base.extension_code,mall_goods_base.in_stock,mall_goods_base.limit_num,mall_goods_base.goods_weight,mall_goods_base.freight_cost,mall_goods_base.freight_id,mall_cart_goods.goods_id,mall_cart_goods.goods_num,mall_cart_goods.attribute_value,user.alias_name');
 		$this->db->from($this->table);
 		$this->db->join('mall_goods_base','mall_goods_base.goods_id=mall_cart_goods.goods_id','inner');
 		$this->db->join('user','user.uid=mall_goods_base.supplier_id','left');
 		$this->db->where('mall_goods_base.is_check','2');//审核通过
 		$this->db->where('mall_goods_base.is_on_sale','1');//上架
-		$this->db->where('mall_cart_goods.uid',$uid);
+		if (!empty($param['uid'])) {
+		   $this->db->where('mall_cart_goods.uid',$param['uid']);
+		}
+		if (!empty($param['goods_id'])) {
+		   $this->db->where_in('mall_cart_goods.goods_id',$param['goods_id']);
+		}
 		$this->db->order_by('mall_cart_goods.creat_at','desc');
 		return $this->db->get();
 	}

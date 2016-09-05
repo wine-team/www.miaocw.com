@@ -15,7 +15,14 @@ class Mall_address_model extends CI_Model
     	$this->db->order_by('is_default','desc'); // 2为默认  1为非默认
     	return $this->db->get($this->table);
     }
-   
-    
-    
+
+     /**
+     * 插入
+     * @param unknown $param
+     */
+    public function insert($param) {
+    	
+       $this->db->insert($this->table,$param);
+       return $this->db->insert_id();
+    }
 }
