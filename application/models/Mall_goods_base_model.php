@@ -166,7 +166,7 @@ class Mall_goods_base_model extends CI_Model{
 	public function setMallNum($param)
 	{
 		$this->db->where('goods_id', $param['goods_id']);
-		$this->db->set('in_stock', 'in_stock-' . $param['goods_num'], FALSE);
+		$this->db->set('in_stock', 'in_stock-' . $param['number'], FALSE);
 		return $this->db->update($this->table);
 	}
 }

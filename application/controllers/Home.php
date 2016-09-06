@@ -187,7 +187,7 @@ class Home extends MW_Controller{
 				'msg'    => '没有登陆'
 			));exit;
 		}
-		$res = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
+		$res = $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid));
 		$num = 0;
 		$sum = 0;
 		foreach ($res->result() as $item) {

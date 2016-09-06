@@ -3,6 +3,7 @@ class Payment extends CS_Controller {
 
 	public function _init() {
 		
+		$this->load->library('encrypt');
 		$this->load->model('region_model','region');
 		$this->load->model('mall_address_model','mall_address');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
@@ -52,10 +53,15 @@ class Payment extends CS_Controller {
      		}
      		foreach ($item['goods'] as $k => $val) {
      			
-     			$order_product_id = $this->creat_order_product($val,$order_id);
+     			$order_product_id = $this->creat_order_product($val,$order_id); //订单产品表
      			if (!$order_product_id) {
      				$this->db->trans_rollback();
-     				$this->jsen('生成订单产品表失败');
+     				$this->jsen('生成订单产品失败');
+     			}
+     			$mallProfit = $this->creat_order_profit($order_product_id,$val); //订单分润数据
+     			if (!$mallProfit) {
+     				$this->db->trans_rollback();
+     				$this->jsen('订单分润失败');
      			}
      			$orderShopPrice += bcmul($val->goods_num,$val->shop_price,2);
      			$orderSupplyPrice += bcmul($val->goods_num,$val->provide_price,2);
@@ -66,31 +72,31 @@ class Payment extends CS_Controller {
      			
      			$product_param['goods_id'] = $val->goods_id;
      			$product_param['number'] = $val->goods_num;
-     			$numStatus = $this->mall_goods_base->setMallNum($product_param);
+     			$numStatus = $this->mall_goods_base->setMallNum($product_param); // 产品表库存的变化
      			if (!$numStatus) {
      				$this->db->trans_rollback();
      				$this->jsen('更新库存失败');
      			}
      		}
-     		/*订单的修改*/
+     		
      		$order_update_params['order_id'] = $order_id;
      		$order_update_params['status'] = 2;
-     		$order_update_params['order_supply_price'] = $orderSupplyPrice;
-     		$order_update_params['order_shop_price'] = $orderShopPrice;
-     		$order_update_params['actual_price'] = $orderActualPrice;
-     		$order_update_params['order_pay_price'] = $orderActualPrice; 
-     		$updateOrder = $this->mall_order_base->updateMallOrder($order_update_params);
+     		$order_update_params['order_supply_price'] = $orderSupplyPrice;// 实际供应价
+     		$order_update_params['order_shop_price'] = $orderShopPrice;// 实际销售价
+     		$order_update_params['actual_price'] = $orderActualPrice;// 实际支付价
+     		$order_update_params['order_pay_price'] = $orderActualPrice; // 实际支付价
+     		$updateOrder = $this->mall_order_base->updateMallOrder($order_update_params);//订单表的修改
      	    if (!$updateOrder) {
      	    	$this->db->trans_rollback();
      	    	$this->jsen('更新订单失败');
      	    }
      	    $subtotal += bcadd($orderActualPrice, $transport_cost, 2); //所有订单总价
+     	    
      	}
-     	//插入总订单
      	$main_params['order_main_sn'] = $orderMainSn;
      	$main_params['created_at'] = date('Y-m-d H:i:s');
      	$main_params['order_amount'] = $subtotal;
-     	$main_order = $this->mall_order_main->create_order($main_params);
+     	$main_order = $this->mall_order_main->create_order($main_params); //插入总订单
      	if (!$main_order) {
      		$this->db->trans_rollback();
      		$this->jsen('主订单生成失败');
@@ -100,6 +106,39 @@ class Payment extends CS_Controller {
      		$this->jsen('订单生成失败');
      	}
      	$this->db->trans_commit();
+     	$this->mall_cart_goods->clear_cart($paramsCart);//清除购物车已经生成订单的产品
+        $mainOrder = $this->encrypt->encode($orderMainSn); //加密
+        $this->jsen(site_url('payment/order?pay='.$mainOrder),true);
+     }
+     
+      /**
+      *订单支付页面
+      */
+     public function order() {
+     	
+     	$pay = $this->input->get('pay');
+     	if (empty($pay)) {
+     	 	show_404();
+     	}
+     	$orderMainSn = $this->encrypt->decode($pay);
+     }
+     
+     
+     
+     
+      /**
+      * 订单分润数据的插入
+      * @param unknown $order_product_id
+      * @param unknown $val
+      */
+     public function creat_order_profit($order_product_id,$val){
+     	
+     	$param['order_product_id'] = $order_product_id;
+     	$param['uid'] = $val->supplier_id;
+     	$param['account'] = bcmul($val->goods_num,$val->provide_price,2);
+     	$param['account_type'] = 1;
+     	$param['as'] = 1;
+     	return $this->mall_order_product_profit->insertOrderProfit($param);
      }
      
       /**
@@ -327,7 +366,7 @@ class Payment extends CS_Controller {
      public function validate($postData){
      	
      	if (empty($postData['goods']) || !is_array($postData['goods'])) {
-     		$this->jsen('请传产品参数');
+     		$this->jsen('请选购产品');
      	}
      	if (empty($postData['address_id'])) {
      		$this->jsen('请传地址参数');

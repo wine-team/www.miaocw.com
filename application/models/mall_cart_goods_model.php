@@ -108,4 +108,15 @@ class Mall_cart_goods_model extends CI_Model{
     	$this->db->where('goods_id',$param['goods_id']);
     	return $this->db->update($this->table);
     }
+    
+     /**
+     * 删除购物车的信息
+     * @param unknown $params
+     */
+    public function clear_cart($params)
+    {
+    	$this->db->where_in('goods_id', $params['goods_id']);
+    	$this->db->where('uid', $params['uid']);
+    	return $this->db->delete($this->table);
+    }
 }
