@@ -28,7 +28,7 @@ class Home extends MW_Controller{
 			$data = $this->cache->memcached->get('hostHomePageCache');
 		}
         $data['infor'] = $this->help_center->getHelpCenter($limit=6);
-		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByUid($this->uid)->num_rows() : 0; 
+		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid))->num_rows() : 0; 
 		$this->load->view('home/grid',$data);
 	}
 	
@@ -168,7 +168,7 @@ class Home extends MW_Controller{
 			));
 			echo $callback . '(' . $jsonData . ')';exit;
 		}
-		$data['cart_goods'] = $this->mall_cart_goods->getCartGoodsByUid(array('uid'=>$this->uid));
+		$data['cart_goods'] = $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid));
 		$jsonData = json_encode(array(
 				'status' => true,
 				'html'   => $this->load->view('home/cartlist',$data,true)
