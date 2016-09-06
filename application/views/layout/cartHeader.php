@@ -31,7 +31,12 @@
 		<a href="<?php echo $this->config->help_url;?>" target="_blank" class="xhb right">
 			联系客服
 		</a>
-		<a href="<?php echo site_url();?>" target="_blank" class="xhb right mr10">继续购物</a>
+		<a href="<?php echo $this->config->ucenter_url;?>" target="_blank" class="xhb right mr10">
+			个人中心
+		</a>
+		<a href="<?php echo site_url();?>" target="_blank" class="xhb right mr10">
+			继续购物
+		</a>
 		<div class="clear"></div>
 	</div>
 </div>

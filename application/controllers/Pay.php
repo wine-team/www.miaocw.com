@@ -64,4 +64,57 @@ class Pay extends CS_Controller {
 		);
 		return $parameter;
 	}
+	
+	 /**
+	 * 获取订单是否支付
+	 */
+	public function getOrderStatus() {
+		
+		$pay = $this->input->post('pay');
+		if (empty($pay)) {
+			$this->jsen('非法参数');
+		}
+		$orderMainSn = base64_decode($pay);
+		$mainRes = $this->mall_order_main->findOrderMainByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		if ($mainRes->num_rows()<=0) {
+			$this->jsen('主订单不存在');
+		}
+		$mainOrder = $mainRes->row(0);
+		if ($mainOrder->status==2) {
+			$this->jsen(site_url('pay/complete?pay='.$pay),true);
+		}
+		$this->jsen('该订单没有支付');
+	}
+	
+	 /**
+	 *支付完成区分结果
+	 */
+	public function complete() {
+		
+		$pay = $this->input->get('pay');
+		if (empty($pay)) {
+			$this->alertJumpPre('非法参数');
+		}
+		$orderMainSn = base64_decode($pay);
+		$mainRes = $this->mall_order_main->findOrderMainByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		if ($mainRes->num_rows()<=0) {
+			$this->alertJumpPre('主订单不存在');
+		}
+		$data['mainOrder'] = $mainRes->row(0);
+		$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		if ($orderRes->num_rows()<=0) {
+			$this->alertJumpPre('订单不存在');
+		}
+		$data['order'] = $orderRes->row(0);
+		$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		if ($productRes->num_rows()<=0) {
+			$this->alertJumpPre('订单产品表不存在');
+		}
+		$data['orderProduct'] = $productRes->result();
+		$this->load->view('payment/complete',$data);
+	}
+	
+	
+	
+	
 }

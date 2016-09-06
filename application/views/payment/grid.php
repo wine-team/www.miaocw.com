@@ -18,7 +18,7 @@
 			<?php foreach ($orderProduct as $val):?>
 			<tr> 
 				<td width="350"> 
-					<a href="<?php echo site_url('goods/detail.html?goods_id='.$val->goods_id);?>" target="_blank">
+					<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank">
 						<?php echo $val->goods_name;?> <b class="red pl10"><?php echo $val->attr_value;?></b>
 					</a> 
 	  			</td>
