@@ -35,13 +35,12 @@ class Payment extends CS_Controller {
      		$this->jsen('产品生成出错');
      	}
      	$subtotal = 0;
-     	$orderMainSn = $this->getOrderSn();//主订单编号
+     	$orderMainSn = $this->getOrderSn(); //主订单编号
      	$orderParam['pay_bank'] = isset($postData['pay_bank']) ? $postData['pay_bank'] : 1;
      	$orderParam['order_note'] = isset($postData['order_note']) ? $postData['order_note'] : '';
      	$orderParam['delivery_address'] = $deliveryArray['deliver'];
      	$this->db->trans_begin();
      	foreach ($goods['order'] as $key => $item) {
-     	    
      		$transport_cost = $item['sub'];
      		$orderShopPrice = 0;// 订单销售价
      		$orderActualPrice = 0; // 订单实际支付价
@@ -52,7 +51,6 @@ class Payment extends CS_Controller {
      			$this->jsen('生成订单失败');
      		}
      		foreach ($item['goods'] as $k => $val) {
-     			
      			$order_product_id = $this->creat_order_product($val,$order_id); //订单产品表
      			if (!$order_product_id) {
      				$this->db->trans_rollback();
@@ -91,12 +89,8 @@ class Payment extends CS_Controller {
      	    	$this->jsen('更新订单失败');
      	    }
      	    $subtotal += bcadd($orderActualPrice, $transport_cost, 2); //所有订单总价
-     	    
      	}
-     	$main_params['order_main_sn'] = $orderMainSn;
-     	$main_params['created_at'] = date('Y-m-d H:i:s');
-     	$main_params['order_amount'] = $subtotal;
-     	$main_order = $this->mall_order_main->create_order($main_params); //插入总订单
+     	$main_order = $this->creat_main_order($orderMainSn,$subtotal,$orderParam['pay_bank']);
      	if (!$main_order) {
      		$this->db->trans_rollback();
      		$this->jsen('主订单生成失败');
@@ -118,13 +112,43 @@ class Payment extends CS_Controller {
      	
      	$pay = $this->input->get('pay');
      	if (empty($pay)) {
-     	 	show_404();
+     	 	$this->alertJumpPre('非法参数');
      	}
      	$orderMainSn = $this->encrypt->decode($pay);
+     	$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+     	if ($orderRes->num_rows()<=0) {
+     		$this->alertJumpPre('订单不存在');
+     	}
+     	$data['order'] = $orderRes->row(0);
+     	$mainRes = $this->mall_order_main->findOrderMainByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+     	if ($mainRes->num_rows()<=0) {
+     		$this->alertJumpPre('主订单不存在');
+     	}
+     	$data['mainOrder'] = $mainRes->row(0);
+     	$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+     	if ($productRes->num_rows()<=0) {
+     		$this->alertJumpPre('订单产品表不存在');
+     	}
+     	$data['orderProduct'] = $productRes->result();
+     	$data['pay_method'] = array('1'=>'支付宝','2'=>'微信','3'=>'银联');
+     	$this->load->view('payment/grid',$data);
      }
      
-     
-     
+      /**
+      * 创建主订单
+      * @param unknown $orderMainSn
+      * @param unknown $subtotal
+      * @param unknown $pay_bank
+      */
+     public function creat_main_order($orderMainSn,$subtotal,$pay_bank) {
+     	
+     	$main_params['uid'] = $this->uid;
+     	$main_params['pay_bank'] = $pay_bank; //支付银行
+     	$main_params['order_main_sn'] = $orderMainSn;
+     	$main_params['created_at'] = date('Y-m-d H:i:s');
+     	$main_params['order_amount'] = $subtotal;
+     	return $this->mall_order_main->create_order($main_params); //插入总订单
+     }
      
       /**
       * 订单分润数据的插入
@@ -168,6 +192,11 @@ class Payment extends CS_Controller {
      	return $this->mall_order_base->create_order($params);
      }
      
+      /**
+      * 创建订单产品表
+      * @param unknown $val
+      * @param unknown $order_id
+      */
      public function creat_order_product($val,$order_id) {
      	
      	$param['order_id'] = $order_id;
@@ -188,7 +217,7 @@ class Payment extends CS_Controller {
      	return $this->mall_order_product->addOrderProduct($param);
      }
      
-     /**
+      /**
       * 插入地址
       * @param unknown $postData
       * @return string
@@ -354,8 +383,8 @@ class Payment extends CS_Controller {
       * 订单唯一的序列编号
       * @return string
       */
-     public function getOrderSn()
-     {
+     public function getOrderSn() {
+     	
      	return date('ynjGis') . mt_rand(100, 999);
      }
       

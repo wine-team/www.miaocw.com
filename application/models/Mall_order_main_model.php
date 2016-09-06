@@ -24,4 +24,21 @@ class Mall_order_main_model extends CI_Model
         $this->db->where('order_main_sn',$order_main_sn);
         return $this->db->update($this->table,$param);
     }
+    
+     /**
+     * 获取总订单信息
+     * @param unknown $param
+     */
+    public function findOrderMainByRes($param=array()) {
+    	
+    	 $this->db->select('*');
+    	 $this->db->from($this->table);
+    	 if (!empty($param['uid'])){
+    	 	$this->db->where('uid',$param['uid']);
+    	 }
+    	 if (!empty($param['order_main_sn'])){
+    	 	$this->db->where('order_main_sn',$param['order_main_sn']);
+    	 }
+    	 return $this->db->get();
+    }
 }
