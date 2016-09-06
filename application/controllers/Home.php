@@ -168,7 +168,7 @@ class Home extends MW_Controller{
 			));
 			echo $callback . '(' . $jsonData . ')';exit;
 		}
-		$data['cart_goods'] = $this->mall_cart_goods->getCartGoodsByUid($this->uid);
+		$data['cart_goods'] = $this->mall_cart_goods->getCartGoodsByUid(array('uid'=>$this->uid));
 		$jsonData = json_encode(array(
 				'status' => true,
 				'html'   => $this->load->view('home/cartlist',$data,true)
