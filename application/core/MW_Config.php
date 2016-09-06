@@ -7,6 +7,7 @@ class MW_Config extends CI_Config
     public $passport_url   =  'http://passport.localhost/';
     public $help_url       =  'http://help.localhost/';
     public $ucenter_url    =  'http://ucenter.localhost/';
+    public $m_url          =  'http://m.localhost/';
     
      /**
      * 图片上传路径

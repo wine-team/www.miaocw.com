@@ -4,6 +4,7 @@ class Payment extends CS_Controller {
 	public function _init() {
 		
 		$this->load->library('encrypt');
+		$this->load->library('qrcode',null,'QRcode');
 		$this->load->model('region_model','region');
 		$this->load->model('mall_address_model','mall_address');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
@@ -101,7 +102,7 @@ class Payment extends CS_Controller {
      	}
      	$this->db->trans_commit();
      	$this->mall_cart_goods->clear_cart($paramsCart);//清除购物车已经生成订单的产品
-        $mainOrder = $this->encrypt->encode($orderMainSn); //加密
+        $mainOrder = base64_encode($orderMainSn); //加密
         $this->jsen(site_url('payment/order?pay='.$mainOrder),true);
      }
      
@@ -114,26 +115,44 @@ class Payment extends CS_Controller {
      	if (empty($pay)) {
      	 	$this->alertJumpPre('非法参数');
      	}
-     	$orderMainSn = $this->encrypt->decode($pay);
-     	$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
-     	if ($orderRes->num_rows()<=0) {
-     		$this->alertJumpPre('订单不存在');
-     	}
-     	$data['order'] = $orderRes->row(0);
+     	$orderMainSn = base64_decode($pay);
      	$mainRes = $this->mall_order_main->findOrderMainByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
      	if ($mainRes->num_rows()<=0) {
      		$this->alertJumpPre('主订单不存在');
      	}
      	$data['mainOrder'] = $mainRes->row(0);
+     	$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+     	if ($orderRes->num_rows()<=0) {
+     		$this->alertJumpPre('订单不存在');
+     	}
+     	$data['order'] = $orderRes->row(0);
      	$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
      	if ($productRes->num_rows()<=0) {
      		$this->alertJumpPre('订单产品表不存在');
      	}
      	$data['orderProduct'] = $productRes->result();
      	$data['pay_method'] = array('1'=>'支付宝','2'=>'微信','3'=>'银联');
-     	$this->load->view('payment/grid',$data);
+     	if ($data['mainOrder']->pay_bank == 2) { 
+     		$data['payEwm'] = $this->productEwm($orderMainSn);
+     		$this->load->view('payment/wxpay',$data);
+     	} else {
+     		$this->load->view('payment/grid',$data);
+     	}
      }
      
+      /**
+      * 二维码的生产
+      * @param unknown $attr_id
+      */
+     public function productEwm($mainOrderSn){
+     		
+     	$url = $this->config->m_url.'pay/wxPay?pay='.base64_encode($mainOrderSn).'.html';
+     	$name = 'pay-'.$mainOrderSn.'.png';
+     	$path = $this->config->upload_image_path('common/ewm').$name;
+     	$this->QRcode->png($url,$path,4,10);
+     	return $name;
+     }
+
       /**
       * 创建主订单
       * @param unknown $orderMainSn
