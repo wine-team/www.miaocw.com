@@ -416,9 +416,6 @@ class Payment extends CS_Controller {
      	if (empty($postData['goods']) || !is_array($postData['goods'])) {
      		$this->jsen('请选购产品');
      	}
-     	if (empty($postData['address_id'])) {
-     		$this->jsen('请传地址参数');
-     	}
      	if (empty($postData['receiver_name'])) {
      		$this->jsen('请传收货姓名');
      	}

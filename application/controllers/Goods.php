@@ -320,7 +320,7 @@ class Goods extends MW_Controller{
 			$params['attribute_value'] = $specArray;
 			$params['goods_id'] = $goods_id;
 			$params['goods_num'] = $qty;
-			$cartId = $this->tourism_cart_goods->addQty($params);
+			$cartId = $this->mall_cart_goods->addQty($params);
 		}
 		if ($cartId) {
 			$cookie_param = array();
