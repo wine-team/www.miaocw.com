@@ -47,6 +47,13 @@
 	        <td colspan="3" align="right">商品总价 &nbsp;<b class="red" id="q_xj" >¥<?php echo bcadd($total,0,2);?></b></td>
        </tr>
 </table>
+<?php else:?>
+<div class="m-cart-body">     
+	<div class="cart-empty">
+		<h2 class="c3">你的购物车是空的，快去 <a class="link-btn cart-btn" href="<?php echo site_url();?>">首页</a> 抢购吧O(∩_∩)O</h2>
+		<p class="link-wrap lh28 clearfix">您可以 <a href="<?php echo $this->config->ucenter_url.'enshrine.html'?>" target="_blank">查看我的收藏&gt;&gt;</a></p>
+	</div>
+</div>
 <?php endif;?>
 <script type="text/javascript">
 $('.operate').delegate('a.enshirne','click',function(e){

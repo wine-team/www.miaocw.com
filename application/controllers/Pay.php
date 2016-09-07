@@ -113,8 +113,4 @@ class Pay extends CS_Controller {
 		$data['orderProduct'] = $productRes->result();
 		$this->load->view('payment/complete',$data);
 	}
-	
-	
-	
-	
 }
