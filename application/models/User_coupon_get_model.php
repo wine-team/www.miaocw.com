@@ -14,10 +14,10 @@ class User_coupon_get_model extends CI_Model
 	    $this->db->where('user_coupon_get.status',1);
 	    $this->db->where('user_coupon_get.start_time<=',date('Y-m-d H:i:s'));
 	    $this->db->where('user_coupon_get.end_time>=',date('Y-m-d H:i:s'));
-	    if (!empty($param['uid'])) {
+	    if (isset($param['uid'])) {
 	    	$this->db->where('user_coupon_get.uid',$param['uid']);
 	    }
-	    if (!empty($param['condition'])) {
+	    if (isset($param['condition'])) {
 	    	$this->db->where('user_coupon_get.condition <= ',$param['condition']);
 	    }
 	    $result = $this->db->get();
