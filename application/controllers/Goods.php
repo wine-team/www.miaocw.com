@@ -15,7 +15,7 @@ class Goods extends MW_Controller{
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
 		$this->load->model('mall_order_reviews_model','mall_order_reviews');
-		$this->load->model('mall_goods_attr_value_model','mall_goods_attr_value');
+	    $this->load->model('mall_attribute_group_model','mall_attribute_group');
 	}
 		
 	 /**
@@ -76,6 +76,7 @@ class Goods extends MW_Controller{
 		   $this->error('goods/search','','搜索无结果');
 		}
 		$goods = $res->row(0);
+		//var_dump(json_decode($goods->attr_spec,true));exit;
 		$this->seeHistory($goods);
 		$this->mall_goods_base->setMallCount($goods_id);
 		$recommond = $this->mall_goods_base->getRecommend($goods->supplier_id,$num=0,$pgNum=3);
@@ -86,9 +87,28 @@ class Goods extends MW_Controller{
 		$data['recommond'] = $recommond;
 		$data['ewm'] = $this->productEwm($goods_id);
 		$data['enshrine'] = $this->isEnshrine($goods_id);
-		$data['spec'] = $this->mall_goods_attr_value->findByRes(array('goods_id'=>$goods_id));
+		$data['attrValues'] = $this->getAttrValues($goods->attr_set_id);
 		$data['countReviews'] = $this->getReviewsArray($goods_id);
 		$this->load->view('goods/detail',$data);
+	}
+	
+	/**
+	 * 
+	 * @param unknown $attr_set_id
+	 */
+	public function getAttrValues($attr_set_id) {
+		
+		$attrValues = array();
+		$result = $this->mall_attribute_group->getAttrValuesByAttrSetId($attr_set_id);
+		if ($result->num_rows() > 0) {
+			foreach ($result->result() as $item) {
+				$attrValues[$item->group_id]['attr_set_id']  = $item->attr_set_id;
+				$attrValues[$item->group_id]['group_id']     = $item->group_id;
+				$attrValues[$item->group_id]['group_name']   = $item->group_name;
+				$attrValues[$item->group_id]['attr_value'][] = $item;
+			}
+		}
+		return $attrValues;
 	}
 	
 	/**

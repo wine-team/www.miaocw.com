@@ -64,7 +64,7 @@
 						<p class="c9">
 							私密配送<em class="vline">|</em>
 							正品保障<em class="vline">|</em>
-							满99元发顺丰
+							满99元包邮
 						</p>
 					</dd>
 				</dl>
@@ -72,19 +72,26 @@
 				<p class="bline"></p>
 				<p class="lh16">&nbsp;</p>
 				<div id="wrap" class="xcolor mb15 additive">
+				    <?php $spec = json_decode($goods->attr_spec,true);?>
+				    <?php foreach ($spec as $attr_value_id=>$val):?>
+				    <?php if(!empty($val['spec_value'])):?>
 					<dl class="gdl dato">
-						<dt><span class="c5">款型</span></dt>
+						<dt>
+							<span class="c5"><?php echo $val['spec_name'];?></span>
+						</dt>
 						<dd>
 							<div class="catt over">
-								<a href="javascript:;"  class="xc_a hover" rel="nofollow" data-pic="images/attrpic/20160810/20160810080841_98068.jpg">
-									5只装<input type="radio" class="hid spec" value="89068" name="spec[1]" autocomplete="off" checked="checked" />
+							    <?php foreach ($val['spec_value'] as $key=>$item):?>
+								<a href="javascript:;"  class="xc_a <?php if($key==0):?>hover<?php endif;?>" rel="nofollow" data-pic="images/attrpic/20160810/20160810080841_98068.jpg">
+									<?php echo $item;?>
+									<input type="radio" class="hid spec" value="<?php echo $item;?>" name="spec[<?php echo $attr_value_id;?>]" autocomplete="off" <?php if($key==0):?>checked="checked"<?php endif;?> />
 								</a>
-								<a href="javascript:;"  class="xc_a" rel="nofollow" data-pic="images/attrpic/20160810/20160810080838_74304.jpg">
-									10只装<input type="radio" class="hid spec" value="89073" name="spec[1]" autocomplete="off" />
-								</a>
+								<?php endforeach;?>
 							</div>
 						</dd>
 					</dl>
+					<?php endif;?>
+					<?php endforeach;?>
 				</div>
 				<dl class="gdl">
 					<dt class="lh40">
@@ -171,12 +178,22 @@
 		</div>
 		<div class="des" id="detail">
 			<div id="description" class="gdes lh25">
+			    <?php $attr_value = json_decode($goods->attr_value,TRUE);?>
 				<div class="g_attr mb10">
-				    <?php foreach ($spec->result() as $val):?>
-					<p title="<?php echo $val->attr_value;?>"><?php echo $val->attr_name;?>：<?php echo $val->attr_value;?></p>
-					<?php endforeach;?>
+				    <?php if (!empty($attrValues)):?>
+	    				<?php foreach ($attrValues as $group):?>
+						    <?php foreach ($group['attr_value'] as $key=>$attrValue):?>
+								<?php if(!empty($attr_value[$group['group_id']]['group_value'][$key])):?>
+									<p title="<?php echo $attrValue->attr_name ?>">
+										<?php echo $attrValue->attr_name ?>：<?php echo $attr_value[$group['group_id']]['group_value'][$key] ; ?>
+									</p>
+								<?php endif;?>
+							<?php endforeach;?>
+						<?php endforeach;?>
+					<?php endif;?>
 					<div class="clear"></div>
 				</div>
+				
 				<div id="video" class="mt10 mb10">
 				    <?php echo $goods->goods_desc;?>
 				</div>
