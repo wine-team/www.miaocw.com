@@ -76,7 +76,6 @@ class Goods extends MW_Controller{
 		   $this->error('goods/search','','搜索无结果');
 		}
 		$goods = $res->row(0);
-		//var_dump(json_decode($goods->attr_spec,true));exit;
 		$this->seeHistory($goods);
 		$this->mall_goods_base->setMallCount($goods_id);
 		$recommond = $this->mall_goods_base->getRecommend($goods->supplier_id,$num=0,$pgNum=3);
@@ -274,19 +273,11 @@ class Goods extends MW_Controller{
 			)); exit;
 		}
 		$specArray = '';
-		$spec_id = $this->input->post('spec');
+		$spec = $this->input->post('spec');
 		$goods_id = $this->input->post('goods_id') ? (int)(base64_decode($this->input->post('goods_id'))) : 0;
 		$qty = $this->input->post('qty') ? (int)$this->input->post('qty') : 0;
-		if (!empty($spec_id)) {
-			/*
-			$specValue = $this->mall_goods_category_spec->getSpecification(array('spec_array'=>$spec_id));
-			if ($specValue->num_rows()>0) {
-				foreach ($specValue->result() as $item) {
-					$spec[] = $item->attribute_value;
-				}
-				$specArray = join(',',$spec); //选择规格属性
-			}*/
-			$specArray = '5支装,刺激';
+		if (!empty($spec)) {
+			$specArray = implode(',',$spec);
 		}
 		if (!$goods_id || !$qty) {
 			echo json_encode(array(

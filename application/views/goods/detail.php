@@ -81,12 +81,12 @@
 						</dt>
 						<dd>
 							<div class="catt over">
-							    <?php foreach ($val['spec_value'] as $key=>$item):?>
-								<a href="javascript:;"  class="xc_a <?php if($key==0):?>hover<?php endif;?>" rel="nofollow" data-pic="images/attrpic/20160810/20160810080841_98068.jpg">
+							    <?php $i=0;foreach ($val['spec_value'] as $key=>$item):?>
+								<a href="javascript:;"  class="xc_a <?php if($i==0):?>hover<?php endif;?>" rel="nofollow">
 									<?php echo $item;?>
 									<input type="radio" class="hid spec" value="<?php echo $item;?>" name="spec[<?php echo $attr_value_id;?>]" autocomplete="off" <?php if($key==0):?>checked="checked"<?php endif;?> />
 								</a>
-								<?php endforeach;?>
+								<?php $i++; endforeach;?>
 							</div>
 						</dd>
 					</dl>

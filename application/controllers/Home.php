@@ -47,7 +47,7 @@ class Home extends MW_Controller{
 			echo $callback . '(' . $jsonData . ')';exit;
 		}
 		$specArray = '';
-		$spec_id = $this->input->get('spec');
+		$spec = $this->input->get('spec');
 		$param['uid'] = $uid;
 		$param['goods_id'] = $this->input->get('goods_id') ? (int)(base64_decode($this->input->get('goods_id'))) : 0;
 		$param['qty'] = $this->input->get('qty') ? (int)$this->input->get('qty') : 0;
@@ -58,16 +58,8 @@ class Home extends MW_Controller{
 			));
 			echo $callback . '(' . $jsonData . ')';exit;
 		}
-		if (!empty($spec_id)) {
-			/*
-			$specValue = $this->mall_goods_category_spec->getSpecification(array('spec_array'=>$spec_id));
-			if ($specValue->num_rows()>0) {
-				foreach ($specValue->result() as $item) {
-					$spec[] = $item->attribute_value;
-				}
-				$specArray = join(',',$spec); //选择规格属性
-			}*/
-			$specArray = '5支装,刺激';
+		if (!empty($spec)) {
+			$specArray = implode(',',$spec);
 		}
 		$result = $this->mall_goods_base->getGoodsByGoodsId($param['goods_id']);
 		if ($result->num_rows()<=0) {
