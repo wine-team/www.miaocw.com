@@ -84,7 +84,7 @@
 							    <?php $i=0;foreach ($val['spec_value'] as $key=>$item):?>
 								<a href="javascript:;"  class="xc_a <?php if($i==0):?>hover<?php endif;?>" rel="nofollow">
 									<?php echo $item;?>
-									<input type="radio" class="hid spec" value="<?php echo $item;?>" name="spec[<?php echo $attr_value_id;?>]" autocomplete="off" <?php if($key==0):?>checked="checked"<?php endif;?> />
+									<input type="radio" class="hid spec" value="<?php echo $item;?>" name="spec[<?php echo $attr_value_id;?>]" autocomplete="off" <?php if($i==0):?>checked="checked"<?php endif;?> />
 								</a>
 								<?php $i++; endforeach;?>
 							</div>
@@ -178,22 +178,18 @@
 		</div>
 		<div class="des" id="detail">
 			<div id="description" class="gdes lh25">
-			    <?php $attr_value = json_decode($goods->attr_value,TRUE);?>
+			    <?php if(!empty($attr_value)):?>
 				<div class="g_attr mb10">
-				    <?php if (!empty($attrValues)):?>
-	    				<?php foreach ($attrValues as $group):?>
-						    <?php foreach ($group['attr_value'] as $key=>$attrValue):?>
-								<?php if(!empty($attr_value[$group['group_id']]['group_value'][$key])):?>
-									<p title="<?php echo $attrValue->attr_name ?>">
-										<?php echo $attrValue->attr_name ?>：<?php echo $attr_value[$group['group_id']]['group_value'][$key] ; ?>
-									</p>
-								<?php endif;?>
-							<?php endforeach;?>
+				    <?php foreach ($attr_value as $group_id=>$val):?>
+					    <?php foreach ($val['group_value'] as $attr_value_id=>$item):?>
+							<p title="<?php echo $item; ?>">
+								<?php echo $attribute_value[$attr_value_id]; ?>：<?php echo  $item; ?>
+							</p>
 						<?php endforeach;?>
-					<?php endif;?>
+					<?php endforeach;?>
 					<div class="clear"></div>
 				</div>
-				
+				<?php endif;?>
 				<div id="video" class="mt10 mb10">
 				    <?php echo $goods->goods_desc;?>
 				</div>

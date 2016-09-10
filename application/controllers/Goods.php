@@ -15,7 +15,7 @@ class Goods extends MW_Controller{
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
 		$this->load->model('mall_order_reviews_model','mall_order_reviews');
-	    $this->load->model('mall_attribute_group_model','mall_attribute_group');
+	    $this->load->model('mall_attribute_value_model','mall_attribute_value');
 	}
 		
 	 /**
@@ -77,6 +77,7 @@ class Goods extends MW_Controller{
 		}
 		$goods = $res->row(0);
 		$this->seeHistory($goods);
+		$attr_value = json_decode($goods->attr_value,true);
 		$this->mall_goods_base->setMallCount($goods_id);
 		$recommond = $this->mall_goods_base->getRecommend($goods->supplier_id,$num=0,$pgNum=3);
 		if ($recommond->num_rows()<=0){
@@ -86,28 +87,40 @@ class Goods extends MW_Controller{
 		$data['recommond'] = $recommond;
 		$data['ewm'] = $this->productEwm($goods_id);
 		$data['enshrine'] = $this->isEnshrine($goods_id);
-		$data['attrValues'] = $this->getAttrValues($goods->attr_set_id);
+		$data['attr_value'] = $attr_value;
+		$data['attribute_value'] = $this->getAttrValues($attr_value);
 		$data['countReviews'] = $this->getReviewsArray($goods_id);
 		$this->load->view('goods/detail',$data);
 	}
 	
-	/**
-	 * 
+	 /**
+	 * 获取所有的规格属性
 	 * @param unknown $attr_set_id
 	 */
-	public function getAttrValues($attr_set_id) {
+	public function getAttrValues($attr_value) {
 		
-		$attrValues = array();
-		$result = $this->mall_attribute_group->getAttrValuesByAttrSetId($attr_set_id);
-		if ($result->num_rows() > 0) {
-			foreach ($result->result() as $item) {
-				$attrValues[$item->group_id]['attr_set_id']  = $item->attr_set_id;
-				$attrValues[$item->group_id]['group_id']     = $item->group_id;
-				$attrValues[$item->group_id]['group_name']   = $item->group_name;
-				$attrValues[$item->group_id]['attr_value'][] = $item;
+		if (empty($attr_value)) {
+			return false;
+		}
+		$idArray = array();
+		foreach($attr_value as $group_id=>$val) {
+			foreach ($val['group_value'] as $attr_value_id=>$item) {
+				$idArray[] = $attr_value_id;
 			}
 		}
-		return $attrValues;
+		if (empty($idArray)) {
+			return false;
+		}
+		$f = 'attr_value_id,attr_name';
+		$res = $this->mall_attribute_value->findByRes(array('attr_value_id'=>$idArray),$f);
+	    if ($res->num_rows()<=0){
+	    	return false;
+	    }
+	    $attr = array();
+	    foreach ($res->result() as $item){
+	    	$attr[$item->attr_value_id] = $item->attr_name;
+	    }
+	    return $attr;
 	}
 	
 	/**
