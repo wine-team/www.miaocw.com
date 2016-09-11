@@ -375,4 +375,34 @@ class Goods extends MW_Controller{
 		$_data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid))->num_rows() : 0;
 	    return $_data;
 	}
+	
+	 /**
+	 * 运费信息
+	 */
+	public function ajaxFreight(){
+		
+		$this->d = $this->input->post();
+		if (empty($this->d['goods_id']) || empty($this->d['qty'])) {
+			$this->jsen(0,true);
+		}
+		$qty = (int)$this->d['qty'];
+		$f = 'goods_weight,supplier_id,shop_price,promote_price,promote_start_date,promote_end_date,freight_id,freight_cost';
+	    $res = $this->mall_goods_base->getGoodsByGoodsId($this->d['goods_id'],$f);
+	    if ($res->num_rows()<=0) {
+	    	$this->jsen(0,true);
+	    }
+	    $goods = $res->row(0);
+	    if ( !empty($goods->promote_price) && !empty($goods->promote_start_date) && !empty($goods->promote_end_date) && ($goods->promote_start_date<=time()) && ($goods->promote_end_date>=time())){
+	     	$actual_price = $goods->promote_price;
+	    } else {
+	     	$actual_price = $goods->shop_price;
+	    }
+	    $total_price = bcmul($actual_price,$qty,2);
+	    if (bcsub($total_price,99,2)>=0) {
+	    	$this->jsen(0,true);
+	    }
+	    if ($goods->freight_id==0) {
+	    	$this->jsen($goods->freight_cost,true);
+	    }
+	}
 }

@@ -60,4 +60,4 @@
 		</div>
 	</div>
 </div>
-<span class="pl10 c9">运费<em id="yuji">0.00</em></span>
+<span class="pl10 c9">运费<em class="cost">0.00</em></span>
