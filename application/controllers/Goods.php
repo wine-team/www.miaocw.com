@@ -16,6 +16,8 @@ class Goods extends MW_Controller{
 		$this->load->model('mall_goods_base_model','mall_goods_base');
 		$this->load->model('mall_order_reviews_model','mall_order_reviews');
 	    $this->load->model('mall_attribute_value_model','mall_attribute_value');
+	    $this->load->model('mall_freight_price_model','mall_freight_price');
+	    $this->load->model('mall_freight_tpl_model','mall_freight_tpl');
 	}
 		
 	 /**
@@ -377,9 +379,9 @@ class Goods extends MW_Controller{
 	}
 	
 	 /**
-	 * 运费信息
+	  **--运费信息
 	 */
-	public function ajaxFreight(){
+	public function ajaxFreight() {
 		
 		$this->d = $this->input->post();
 		if (empty($this->d['goods_id']) || empty($this->d['qty'])) {
@@ -398,11 +400,49 @@ class Goods extends MW_Controller{
 	     	$actual_price = $goods->shop_price;
 	    }
 	    $total_price = bcmul($actual_price,$qty,2);
-	    if (bcsub($total_price,99,2)>=0) {
+	    if (bcsub($total_price,99,2)>=0) { // 满99元包邮
 	    	$this->jsen(0,true);
 	    }
-	    if ($goods->freight_id==0) {
+	    if ($goods->freight_id==0) { 
 	    	$this->jsen($goods->freight_cost,true);
 	    }
+	    $freight = $this->mall_freight_tpl->getTransports(array('uid'=>$goods->supplier_id,'freight_id'=>$goods->freight_id));
+	    if (empty($freight)) {
+	    	$this->jsen($goods->freight_cost,true);
+	    }
+	    $transport = $this->mall_freight_price->getFreightRow(array('freight_id'=>$goods->freight_id,'area'=>trim($this->d['province'])));
+	    if (empty($transport)) {
+	    	$this->jsen($goods->freight_cost,true);
+	    }
+	    if ($freight->methods==1) { // 按件
+	    	if ($transport->add_unit == 0) {  //如果没有增加的单位为零，直接为第一份的价格
+	    		$this->jsen($transport->first_price,true);
+	    	} else {
+	    		if ($qty <= $transport->first_unit) {
+	    			$this->jsen($transport->first_price,true);
+	    		}else{
+	    			$over_unit = $qty - $transport->first_unit;//计算超出部分
+	    			$over_price = ceil($over_unit / $transport->add_unit) * $transport->add_price;//超出部分价格
+	    			$total_price = bcadd($over_price,$transport->first_price,2);
+	    			$this->jsen($total_price,true);
+	    		}
+	    	}
+	    }
+	    if ( $freight->methods == 2 ) { //按重量计算
+	    	$total_weight = bcmul($goods->goods_weight/1000,$qty,3);  // g转化成kg
+	    	if ($transport->add_unit == 0) {  // 如果没有增加的单位为零，直接为第一份的价格
+	    		$this->jsen($transport->first_price,true);
+	    	}else{
+	    		if (bcsub($transport->first_unit,$total_weight,3)>=0) {
+	    			$this->jsen($transport->first_price,true);
+	    		} else { //重量大于首重
+	    			$over_weight = bcsub($total_weight , $transport->first_unit,3);//计算超出部分
+	    			$over_price = ceil($over_weight / $transport->add_unit) * $transport->add_price;
+	    			$total_price = bcadd($over_price,$transport->first_price,2);
+	    			$this->jsen($total_price,true);
+	    		}
+	    	}
+	    }
+	    $this->jsen($goods->freight_cost,true);
 	}
 }

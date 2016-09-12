@@ -12,7 +12,8 @@
 				<?php endforeach;?>
 			</ul>
 			<a href="javascript:;" class="afav left hand <?php if($enshrine):?>active<?php endif;?>" goods-id="<?php echo base64_encode($goods->goods_id);?>">
-				<i class="f f18">&#xe636;</i><p>收藏</p>
+				<i class="f f18">&#xe636;</i>
+				<p>收藏</p>
 			</a>
 			<div class="clear"></div>
 		</div>
@@ -220,8 +221,8 @@
 			<ul id="whatchoose" class="u_q clearfix comment-type">
 				<li data-id="0" class="first on" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['all'] : '0';?>">全部 (<?php echo count($countReviews) > 0  ?  $countReviews['all'] : '0';?>)</li>
 				<li data-id="1" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['up'] : '0';?>">好评 (<?php echo count($countReviews) > 0  ?  $countReviews['up'] : '0';?>)</li>
-				<li data-id="2" data-s="0" class="xline">中评 (<?php echo count($countReviews) > 0  ?  $countReviews['middle'] : '0';?>)</li>
-				<li data-id="3" data-s="0" class="xline">差评 (<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>)</li>
+				<li data-id="2" data-s="0">中评 (<?php echo count($countReviews) > 0  ?  $countReviews['middle'] : '0';?>)</li>
+				<li data-id="3" data-s="0">差评 (<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>)</li>
 			</ul>
 			<p class="lh16">&nbsp;</p>
 			<div class="product-review">
@@ -353,38 +354,29 @@
 		<?php echo $cms_block['foot_speed_key'];?>
 	</div>
 </div>
-<div id="pbox" class="pbox lh35 hid">
-	<p class="g_b hand alC">关闭</p>
-	<h2 class="c3 f14">请选择产品附加属性</h2>
-	<div id="ECS_FORMBUY2">
-		<div id="wrapg" class="xcolor"></div>
-		<p>&nbsp;</p>
-		<input type="button" class="redb left" value="确认选择" onclick="shux()">
-	</div>
-</div>
 <div class="pbox hid denglu" id="denglu">
 	<p class="g_b hand alC close">关闭</p>
 	<form class="lh35 loginform" id="loginform">
 		<h3 class="f16 c3">会员登录    <span class="goods-error hid">错误信息</span></h3>
 		<table width="100%" border="0">
 			<tbody>
-			  <tr>
-				 <td class="pt10">
-				 	<input type="text" class="lpt u_zh left"  name="username" id="username" placeholder="手机/邮箱" />
-				 </td>
-			  </tr>
-			  <tr>
-			     <td class="pt10">
-			     	<input type="password" id="password" autocomplete="off" class="lpt u_mm left" name="password" placeholder="密码" />
-			     </td>
-			  </tr>
-			  <tr>
-				 <td>
-					<p>&nbsp;</p>
-					<input type="button"  class="wwbtn wwbtno hand close" value="返回并关闭" /><input type="submit" class="wwbtn ml10 hand d-login" value="登 录" name="submit" />
-					<p><a href="<?php echo $this->config->passport_url.'register/index?backurl='.site_url('goods/detail?goods_id='.$goods->goods_id);?>">还没帐户，免费注册</a></p>
-				 </td>
-			  </tr>
+				  <tr>
+					 <td class="pt10">
+					 	<input type="text" class="lpt u_zh left"  name="username" id="username" placeholder="手机/邮箱" />
+					 </td>
+				  </tr>
+				  <tr>
+				     <td class="pt10">
+				     	<input type="password" id="password" autocomplete="off" class="lpt u_mm left" name="password" placeholder="登陆密码" />
+				     </td>
+				  </tr>
+				  <tr>
+					 <td>
+						<p>&nbsp;</p>
+						<input type="button"  class="wwbtn wwbtno hand close" value="返回并关闭" /><input type="submit" class="wwbtn ml10 hand d-login" value="登 录" name="submit" />
+						<p><a href="<?php echo $this->config->passport_url.'register/index?backurl='.site_url('goods/detail?goods_id='.$goods->goods_id);?>">还没帐户，免费注册</a></p>
+					 </td>
+				  </tr>
 			 </tbody>
 		</table>
 	</form>

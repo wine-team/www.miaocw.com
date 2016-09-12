@@ -21,8 +21,8 @@
 	</p>
 	<div class="pes_z lh25">
 		<ul id="pes_ul" class="region">
-			<li class="province on">省份</li>
-			<li class="city">地级市</li>
+			<li class="province on"><?php echo $localAddress['province'] ? $localAddress['province'] : '省份';?></li>
+			<li class="city"><?php echo $localAddress['city'] ? $localAddress['city'] : '地级市';?></li>
 			<li class="area">区县</li>
 		</ul>
 		<div id="pes_z">

@@ -10,7 +10,7 @@ class Mall_freight_price_model extends CI_Model{
 	public function getFreightRow($params)
 	{
 		$area = trim(addslashes($params['area']));
-		$sql = 'tid = ' . $params['id'] . ' AND (is_default = 1 OR area like "%' . $area . '%")';
+		$sql = 'freight_id = ' . $params['freight_id'] . ' AND (is_default = 1 OR area like "%' . $area . '%")';
 		$this->db->where($sql);
 		$this->db->order_by('is_default', 'asc');
 		return $this->db->get($this->table)->row();
