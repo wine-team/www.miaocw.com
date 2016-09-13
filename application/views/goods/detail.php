@@ -154,7 +154,7 @@
 			<p class="lh35 mt10 c9">看了又看<a href="javascript:;" id="s_next" class="c9 nua kan_i change" from="<?php echo base64_encode($goods->supplier_id);?>" pg="1">换一换</a></p>
 			<div id="wrapB" class="wrapb rel">
 				<ul class="ka_r recommend">
-				    <?php $this->load->view('goods/moresee');?>
+				    <?php //$this->load->view('goods/moresee');?>
 				</ul>
 			</div>
 		</div>
@@ -221,8 +221,8 @@
 			<ul id="whatchoose" class="u_q clearfix comment-type">
 				<li data-id="0" class="first on" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['all'] : '0';?>">全部 (<?php echo count($countReviews) > 0  ?  $countReviews['all'] : '0';?>)</li>
 				<li data-id="1" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['up'] : '0';?>">好评 (<?php echo count($countReviews) > 0  ?  $countReviews['up'] : '0';?>)</li>
-				<li data-id="2" data-s="0">中评 (<?php echo count($countReviews) > 0  ?  $countReviews['middle'] : '0';?>)</li>
-				<li data-id="3" data-s="0">差评 (<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>)</li>
+				<li data-id="2" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>">中评 (<?php echo count($countReviews) > 0  ?  $countReviews['middle'] : '0';?>)</li>
+				<li data-id="3" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>">差评 (<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>)</li>
 			</ul>
 			<p class="lh16">&nbsp;</p>
 			<div class="product-review">

@@ -12,12 +12,12 @@ class Reviews extends MW_Controller
      * 评论
      * @param number $pg
      */
-    public function getReviews($num=0)
-    {
-        $page_num = 10;
-        $pg = $num/$page_num +1;
+    public function getReviews($pg=1) {
+    	
+        $page_num = 20;
+        $num = ($pg - 1) * $page_num;
         $total = $this->mall_order_reviews->total($this->input->get());
-        $config['per_page'] =10;
+        $config['per_page'] = 20;
         $config['first_url'] = base_url('reviews/getReviews').$this->pageGetParam($this->input->get());
         $config['suffix'] = $this->pageGetParam($this->input->get());
         $config['base_url'] = base_url('reviews/getReviews');
@@ -30,7 +30,6 @@ class Reviews extends MW_Controller
         echo json_encode(array(
             'status' => true,
             'html'   => $this->load->view('goods/reviews', $data, true)
-        ));
-        exit;
+        ));exit;
     }
 }

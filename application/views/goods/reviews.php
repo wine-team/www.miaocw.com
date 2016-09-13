@@ -14,12 +14,14 @@
 					<!--<em class="vip v2"></em><em class='c9'>青海省-海东地区</em>-->
 					<div class="right px px<?php echo $item->score;?>"><p></p></div>
 				</div>
-				<?php echo $item->content;?>
+				<p>
+					<?php echo $item->content;?>
+				</p>
 				<?php if(!empty($item->slide_show)):?>
 				<?php $image = array_filter(explode('|',$item->slide_show));?>
 				<div class="s_d">
 				    <?php foreach ($image as $val):?>
-					<img width="60" height="60" onclick="zom(this)" data-b="http://s.qw.cc/images/comment/9221/1463386872460187446.jpg" src="http://s.qw.cc/images/comment/9221/1463386872460187446-60x60.jpg" class="on" data-n="0">
+						<img width="60" height="60" onclick="zom(this)" data-b="<?php echo $this->config->show_image_url('mall',$val);?>" src="<?php echo $this->config->show_image_thumb_url('mall',$val,60);?>" class="on" data-n="0">
 				    <?php endforeach;?>
 				</div>
 				<?php endif;?>
@@ -29,12 +31,6 @@
 		<div class="clear"></div>
 </div>
 <div id="pager" class="page alC">
-    <!--  
-	<a href="javascript:;" onClick="ppage()">&lt;</a>
-	<a href="javascript:;" onClick="gpage(1)" class="on">1</a>
-	<a href="javascript:;" onClick="gpage(2)" >2</a>
-	<a href="javascript:;" onClick="npage()">&gt;</a>
-	-->
 	<?php echo $pg_list; ?>
 </div>
 <?php else:?>

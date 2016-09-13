@@ -81,12 +81,7 @@ class Goods extends MW_Controller{
 		$this->seeHistory($goods);
 		$attr_value = json_decode($goods->attr_value,true);
 		$this->mall_goods_base->setMallCount($goods_id);
-		$recommond = $this->mall_goods_base->getRecommend($goods->supplier_id,$num=0,$pgNum=3);
-		if ($recommond->num_rows()<=0){
-			$recommond = $this->mall_goods_base->getRecommendGoodsBase();
-		}
 		$data['goods'] = $goods;
-		$data['recommond'] = $recommond;
 		$data['ewm'] = $this->productEwm($goods_id);
 		$data['enshrine'] = $this->isEnshrine($goods_id);
 		$data['attr_value'] = $attr_value;
