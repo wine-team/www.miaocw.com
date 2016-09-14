@@ -226,11 +226,13 @@ class Goods extends MW_Controller{
 	public function getHot(){
 		
 		$param['num'] = 5;
-		$param['category_id'] = base64_decode($this->input->post('cat',true));
-		$data['goods'] = $this->mall_goods_base->getRecommendGoodsBase($param);
+		$param['attr_set_id'] = trim($this->input->post('cat',true));
+		$data['samegoods'] = $this->mall_goods_base->getRecommendGoodsBase($param);
+	    $data['allgoods'] = $this->mall_goods_base->getRecommendGoodsBase(array('num'=>$param['num']));
 	    echo json_encode(array(
 	    	'status' => true,
-	        'html'   => $this->load->view('goods/hot',$data,true)
+	        'same'   => $this->load->view('goods/samehot',$data,true),
+	    	'all'    => $this->load->view('goods/allhot',$data,true)
 	    )); exit;
 	}
 	

@@ -47,13 +47,10 @@ class Mall_goods_base_model extends CI_Model{
  	     $this->db->from($this->table);
  	     $this->db->where('is_on_sale',1);
  	     $this->db->where('is_check',2);
- 	     if (!empty($param['category_id'])) {
- 	     	//$this->db->where('category_id',$param['category_id']);
+ 	     if (!empty($param['attr_set_id'])) {
+ 	     	$this->db->where('attr_set_id',$param['attr_set_id']);
  	     }
- 	     if (!empty($param['hot_recommend'])) {
- 	     	//$this->db->where('hot_recommend',$param['hot_recommend']);
- 	     }
- 	     $this->db->order_by('tour_count','desc');
+ 	     $this->db->order_by('sort_order','desc');// 越大越前
  	     if (!empty($param['num'])) {
  	     	$this->db->limit($param['num']);
  	     }

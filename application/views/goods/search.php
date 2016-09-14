@@ -110,13 +110,13 @@
 		<dl class="gl">
 			<dt><?php $img_arr=explode('|',$goods->goods_img);?>
 				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
-					<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_brief;?>" />
+					<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_name;?>" />
 				</a>
 			</dt>
 			<dd class="simg">
-			    <?php foreach($img_arr as $img) :?>
+			    <?php foreach($img_arr as $img):?>
 			    <?php if(!empty($img)) : ?>
-				<img class="lazy" src="miaow/images/load.jpg" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
+					<img class="lazy" src="miaow/images/load.jpg"  data-original="<?php echo $this->config->show_image_thumb_url('mall',$img,60);?>" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
 			    <?php endif;?>
 			    <?php endforeach;?>
 			</dd>

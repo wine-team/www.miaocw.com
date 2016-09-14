@@ -84,7 +84,7 @@
 		</div>
 		<?php foreach ($recommend->result() as $item):?>
 		<a href="<?php echo site_url('goods/detail?goods_id='.$item->goods_id);?>" class="dn_a" title="<?php echo $item->goods_name;?>">
-			<img src = "<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true));?>" width="270" height="270" class="sbm"/>
+			<img class="lazy" src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true));?>" width="270" height="270" class="sbm"/>
 			<div class="h250">
 				<p class="OverH"><?php echo $item->goods_name;?></p>
 				<p>
@@ -100,8 +100,8 @@
 	<?php endif;?>
 	<p class="lh30">&nbsp;</p>
 	<div class="ov w_hd">
-	    <a href="topic.php?topic_id=450" target="_blank">
-	    	<img src = "http://s.qw.cc/data/afficheimg/1441780867067551921.jpg" width="1190" height="90">
+	    <a href="<?php echo site_url();?>" target="_blank">
+	    	<img src="miaow/images/femal.jpg" width="1190" height="90">
 	    </a>
 	</div>
 </div>
@@ -112,13 +112,13 @@
 		<dl class="gl">
 			<dt>
 				<a href="<?php echo site_url('goods/detail?goods_id='.$item->goods_id);?>" target="_blank">
-					<img src="<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true))?>" width="270" height="270" class="sbm">
+					<img  src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true))?>" width="270" height="270" class="sbm lazy" alt="<?php echo $item->goods_name;?>">
 				</a>
 			</dt>
-			<?php $img = array_filter(explode('|',$item->goods_img)); ?>
+			<?php $img = array_filter(explode('|',$item->goods_img));?>
 			<dd class="simg">
 			    <?php foreach ( $img as $val):?>
-				<img src="<?php echo $this->config->show_image_thumb_url('mall',$val,'60');?>" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$val);?>"/>
+				<img class="lazy" src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',$val,'60');?>" width="30" height="30" data-s="<?php echo $this->config->show_image_thumb_url('mall',$val);?>"/>
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb5">

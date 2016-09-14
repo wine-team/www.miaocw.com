@@ -292,7 +292,7 @@
 					<p>&nbsp;</p>
 				</div>
 				<p class="alC">
-					<img src="miaow/images/fuwu.png" width="690" height="552">
+					<img src="miaow/images/fuwu.png" width="690" height="552"/>
 				</p>
 			</div>
 		</div>
@@ -332,15 +332,15 @@
 			<em class="f f16">&#xe636;</em> 
 		    <b>同类热卖</b>
 		</p>
-		<div class="glb same-hot" cat="<?php //echo base64_encode($goods->category_id)?>">
-			 <?php //$this->load->view('goods/hot');?>
+		<div class="glb same-hot" cat="<?php echo $goods->attr_set_id;?>">
+			 <?php //$this->load->view('goods/samehot');?>
 		</div>
 		<p class="glh3">
 			<em class="f f16">&#xe636;</em>
 			<b>整站热卖</b>
 		</p>
 		<div class="glb all-hot">
-		     <?php //$this->load->view('goods/hot');?>
+		     <?php //$this->load->view('goods/allhot');?>
 		</div>
 	</div>
 	<div class="clear"></div>
