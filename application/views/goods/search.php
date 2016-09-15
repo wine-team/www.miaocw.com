@@ -124,10 +124,15 @@
 				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
 				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
 			</dd>
+			<?php if( !empty($goods->promote_price) && !empty($goods->promote_start_date) && !empty($goods->promote_end_date) && ($goods->promote_start_date<=time()) && ($goods->promote_end_date>=time())):?>
+				<?php $shop_price = $goods->promote_price;?>
+			<?php else:?>
+				<?php $shop_price = $goods->shop_price;?>
+			<?php endif;?>
 			<dd>
 				<em class="i_hot">热销</em>
 				<i class="rmb">¥</i>
-				<b class="xj"><?php echo $goods->promote_price;?></b>
+				<b class="xj"><?php echo $shop_price;?></b>
 				<del>¥<?php echo $goods->market_price;?></del>
 			</dd>
 			<dd class="mt5">销量 
