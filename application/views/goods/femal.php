@@ -1,4 +1,4 @@
- <?php $this->load->view('layout/header');?>
+<?php $this->load->view('layout/header');?>
 <p class="lh35 hid" id="konav">&nbsp;</p>
 <div id="content" class="w">
 	<div class="bl_l left">
@@ -83,10 +83,12 @@
 			<!-- <em class="c9">MASTERPIECE</em>-->
 		</div>
 		<?php foreach ($recommend->result() as $item):?>
-		<a href="<?php echo site_url('goods/detail?goods_id='.$item->goods_id);?>" class="dn_a" title="<?php echo $item->goods_name;?>">
-			<img class="lazy" src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true));?>" width="270" height="270" class="sbm"/>
+		<a href="<?php echo site_url('goods/detail?goods_id='.$item->goods_id);?>" class="dn_a" title="<?php echo $item->goods_name;?>" target="_blank">
+			<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true));?>" width="270" height="270" class="sbm lazy"/>
 			<div class="h250">
-				<p class="OverH"><?php echo $item->goods_name;?></p>
+				<p class="OverH">
+					<?php echo $item->goods_name;?>
+				</p>
 				<p>
 					<i class="rmb">¥</i>
 					<b class="xj"><?php echo $item->promote_price;?></b>
@@ -101,7 +103,7 @@
 	<p class="lh30">&nbsp;</p>
 	<div class="ov w_hd">
 	    <a href="<?php echo site_url();?>" target="_blank">
-	    	<img src="miaow/images/femal.jpg" width="1190" height="90">
+	    	<img src="miaow/images/femal.jpg" width="1190" height="90"/>
 	    </a>
 	</div>
 </div>
