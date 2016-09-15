@@ -61,8 +61,8 @@ class Goods extends MW_Controller{
 		$data = $this->common();
 	    $data['advert'] = $this->advert->findBySourceState($source_state=3);
 	    $data['child_cat'] = $this->mall_category->getChildCat($cat_id=2);
-	    $data['recommend'] = $this->mall_goods_base->getRecommendGoodsBase(array('category_id'=>2,'hot_recommend'=>2,'num'=>4));
-	    $data['mall_goods'] = $this->mall_goods_base->getGoodsBase(array('category_id'=>2,'num'=>40));
+	    $data['recommend'] = $this->mall_goods_base->getGoodsBase(array('category_id'=>2,'num'=>4,'sort'=>'tour_count')); //浏览量最高的   
+	    $data['mall_goods'] = $this->mall_goods_base->getGoodsBase(array('category_id'=>2,'num'=>40,'sort'=>'position')); //按照推荐排序
 	    $this->load->view('goods/femal',$data);
 	}
 	

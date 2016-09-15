@@ -50,6 +50,7 @@ class Mall_goods_base_model extends CI_Model{
  	     if (!empty($param['attr_set_id'])) {
  	     	$this->db->where('attr_set_id',$param['attr_set_id']);
  	     }
+ 	     
  	     $this->db->order_by('sort_order','desc');// 越大越前
  	     if (!empty($param['num'])) {
  	     	$this->db->limit($param['num']);
@@ -63,11 +64,15 @@ class Mall_goods_base_model extends CI_Model{
 	 */
 	public function getGoodsBase($param) {
 		
-		$this->db->select('goods_id,goods_name,goods_brief,shop_price,market_price,promote_price,goods_img,sale_count,review_count');
+		$this->db->select('mall_goods_base.goods_id,goods_name,goods_brief,shop_price,market_price,promote_price,goods_img,sale_count,review_count');
 		$this->db->from($this->table);
-		$this->db->where('is_on_sale',1);
-		$this->db->where('is_check',2);
-		$this->db->order_by('sort_order','desc');
+		$this->db->join('mall_category_product','mall_category_product.goods_id=mall_goods_base.goods_id');
+		$this->db->where('mall_goods_base.is_on_sale',1);
+		$this->db->where('mall_goods_base.is_check',2);
+		$this->db->where('mall_category_product.category_id',$param['category_id']);
+		if (isset($param['sort'])) {
+			$this->db->order_by($param['sort'],'desc');
+		}
 		$this->db->limit($param['num']);
 		return $this->db->get();
 	}
