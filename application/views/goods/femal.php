@@ -114,7 +114,7 @@
 </div>
 <div class="w" id="gdls">
 	<div class="bdls femal">
-	    <?php if($mall_goods->num_rows()>0):?>
+	    <?php if ($mall_goods->num_rows()>0):?>
 	    <?php foreach ($mall_goods->result() as $item):?>
 		<dl class="gl">
 			<dt>

@@ -147,17 +147,10 @@
   		<?php echo $pg_link;?>
     </div>
     <div class="ftj mt35">
-		<b class="bl_red">热门推荐:</b>
-		<a href="/topic/zengda/">阴茎增大</a><em class="vline">|</em>
-		<a href="/topic/feijibei/">飞机杯专场</a><em class="vline">|</em>
-		<a href="/topic/nvyoumingqi/">AV女优盛宴</a><em class="vline">|</em>
-		<a href="/topic/ximilu/">实体娃娃</a><em class="vline">|</em>
-		<a href="/topic/gdzt/">高端情趣用品</a><em class="vline">|</em>
-		<a href="/topic/yanshi/">延长性爱时间</a><em class="vline">|</em>
-		<a href="/topic/jnxzw/">女性自慰神器</a><em class="vline">|</em>
-		<a href="/topic/rexiao/">成人用品热卖</a>
+		<?php echo $cms_block['search_keyword'];?>
 	</div>
 	<div class="b_li">
+	
 		<a href="javascript:;" class="dn_a" target="_blank">
 			<img src="http://s.qw.cc/images/201503/goods_img/5076_P_1426578924869-270x270.jpg" width="270" height="270" class="sbm" />
 			<div class="h250">
@@ -190,6 +183,7 @@
 				<p class="c9">销量 <em class="c_zon">1191</em>笔 | 评价 <em class="c_blue">21</em></p>
 			</div>
 		</a>
+		
 	</div>	
 	<div class="tpk over">
 	    <?php echo $cms_block['foot_recommend_img'];?>

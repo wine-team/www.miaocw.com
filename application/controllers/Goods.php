@@ -370,7 +370,7 @@ class Goods extends MW_Controller{
 	public function common(){
     
 		$_data['head_menu'] = 'on';
-		$_data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','foot_speed_key','femal_head_recommend'));
+		$_data['cms_block'] = $this->cms_block->findByBlockIds(array('home_keyword','foot_recommend_img','search_keyword','foot_speed_key','femal_head_recommend'));
 		$_data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid))->num_rows() : 0;
 	    return $_data;
 	}
