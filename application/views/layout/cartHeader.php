@@ -20,7 +20,7 @@
 <?php js('miaow', 'jquery.lazyload.min');?>
 <?php js('miaow', 'jquery.validate.min');?>
 <?php js('miaow', 'jquery.validate.messages_zh');?>
-<?php js('miaow', 'index');?>
+<?php js('miaow', 'cart');?>
 </head>
 <body>
 <div class="w9">

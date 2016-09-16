@@ -7,8 +7,9 @@ class Mall_address_model extends CI_Model
      * 发现地址
      * @param unknown $param
      */
-    public function findAddressByRes($param=array()){
+    public function findAddressByRes($param=array(),$f='*'){
     	
+    	$this->db->select($f);
     	if(!empty($param['uid'])) {
     		$this->db->where('uid',$param['uid']);
     	}

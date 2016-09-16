@@ -10,7 +10,7 @@
 	   <div class="bgwd p_bg">
 	      	<h2 class="c_t f16 lh30"><em>2</em>填写订购信息</h2>
 	        <div class="pd4 bgcr">
-	            <input type="hidden" name="address_id" value="<?php echo isset($address->address_id) ? $address->address_id : '';?>">  
+	            <input type="hidden" name="address_id" value="<?php echo isset($address->address_id) ? $address->address_id : '';?>" />  
 	        	<table width="100%" border="0" class="p_td mt10 lh30">
 	          		<tr>
 	                	<td width="80">您的姓名</td>
@@ -22,7 +22,7 @@
 			        <tr>
 			            <td>手机号码</td>
 			            <td>
-			            	<input type="text"  placeholder="手机号码" maxlength="15"  name="tel" class="ipt left" size="30" value="<?php echo isset($address->tel) ? $address->tel : '';?>"/>
+			            	<input type="text"  placeholder="手机号码" name="tel" size="30" class="ipt left" value="<?php echo isset($address->tel) ? $address->tel : '';?>"/>
 			              	<em class="red pl5 ert">必填</em>
 			            </td>
 			        </tr>
@@ -36,7 +36,6 @@
 		          	<tr>
 		            	<td>详细地址</td>
 		            	<td>
-		            		<em id="x_p" class="left"></em><em id="x_c" class="left"></em><em id="x_z" class="left"></em>
 		              		<input type="text"  placeholder="镇、街道、小区名、门牌号" maxlength="30" style="width:350px;" class="yz ipt left" name="detailed"  value="<?php echo isset($address->detailed) ? $address->detailed : '';?>"/>
 		              		<em class="red pl5 ert">必填</em>
 		              	</td>
@@ -48,7 +47,7 @@
 			              	<span class="gray pl5">选填</span>
 			            </td>
 	          		</tr>
-	          </table>
+	            </table>
 	       </div>
 	    </div>
 	    <div class="bgwd">
@@ -89,77 +88,4 @@
 	    </div>
   	</form>
 </div>
-<script type="text/javascript">
-jQuery(function(){
-	cart();
-	
-})
-function cart() {
-	$.ajax({
-		type: 'post',
-        async: false,
-        dataType : 'json',
-        url: hostUrl()+'/cart/main',
-        success: function(json) {
-           $('.pay-order').html(json.amount);
-           $('.cart-content').html(json.html);
-           $('img.lazy').lazyload();
-        }
-	})
-}
-$('.cart').on('submit','form.order-form',function(e){ // 购物车提交
-	var mobile = /^(13|14|15|17|18)+[0-9]{9}$/;
-    var receiver_name = $('input[name="receiver_name"]').val();
-    var tel = $('input[name="tel"]').val();
-    var district_id = $('select[name="district_id"]').val();
-    var detailed = $('input[name="detailed"]').val();
-    var pay_bank = $('input[name="pay_bank"]').val();
-    if (receiver_name.length<=0) {
-        layer.msg('请填写收货人');
-        return false;
-    }
-    if (tel.length<=0) {
-    	layer.msg('请填联系方式');
-    	return false;
-    }
-    if(!mobile.test(tel)){ 
-    	layer.msg("请填写正确的手机号码！");
-        return false;
-    }
-    if (district_id.length<=0) {
-    	layer.msg('请选择地区');
-    	return false;
-    }
-    if (detailed.length<=0) {
-    	layer.msg('请填详细地址');
-    	return false;
-    }
-    if (pay_bank.length<=0) {
-    	layer.msg('请选择支付方式');
-    	return false;
-    }
-    $.ajax({
-    	type:'post',
-        dataType:'json',
-        async: false,
-        url: hostUrl()+'/payment/create_order',
-        data: $('form.order-form').serialize(),
-        beforeSend: function() {
-            $('.order-form input[type="submit"]').val('正在提交');
-            //attr('disabled', true);
-        },
-        success: function(json) {
-            
-            if (json.status) {
-                window.location.href = json.message;
-            } else {
-            	layer.msg(json.message);
-                $('.order-form input[type="submit"]').val('提交订单').removeAttr('disabled');
-            }
-        }
-    })
-	e.preventDefault();
-	return false;
-})
-</script>
 <?php $this->load->view('layout/cartFooter');?>

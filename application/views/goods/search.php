@@ -108,7 +108,7 @@
 	<div class="gdls" id="gdls">
 	    <?php foreach ($page_list as $goods) :?>
 		<dl class="gl">
-			<dt><?php $img_arr=explode('|',$goods->goods_img);?>
+			<dt><?php $img_arr=array_filter(explode('|',$goods->goods_img));?>
 				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
 					<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_name;?>" />
 				</a>

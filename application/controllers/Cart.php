@@ -18,13 +18,14 @@ class Cart extends CS_Controller {
 	  */
      public function grid(){
      	
-     	$address = $this->mall_address->findAddressByRes(array('uid'=>$this->uid));
+     	$result = $this->mall_address->findAddressByRes(array('uid'=>$this->uid));
      	$data['address'] = null;
-     	if ($address->num_rows()>0) {
-     		$data['address'] = $address->row(0);
-     		$data['province_id'] = $address->row(0)->province_id;
-            $data['city_id'] = $address->row(0)->city_id;
-            $data['district_id'] = $address->row(0)->district_id;
+     	if ($result->num_rows()>0) {
+     		$address = $result->row(0);
+     		$data['address'] = $address;
+     		$data['province_id'] = $address->province_id;
+     		$data['city_id'] = $address->city_id;
+            $data['district_id'] = $address->district_id;
      	}
         $this->load->view('cart/grid',$data);
      }
