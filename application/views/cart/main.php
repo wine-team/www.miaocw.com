@@ -55,3 +55,40 @@
 	</div>
 </div>
 <?php endif;?>
+<script type="text/javascript">
+$('.operate').delegate('a.enshirne','click',function(e){
+	var goods_id = $(this).attr('goods-id');
+	$.ajax({
+        type: 'post',
+        async: false,
+        dataType : 'json',
+        url: hostUrl()+'/cart/enshrine',
+        data:{goods_id:goods_id},
+        success: function(json) {
+            layer.msg(json.message);
+        }
+    });
+	e.stopPropagation();
+	return false;
+})
+
+$('.operate').on('click','a.delete',function(e){
+    var goods_id = $(this).attr('goods-id');
+    layer.confirm('你确认要删除吗', {icon: 3, title:'提示'}, function(index){
+    	$.ajax({
+    	    type: 'post',
+    	    async: false,
+    	    dataType : 'json',
+    	    url: hostUrl()+'/cart/delete',
+    	    data:{goods_id:goods_id},
+    	    success: function(json) {
+    	        if (json.status) {
+    	            window.location.href = location.href;
+    	        } else {
+    	            layer.msg(json.message);
+    	        }
+    	    }
+    	});
+    });
+})
+</script>
