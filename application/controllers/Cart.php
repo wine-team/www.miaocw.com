@@ -31,9 +31,9 @@ class Cart extends CS_Controller {
      }
      
       /**
-      *购物车
+        **购物车
       */
-     public function main(){
+     public function main() {
      	
      	$area = $this->input->post('area',true);
      	$couponId = $this->input->post('coupon') ? $this->input->post('coupon') : 0;
