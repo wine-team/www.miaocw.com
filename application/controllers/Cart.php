@@ -31,7 +31,7 @@ class Cart extends CS_Controller {
      }
      
       /**
-        **购物车
+       ** 购物车
       */
      public function main() {
      	
@@ -59,15 +59,16 @@ class Cart extends CS_Controller {
      */
      public function encrypt($cart,$area) {
      	
-     	$total = 0; // 订单销售价
-     	$actual_price = 0; // 积极支付价
-     	$transport_cost = 0; //总运费价格
+     	$total = 0; //--订单销售价
+     	$actual_price = 0; //--实际支付价
+     	$transport_cost = 0; //--总运费价格
      	$cartArr = array();
-     	foreach ($cart->result() as $val){
+     	foreach ($cart->result() as $val) {
      		$cartArr[$val->supplier_id]['supplier_id'] = $val->supplier_id;
      		$cartArr[$val->supplier_id]['shop_name'] = $val->alias_name;
      		$cartArr[$val->supplier_id]['goods'][] = $val;
-     		$total += bcmul($val->goods_num,$val->promote_price,2);
+     		$total_price = $this->getTotalPrice($val);
+     		$total += bcmul($val->goods_num,$total_price,2);
      	}
      	$transport_cost = $this->getFreight($cartArr,$area); //算运费
      	$actual_price = bcadd($total,$transport_cost,2);
@@ -78,6 +79,21 @@ class Cart extends CS_Controller {
      			 'actual_price'   => $actual_price
      	        );
      }
+     
+     /**
+      * 获取实际价格  促销价和妙处网销售价
+      * @param unknown $val
+      */
+     private function getTotalPrice($val) {
+     	
+     	if( !empty($val->promote_price) && !empty($val->promote_start_date) && !empty($val->promote_end_date) && ($val->promote_start_date<=time()) && ($val->promote_end_date>=time())) {
+     		$total_price =  $val->promote_price;
+     	} else {
+     		$total_price = $val->shop_price;
+     	}
+     	return $total_price;
+     }
+     
      
       /**
       * 获取运维信息

@@ -24,8 +24,15 @@
             	<?php endif;?>
             </a> 
         </td>
+        <?php if( !empty($val->promote_price) && !empty($val->promote_start_date) && !empty($val->promote_end_date) && ($val->promote_start_date<=time()) && ($val->promote_end_date>=time())):?>
+			 <?php $total_price = $val->promote_price;?>
+		<?php else:?>
+			 <?php $total_price = $val->shop_price;?>
+		<?php endif;?>
         <td>
-          	<em class="q_price">¥<?php echo $val->promote_price;?></em>
+          	<em class="q_price">
+          		¥<?php echo $total_price;?>
+          	</em>
         </td>
 	    <td class="cart-solve">            
 		    <input type="text" name="goods[<?php echo $val->goods_id;?>]" goods-num="<?php echo $val->in_stock;?>" limit-num="<?php echo $val->limit_num;?>" goods-id="<?php echo base64_encode($val->goods_id);?>" value="<?php echo $val->goods_num;?>"  class="number left"  onkeyup="this.value=this.value.replace(/\D/g,'')" onblur="javascript:cartQtyChange($(this))"/>
@@ -34,7 +41,7 @@
 			    <p class="decrease" onclick="javascript:cartQtyUpdate('down',$(this))"></p>
 			</div>
 		</td>
-        <td class="g_xj">¥<?php echo bcmul($val->goods_num,$val->promote_price,2);?></td>
+        <td class="g_xj">¥<?php echo bcmul($val->goods_num,$total_price,2);?></td>
         <td class="operate">
           	<p><a class="c9 enshirne" href="javascript:;" goods-id="<?php echo base64_encode($val->goods_id);?>">收藏</a></p>
             <a class="c9 delete" href="javascript:;" goods-id="<?php echo base64_encode($val->goods_id);?>">删除</a>
