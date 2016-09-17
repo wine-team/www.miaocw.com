@@ -133,4 +133,18 @@ function create_suffix($arr, $key='')
     return http_build_query($arr);
 }
 
+/**
+ * 获取搜索价格范围
+ * */
+function get_priceRange()
+{
+    return array(
+        '1'=>'0-100', 
+        '2'=>'100-500', 
+        '3'=>'500-1000', 
+        '4'=>'1000-2500', 
+        '5'=>'2500-以上'
+    );
+}
+
 

@@ -95,9 +95,13 @@ class Mall_goods_base_model extends CI_Model{
 	        $this->db->where('t.category_id', $search['category_id']);
 	    }
 	    if (!empty($search['price_range'])) {
-	        $price_arr = explode('-', $search['price_range']);
-	        $this->db->where('promote_price >=', $price_arr[0]);
-	        if (is_numeric($price_arr[1])) $this->db->where('promote_price <', $price_arr[1]);
+	        $price_range = get_priceRange();
+	        $price_arr = explode('-', $price_range[$search['price_range']]);
+	        if (!is_numeric($price_arr[1])) {
+	            $this->db->where('shop_price >=', $price_arr[0]);
+	        } else {
+	            $this->db->where("(`shop_price` BETWEEN '{$price_arr[0]}' AND '{$price_arr[1]}')");
+	        }
 	    }
 	    if (!empty($search['brand_id'])) {
 	        $this->db->where('mall_goods_base.brand_id', $search['brand_id']);
@@ -114,7 +118,6 @@ class Mall_goods_base_model extends CI_Model{
 	public function page_list($page_num, $num, $search=array())
 	{
 	    $this->db->select('mall_goods_base.*');
-// 	    $this->db->select('mall_goods_base.goods_id, t.category_id, t.cat_name');
 	    $this->db->from($this->table);
 	    $this->db->join($this->table1, 'mall_goods_base.brand_id = mall_brand.brand_id', 'left');
 	    $this->db->join("(SELECT mall_category_product.category_id,mall_category_product.goods_id,mall_category.cat_name FROM mall_category_product LEFT JOIN mall_category ON mall_category_product.category_id = mall_category.cat_id ) t", 'mall_goods_base.goods_id = t.goods_id', 'left');
@@ -125,9 +128,13 @@ class Mall_goods_base_model extends CI_Model{
 	        $this->db->where('t.category_id', $search['category_id']);
 	    }
 	    if (!empty($search['price_range'])) {
-	        $price_arr = explode('-', $search['price_range']);
-	        $this->db->where('promote_price >=', $price_arr[0]);
-	        if (is_numeric($price_arr[1])) $this->db->where('promote_price <', $price_arr[1]);
+	        $price_range = get_priceRange();
+	        $price_arr = explode('-', $price_range[$search['price_range']]);
+	        if (!is_numeric($price_arr[1])) {
+	            $this->db->where('shop_price >=', $price_arr[0]);
+	        } else {
+	            $this->db->where("(`shop_price` BETWEEN '{$price_arr[0]}' AND '{$price_arr[1]}')");
+	        }
 	    }
 	    if (!empty($search['brand_id'])) {
 	        $this->db->where('mall_goods_base.brand_id', $search['brand_id']);
@@ -135,12 +142,12 @@ class Mall_goods_base_model extends CI_Model{
 	    $this->db->where('is_on_sale', 1);
 	    $this->db->where('is_check', 2);
 	    if (!empty($search['order'])) {
-	        if ($search['order'] == 'price_asc') {
-	            $this->db->order_by('promote_price', 'ASC');
-	        } else if ($search['order'] == 'price_desc') {
-	            $this->db->order_by('promote_price', 'DESC');
-	        } else{
-	            $this->db->order_by($search['order'], 'DESC');
+	        switch ($search['order']) {
+	            case 1 : $this->db->order_by('goods_id', 'DESC');break;
+	            case 2 : $this->db->order_by('sale_count', 'DESC');break;
+	            case 3 : $this->db->order_by('tour_count', 'DESC');break;
+	            case 4 : $this->db->order_by('shop_price', 'ASC');break;
+	            case 5 : $this->db->order_by('shop_price', 'DESC');break;
 	        }
 	    }
 	    $this->db->order_by('mall_goods_base.sort_order', 'ASC');

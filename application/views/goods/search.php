@@ -25,7 +25,7 @@
 		    <?php if($this->input->get('price_range')) :?>
 		      <li>
     		      <a class="d_xx" title="价格" href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'price_range'));?>">
-    		 价格：<?php echo $this->input->get('price_range');?>
+    		 价格：<?php echo $price_arr[$this->input->get('price_range')];?>
     		      </a>
 		      </li>
 		    <?php endif;?>
@@ -69,8 +69,8 @@
 		<dl class="sdl">
 			<dt>价格</dt>
 			<dd>
-			    <?php foreach ($price_arr as $price) :?>
-			    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'price_range').'&price_range='.$price);?>" class="<?php if($this->input->get('price_range')==$price) echo 'on';?>"><?php echo $price;?></a>
+			    <?php foreach ($price_arr as $key=>$price) :?>
+			    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'price_range').'&price_range='.$key);?>" class="<?php if($this->input->get('price_range')==$key) echo 'on';?>"><?php echo $price;?></a>
 			    <?php endforeach;?>
 			</dd>
 		</dl>
@@ -83,10 +83,10 @@
 				<div class="left pl10">
 					<form method="GET" class="sort"  name="listform">
 					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()))?>" class="sb_a <?php if(empty($this->input->get('order'))) echo 'sb_on'?>">默认</a>
-					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=goods_id')?>" class="sb_a <?php if($this->input->get('order')=='goods_id') echo 'sb_on'?>">最新上架</a>
-					    <a href="<?php $order_price=($this->input->get('order')=='price_asc') ? 'price_desc' : 'price_asc';echo site_url('goods/search?'.create_suffix($this->input->get()).'&order='.$order_price)?>" class="sb_a <?php if($this->input->get('order')=='price_asc') echo 'sup';?> <?php if($this->input->get('order')=='price_asc' || $this->input->get('order')=='price_desc') echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
-					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=sale_count')?>" class="sb_a <?php if($this->input->get('order')=='sale_count') echo 'sb_on'?>">热销</a>
-					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=tour_count')?>" class="sb_a <?php if($this->input->get('order')=='tour_count') echo 'sb_on'?>">热门</a>
+					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=1')?>" class="sb_a <?php if($this->input->get('order')==1) echo 'sb_on'?>">最新上架</a>
+					    <a href="<?php $order_price=($this->input->get('order')==4) ? 5 : 4;echo site_url('goods/search?'.create_suffix($this->input->get()).'&order='.$order_price)?>" class="sb_a <?php if($this->input->get('order')==4) echo 'sup';?> <?php if($this->input->get('order')==4 || $this->input->get('order')==5) echo 'sb_on'?>"><em class="pr10">价格</em><i class="rjg"></i></a>
+					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=2')?>" class="sb_a <?php if($this->input->get('order')==2) echo 'sb_on'?>">热销</a>
+					    <a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get()).'&order=3')?>" class="sb_a <?php if($this->input->get('order')==3) echo 'sb_on'?>">热门</a>
 					</form>
 				</div>
 				<div class="prt right"> 
