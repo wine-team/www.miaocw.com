@@ -49,7 +49,6 @@ class Goods extends MW_Controller{
 	    $data['category_arr'] = $category;
 	    $data['price_arr'] = get_priceRange();
 	    $data['brand_arr'] = $this->mall_brand->findBrand()->result();
-// 	    $data['order_arr'] = array('goods_id'=>'最新上架','sale_count'=>'热销','tour_count'=>'热门', 'price_asc'=>'价格从低到高', 'price_desc'=>'价格从高到低');
 		$data['order_arr'] = array('1'=>'最新上架','2'=>'热销','3'=>'热门', '4'=>'价格从低到高', '5'=>'价格从高到低');
 		$this->load->view('goods/search',$data);
 	}
