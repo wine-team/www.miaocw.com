@@ -1,8 +1,9 @@
 <b class="red right" id="amount">¥<?php echo bcadd($actual_price,0,2);?></b>
 <em class="gray right">实付款：</em>
 <em class="right ml10 pr10"> = </em>
-<div class="right" id="computer">
-    <span class="right">满减<b class="red" id="computer_discount">¥0.00</b></span><i class="o_cut right"></i>
+<div class="right hid" id="computer"><!--满减先去掉 -->
+    <span class="right">满减<b class="red" id="computer_discount">¥0.00</b></span>
+    <i class="o_cut right"></i>
 </div>
 <?php if(count($coupon)>0):?>
 <div class="right free" id="favourable">

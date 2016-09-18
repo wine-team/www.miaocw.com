@@ -26,7 +26,7 @@ class Payment extends CS_Controller {
      	$postData = $this->input->post();
      	$this->validate($postData);
      	$addressId = $this->input->post('address_id');
-     	$couponId = $this->input->post('couponId');
+     	$couponId = $this->input->post('coupon_id');
      	$deliveryArray = $this->getAddress($addressId,$postData);
         if (empty($deliveryArray)) {
         	$this->jsen('收货地址出错');
@@ -36,7 +36,7 @@ class Payment extends CS_Controller {
      		$this->jsen('产品生成出错');
      	}
      	$subtotal = 0;
-     	$orderMainSn = $this->getOrderSn(); //主订单编号
+     	$pay_id = $this->getOrderSn(); //主订单编号
      	$orderParam['pay_bank'] = isset($postData['pay_bank']) ? $postData['pay_bank'] : 1;
      	$orderParam['order_note'] = isset($postData['order_note']) ? $postData['order_note'] : '';
      	$orderParam['delivery_address'] = $deliveryArray['deliver'];
@@ -300,14 +300,14 @@ class Payment extends CS_Controller {
      			}
      		}
      		$item->goods_num = $goods[$item->goods_id]; //购买产品的数量
-     		$total += bcmul($item->goods_num,$item->promote_price,2); //销售价
+     		$total_price = $this->getTotalPrice($item);
+     		$total += bcmul($item->goods_num,$total_price,2);
      		/**订单数据的处理**/
      		$supplier_id = $item->supplier_id;
-     		$argc[$supplier_id]['order_sn'] = $this->getOrderSn();
      		$argc[$supplier_id]['supplier_id'] = $supplier_id;
      		$argc[$supplier_id]['goods'][] = $item;
      	}
-     	$argc = $this->getFreight($argc,$area);
+     	$argc = $this->getFreight($argc,$area,$total);
      	return array(
      		  'order' => $argc,
      		  'total' => $total  //总价多少钱
@@ -315,12 +315,32 @@ class Payment extends CS_Controller {
      }
      
      /**
+      * 获取实际价格  促销价和妙处网销售价
+      * @param unknown $val
+      */
+     private function getTotalPrice($val) {
+     
+     	if( !empty($val->promote_price) && !empty($val->promote_start_date) && !empty($val->promote_end_date) && ($val->promote_start_date<=time()) && ($val->promote_end_date>=time())) {
+     		$total_price =  $val->promote_price;
+     	} else {
+     		$total_price = $val->shop_price;
+     	}
+     	return $total_price;
+     }
+     
+     /**
       * 获取运维信息
       * @param unknown $cartArr
       */
-     public function getFreight($goods,$area) {
+     public function getFreight($goods,$area,$totalPrice) {
      	 
      	$freight = array(); //获取商品是哪个模板 哪个地区 是否是
+     	if (bcsub($totalPrice,99,2)>=0) { //满99元包邮
+     		foreach ($goods as $key => $item) {
+     			$goods[$key]['sub'] = 0; // 每个商品运费为零
+     		}
+     		return $goods;
+     	}
      	foreach ($goods as $key => $item) {
      		foreach ($item['goods'] as $val) {//循环店铺
      			$tid = $val->freight_id;
@@ -344,6 +364,7 @@ class Payment extends CS_Controller {
      		foreach ($items as $freight_id => $item) {  //店铺下运费模版的计算
      			if ($freight_id == 0) {
      				$sub += $item['freight_cost'];
+     				continue;
      			}
      			$result = $this->mall_freight_tpl->getTransports(array('freight_id'=>$freight_id,'uid'=>$item['supplier_id']));
      			if (isset($result->methods)) {

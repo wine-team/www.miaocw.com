@@ -10,7 +10,7 @@
 	   <div class="bgwd p_bg">
 	      	<h2 class="c_t f16 lh30"><em>2</em>填写订购信息</h2>
 	        <div class="pd4 bgcr">
-	            <input type="hidden" name="address_id" value="<?php echo isset($address->address_id) ? $address->address_id : '';?>" />  
+	            <input type="hidden" name="address_id" value="<?php echo isset($address->address_id) ? $address->address_id : 0;?>" />  
 	        	<table width="100%" border="0" class="p_td mt10 lh30">
 	          		<tr>
 	                	<td width="80">您的姓名</td>
