@@ -9,7 +9,7 @@ class Payment extends CS_Controller {
 		$this->load->model('mall_address_model','mall_address');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
-		$this->load->model('mall_order_main_model','mall_order_main');
+		$this->load->model('mall_order_pay_model','mall_order_pay');
 		$this->load->model('mall_order_base_model','mall_order_base');
 		$this->load->model('mall_order_product_model','mall_order_product');
 		$this->load->model('mall_freight_tpl_model','mall_freight_tpl');
@@ -36,7 +36,7 @@ class Payment extends CS_Controller {
      		$this->jsen('产品生成出错');
      	}
      	$subtotal = 0;
-     	$pay_id = $this->getOrderSn(); //主订单编号
+     	$payId = $this->getOrderSn(); //主订单编号
      	$orderParam['pay_bank'] = isset($postData['pay_bank']) ? $postData['pay_bank'] : 1;
      	$orderParam['order_note'] = isset($postData['order_note']) ? $postData['order_note'] : '';
      	$orderParam['delivery_address'] = $deliveryArray['deliver'];
@@ -46,7 +46,7 @@ class Payment extends CS_Controller {
      		$orderShopPrice = 0;// 订单销售价
      		$orderActualPrice = 0; // 订单实际支付价
      		$orderSupplyPrice = 0; // 订单供应价
-     		$order_id = $this->create_mall_order($key, $item, $orderMainSn, $orderParam);
+     		$order_id = $this->create_mall_order($key, $item, $payId, $orderParam);
      		if (!$order_id) {
      			$this->db->trans_rollback();
      			$this->jsen('生成订单失败');
@@ -62,9 +62,9 @@ class Payment extends CS_Controller {
      				$this->db->trans_rollback();
      				$this->jsen('订单分润失败');
      			}
-     			$orderShopPrice += bcmul($val->goods_num,$val->shop_price,2);
+     			$orderShopPrice += bcmul($val->goods_num,$val->total_price,2);
      			$orderSupplyPrice += bcmul($val->goods_num,$val->provide_price,2);
-     			$orderActualPrice += bcmul($val->goods_num,$val->shop_price,2);
+     			$orderActualPrice += bcmul($val->goods_num,$val->total_price,2);
      		    
      			$paramsCart['uid'] = $this->uid;
      			$paramsCart['goods_id'][] = $val->goods_id;
@@ -79,7 +79,7 @@ class Payment extends CS_Controller {
      		}
      		
      		$order_update_params['order_id'] = $order_id;
-     		$order_update_params['status'] = 2;
+     		$order_update_params['order_status'] = 2;
      		$order_update_params['order_supply_price'] = $orderSupplyPrice;// 实际供应价
      		$order_update_params['order_shop_price'] = $orderShopPrice;// 实际销售价
      		$order_update_params['actual_price'] = $orderActualPrice;// 实际支付价
@@ -91,7 +91,7 @@ class Payment extends CS_Controller {
      	    }
      	    $subtotal += bcadd($orderActualPrice, $transport_cost, 2); //所有订单总价
      	}
-     	$main_order = $this->creat_main_order($orderMainSn,$subtotal,$orderParam['pay_bank']);
+     	$main_order = $this->creat_main_order($payId,$subtotal,$orderParam['pay_bank']);
      	if (!$main_order) {
      		$this->db->trans_rollback();
      		$this->jsen('主订单生成失败');
@@ -102,7 +102,7 @@ class Payment extends CS_Controller {
      	}
      	$this->db->trans_commit();
      	$this->mall_cart_goods->clear_cart($paramsCart);//清除购物车已经生成订单的产品
-        $mainOrder = base64_encode($orderMainSn); //加密
+        $mainOrder = base64_encode($payId); //加密
         $this->jsen(site_url('payment/order?pay='.$mainOrder),true);
      }
      
@@ -115,25 +115,25 @@ class Payment extends CS_Controller {
      	if (empty($pay)) {
      	 	$this->alertJumpPre('非法参数');
      	}
-     	$orderMainSn = base64_decode($pay);
-     	$mainRes = $this->mall_order_main->findOrderMainByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+     	$payId = base64_decode($pay);
+     	$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
      	if ($mainRes->num_rows()<=0) {
      		$this->alertJumpPre('主订单不存在');
      	}
      	$data['mainOrder'] = $mainRes->row(0);
-     	$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+     	$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
      	if ($orderRes->num_rows()<=0) {
      		$this->alertJumpPre('订单不存在');
      	}
      	$data['order'] = $orderRes->row(0);
-     	$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+     	$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'pay_id'=>$payId));
      	if ($productRes->num_rows()<=0) {
      		$this->alertJumpPre('订单产品表不存在');
      	}
      	$data['orderProduct'] = $productRes->result();
      	$data['pay_method'] = array('1'=>'支付宝','2'=>'微信','3'=>'银联');
      	if ($data['mainOrder']->pay_bank == 2) { 
-     		$data['payEwm'] = $this->productEwm($orderMainSn);
+     		$data['payEwm'] = $this->productEwm($payId);
      		$this->load->view('payment/wxpay',$data);
      	} else {
      		$this->load->view('payment/grid',$data);
@@ -159,14 +159,14 @@ class Payment extends CS_Controller {
       * @param unknown $subtotal
       * @param unknown $pay_bank
       */
-     public function creat_main_order($orderMainSn,$subtotal,$pay_bank) {
+     public function creat_main_order($payId,$subtotal,$pay_bank) {
      	
      	$main_params['uid'] = $this->uid;
      	$main_params['pay_bank'] = $pay_bank; //支付银行
-     	$main_params['order_main_sn'] = $orderMainSn;
+     	$main_params['pay_id'] = $payId;
      	$main_params['created_at'] = date('Y-m-d H:i:s');
      	$main_params['order_amount'] = $subtotal;
-     	return $this->mall_order_main->create_order($main_params); //插入总订单
+     	return $this->mall_order_pay->create_order($main_params); //插入总订单
      }
      
       /**
@@ -191,12 +191,11 @@ class Payment extends CS_Controller {
       * @param unknown $orderMainSn
       * @param unknown $orderParam
       */
-     public function create_mall_order($key, $item, $orderMainSn, $orderParam) {
+     public function create_mall_order($key, $item, $payId, $orderParam) {
      	
-     	$params['order_main_sn'] = $orderMainSn;
-     	$params['order_sn'] = $this->getOrderSn();
-     	$params['state'] = 1;
-     	$params['status'] = 1;
+     	$params['pay_id'] = $payId;
+     	$params['order_state'] = 1;
+     	$params['order_status'] = 1;
      	$params['seller_uid'] = $key;
      	$params['payer_uid'] = $this->uid;
      	$params['user_name'] = $this->userName;
@@ -206,7 +205,7 @@ class Payment extends CS_Controller {
      	$params['delivery_address'] = $orderParam['delivery_address'];
      	$params['deliver_price'] = $item['sub'];
      	$params['order_note'] = $orderParam['order_note'];
-     	$params['is_form'] = 1;
+     	$params['is_from'] = 1;
      	$params['created_at'] = date('Y-m-d H:i:s');
      	return $this->mall_order_base->create_order($params);
      }
@@ -228,10 +227,10 @@ class Payment extends CS_Controller {
      	$param['barter_num'] = 0;
      	$param['refund_num'] = $val->goods_num;
      	$param['market_price'] = $val->market_price; //市场价
-     	$param['shop_price'] = $val->shop_price;// 贝竹价
+     	$param['shop_price'] = $val->total_price;// 贝竹价
      	$param['supply_price'] = $val->provide_price; // 供应价
      	$param['integral'] = 0 ; //可用积分
-     	$param['pay_amount'] = $val->shop_price;// 实际支付价
+     	$param['pay_amount'] = $val->total_price;// 实际支付价
      	$param['created_at'] = date('Y-m-d H:i:s');
      	return $this->mall_order_product->addOrderProduct($param);
      }
@@ -300,8 +299,8 @@ class Payment extends CS_Controller {
      			}
      		}
      		$item->goods_num = $goods[$item->goods_id]; //购买产品的数量
-     		$total_price = $this->getTotalPrice($item);
-     		$total += bcmul($item->goods_num,$total_price,2);
+     		$item->total_price = $this->getTotalPrice($item); // 实际销售价因为促销价在里面
+     		$total += bcmul($item->goods_num,$item->total_price,2);
      		/**订单数据的处理**/
      		$supplier_id = $item->supplier_id;
      		$argc[$supplier_id]['supplier_id'] = $supplier_id;

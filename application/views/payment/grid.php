@@ -7,7 +7,7 @@
 		</div>
 		<p class="lh18">&nbsp;</p>
 		<p>订单编号：
-			<b><?php echo $mainOrder->order_main_sn;?></b>
+			<b><?php echo $mainOrder->pay_id;?></b>
 			<?php $deliver = json_decode($orderProduct[0]->delivery_address);?>
 			<em class="pl30">收货信息：<?php echo $deliver->receiver_name;?>，手机号码</em><?php echo $deliver->tel;?>，<?php echo $deliver->detailed;?>
 		</p>
@@ -34,7 +34,7 @@
 		</p>
 		<p class="lh18">&nbsp;</p>
 		<form action="<?php echo site_url('pay/grid');?>" method="post" class="pay">
-		    <input type="hidden" name="order_main_sn" value="<?php echo $mainOrder->order_main_sn;?>"/>
+		    <input type="hidden" name="pay_id" value="<?php echo $mainOrder->pay_id;?>"/>
 		    <input type="hidden" name="pay_bank" value="<?php echo $mainOrder->pay_bank;?>" />
 			<input type="submit" class="bigsee" value="立即使用<?php echo $pay_method[$mainOrder->pay_bank]?>支付" />
 	    </form> 

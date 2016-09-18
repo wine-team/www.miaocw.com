@@ -26,8 +26,8 @@ class Mall_order_base_model extends CI_Model
         if (!empty($param['uid'])) {
         	$this->db->where('payer_uid',$param['uid']);
         }
-        if (!empty($param['order_main_sn'])) {
-        	$this->db->where('order_main_sn',$param['order_main_sn']);
+        if (!empty($param['pay_id'])) {
+        	$this->db->where('pay_id',$param['pay_id']);
         }
         return $this->db->get();
     }
