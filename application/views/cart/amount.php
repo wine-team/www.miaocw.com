@@ -6,7 +6,7 @@
 </div>
 <?php if(count($coupon)>0):?>
 <div class="right free" id="favourable">
-	<select name="coupon" class="right <?php if(!$couponId):?>hid<?php endif;?> select-free" style="width:100px;">
+	<select name="coupon_id" class="right <?php if(!$couponId):?>hid<?php endif;?> select-free">
 		<option value="0" <?php if($couponId==0):?>selected="selected"<?php endif;?>>选择优惠券</option>
 		<?php foreach ($coupon as $key=>$val):?>
 		<option value="<?php echo $val->coupon_get_id;?>" <?php if($couponId==$val->coupon_get_id):?>selected="selected"<?php endif;?> ><?php echo $val->coupon_name;?>[¥<?php echo $val->amount;?>]</option>
@@ -23,7 +23,6 @@
 <i class="o_add right"></i>
 <span class="right">商品总价<b class="red" id="zj">¥<?php echo bcadd($total,0,2);?></b></span>
 <script type="text/javascript">
-
 $('.free').on('click','.youhuiquan',function(e){ //优惠券
    var selectFlag = $(this).parents('.free').find('.select-free');
    if ($(this).is(':checked')) {
@@ -37,12 +36,12 @@ $('.free').on('click','.youhuiquan',function(e){ //优惠券
 
 $('.free').on('change','.select-free',function(e){
 	var area = $('select[name="province_id"]').find("option:selected").attr('province');
-	var coupon = $(this).val();
+	var coupon_id = $(this).val();
 	$.ajax({
 		type: 'post',
         async: false,
         dataType : 'json',
-        data:{area:area,coupon:coupon},
+        data:{area:area,coupon_id:coupon_id},
         url: hostUrl()+'/cart/main',
         success: function(json) {
            $('.pay-order').html(json.amount);
@@ -51,5 +50,4 @@ $('.free').on('change','.select-free',function(e){
         }
 	})
 })
-
 </script>
