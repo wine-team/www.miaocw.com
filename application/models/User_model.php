@@ -21,4 +21,18 @@ class User_model extends CI_Model
     public function insertUserLog($param){
     	return $this->db->insert($this->table_1,$param);
     }
+    
+     /**
+     * 获取用户信息
+     * @param unknown $param
+     * @param string $f
+     */
+    public function getPayPoints($uid) {
+    	
+    	$this->db->select('pay_points');
+    	$this->db->from($this->table);
+    	$this->db->where('uid',$uid);
+        $result = $this->db->get();
+        return ($result->num_rows() > 0) ?  $result->row(0)->pay_points : 0;
+    }
 }

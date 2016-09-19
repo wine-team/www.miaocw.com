@@ -30,4 +30,16 @@ class User_coupon_get_model extends CI_Model
 	    return  $couponArr;
 	}
 	
+	/**
+	 * 根据coupon_id更新这个已用
+	 * @param unknown $coupon_id
+	 */
+    public function updateStatus($coupon_id,$uid) {
+    	
+        $data['status'] = 2;//已用
+        $this->db->where('uid',$uid);
+        $this->db->where('coupon_get_id',$coupon_id);
+    	return $this->db->update($this->table,$data);
+    }
+	
 }

@@ -1,10 +1,15 @@
 <b class="red right" id="amount">¥<?php echo bcadd($actual_price,0,2);?></b>
 <em class="gray right">实付款：</em>
 <em class="right ml10 pr10"> = </em>
-<div class="right hid" id="computer"><!--满减先去掉 -->
-    <span class="right">满减<b class="red" id="computer_discount">¥0.00</b></span>
+<?php if($integra>0):?>
+<div class="right jf-integra" id="computer">
+    <label class="pr10 right">
+        <input type="checkbox" name="jf" class="jf" <?php if($jf):?>checked="checked"<?php endif;?> value="1"/>
+        可抵扣<?php echo $integra;?>积分(<b class="red"><?php echo bcdiv($integra,100,2);?></b>)
+    </label>
     <i class="o_cut right"></i>
 </div>
+<?php endif;?>
 <?php if(count($coupon)>0):?>
 <div class="right free" id="favourable">
 	<select name="coupon_id" class="right <?php if(!$couponId):?>hid<?php endif;?> select-free">
@@ -24,6 +29,27 @@
 <i class="o_add right"></i>
 <span class="right">商品总价<b class="red" id="zj">¥<?php echo bcadd($total,0,2);?></b></span>
 <script type="text/javascript">
+
+$('.jf-integra').on('click','.jf',function(e){
+     
+	var area = $('select[name="province_id"]').find("option:selected").attr('province');
+	var jf = $('input[name="jf"]').val();
+	var coupon_id = $('select[name="coupon_id"]').val();
+	$.ajax({
+		type: 'post',
+        async: false,
+        dataType : 'json',
+        data:{area:area,coupon_id:coupon_id,jf:jf},
+        url: hostUrl()+'/cart/main',
+        success: function(json) {
+           $('.pay-order').html(json.amount);
+           $('.cart-content').html(json.html);
+           $('img.lazy').lazyload();
+        }
+	})
+	e.preventDefault();
+})
+
 $('.free').on('click','.youhuiquan',function(e){ //优惠券
    var selectFlag = $(this).parents('.free').find('.select-free');
    if ($(this).is(':checked')) {
@@ -35,14 +61,16 @@ $('.free').on('click','.youhuiquan',function(e){ //优惠券
    }
 })
 
+
 $('.free').on('change','.select-free',function(e){
 	var area = $('select[name="province_id"]').find("option:selected").attr('province');
 	var coupon_id = $(this).val();
+	var jf = $('.jf').val();
 	$.ajax({
 		type: 'post',
         async: false,
         dataType : 'json',
-        data:{area:area,coupon_id:coupon_id},
+        data:{area:area,coupon_id:coupon_id,jf:jf},
         url: hostUrl()+'/cart/main',
         success: function(json) {
            $('.pay-order').html(json.amount);
@@ -50,5 +78,7 @@ $('.free').on('change','.select-free',function(e){
            $('img.lazy').lazyload();
         }
 	})
+	e.preventDefault();
 })
+
 </script>

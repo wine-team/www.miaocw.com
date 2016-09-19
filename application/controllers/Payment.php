@@ -41,6 +41,7 @@ class Payment extends CS_Controller {
      	$orderParam['order_note'] = isset($postData['order_note']) ? $postData['order_note'] : '';
      	$orderParam['delivery_address'] = $deliveryArray['deliver'];
      	$this->db->trans_begin();
+     	
      	foreach ($goods['order'] as $key => $item) {
      		$transport_cost = $item['sub'];
      		$orderShopPrice = 0;// 订单销售价
@@ -96,12 +97,15 @@ class Payment extends CS_Controller {
      		$this->db->trans_rollback();
      		$this->jsen('主订单生成失败');
      	}
+     	$this->mall_cart_goods->clear_cart($paramsCart);//清除购物车已经生成订单的产品
+     	if (!empty($couponId)) {
+     		$this->user_coupon_get->updateStatus($couponId,$this->uid);
+     	}
      	if ($this->db->trans_status() === FALSE) {
      		$this->db->trans_rollback();
      		$this->jsen('订单生成失败');
      	}
      	$this->db->trans_commit();
-     	$this->mall_cart_goods->clear_cart($paramsCart);//清除购物车已经生成订单的产品
         $mainOrder = base64_encode($payId); //加密
         $this->jsen(site_url('payment/order?pay='.$mainOrder),true);
      }

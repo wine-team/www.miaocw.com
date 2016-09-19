@@ -11,6 +11,7 @@ class Cart extends CS_Controller {
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_enshrine_model','mall_enshrine');
 		$this->load->model('mall_address_model','mall_address');
+		$this->load->model('user_model','user');
 	}
 
 	  /**
@@ -36,6 +37,7 @@ class Cart extends CS_Controller {
      public function main() {
      	
      	$area = $this->input->post('area',true);
+     	$jf = $this->input->post('jf');
      	$couponId = $this->input->post('coupon_id') ? (int)$this->input->post('coupon_id') : 0;
      	$cart = $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid));
      	$cartData = $this->encrypt($cart,$area);
@@ -44,8 +46,11 @@ class Cart extends CS_Controller {
      	$data['total'] = $cartData['total'];
      	$couponRes = $this->user_coupon_get->getCouponByRes(array('uid'=>$this->uid,'condition'=>$data['total'])); // 优惠劵使用条件
      	$yhqTotal = ($couponId && count($couponRes)>0) ?  $couponRes[$couponId]->amount : 0;
+     	$integralTotal = $this->getIntegral($cartData['total_integral']);
+     	$data['jf'] = $jf;
+     	$data['integra'] = $integralTotal;
      	$data['coupon'] = $couponRes;
-     	$data['actual_price'] = bcsub($cartData['actual_price'],$yhqTotal,2);
+     	$data['actual_price'] = $jf ?  bcsub(bcsub($cartData['actual_price'],$yhqTotal,2),$integralTotal/100,2) : bcsub($cartData['actual_price'],$yhqTotal,2);
      	$data['transport_cost'] = $cartData['transport_cost'];
      	echo json_encode(array(
      		'status' => true,
@@ -62,6 +67,7 @@ class Cart extends CS_Controller {
      	$total = 0; //--订单销售价
      	$actual_price = 0; //--实际支付价
      	$transport_cost = 0; //--总运费价格
+     	$total_integral = 0;
      	$cartArr = array();
      	foreach ($cart->result() as $val) {
      		$cartArr[$val->supplier_id]['supplier_id'] = $val->supplier_id;
@@ -69,15 +75,38 @@ class Cart extends CS_Controller {
      		$cartArr[$val->supplier_id]['goods'][] = $val;
      		$total_price = $this->getTotalPrice($val);
      		$total += bcmul($val->goods_num,$total_price,2);
+     		$total_integral += $val->integral;
      	}
      	$transport_cost = $this->getFreight($cartArr,$area,$total); //算运费
      	$actual_price = bcadd($total,$transport_cost,2);
      	return array(
-     			 'cart'   =>  $cartArr,
-     			 'total'  =>  $total,
-     			 'transport_cost' => $transport_cost,
-     			 'actual_price'   => $actual_price
+     			 'cart'   =>  $cartArr, // 总的商品信息
+     			 'total'  =>  $total, // 总的销售价
+     			 'transport_cost' => $transport_cost, // 运费
+     			 'actual_price'   => $actual_price,   // 实际支付价
+     			 'total_integral' => $total_integral  // 商品使用总积分
      	        );
+     }
+     
+      /**
+      * 获取可用的的积分
+      * @param unknown $goodsIntegral
+      */
+     public function getIntegral($goodsIntegral) {
+     	
+     	if ($goodsIntegral==0) {//商品没有积分抵扣
+     		return $goodsIntegral;
+     	}
+     	$userPoints = $this->user->getPayPoints($this->uid);
+     	if ($userPoints==0) { // 用户没有积分
+     		return $userPoints;
+     	}
+     	if ($goodsIntegral>=$userPoints) { // 商品使用积分大于用户积分
+     		return $userPoints;
+     	} 
+     	if ($userPoints >=$goodsIntegral) { // 用户积分大于商品可用积分
+     		return $goodsIntegral;
+     	}
      }
      
      /**
