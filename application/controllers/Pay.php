@@ -7,7 +7,7 @@ class Pay extends CS_Controller {
 		$this->load->library('chinapay/chinapay', null, 'chinapay');
 		$this->load->library('alipay/alipaypc', null, 'alipaypc');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
-		$this->load->model('mall_order_main_model','mall_order_main');
+		$this->load->model('mall_order_pay_model','mall_order_pay');
 		$this->load->model('mall_order_base_model','mall_order_base');
 		$this->load->model('mall_order_product_model','mall_order_product');
 	}
@@ -74,8 +74,8 @@ class Pay extends CS_Controller {
 		if (empty($pay)) {
 			$this->jsen('非法参数');
 		}
-		$orderMainSn = base64_decode($pay);
-		$mainRes = $this->mall_order_main->findOrderMainByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		$payId = base64_decode($pay);
+		$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
 		if ($mainRes->num_rows()<=0) {
 			$this->jsen('主订单不存在');
 		}
@@ -96,7 +96,7 @@ class Pay extends CS_Controller {
 			$this->alertJumpPre('非法参数');
 		}
 		$orderMainSn = base64_decode($pay);
-		$mainRes = $this->mall_order_main->findOrderMainByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
 		if ($mainRes->num_rows()<=0) {
 			$this->alertJumpPre('主订单不存在');
 		}
