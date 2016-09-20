@@ -5,6 +5,7 @@ class Payment extends CS_Controller {
 		
 		$this->load->library('encrypt');
 		$this->load->library('qrcode',null,'QRcode');
+		$this->load->model('user_model','user');
 		$this->load->model('region_model','region');
 		$this->load->model('mall_address_model','mall_address');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
@@ -25,6 +26,7 @@ class Payment extends CS_Controller {
      	
      	$postData = $this->input->post();
      	$this->validate($postData);
+     	$jf = $this->input->post('jf');
      	$addressId = $this->input->post('address_id');
      	$couponId = $this->input->post('coupon_id');
      	$deliveryArray = $this->getAddress($addressId,$postData);
@@ -36,7 +38,9 @@ class Payment extends CS_Controller {
      		$this->jsen('产品生成出错');
      	}
      	$subtotal = 0;
+     	$overrPoints = 0;// 剩余积分
      	$payId = $this->getOrderSn(); //主订单编号
+     	$userPoints = $this->user->getPayPoints($this->uid); // 用户总积分
      	$orderParam['pay_bank'] = isset($postData['pay_bank']) ? $postData['pay_bank'] : 1;
      	$orderParam['order_note'] = isset($postData['order_note']) ? $postData['order_note'] : '';
      	$orderParam['delivery_address'] = $deliveryArray['deliver'];
@@ -44,9 +48,11 @@ class Payment extends CS_Controller {
      	
      	foreach ($goods['order'] as $key => $item) {
      		$transport_cost = $item['sub'];
-     		$orderShopPrice = 0;// 订单销售价
+     		$orderShopPrice = 0; // 订单销售价
      		$orderActualPrice = 0; // 订单实际支付价
      		$orderSupplyPrice = 0; // 订单供应价
+     		$orderIntegral = 0;    // 产品积分
+     		$orderActualIntegral = 0; // 每个订单实际支付价格
      		$order_id = $this->create_mall_order($key, $item, $payId, $orderParam);
      		if (!$order_id) {
      			$this->db->trans_rollback();
@@ -66,31 +72,48 @@ class Payment extends CS_Controller {
      			$orderShopPrice += bcmul($val->goods_num,$val->total_price,2);
      			$orderSupplyPrice += bcmul($val->goods_num,$val->provide_price,2);
      			$orderActualPrice += bcmul($val->goods_num,$val->total_price,2);
-     		    
+     			$orderIntegral += bcmul($val->goods_num,$val->integral,2);
+     			
      			$paramsCart['uid'] = $this->uid;
      			$paramsCart['goods_id'][] = $val->goods_id;
      			
-     			$product_param['goods_id'] = $val->goods_id;
-     			$product_param['number'] = $val->goods_num;
-     			$numStatus = $this->mall_goods_base->setMallNum($product_param); // 产品表库存的变化
-     			if (!$numStatus) {
-     				$this->db->trans_rollback();
-     				$this->jsen('更新库存失败');
+     			if ($val->minus_stock ==1) { // 拍下减库存
+     				$product_param['goods_id'] = $val->goods_id;
+     				$product_param['number'] = $val->goods_num;
+     				$numStatus = $this->mall_goods_base->setMallNum($product_param); // 产品表库存的变化
+     				if (!$numStatus) {
+     					$this->db->trans_rollback();
+     					$this->jsen('更新库存失败');
+     				}
      			}
      		}
      		
+     		if (!empty($jf)) {
+     			$orderActualIntegral = $this->getIntegral($orderIntegral,$userPoints);// 获取实际抵扣积分
+     			$order_update_params['integral'] = $orderActualIntegral;
+     			if ($orderActualIntegral != 0) {
+     				$userStatus = $this->user->setPayPoints($orderActualIntegral,$this->uid);
+     				if (!$userStatus) {
+     					$this->db->trans_rollback();
+     					$this->jsen('更新账户积分失败');
+     				}
+     			}
+     			$userPoints = bcsub($userPoints,$orderActualIntegral);//剩余积分
+     		}
+
      		$order_update_params['order_id'] = $order_id;
      		$order_update_params['order_status'] = 2;
      		$order_update_params['order_supply_price'] = $orderSupplyPrice;// 实际供应价
      		$order_update_params['order_shop_price'] = $orderShopPrice;// 实际销售价
-     		$order_update_params['actual_price'] = $orderActualPrice;// 实际支付价
-     		$order_update_params['order_pay_price'] = $orderActualPrice; // 实际支付价
+     		$order_update_params['actual_price'] = bcsub($orderActualPrice,$orderActualIntegral/100,2);  // 实际支付价
+     		$order_update_params['order_pay_price'] = bcsub($orderActualPrice,$orderActualIntegral/100,2); // 实际支付价
      		$updateOrder = $this->mall_order_base->updateMallOrder($order_update_params);//订单表的修改
+     	    
      	    if (!$updateOrder) {
      	    	$this->db->trans_rollback();
      	    	$this->jsen('更新订单失败');
      	    }
-     	    $subtotal += bcadd($orderActualPrice, $transport_cost, 2); //所有订单总价
+     	    $subtotal += bcsub(bcadd($orderActualPrice, $transport_cost, 2),$orderActualIntegral/100,2); //所有订单总价
      	}
      	$main_order = $this->creat_main_order($payId,$subtotal,$orderParam['pay_bank']);
      	if (!$main_order) {
@@ -143,6 +166,28 @@ class Payment extends CS_Controller {
      		$this->load->view('payment/grid',$data);
      	}
      }
+     
+     /**
+      * 获取可抵积分
+      * @param unknown $orderIntegral  --一个订单表的需要抵扣积分
+      * @param unknown $userPoints -- 用户账户积分
+      */
+     private function getIntegral($orderIntegral,$userPoints) {
+     	
+     	if ($orderIntegral == 0) {
+     		return $orderIntegral;
+     	}
+     	if ($userPoints == 0) {
+     		return $userPoints;
+     	}
+     	if ($userPoints < $orderIntegral) {
+     		return $userPoints;
+     	}
+     	if ($orderIntegral < $userPoints) {
+     		return $orderIntegral;
+     	}
+     }
+     
      
       /**
       * 二维码的生产
@@ -437,6 +482,9 @@ class Payment extends CS_Controller {
       */
      public function validate($postData){
      	
+     	if (empty($this->uid)) {
+     		$this->jsen('请先登录');
+     	}
      	if (empty($postData['goods']) || !is_array($postData['goods'])) {
      		$this->jsen('快去选购产品哦');
      	}

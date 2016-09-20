@@ -35,4 +35,16 @@ class User_model extends CI_Model
         $result = $this->db->get();
         return ($result->num_rows() > 0) ?  $result->row(0)->pay_points : 0;
     }
+    
+     /**
+     * 重新设置积分
+     * @param unknown $pay_points
+     * @param unknown $uid
+     */
+    public function setPayPoints($pay_points,$uid){
+    	
+    	$this->db->set('pay_points','pay_points-'.$pay_points,false);
+    	$this->db->where('uid',$uid);
+    	return $this->db->update($this->table);
+    }
 }

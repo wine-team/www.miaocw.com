@@ -50,7 +50,7 @@ class Cart extends CS_Controller {
      	$data['jf'] = $jf;
      	$data['integra'] = $integralTotal;
      	$data['coupon'] = $couponRes;
-     	$data['actual_price'] = $jf ?  bcsub(bcsub($cartData['actual_price'],$yhqTotal,2),$integralTotal/100,2) : bcsub($cartData['actual_price'],$yhqTotal,2);
+     	$data['actual_price'] = $jf ? bcsub(bcsub($cartData['actual_price'],$yhqTotal,2),$integralTotal/100,2) : bcsub($cartData['actual_price'],$yhqTotal,2);
      	$data['transport_cost'] = $cartData['transport_cost'];
      	echo json_encode(array(
      		'status' => true,

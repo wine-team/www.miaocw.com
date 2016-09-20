@@ -13,7 +13,7 @@ class Mall_cart_goods_model extends CI_Model{
 		$this->db->select('mall_goods_base.goods_name,mall_goods_base.supplier_id,
 				           mall_goods_base.promote_price,market_price,
 				           shop_price,provide_price,promote_start_date,
-				           promote_end_date,integral,mall_goods_base.goods_img,
+				           promote_end_date,integral,minus_stock,mall_goods_base.goods_img,
 				           mall_goods_base.extension_code,mall_goods_base.in_stock,
 				           mall_goods_base.limit_num,mall_goods_base.goods_weight,
 				           mall_goods_base.freight_cost,mall_goods_base.freight_id,

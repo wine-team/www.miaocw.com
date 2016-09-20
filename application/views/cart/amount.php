@@ -4,7 +4,7 @@
 <?php if($integra>0):?>
 <div class="right jf-integra" id="computer">
     <label class="pr10 right">
-        <input type="checkbox" name="jf" class="jf" <?php if($jf):?>checked="checked"<?php endif;?> value="1"/>
+        <input type="checkbox" name="jf" class="jf" <?php if($jf):?>checked="checked"<?php endif;?>/>
         可抵扣<?php echo $integra;?>积分(<b class="red"><?php echo bcdiv($integra,100,2);?></b>)
     </label>
     <i class="o_cut right"></i>
