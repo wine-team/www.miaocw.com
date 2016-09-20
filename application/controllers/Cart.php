@@ -75,7 +75,7 @@ class Cart extends CS_Controller {
      		$cartArr[$val->supplier_id]['goods'][] = $val;
      		$total_price = $this->getTotalPrice($val);
      		$total += bcmul($val->goods_num,$total_price,2);
-     		$total_integral += $val->integral;
+     		$total_integral += bcmul($val->integral,$val->goods_num);//
      	}
      	$transport_cost = $this->getFreight($cartArr,$area,$total); //算运费
      	$actual_price = bcadd($total,$transport_cost,2);
