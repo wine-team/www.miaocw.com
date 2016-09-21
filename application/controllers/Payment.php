@@ -7,6 +7,7 @@ class Payment extends CS_Controller {
 		$this->load->library('qrcode',null,'QRcode');
 		$this->load->model('user_model','user');
 		$this->load->model('region_model','region');
+		$this->load->model('account_log_model','account_log');
 		$this->load->model('mall_address_model','mall_address');
 		$this->load->model('mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
@@ -93,7 +94,8 @@ class Payment extends CS_Controller {
      			$order_update_params['integral'] = $orderActualIntegral;
      			if ($orderActualIntegral != 0) {
      				$userStatus = $this->user->setPayPoints($orderActualIntegral,$this->uid);
-     				if (!$userStatus) {
+     				$logStatus = $this->insertLog($order_id,$orderActualIntegral);//积分使用记录
+     				if (!$userStatus || !$logStatus) {
      					$this->db->trans_rollback();
      					$this->jsen('更新账户积分失败');
      				}
@@ -188,6 +190,24 @@ class Payment extends CS_Controller {
      	}
      }
      
+     /**
+      * 使用日志
+      * @param unknown $order_id
+      * @param unknown $orderActualIntegral
+      */
+     private function insertLog($order_id,$orderActualIntegral) {
+     	
+     	$param = array(
+     		'uid' => $this->uid,
+     		'order_id' => $order_id,
+     		'account_type' => 2,//1账户,2积分 
+     		'flow' => 2, // 1收入，2支出
+     		'trade_type' => 1,//1购物，2充值，3提现，4转账，5还款,6退款
+     		'amount' => bcdiv($orderActualIntegral,100,2),
+     		'note' => '订单号为：'.$order_id.' 使用  '.$orderActualIntegral.'积分'
+     	);
+     	return $this->account_log->insertLog($param);
+     }
      
       /**
       * 二维码的生产
