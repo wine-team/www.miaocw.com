@@ -53,7 +53,8 @@ class Payment extends CS_Controller {
      		$orderActualPrice = 0; // 订单实际支付价
      		$orderSupplyPrice = 0; // 订单供应价
      		$orderIntegral = 0;    // 产品积分
-     		$orderActualIntegral = 0; // 每个订单实际支付价格
+     		$orderActualIntegral = 0; // 每个订单实际支付积分
+     		$orderActualCoupn = 0 ;// 优惠劵实际抵扣
      		$order_id = $this->create_mall_order($key, $item, $payId, $orderParam);
      		if (!$order_id) {
      			$this->db->trans_rollback();
@@ -89,7 +90,7 @@ class Payment extends CS_Controller {
      			}
      		}
      		
-     		if (!empty($jf)) {
+     		if (!empty($jf)) {  //优惠劵的使用
      			$orderActualIntegral = $this->getIntegral($orderIntegral,$userPoints);// 获取实际抵扣积分
      			$order_update_params['integral'] = $orderActualIntegral;
      			if ($orderActualIntegral != 0) {
@@ -102,20 +103,35 @@ class Payment extends CS_Controller {
      			}
      			$userPoints = bcsub($userPoints,$orderActualIntegral);//剩余积分
      		}
+     		
+     	    if (!empty($couponId)) { //积分的使用
+     	   	   
+     	        $couponRes = $this->user_coupon_get->getCouponById($couponId,$this->uid);
+     	        if ($couponRes->num_rows()<=0) {
+     	        	$this->jsen('优惠劵不存在');
+     	        }
+     	        $coupon = $couponRes->row(0);
+     	        if ( (bcsub(bcsub($orderActualPrice,$coupon->amount,2),$orderActualIntegral/100,2)>=0) && ($coupon->status==1) ) {
+     	        	$orderActualCoupn = $coupon->amount;
+     	        	$this->user_coupon_get->updateStatus($couponId,$this->uid);
+     	        }
+     	    }
 
      		$order_update_params['order_id'] = $order_id;
      		$order_update_params['order_status'] = 2;
      		$order_update_params['order_supply_price'] = $orderSupplyPrice;// 实际供应价
      		$order_update_params['order_shop_price'] = $orderShopPrice;// 实际销售价
-     		$order_update_params['actual_price'] = bcsub($orderActualPrice,$orderActualIntegral/100,2);  // 实际支付价
-     		$order_update_params['order_pay_price'] = bcsub($orderActualPrice,$orderActualIntegral/100,2); // 实际支付价
+     		$order_update_params['actual_price'] = bcsub(bcsub($orderActualPrice,$orderActualIntegral/100,2),$orderActualCoupn,2);  // 实际支付价
+     		$order_update_params['order_pay_price'] = bcsub(bcsub($orderActualPrice,$orderActualIntegral/100,2),$orderActualCoupn,2); // 实际支付价
+     		$order_update_params['coupon_code'] = $couponId;
+     		$order_update_params['coupon_price'] = $orderActualCoupn;
      		$updateOrder = $this->mall_order_base->updateMallOrder($order_update_params);//订单表的修改
      	    
      	    if (!$updateOrder) {
      	    	$this->db->trans_rollback();
      	    	$this->jsen('更新订单失败');
      	    }
-     	    $subtotal += bcsub(bcadd($orderActualPrice, $transport_cost, 2),$orderActualIntegral/100,2); //所有订单总价
+     	    $subtotal += bcsub(bcsub(bcadd($orderActualPrice, $transport_cost, 2),$orderActualIntegral/100,2),$orderActualCoupn,2); //所有订单总价
      	}
      	$main_order = $this->creat_main_order($payId,$subtotal,$orderParam['pay_bank']);
      	if (!$main_order) {
@@ -123,9 +139,6 @@ class Payment extends CS_Controller {
      		$this->jsen('主订单生成失败');
      	}
      	$this->mall_cart_goods->clear_cart($paramsCart);//清除购物车已经生成订单的产品
-     	if (!empty($couponId)) {
-     		$this->user_coupon_get->updateStatus($couponId,$this->uid);
-     	}
      	if ($this->db->trans_status() === FALSE) {
      		$this->db->trans_rollback();
      		$this->jsen('订单生成失败');

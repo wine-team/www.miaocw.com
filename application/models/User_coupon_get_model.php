@@ -20,6 +20,9 @@ class User_coupon_get_model extends CI_Model
 	    if (isset($param['condition'])) {
 	    	$this->db->where('user_coupon_get.condition <= ',$param['condition']);
 	    }
+	    if (isset($param['coupon_get_id'])) {
+	    	$this->db->where('user_coupon_get.coupon_get_id',$param['coupon_get_id']);
+	    }
 	    $result = $this->db->get();
 	    $couponArr = array();
 	    if ($result->num_rows()>0) {
@@ -40,6 +43,22 @@ class User_coupon_get_model extends CI_Model
         $this->db->where('uid',$uid);
         $this->db->where('coupon_get_id',$coupon_id);
     	return $this->db->update($this->table,$data);
+    }
+    
+     /**
+      * 根据多个id进行选取结果
+      * @param unknown $coupon_get_id
+      * @param unknown $uid
+      */
+    public function getCouponById($coupon_get_id,$uid) {
+    	
+    	$this->db->select('coupon_get_id,amount,condition,status');
+    	$this->db->from($this->table);
+    	$this->db->where('coupon_get_id',$coupon_get_id);
+    	$this->db->where('uid',$uid);
+    	$this->db->where('user_coupon_get.start_time <=',date('Y-m-d H:i:s'));
+    	$this->db->where('user_coupon_get.end_time >=',date('Y-m-d H:i:s'));
+    	return $this->db->get();
     }
 	
 }
