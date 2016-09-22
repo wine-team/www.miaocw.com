@@ -21,7 +21,7 @@ class Payment extends CS_Controller {
 	}
 
 	 /**
-	  * 首页
+	  *首页
 	 */
      public function create_order(){
      	

@@ -19,7 +19,7 @@
 		共<b id="a_num" class="red"><?php echo $num;?></b>件商品，总计
 		<b id="a_sum" class="red"><?php echo $total;?></b>元
 	</p>
-	<p class="gray">在线支付满199包邮</p>
+	<p class="gray">在线支付满99包邮</p>
 	<p><a class="srbtn mt5 right" href="<?php echo site_url('cart/grid');?>">去购物车结算>></a></p>
 </div>
 <?php else:?>

@@ -184,7 +184,8 @@ class Home extends MW_Controller{
 		$sum = 0;
 		foreach ($res->result() as $item) {
 			$num += $item->goods_num;
-			$sum += bcmul($item->promote_price,$item->goods_num,2);
+			$total_price = $this->getTotalPrice($item);
+			$sum += bcmul($total_price,$item->goods_num,2);
 		}
 		echo json_encode(array(
 				'status' => true,
@@ -193,4 +194,17 @@ class Home extends MW_Controller{
 		));exit;
 	}
 	
+	 /**
+	 * 获取实际价格  促销价和妙处网销售价
+	 * @param unknown $val
+	 */
+	private function getTotalPrice($val) {
+	
+		if( !empty($val->promote_price) && !empty($val->promote_start_date) && !empty($val->promote_end_date) && ($val->promote_start_date<=time()) && ($val->promote_end_date>=time())) {
+			$total_price =  $val->promote_price;
+		} else {
+			$total_price = $val->shop_price;
+		}
+		return $total_price;
+	}
 }
