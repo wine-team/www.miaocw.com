@@ -80,9 +80,7 @@ class Payment extends CS_Controller {
      			$paramsCart['goods_id'][] = $val->goods_id;
      			
      			if ($val->minus_stock ==1) { // 拍下减库存
-     				$product_param['goods_id'] = $val->goods_id;
-     				$product_param['number'] = $val->goods_num;
-     				$numStatus = $this->mall_goods_base->setMallNum($product_param); // 产品表库存的变化
+     				$numStatus = $this->mall_goods_base->setMallNum(array('goods_id'=>$val->goods_id,'number'=>$val->goods_num)); // 产品表库存的变化
      				if (!$numStatus) {
      					$this->db->trans_rollback();
      					$this->jsen('更新库存失败');
@@ -117,16 +115,7 @@ class Payment extends CS_Controller {
      	        }
      	    }
 
-     		$order_update_params['order_id'] = $order_id;
-     		$order_update_params['order_status'] = 2;
-     		$order_update_params['order_supply_price'] = $orderSupplyPrice;// 实际供应价
-     		$order_update_params['order_shop_price'] = $orderShopPrice;// 实际销售价
-     		$order_update_params['actual_price'] = bcsub(bcsub($orderActualPrice,$orderActualIntegral/100,2),$orderActualCoupn,2);  // 实际支付价
-     		$order_update_params['order_pay_price'] = bcsub(bcsub($orderActualPrice,$orderActualIntegral/100,2),$orderActualCoupn,2); // 实际支付价
-     		$order_update_params['coupon_code'] = $couponId;
-     		$order_update_params['coupon_price'] = $orderActualCoupn;
-     		$updateOrder = $this->mall_order_base->updateMallOrder($order_update_params);//订单表的修改
-     	    
+     		$updateOrder = $this->updateMallOrder($order_id,$couponId,$orderSupplyPrice,$orderShopPrice,$orderActualPrice,$orderActualIntegral,$orderActualCoupn);
      	    if (!$updateOrder) {
      	    	$this->db->trans_rollback();
      	    	$this->jsen('更新订单失败');
@@ -180,6 +169,30 @@ class Payment extends CS_Controller {
      	} else {
      		$this->load->view('payment/grid',$data);
      	}
+     }
+     
+     /**
+      * 更新主库的订单信息
+      * @param unknown $order_id
+      * @param unknown $couponId
+      * @param unknown $orderSupplyPrice
+      * @param unknown $orderShopPrice
+      * @param unknown $orderActualPrice
+      * @param unknown $orderActualIntegral
+      * @param unknown $orderActualCoupn
+      */
+     private function updateMallOrder($order_id,$couponId,$orderSupplyPrice,$orderShopPrice,$orderActualPrice,$orderActualIntegral,$orderActualCoupn) {
+     	
+     	$actual_price =  bcsub(bcsub($orderActualPrice,$orderActualIntegral/100,2),$orderActualCoupn,2);
+     	$order_update_params['order_id'] = $order_id;
+     	$order_update_params['coupon_code'] = $couponId;
+     	$order_update_params['order_status'] = 2;
+     	$order_update_params['order_supply_price'] = $orderSupplyPrice;// 实际供应价
+     	$order_update_params['order_shop_price'] = $orderShopPrice;// 实际销售价
+     	$order_update_params['actual_price'] = $actual_price;// 实际支付价
+     	$order_update_params['order_pay_price'] = $actual_price; // 实际支付价
+     	$order_update_params['coupon_price'] = $orderActualCoupn;
+     	return $this->mall_order_base->updateMallOrder($order_update_params);//订单表的修改
      }
      
      /**
