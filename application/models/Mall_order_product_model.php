@@ -26,8 +26,12 @@ class Mall_order_product_model extends CI_Model
    						);
     	$this->db->from($this->table);
     	$this->db->join('mall_order_base','mall_order_base.order_id=mall_order_product.order_id');
-        $this->db->where('mall_order_base.pay_id',$param['pay_id']);
-        $this->db->where('mall_order_base.payer_uid',$param['uid']);
+        if (!empty($param['pay_id'])) {
+        	$this->db->where('mall_order_base.pay_id',$param['pay_id']);
+        }
+    	if (!empty($param['uid'])) {
+    		$this->db->where('mall_order_base.payer_uid',$param['uid']);
+    	}
         return $this->db->get();
     }
 }

@@ -1,20 +1,20 @@
 <?php $this->load->view('layout/cartHeader');?>
 <div class="w9" id="content"> 
-	<div class="bgwd" id="weixinzhifu">
+	<div class="bgwd weixinzhifu" id="weixinzhifu" >
         <table width="100%" border="0" height="415">
 	        <tr>
 	        	<td width="20">&nbsp;</td>
 	        	<td width="80" valign="top">
 	        		<p class="okts"></p>
 	        	</td>
-	        	<td style="background:url(miaow/images/weipay.png) 320px 52px no-repeat;">
+	        	<td class="pay-wx">
 		        	<h3 class="c3 lh30 f16">恭喜，提交成功，请使用微信扫一扫，扫描二维码支付</h3>
 		        	<p class="lh18">&nbsp;</p>
-		        	<div style="border:1px solid #ddd;width:280px;margin-top:20px;padding-top:10px;">
-		       			<div id="codeimg" class="alC" style="height:230px;">
+		        	<div class="pay-wx-content">
+		       			<div id="codeimg" class="alC">
 		       				<img width="230" height="230" src="<?php echo $this->config->show_image_url('common/ewm',$payEwm);?>" />
 		       			</div>        
-			        	<div style="background-color:#eee;padding:10px;">
+			        	<div class="pay-ewm">
 				        	<p><em class="gray">订单编号：</em><b><?php echo $mainOrder->pay_id;?></b></p>
 				        	<?php $deliver = json_decode($orderProduct[0]->delivery_address);?>
 				        	<p><em class="gray">收货信息：</em><?php echo $deliver->receiver_name;?>，<?php echo $deliver->tel;?>，<?php echo $deliver->detailed;?></p>

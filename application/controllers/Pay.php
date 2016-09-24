@@ -52,13 +52,13 @@ class Pay extends CS_Controller {
 	private function alipayParameter($pay_bank, $orderInfo)
 	{
 		$parameter = array(
-				'out_trade_no' => $orderInfo->pay_id,
+				'out_trade_no' => $orderInfo->pay_id, //总支付编号
 				'subject'      => $orderInfo->pay_id,
 				'total_fee'    => $orderInfo->order_amount,
 				'body'         => $orderInfo->pay_id,
 				'show_url'     => base_url(),
 				'notify_url'   => base_url('paycallback/alipayNotify'),
-				'return_url'   => base_url('payt/alipayReturn'),
+				'return_url'   => base_url('pay/alipayReturn'),
 				'pay_method'   => $pay_bank,
 				'defaultbank'  => 'alipay'
 		);
@@ -95,18 +95,18 @@ class Pay extends CS_Controller {
 		if (empty($pay)) {
 			$this->alertJumpPre('非法参数');
 		}
-		$orderMainSn = base64_decode($pay);
-		$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		$payId = base64_decode($pay);
+		$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
 		if ($mainRes->num_rows()<=0) {
 			$this->alertJumpPre('主订单不存在');
 		}
 		$data['mainOrder'] = $mainRes->row(0);
-		$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
 		if ($orderRes->num_rows()<=0) {
 			$this->alertJumpPre('订单不存在');
 		}
 		$data['order'] = $orderRes->row(0);
-		$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'order_main_sn'=>$orderMainSn));
+		$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'pay_id'=>$payId));
 		if ($productRes->num_rows()<=0) {
 			$this->alertJumpPre('订单产品表不存在');
 		}
