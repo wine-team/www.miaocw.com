@@ -2,7 +2,7 @@
 <div id="content" class="w goods-list">
    	<div class="s_tl">
    		<span class="left">
-   			<a href="<?php echo $this->config->main_base_url?>">首页</a>
+   			<a href="<?php echo $this->config->main_base_url;?>">首页</a>
    			<code class="lr3">></code>
    			<a href="javascript:;">关键字</a><code class="lr3">></code>
    			<b class="lr3"> <?php echo $this->input->get('keyword');?> </b>

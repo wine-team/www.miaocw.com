@@ -15,7 +15,7 @@
 		       				<img width="230" height="230" src="<?php echo $this->config->show_image_url('common/ewm',$payEwm);?>" />
 		       			</div>        
 			        	<div style="background-color:#eee;padding:10px;">
-				        	<p><em class="gray">订单编号：</em><b><?php echo $mainOrder->order_main_sn;?></b></p>
+				        	<p><em class="gray">订单编号：</em><b><?php echo $mainOrder->pay_id;?></b></p>
 				        	<?php $deliver = json_decode($orderProduct[0]->delivery_address);?>
 				        	<p><em class="gray">收货信息：</em><?php echo $deliver->receiver_name;?>，<?php echo $deliver->tel;?>，<?php echo $deliver->detailed;?></p>
 				        	<p>
