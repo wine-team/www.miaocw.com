@@ -15,7 +15,7 @@ class Home extends MW_Controller{
 	/**
 	 **首页
 	*/
-	public function grid(){
+	public function grid() {
 
 		if (!$this->cache->memcached->get('hostHomePageCache')) {
 			$data = array(
@@ -35,7 +35,7 @@ class Home extends MW_Controller{
 	/**
 	 * 加入购物车
 	 */
-	public function addToCart(){
+	public function addToCart() {
 		
 		$uid = $this->uid;
 		$callback = $this->input->get('callback');

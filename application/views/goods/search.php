@@ -115,7 +115,7 @@
 			</dt>
 			<dd class="simg">
 			    <?php foreach($img_arr as $img):?>
-					<img class="lazy" src="miaow/images/load.jpg" width="30" height="30" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
+					<img class="lazy" src="miaow/images/load.jpg" width="30" height="30" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img,60);?>" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb10">
