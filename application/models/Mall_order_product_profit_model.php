@@ -41,4 +41,16 @@ class Mall_order_product_profit_model extends CI_Model
     	
     	return $this->db->insert($this->table,$param);
     }
+    
+    /**
+     * 获取商品分润信息
+     * @param unknown $params
+     */
+    public function findByParamProductProfit($params)
+    {
+    	if (!empty($params['order_product_ids'])) {
+    		$this->db->where_in('order_product_id', $params['order_product_ids']);
+    	}
+    	return $this->db->get($this->table);
+    }
 }

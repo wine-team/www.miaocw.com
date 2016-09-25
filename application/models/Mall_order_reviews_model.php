@@ -61,4 +61,26 @@ class Mall_order_reviews_model extends CI_Model
     		case '3' : return array('1','2');break;
     	}
     }
+    
+    public function insertBatchReviews($params)
+    {
+    	$data = array();
+    	foreach ($params as $value) {
+    		$data[] = array(
+    				'order_product_id'=> $value['order_product_id'],
+    				'order_id'        => $value['order_id'],
+    				'goods_id'        => $value['goods_id'],
+    				'goods_attr'      => json_encode($value['goods_attr']),
+    				'goods_name'      => $value['goods_name'],
+    				'uid'             => $value['uid'],
+    				'user_name'       => $value['user_name'],
+    				'content'         => $value['content'],
+    				'status'          => $value['status'],
+    				'score'           => $value['score'],
+    				'created_at'      => date('Y-m-d H:i:s',time()),
+    				'updated_at'      => date('Y-m-d H:i:s',time())
+    		);
+    	}
+    	return $this->db->insert_batch($this->table, $data);
+    }
 }

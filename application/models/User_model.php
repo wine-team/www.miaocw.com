@@ -47,4 +47,16 @@ class User_model extends CI_Model
     	$this->db->where('uid',$uid);
     	return $this->db->update($this->table);
     }
+    
+    /**
+     * 添加账户余额
+     * @param unknown $uid
+     * @param unknown $account
+     */
+    public function updateUserAccountProfit($uid,$account) {
+    	
+    	$this->db->set('user_money','user_money+'.$account,false);
+    	$this->db->where('uid',$uid);
+    	return $this->db->update($this->table);
+    }
 }
