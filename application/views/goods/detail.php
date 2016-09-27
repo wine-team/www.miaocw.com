@@ -374,7 +374,7 @@
 					 <td>
 						<p>&nbsp;</p>
 						<input type="button"  class="wwbtn wwbtno hand close" value="返回并关闭" /><input type="submit" class="wwbtn ml10 hand d-login" value="登 录" name="submit" />
-						<p><a href="<?php echo $this->config->passport_url.'register/index?backurl='.site_url('goods/detail?goods_id='.$goods->goods_id);?>">还没帐户，免费注册</a></p>
+						<p><a href="<?php echo $this->config->passport_url.'register/index?backurl='.urlencode(site_url('goods/detail?goods_id='.$goods->goods_id));?>">还没帐户，免费注册</a></p>
 					 </td>
 				  </tr>
 			 </tbody>
