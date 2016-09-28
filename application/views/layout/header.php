@@ -43,8 +43,8 @@
             <?php else:?>
                <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">你好，请登录</a>
 	           <span class="vline">|</span>
-	           <a rel="nofollow" title="注册就送10元优惠券" class="c9" href="<?php echo $this->config->passport_url.'register.html';?>">
-	            	免费注册<em class="c9 pl10"><i class="org">送10元优惠券</i></em>
+	           <a rel="nofollow" title="注册就送8元优惠券" class="c9" href="<?php echo $this->config->passport_url.'register.html';?>">
+	            	免费注册<em class="c9 pl10"><i class="org">送8元优惠券</i></em>
 	           </a>                        
             <?php endif;?>
         </div>

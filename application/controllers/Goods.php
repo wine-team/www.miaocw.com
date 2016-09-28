@@ -261,7 +261,7 @@ class Goods extends MW_Controller{
 			echo json_encode(array(
 					'status'   => true,
 					'isShrine' => $insert ? true : false,
-					'message'  => $insert ? '收藏成功' : '取消收藏成功',
+					'message'  => $insert ? '收藏成功' : '取消收藏',
 			));exit;
 		} else {
 			echo json_encode(array(
