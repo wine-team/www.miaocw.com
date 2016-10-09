@@ -10,7 +10,7 @@
 <meta name="description"  content="<?php echo isset($headTittle) ? $headTittle : '妙处网,成人用品商城专业销售各类成人玩具、性保健品、情趣用品、情趣内衣、避孕套、成人玩具等高档情趣性用品';?>" />
 <title><?php echo isset($headTittle) ? $headTittle : '妙处网,性用品,性保健品,正品成人用品网站';?></title> 
 <base href="<?php echo $this->config->skins_url;?>"/>
-<link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.png"/>
+<link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.jpg"/>
 <?php css('common','common', '20160415');?>
 <?php css('miaow', 'reset', '20160415');?>
 <?php css('miaow', 'style', '20160415');?>
