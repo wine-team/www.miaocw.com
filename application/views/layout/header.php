@@ -5,10 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="renderer" content="webkit">
-<meta name="title"  content="<?php echo isset($headTittle) ? $headTittle : '妙处网,成人用品玩具-男根增大延迟性保健品-夫妻情趣用品-(全国货到付款 保密配送)';?>" />
-<meta name="keywords" content="<?php echo isset($headTittle) ? $headTittle : '妙处网.成人用品,情趣用品,成人用具,性用品,性保健品,性生活用品,性爱用品,成人保健,夫妻保健品';?>" />
-<meta name="description"  content="<?php echo isset($headTittle)?$headTittle : '妙处网,成人用品商城专业销售各类成人玩具、性保健品、情趣用品、情趣内衣、避孕套、成人玩具等高档情趣性用品,订购热线888-8888-888!';?>" />
-<title><?php echo isset($headTittle)?$headTittle:'妙处网,性用品,性保健品,正品成人用品网站';?></title> 
+<meta name="title"  content="<?php echo isset($headTittle) ? $headTittle : '妙处网,成人用品玩具-男根增大延迟性保健品-夫妻情趣用品';?>" />
+<meta name="keywords" content="<?php echo isset($headTittle) ? $headTittle : '妙处网,成人用品,情趣用品,成人用具,性用品,性保健品,性生活用品,性爱用品,成人保健,夫妻保健品';?>" />
+<meta name="description"  content="<?php echo isset($headTittle) ? $headTittle : '妙处网,成人用品商城专业销售各类成人玩具、性保健品、情趣用品、情趣内衣、避孕套、成人玩具等高档情趣性用品';?>" />
+<title><?php echo isset($headTittle) ? $headTittle : '妙处网,性用品,性保健品,正品成人用品网站';?></title> 
 <base href="<?php echo $this->config->skins_url;?>"/>
 <link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.png"/>
 <?php css('common','common', '20160415');?>
@@ -25,19 +25,20 @@
 
 <?php js('common','common', '20160415');?>
 <?php js('miaow', 'index');?>
-
 </head>
 <body>
+
 <?php if (!empty($cms_block['homepage_advert'])):?>
 <div class="top-active">
 	<?php echo $cms_block['homepage_advert'];?>
 </div>
 <?php endif;?>
+
 <div id="top">
     <div class="w">
         <div class="left c8">
             <?php if($this->uid):?>
-                                         你好：<a class="c3" title="会员等级v1" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
+                                         你好：<a class="c3" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
 			   <span class="vline">|</span>
 			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
             <?php else:?>
@@ -124,7 +125,7 @@
     <?php $allCategory =  getAllCategory();?>
     <div class="w">
         <div class="lcat" <?php if(isset($head_menu)):?>id="bignav"<?php endif;?>>
-            <p class="nall hand">全部商品分类</p>
+            <p class="nall hand">所有商品分类</p>
             <ul class="lnav" id="lnav">
                 <?php foreach ($allCategory as $key=>$item):?>
                 <li>
@@ -144,7 +145,7 @@
                             <?php endforeach;?>
                         </p>
                         <?php if(!empty($item['keyword'])):?>
-                        <div class="lh3"><b class="left">本类热搜</b></div>
+                        <div class="lh3"><b class="left">热卖商品</b></div>
                         <p class="bom">
                             <?php echo $item['keyword'];?>
                         </p>
@@ -157,14 +158,14 @@
         </div>
         <ul class="navs left">
             <li><a href="<?php echo site_url();?>" rel="nofollow">首页</a></li>
-            <li><a href="<?php echo site_url('goods/femal');?>">女性用品</a></li>
-            <li><a href="<?php echo site_url('goods/femal');?>">男性用品</a></li>
-            <li><a href="<?php echo site_url('goods/femal');?>">延时助情</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">避孕套</a></li>
             <li><a href="<?php echo site_url('goods/femal');?>">情趣内衣</a></li>
-            <li><a href="<?php echo site_url('goods/femal');?>">飞机杯</a></li>
-            <li><a href="<?php echo site_url('goods/femal');?>">G点棒</a></li>
-            <li><a href="<?php echo site_url('goods/femal');?>">仿真阳具</a></li>
-            <li><a href="<?php echo site_url('goods/femal');?>">土豪天堂</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">男性玩具</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">女性玩具</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">延时助情</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">双人情趣</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">润滑液</a></li>
+            <li><a href="<?php echo site_url('goods/femal');?>">丰胸缩阴</a></li>
         </ul>
         <div class="clear"></div>
     </div>

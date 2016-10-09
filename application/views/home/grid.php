@@ -10,11 +10,13 @@
 	    </li>
 	    <?php endforeach;?>
 	</ul>
+	<?php if (!empty($cms_block['head_right_advert'])):?>
 	<a class="h_pre" href="javascript:;">&lt;</a>
 	<a class="h_nxt" href="javascript:;">&gt;</a>
 	<p id="hr_a" class="ov">
 	    <?php echo $cms_block['head_right_advert'];?>
 	</p>
+	<?php endif;?>
 </div>
 <?php endif;?>
 <div id="content" class="w home-content">
@@ -33,6 +35,7 @@
 	<div class="hotk ov">
 		<?php echo $cms_block['head_hot_keyword'];?>
 	</div>
+	
 	<div class="home-man">
 		<p class="lh35">&nbsp;</p>
 		<div class="h_tt over">
@@ -121,6 +124,7 @@
 	        </a>
 	    </div>
     </div>
+    
     <div class="home-woman">
 	    <p class="clear lh35">&nbsp;</p>
 	    <div class="h_tt over">
@@ -502,10 +506,10 @@
 </div>
 <div class="hs_t" id="home_top">
 	<div class="w">
-		<a href="javascript:;" class="mt5 left">
+		<a class="mt5 left">
 			<img src="miaow/images/mcw2.png"/>
 		</a>
-		<div id="search" class="left home-search" style="margin:0 110px;">
+		<div id="search" class="left home-search">
 			<form action="<?php echo site_url('goods/search');?>" method="get"  class="ov">
 				<input type="text"  name="keyword" autocomplete="off" x-webkit-speech="" class="shl left" placeholder="想凉快吗？点我！" />
 				<input type="submit" class="left shr" title="点击搜索" value="搜索">

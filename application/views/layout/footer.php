@@ -83,50 +83,47 @@
 		<dl class="f_dl">
 			<dt>购物指南</dt>
 			<dd>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">购物流程</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">会员介绍</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">免费注册</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">常见问题</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/1.html';?>" target="_blank">免费注册</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/9.html';?>" target="_blank">购物流程</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/28.html';?>" target="_blank">常见问题</a>
 			</dd>
 		</dl>
 		<dl class="f_dl">
 			<dt>支付方式</dt>
 			<dd>
-			    <a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">网银支付</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">快捷支付</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">优惠券抵扣</a>
+			    <a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/5.html';?>" target="_blank">在线支付</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/7.html';?>" target="_blank">优惠劵支付</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/8.html';?>" target="_blank">积分抵现</a>
 			</dd>
 		</dl>
 		<dl class="f_dl">
 			<dt>配送与售后</dt>
 			<dd>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">签收验货</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">物流查询</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">退/换货政策</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">隐私保护</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/13.html';?>" target="_blank">签收验货</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/15.html';?>" target="_blank">退/换货政策</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/21.html';?>" target="_blank">退/换货流程</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/16.html';?>" target="_blank">隐私保护</a>
 			</dd>
 		</dl>
 		<dl class="f_dl">
 			<dt>订购方式</dt>
 			<dd>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">网站订购</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank" >微信订购</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">APP订购</a>
-			    <a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">400电话订购</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/9.html';?>" target="_blank">网站订购</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/10.html';?>" target="_blank">电话订购</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/11.html';?>" target="_blank" >微信订购</a>
 			</dd>
 		</dl>
 		<dl class="f_dl">
-			<dt>商家服务</dt>
+			<dt>关于我们</dt>
 			<dd>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">商家入驻</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">培训中心</a>
-				<a rel="nofollow" href="javascript:jieshou();">广告服务</a>
-				<a rel="nofollow" href="<?php echo $this->config->help_url;?>" target="_blank">商家帮助</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/26.html';?>" target="_blank">公司简介</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/27.html';?>" target="_blank">联系我们</a>
+				<a rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/22.html';?>" target="_blank">正品保证</a>
 			</dd>
 		</dl>
 		<dl class="f_dl mr0">
-			<dt>妙处网客户端</dt>
-			<dd><img src="" width="100" height="100"></dd>
+			<dt>妙处网微信号</dt>
+			<dd><img src="help/images/weixin.png" width="100" height="100"></dd>
 		</dl>
 		<div class="clear"></div>
 	</div>
@@ -135,13 +132,13 @@
 			<p>
 				<a target="_blank" href="<?php echo $this->config->main_base_url;?>" class="c9">首页</a>
 				<span class="vline">|</span>
-				<a target="_blank" rel="nofollow" href="<?php echo $this->config->help_url;?>" class="c9">关于我们</a>
+				<a target="_blank" rel="nofollow" href="<?php echo $this->config->help_url.'help_center/index/26.html';?>" class="c9">关于我们</a>
 				<span class="vline">|</span>
-				<a target="_blank" href="<?php echo $this->config->help_url;?>" rel="nofollow" class="c9">联系我们</a>
+				<a target="_blank" href="<?php echo $this->config->help_url.'help_center/index/27.html';?>" rel="nofollow" class="c9">联系我们</a>
 				<span class="vline">|</span>
-				<a target="_blank" href="<?php echo $this->config->help_url;?>" rel="nofollow" class="c9">联系客服</a>
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2665892628&site=qq&menu=yes" rel="nofollow" class="c9">联系客服</a>
 				<span class="vline">|</span>
-				<a rel="nofollow" target="_blank" href="<?php echo $this->config->help_url;?>" class="c9">商家入驻</a>
+				<a rel="nofollow" target="_blank" href="<?php echo $this->config->help_url.'help_center/index/27.html';?>" class="c9">商家入驻</a>
 				<span class="vline">|</span>
 				订购热线 <span>888-8888-8888</span>
 			</p>
