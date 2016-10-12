@@ -58,7 +58,7 @@
 					<i class="iconfont">&#xe607;</i>
 				</a>
 				<p class="r_av m_tr" id="m_fma">
-					<img src="http://s.qw.cc/themes/v4/css/2/qapp02.png" width="120" height="135">
+					<img src="miaow/images/weixin1.png" width="120" height="135">
 					<em class="r_vt">◆</em>
 				</p>
 			</li>

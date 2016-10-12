@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-    'hostname' => '120.76.250.144',
-    'username' => 'miaocw01',
-    'password' => 'xiaoyixian123',
+	'hostname' => '120.76.250.144',
+	'username' => 'miaocw01',
+	'password' => 'xiaoyixian123',
 	'database' => 'miaocw',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -90,7 +90,7 @@ $db['default'] = array(
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
-	'stricton' => FALSE,
+	'stricton' => TRUE,
 	'failover' => array(),
 	'save_queries' => TRUE
 );
