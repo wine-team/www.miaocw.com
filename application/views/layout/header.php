@@ -66,7 +66,7 @@
             		<em class="f f14 mr5 iconfont red">&#xe60c;</em>我的订单
             	</a>
             </li>
-            <li class="nbt">
+            <!--  <li class="nbt">
                 <a href="javascript:;" rel="nofollow">
                 	<em class="f mt1 iconfont">&#xe608;</em>手机版
                 	<em class="rdop"></em>
@@ -74,13 +74,13 @@
                 <div class="tuln">
                 	<img src="help/images/tm31.png" width="188" height="124"/>
                 </div>
-            </li>
+            </li>-->
             <li class="nbt">
                 <a href="<?php echo $this->config->help_url;?>" rel="nofollow">客户服务<em class="rdop"></em></a>
                 <div class="tuln">
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">如何订购</a>
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">在线支付</a>
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">物流查询</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/9';?>" rel="nofollow" target="_blank">如何订购</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/5';?>" rel="nofollow" target="_blank">在线支付</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/14';?>" rel="nofollow" target="_blank">物流查询</a>
                 </div>
             </li>
             <li><a href="<?php echo $this->config->help_url;?>" rel="nofollow" class="pr5" target="_blank">商家服务</a></li>
