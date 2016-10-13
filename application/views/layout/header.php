@@ -38,7 +38,7 @@
     <div class="w">
         <div class="left c8">
             <?php if($this->uid):?>
-                                         你好：<a class="c3" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
+                                         你好：<a class="c3" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->aliasName;?></a>
 			   <span class="vline">|</span>
 			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
             <?php else:?>
