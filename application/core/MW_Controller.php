@@ -4,16 +4,26 @@ class MW_Controller extends CI_Controller
 {
     protected $frontUser = false;
     public $uid;
-    public $aliasName;
+    public $aliasName; //用户昵称
+    public $userPhone; //用户手机号
+    public $userEmail; //用户邮箱
+    public $parentId;  //上级用户UID
+    public $userLevel; //用户级别
+    public $userPhoto; //用户头像
     
     public function __construct()
     {
         parent::__construct();
-        $frontUser = get_cookie('frontUser') ? get_cookie('frontUser') : $this->cache->memcached->get('frontUser');
-        if($frontUser){
-        	$this->frontUser = unserialize( base64_decode($frontUser) );
-            $this->uid = $this->frontUser['uid'];
-            $this->aliasName = $this->frontUser['aliasName'];
+        $frontUser = get_cookie('frontUser');
+        if ($frontUser) {
+        	$this->frontUser = unserialize(base64_decode($frontUser));
+        	$this->uid       = $this->frontUser['uid'];
+        	$this->aliasName = $this->frontUser['aliasName'];
+        	$this->userPhone = $this->frontUser['userPhone'];
+        	$this->userEmail = $this->frontUser['userEmail'];
+        	$this->parentId  = $this->frontUser['parentId'];
+        	//$this->userLevel = $this->frontUser['userLevel'];
+        	$this->userPhoto = $this->frontUser['userPhoto'];
         }
         $this->_init(); //用着重载
         
