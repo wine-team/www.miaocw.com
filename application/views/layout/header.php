@@ -38,7 +38,7 @@
     <div class="w">
         <div class="left c8">
             <?php if($this->uid):?>
-                                         你好：<a class="c3" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->userName;?></a>
+                                         你好：<a class="c3" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->aliasName;?></a>
 			   <span class="vline">|</span>
 			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
             <?php else:?>
@@ -66,8 +66,7 @@
             		<em class="f f14 mr5 iconfont red">&#xe60c;</em>我的订单
             	</a>
             </li>
-            <!-- 
-            <li class="nbt">
+            <!--  <li class="nbt">
                 <a href="javascript:;" rel="nofollow">
                 	<em class="f mt1 iconfont">&#xe608;</em>手机版
                 	<em class="rdop"></em>
@@ -75,19 +74,18 @@
                 <div class="tuln">
                 	<img src="help/images/tm31.png" width="188" height="124"/>
                 </div>
-            </li>
-             -->
+            </li>-->
             <li class="nbt">
                 <a href="<?php echo $this->config->help_url;?>" rel="nofollow">客户服务<em class="rdop"></em></a>
                 <div class="tuln">
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">如何订购</a>
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">在线支付</a>
-                	<a href="<?php echo $this->config->help_url;?>" rel="nofollow" target="_blank">物流查询</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/9';?>" rel="nofollow" target="_blank">如何订购</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/5';?>" rel="nofollow" target="_blank">在线支付</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/14';?>" rel="nofollow" target="_blank">物流查询</a>
                 </div>
             </li>
             <li><a href="<?php echo $this->config->help_url;?>" rel="nofollow" class="pr5" target="_blank">商家服务</a></li>
             <li>
-            	<a rel="nofollow" href="http://wpa.qq.com/msgrd?v=3&uin=2644720895&site=qq&menu=yes" class="contact-kf">
+            	<a rel="nofollow" href="javascript:;" class="contact-kf">
             		<em class="f f14 iconfont mr5">&#xe605;</em>联系客服
             	</a>
             </li>
@@ -132,18 +130,18 @@
                 <?php foreach ($allCategory as $key=>$item):?>
                 <li>
                    <em class="f">&nbsp;</em>
-                   <a class="lma" href="<?php echo site_url('goods/search?category_id='.$item['cat_id']);?>">
+                   <a class="lma" href="<?php echo site_url('goods/search?cid='.$item['cat_id']);?>">
                    	    <?php echo $item['cat_name'];?>
                    </a>
                    <?php if (!empty($item['childCat'])):?>
                    <div class="lra" >
                         <div class="lh3">
                             <b class="left"><?php echo $item['cat_name'];?></b>
-                            <a href="<?php echo site_url('goods/search?category_id='.$item['cat_id']);?>" class="right" rel="nofollow">更多>></a>
+                            <a href="<?php echo site_url('goods/search?cid='.$item['cat_id']);?>" class="right" rel="nofollow">更多>></a>
                         </div>
                         <p class="boa">
                             <?php foreach ($item['childCat'] as $i=>$val):?>
-                            <a href="<?php echo site_url('goods/search?category_id='.$val['cat_id']);?>"><?php echo $val['cat_name'];?></a>
+                            <a href="<?php echo site_url('goods/search?cid='.$val['cat_id']);?>"><?php echo $val['cat_name'];?></a>
                             <?php endforeach;?>
                         </p>
                         <?php if(!empty($item['keyword'])):?>
