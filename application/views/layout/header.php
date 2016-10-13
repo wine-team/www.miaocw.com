@@ -38,7 +38,7 @@
     <div class="w">
         <div class="left c8">
             <?php if($this->uid):?>
-                                         你好：<a class="c3" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->aliasName;?></a>
+                                         你好：<a class="c3" title="会员等级v1" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->aliasName;?></a>
 			   <span class="vline">|</span>
 			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
             <?php else:?>
@@ -55,10 +55,10 @@
                 	我的妙处网<em class="rdop"></em>
                 </a>
                 <div class="tuln">
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'ucenter/user_info';?>" target="_blank">个人信息</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'enshrine';?>" target="_blank">我的收藏</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'user_coupon';?>" target="_blank">我的优惠券</a>
-                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'address';?>" target="_blank">收货地址</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'ucenter/user_info.html';?>" target="_blank">个人信息</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'enshrine.html';?>" target="_blank">我的收藏</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'user_coupon.html';?>" target="_blank">我的优惠券</a>
+                	<a rel="nofollow" href="<?php echo $this->config->ucenter_url.'address.html';?>" target="_blank">收货地址</a>
                 </div>
             </li>
             <li>
@@ -66,7 +66,9 @@
             		<em class="f f14 mr5 iconfont red">&#xe60c;</em>我的订单
             	</a>
             </li>
-            <!--  <li class="nbt">
+            
+            <!-- 
+            <li class="nbt">
                 <a href="javascript:;" rel="nofollow">
                 	<em class="f mt1 iconfont">&#xe608;</em>手机版
                 	<em class="rdop"></em>
@@ -74,18 +76,20 @@
                 <div class="tuln">
                 	<img src="help/images/tm31.png" width="188" height="124"/>
                 </div>
-            </li>-->
+            </li>
+             -->
             <li class="nbt">
                 <a href="<?php echo $this->config->help_url;?>" rel="nofollow">客户服务<em class="rdop"></em></a>
                 <div class="tuln">
-                	<a href="<?php echo $this->config->help_url.'help_center/index/9';?>" rel="nofollow" target="_blank">如何订购</a>
-                	<a href="<?php echo $this->config->help_url.'help_center/index/5';?>" rel="nofollow" target="_blank">在线支付</a>
-                	<a href="<?php echo $this->config->help_url.'help_center/index/14';?>" rel="nofollow" target="_blank">物流查询</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/9.html';?>" rel="nofollow" target="_blank">如何订购</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/23.html';?>" rel="nofollow" target="_blank">在线支付</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/28.html';?>" rel="nofollow" target="_blank">常见问题</a>
+                	<a href="<?php echo $this->config->help_url.'help_center/index/25.html';?>" rel="nofollow" target="_blank">分销指南</a>
                 </div>
             </li>
-            <li><a href="<?php echo $this->config->help_url;?>" rel="nofollow" class="pr5" target="_blank">商家服务</a></li>
+            <li><a href="<?php echo $this->config->help_url.'help_center/index/27.html';?>" rel="nofollow" class="pr5" target="_blank">商家服务</a></li>
             <li>
-            	<a rel="nofollow" href="javascript:;" class="contact-kf">
+            	<a rel="nofollow" href="http://wpa.qq.com/msgrd?v=3&uin=2644720895&site=qq&menu=yes" class="contact-kf" target="_blank">
             		<em class="f f14 iconfont mr5">&#xe605;</em>联系客服
             	</a>
             </li>
