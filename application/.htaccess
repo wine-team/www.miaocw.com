@@ -1,6 +1,14 @@
-<IfModule authz_core_module>
-    Require all denied
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    Options +FollowSymLinks
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteCond $1 !^(index\.php|(.*)\.swf|images|robots\.txt|css|docs)
+    RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>
-<IfModule !authz_core_module>
-    Deny from all
+
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 /application/errors/404.php
 </IfModule>
