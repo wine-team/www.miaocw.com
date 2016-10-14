@@ -23,71 +23,48 @@
 		</div>
 		<div class="h_fl">
 			<div class="h_cat">
-				<h3 class="mb5">飞机杯/增大</h3>
-				<a class="c_zon" href="<?php echo site_url('goods/search?keyword=电动型');?>" target="_blank">电动型</a>
-				<a href="<?php echo site_url('goods/search?keyword=手动型');?>" target="_blank">手动型</a>
-				<a href="<?php echo site_url('goods/search?keyword=免提式');?>" target="_blank">免提式</a>
-				<a href="<?php echo site_url('goods/search?keyword=阴交型');?>" class="c_zon" target="_blank">阴交型</a>
-				<a href="<?php echo site_url('goods/search?keyword=电动增大');?>" class="c_zon" target="_blank">电动增大</a>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" target="_blank">两用型</a>
+				<h3 class="mb5">挑逗服饰</h3>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>" class="c_zon">火辣三点</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">连体网衣</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>" class="c_on">黑色丝袜</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">丁字裤</a>
 			</div>
 			<div class="h_cat">
-				<h3 class="mb5">真人倒模</h3>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>"  class="c_zon"target="_blank">阴部</a>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" target="_blank">臀部</a>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" target="_blank" class="c_zon">AV女优</a>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" target="_blank" >真人呻吟</a>
+				<h3 class="mb5">制服诱惑</h3>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">女仆</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">学生</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">护士</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">空姐</a>
 			</div>
 			<div class="h_cat">
-				<h3 class="mb5">其他</h3>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" class="c_zon" target="_blank">充气娃娃</a>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" target="_blank">实体娃娃</a>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" target="_blank">前列腺刺激</a>
-				<a href="<?php echo site_url('goods/search?keyword=两用型');?>" target="_blank">延时喷剂</a>
+				<h3 class="mb5">性感诱惑</h3>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">性感裙装</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>" class="c_zon">透视</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">开档丝袜</a>
+				<a target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">蕾丝</a>
 			</div>
-			<a class="h_ff" target="_blank" href="<?php echo site_url('goods/femal');?>">
-				<img src="http://s.qw.cc/themes/v4/css/ft/f1.jpg" width="123" height="75" alt="男性用品">
+			<a class="h_ff" target="_blank" href="<?php echo site_url('goods/search?keyword=延时助情');?>">
+				<img alt="情趣内衣" src = "http://s.qw.cc/themes/v4/css/ft/f4.jpg" width="123" height="75">
 			</a>
-		</div>
-		<div class="h_fm">
-			<a href="<?php echo site_url('goods/femal');?>" target="_blank">
-				<img src="http://s.qw.cc/data/afficheimg/1451448053762084083.jpg" width="400" height="390">
-			</a>
-		</div>
-		<div class="h_fr">
-	        <a href="<?php echo site_url('goods/detail');?>" class="f_aa" target="_blank">
-	            <div class="f_am">
-	            	飞机杯式<em class="red">增大器</em>
-					<p>电动夹吸，4D通道</p>
-					<i>¥459</i>
-				</div>
-				<img src="http://s.qw.cc/data/afficheimg/1453446640724076722.jpg" width="160" height="170" class="ha_po" />
-		    </a>
-	        <a href="<?php echo site_url('goods/detail');?>" class="f_aa" target="_blank">
-	            <div class="f_am">
-	                                             国优<em class="red">名器</em>
-	                                             兽兽宝贝<p>私处仿真倒模</p>
-	                <i>¥199</i>
-	            </div>
-	            <img src = "http://s.qw.cc/data/afficheimg/1441781567790022284.jpg" width="160" height="170" class="ha_po"/>
-	        </a>
-	        <a href="<?php echo site_url('goods/detail');?>" class="f_aa" target="_blank">
-	            <div class="f_am">
-	                                             触控型<em class="red">真人发声</em>
-	            	飞机杯<p>配嫩模真人叫床声</p>
-	            	<i>¥299</i>
-	            </div>
-	            <img src = "http://s.qw.cc/data/afficheimg/1449233890346675557.jpg" width="160" height="170" class="ha_po" />
-	        </a>
-	        <a href="<?php echo site_url('goods/detail');?>" class="f_aa" target="_blank">
-	           <div class="f_am">
-	            	<em class="red">英国Revo</em>
-	            	前列腺按摩<p>360°旋转式按摩</p>
-	            	<i>¥1799</i>
-	           </div>
-	           <img src = "http://s.qw.cc/data/afficheimg/1456883466852655483.jpg" width="160" height="170" class="ha_po">
-	        </a>
-	    </div>
+		 </div>
+		 <div class="h_sex" id="h_sex">
+            <a href="<?php echo site_url('goods/detail');?>" class="hx_a" target="_blank">
+            	<img src="http://s.qw.cc/data/afficheimg/1454400614446268041.jpg" width="248" height="390"/>
+            	<p class="sx_t"></p>
+            </a>
+            <a href="<?php echo site_url('goods/detail');?>" class="hx_a" target="_blank">
+            	<img src="http://s.qw.cc/data/afficheimg/1441706343050175272.jpg" width="248" height="390">
+            		<p class="sx_t"></p>
+            	</a>
+            <a href="<?php echo site_url('goods/detail');?>" class="hx_a" target="_blank">
+            	<img src="http://s.qw.cc/data/afficheimg/1441706369696309198.jpg" width="248" height="390">
+            	<p class="sx_t"></p>
+            </a>
+            <a href="<?php echo site_url('goods/detail');?>" class="hx_a" target="_blank">
+            	<img src="http://s.qw.cc/data/afficheimg/1457420294119268664.jpg" width="248" height="390">
+            	<p class="sx_t"></p>
+            </a>
+	     </div>
 
 
 
