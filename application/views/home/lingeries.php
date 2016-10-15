@@ -29,7 +29,7 @@
                   <a href="<?php echo site_url('goods/search?category_id=93');?>" target="_blank" title="制服诱惑">制服诱惑</a>
                 </li> 
           </ul>
-          <a href="<?php echo site_url('goods/search?category_id=22');?>" target="_blank" class="chosen-list-more">所有<i class="chosen-list-arrow"></i></a>
+          <a href="<?php echo site_url('goods/search?category_id=22');?>" target="_blank" class="chosen-list-more">更多<i class="chosen-list-arrow"></i></a>
      </div>
      <ul class="chosen-list relative clf">
            <li class="chosen-item" style="left: 0px; top: 0px; width: 346px; height: 460px;">

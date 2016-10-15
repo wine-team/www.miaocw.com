@@ -18,7 +18,7 @@
              </li>
                  
         </ul>
-        <a href="<?php echo site_url('goods/search?category_id=21');?>" target="_blank" class="chosen-list-more">所有<i class="chosen-list-arrow"></i></a>
+        <a href="<?php echo site_url('goods/search?category_id=21');?>" target="_blank" class="chosen-list-more">更多<i class="chosen-list-arrow"></i></a>
      </div>
      <ul class="chosen-list relative clf">
         <li class="chosen-item" style="left: 500px; top: 1px; width: 475px; height: 230px;">

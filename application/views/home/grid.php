@@ -20,21 +20,31 @@
 </div>
 <?php endif;?>
 <div id="content" class="w home-content">
+    
+    <?php if (!empty($cms_block['head_hot_keyword'])):?>
     <div class="hlock over mt35">
 	    <div class="lk_l left"><p class="ldok">●</p></div>
 	    <div class="lk_r left" id="lk_r">
 	        <?php echo $cms_block['head_today_recommend'];?>
 	    </div>
 	</div>
+	<?php endif;?>
+	
+	<?php if (!empty($cms_block['head_recommend_down'])):?>
 	<div class="w ov mt35">
 		<div class="h_pic" id="h_pic">
 		     <?php echo $cms_block['head_recommend_down'];?>
 		     <div class="clear"></div>
 		</div>
 	</div>
+	<?php endif;?>
+	
+	<?php if (!empty($cms_block['head_hot_keyword'])):?>
 	<div class="hotk ov">
 		<?php echo $cms_block['head_hot_keyword'];?>
 	</div>
+	<?php endif;?>
+	
 	<div class="chosen-box clf condom">
         <?php $this->load->view('home/condom')?>
     </div>

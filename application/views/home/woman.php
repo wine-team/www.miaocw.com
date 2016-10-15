@@ -32,7 +32,7 @@
                   <a href="<?php echo site_url('goods/search?category_id=20');?>" target="_blank" title="AV震动棒">AV震动棒</a>
               </li>       
           </ul>
-          <a href="<?php echo site_url('goods/search?category_id=2');?>" target="_blank" class="chosen-list-more">所有<i class="chosen-list-arrow"></i></a>
+          <a href="<?php echo site_url('goods/search?category_id=2');?>" target="_blank" class="chosen-list-more">更多<i class="chosen-list-arrow"></i></a>
     </div>
     <ul class="chosen-list relative clf">
           <li class="chosen-item" style="left: 0px; top: 0px; width: 558px; height: 460px;">

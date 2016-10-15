@@ -27,7 +27,7 @@
                   <a href="<?php echo site_url('goods/search?category_id=45');?>" target="_blank" title="项圈脖套">项圈脖套</a>
             </li> 
         </ul>
-        <a href="<?php echo site_url('goods/search?category_id=23');?>" target="_blank" class="chosen-list-more">所有<i class="chosen-list-arrow"></i></a>
+        <a href="<?php echo site_url('goods/search?category_id=23');?>" target="_blank" class="chosen-list-more">更多<i class="chosen-list-arrow"></i></a>
     </div>
     <ul class="chosen-list relative clf">
         <li class="chosen-item" style="left: 0px; top: 0px; width: 558px; height: 460px;">
