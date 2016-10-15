@@ -1,4 +1,5 @@
 <?php
+
 class Account_log_model extends CI_Model
 {
 	private $table = 'account_log';
