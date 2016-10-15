@@ -17,17 +17,21 @@ class Home extends MW_Controller{
 	*/
 	public function grid() {
 
+		$cms_block = array(
+				'home_keyword', 'head_right_advert','head_today_recommend',
+				'head_recommend_down','head_hot_keyword','homepage_advert',
+				'home_condom','home_lingeries','home_man',
+				'home_woman','home_yanshi','home_lover'
+		);
 		if (!$this->cache->memcached->get('hostHomePageCache')) {
 			$data = array(
 				'advert' => $this->advert->findBySourceState($source_state=1)->result_array(),
-			    'cms_block' => $this->cms_block->findByBlockIds(array('home_keyword','head_right_advert','head_today_recommend','head_recommend_down','head_hot_keyword','homepage_advert')),
-			    'brand' => $this->mall_brand->findBrand($limit=6)->result_array()
+			    'cms_block' => $this->cms_block->findByBlockIds($cms_block),
 			);
 			$this->cache->memcached->save('hostHomePageCache',$data);
 		} else {
 			$data = $this->cache->memcached->get('hostHomePageCache');
 		}
-        $data['infor'] = $this->help_center->getHelpCenter($limit=6);
 		$data['cart_num'] = ($this->uid) ? $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->uid))->num_rows() : 0; 
 		$this->load->view('home/grid',$data);
 	}
