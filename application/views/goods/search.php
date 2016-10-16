@@ -2,13 +2,16 @@
 <div id="content" class="w goods-list">
    	<div class="s_tl">
    		<span class="left">
-   			<a href="<?php echo $this->config->main_base_url;?>">首页</a>
+   			<a href="javascript:;">当前位置</a>
+   			<code class="lr3">:</code>
+   			<a href="<?php echo site_url();?>">妙处网</a>
+   			<?php if ($this->input->get('keyword')):?>
    			<code class="lr3">></code>
-   			<a href="javascript:;">关键字</a><code class="lr3">></code>
-   			<b class="lr3"> <?php echo $this->input->get('keyword');?> </b>
+   			<b class="lr3"><?php echo $this->input->get('keyword');?></b>
+   			<?php endif;?>
    		</span>	
 		<ul class="left s_sx">
-		    <?php if($this->input->get('category_id') && !empty($category_arr)) :?>
+		    <?php if ($this->input->get('category_id')) :?>
 		      <li>
 		          <a class="d_xx" title="分类" href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'category_id'));?>">
 		           分类：<?php echo $category_arr[$this->input->get('category_id')];?>
@@ -30,11 +33,13 @@
 		      </li>
 		    <?php endif;?>
 		    
+		    <?php if($this->input->get('order')):?>
             <li>
                 <a class="d_xx" title="排序" href="<?php echo site_url('goods/search?keyword='.$this->input->get('keyword'));?>">
-                             排序：<?php echo empty($this->input->get('order')) ? '默认' : $order_arr[$this->input->get('order')];?>
+                      排序：<?php echo $order_arr[$this->input->get('order')];?>
     		    </a>
 		    </li>
+		    <?php endif;?>
         </ul>
    		
    		<span class="right">共找<b class="c3"><?php echo $all_rows;?></b>件</span>
@@ -54,18 +59,22 @@
 				<p class="b_rmo <?php if(count($category_arr)<14) echo 'hid';?>" id="">更多</p>
 			</dd>
 		</dl>
+		
+		<?php if ($brand_arr->num_rows()>0):?>
 		<dl class="sdl">
 			<dt>品牌</dt>
 			<dd id="brand_dl" class="brand_dl">
 				<div id="list_b" class="over">
-				    <?php foreach ($brand_arr as $brand) :?>
+				    <?php foreach ($brand_arr->result() as $brand) :?>
 					<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'brand_id,brand_name').'&brand_id='.$brand->brand_id.'&brand_name='.$brand->brand_name);?>" class="<?php if($this->input->get('brand_id')==$brand->brand_id) echo 'on';?>"><?php echo $brand->brand_name;?></a>
 					<?php endforeach;?>
 				</div>
 				<p class="wz_b"></p>
-				<p class="b_rmo <?php if(count($brand_arr)<14) echo 'hid';?>" id="b_rmo">更多</p>
+				<p class="b_rmo <?php if($brand_arr->num_rows()<14):?>hid<?php endif;?>" id="b_rmo">更多</p>
 			</dd>
 		</dl>
+		<?php endif;?>
+		
 		<dl class="sdl">
 			<dt>价格</dt>
 			<dd>
@@ -108,7 +117,8 @@
 	<div class="gdls" id="gdls">
 	    <?php foreach ($page_list as $goods) :?>
 		<dl class="gl">
-			<dt><?php $img_arr=array_filter(explode('|',$goods->goods_img));?>
+			<dt>
+			    <?php $img_arr=array_filter(explode('|',$goods->goods_img));?>
 				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
 					<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_name;?>" />
 				</a>
@@ -141,54 +151,17 @@
 		<?php endforeach;?>
 	</div>
 	<div class="page" id="pager">
-  		<span class="yemr">总计<b><?php echo $all_rows;?></b> 条记录</span>                     
+  		<span class="yemr">总计<b><?php echo $all_rows;?></b> 条记录</span>              
   		<?php echo $pg_link;?>
     </div>
-    <div class="ftj mt35">
+    <div class="ftj mt35 b_li">
 		<?php echo $cms_block['search_keyword'];?>
 	</div>
-	<div class="b_li">
 	
-		<a href="javascript:;" class="dn_a" target="_blank">
-			<img src="http://s.qw.cc/images/201503/goods_img/5076_P_1426578924869-270x270.jpg" width="270" height="270" class="sbm" />
-			<div class="h250">
-				<p class="OverH">德国FunFactory神鬼战士左鹰深度抽插按摩棒</p>
-				<p><b class="red f14">¥1610.00</b><del class="ml10">¥3299.00</del></p>
-				<p class="c9">销量 <em class="c_zon">1753</em>笔 | 评价 <em class="c_blue">53</em></p>
-			</div>
-		</a>
-		<a href="javascript:;" class="dn_a" target="_blank">
-			<img src="http://s.qw.cc/images/201511/goods_img/6002_P_1446719027726-270x270.jpg" width="270" height="270" class="sbm" />
-			<div class="h250">
-				<p class="OverH">香港简爱定海神针智能恒温高潮冲击棒</p>
-				<p><b class="red f14">¥338.00</b><del class="ml10">¥439.40</del></p>
-				<p class="c9">销量 <em class="c_zon">4212</em>笔 | 评价 <em class="c_blue">57</em></p>
-			</div>
-		</a>
-		<a href="goods-8926.html" class="dn_a" target="_blank">
-			<img src="http://s.qw.cc/images/201601/goods_img/8926_P_1452499709527-270x270.jpg" width="270" height="270" class="sbm">
-			<div class="h250">
-				<p class="OverH">惹火猫 加温震动充电静音防水AV棒</p>
-				<p><b class="red f14">¥298.00</b><del class="ml10">¥387.40</del></p>
-				<p class="c9">销量 <em class="c_zon">1690</em>笔 | 评价 <em class="c_blue">66</em></p>
-			</div>
-		</a>
-		<a href="goods-5510.html" class="dn_a" target="_blank">
-			<img src="http://s.qw.cc/images/201602/goods_img/5510_P_1456297733634-270x270.jpg" width="270" height="270" class="sbm">
-			<div class="h250">
-				<p class="OverH">法国乐慕L-AMOUROSE加温G点震动棒</p>
-				<p><b class="red f14">¥1680.00</b><del class="ml10">¥3399.00</del></p>
-				<p class="c9">销量 <em class="c_zon">1191</em>笔 | 评价 <em class="c_blue">21</em></p>
-			</div>
-		</a>
-		
-	</div>	
 	<div class="tpk over">
 	    <?php echo $cms_block['foot_recommend_img'];?>
 	</div>
-	<p class="alC">
-		<a href="javascript:;" class="hbtn c9 mt15" target="_blank" rel="nofollow">查看更多活动</a>
-	</p>
+	
 	<div class="fa_l clearfix mt35">
 		<?php echo $cms_block['foot_speed_key'];?>
 	</div>
