@@ -129,8 +129,8 @@
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb10">
-				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
-				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
+				<a href="<?php echo site_url('goods/detail/'.$goods->goods_id);?>" class="gna" title="<?php echo $goods->goods_name;?>" target="_blank"><?php echo $goods->goods_name;?></a>
+				<a href="<?php echo site_url('goods/detail/'.$goods->goods_id);?>" class="gna c9" title="<?php echo $goods->goods_brief;?>" target="_blank"><?php echo $goods->goods_brief;?></a>
 			</dd>
 			<?php if( !empty($goods->promote_price) && !empty($goods->promote_start_date) && !empty($goods->promote_end_date) && ($goods->promote_start_date<=time()) && ($goods->promote_end_date>=time())):?>
 				<?php $shop_price = $goods->promote_price;?>
