@@ -45,7 +45,7 @@ class Goods extends MW_Controller{
 	        if (!isset($category[$s->category_id]) && !empty($s->category_id)) {
 	            $category[$s->category_id] = $s->cat_name;
 	        }
-	    } 
+	    }
 	    $data['category_arr'] = $category;
 	    $data['price_arr'] = get_priceRange();
 	    $data['brand_arr'] = $this->mall_brand->findBrand();
@@ -69,10 +69,11 @@ class Goods extends MW_Controller{
 	 /**
 	 *产品详情
 	 */
-	public function detail(){
+	public function detail($goods_id){
 		
-		$data = $this->common();
-		$goods_id = $this->input->get('goods_id',true);
+		if(empty($goods_id)) {
+			$this->error('goods/search','','搜索无结果');
+		}
 		$res = $this->mall_goods_base->getGoodsByGoodsId($goods_id);
 		if ($res->num_rows()<=0) {
 		   $this->error('goods/search','','搜索无结果');
@@ -81,6 +82,7 @@ class Goods extends MW_Controller{
 		$this->seeHistory($goods);
 		$attr_value = json_decode($goods->attr_value,true);
 		$this->mall_goods_base->setMallCount($goods_id);
+		$data = $this->common();
 		$data['goods'] = $goods;
 		$data['ewm'] = $this->productEwm($goods_id);
 		$data['enshrine'] = $this->isEnshrine($goods_id);

@@ -49,7 +49,7 @@
     <div class="scat over">
 		<dl class="sdl sfst">
 			<dt><b class="red">分类</b></dt> 
-			<dd id="" class="brand_dl">
+			<dd class="brand_dl">
 				<div id="list_b" class="over">
 				    <?php foreach ($category_arr as $cat_id=>$cat_name) : ?>
     				<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'category_id').'&category_id='.$cat_id);?>" class="<?php if($this->input->get('category_id')==$cat_id) echo 'on';?>"><?php echo $cat_name;?></a>
@@ -118,8 +118,8 @@
 	    <?php foreach ($page_list as $goods) :?>
 		<dl class="gl">
 			<dt>
-			    <?php $img_arr=array_filter(explode('|',$goods->goods_img));?>
-				<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" target="_blank">
+			    <?php $img_arr = array_filter(explode('|',$goods->goods_img));?>
+				<a href="<?php echo site_url('goods/detail/'.$goods->goods_id);?>" target="_blank">
 					<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_name;?>" />
 				</a>
 			</dt>
