@@ -239,10 +239,10 @@ class Payment extends CS_Controller {
       * 二维码的生产
       * @param unknown $attr_id
       */
-     public function productEwm($mainOrderSn){
+     public function productEwm($payId){
      		
-     	$url = $this->config->m_url.'pay/wxPay?pay='.base64_encode($mainOrderSn).'.html';
-     	$name = 'pay-'.$mainOrderSn.'.png';
+     	$url = $this->config->m_url.'pay/wxPay?pay='.base64_encode($payId).'.html';
+     	$name = 'pay-'.$payId.'.png';
      	$path = $this->config->upload_image_path('common/ewm').$name;
      	$this->QRcode->png($url,$path,4,10);
      	return $name;
