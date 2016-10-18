@@ -27,12 +27,12 @@
 						<dt class="mt5">售价</dt>
 						<dd>
 							<b class="yen">¥</b>
-							<?php if( !empty($goods->promote_price) && !empty($goods->promote_start_date) && !empty($goods->promote_end_date) && ($goods->promote_start_date<=time()) && ($goods->promote_end_date>=time())):?>
+							<?php if (!empty($goods->promote_price) && ($goods->promote_start_date<=time()) && ($goods->promote_end_date>=time())) : ?>
 								<?php $total_price = $goods->promote_price;?>
 							<?php else:?>
 								<?php $total_price = $goods->shop_price;?>
 							<?php endif;?>
-							<b id="ECS_RANKPRICE_m" class="red f30">
+							<b class="red f30">
 								<?php echo $total_price;?>
 							</b>
 							<?php if ($total_price>=99):?>
@@ -80,7 +80,7 @@
 				<p class="bline"></p>
 				<p class="lh16">&nbsp;</p>
 				<div id="wrap" class="xcolor mb15 additive">
-				    <?php $spec = json_decode($goods->attr_spec,true);?>
+				    <?php $spec = json_decode($goods->attr_spec, true);?>
 				    <?php if (!empty($spec)):?>
 					    <?php foreach ($spec as $attr_value_id=>$val):?>
 						    <?php if(!empty($val['spec_value'])):?>
