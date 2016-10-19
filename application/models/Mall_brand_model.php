@@ -7,7 +7,7 @@ class Mall_brand_model extends CI_Model{
 	 * 获取品牌
 	 * @param unknown $limit
 	 */
-	public function findBrand($limit = 0,$f='*'){
+	public function findBrand($f='*',$limit=0){
 		
 		$this->db->select($f);
 		$this->db->from($this->table);

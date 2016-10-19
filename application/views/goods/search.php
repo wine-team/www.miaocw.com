@@ -1,50 +1,11 @@
 <?php $this->load->view('layout/header');?>
+
 <div id="content" class="w goods-list">
-   	<div class="s_tl">
-   		<span class="left">
-   			<a href="javascript:;">当前位置</a>
-   			<code class="lr3">></code>
-   			<a href="<?php echo site_url();?>">妙处网</a>
-   			<?php if ($this->input->get('keyword')):?>
-   			<code class="lr3">></code>
-   			<a><?php echo $this->input->get('keyword');?></a>
-   			<?php endif;?>
-   		</span>	
-   		<span class="right">共找<b class="c3"><?php echo $all_rows;?></b>件</span>
-    </div>
-	<div class="sxbox">
-		<div class="ls_cat" id="ls_cat">
-		    <?php 
-		    	$order = $this->input->get('order');
-		        $keyword = $this->input->get('keyword');
-		    ?>
-			<div class="w">
-				<div class="left pl10">
-				    <a href="<?php echo site_url('goods/search?'.http_build_query(array('keyword'=>$keyword)));?>" class="sb_a <?php if(empty($order)):?>sb_on<?php endif;?>">默认</a>
-				    <a href="<?php echo site_url('goods/search?'.http_build_query(array('keyword'=>$keyword,'order'=>1)));?>" class="sb_a <?php if($order==1):?>sb_on<?php endif;?>">最新上架</a>
-				    <a href="<?php echo site_url('goods/search?'.http_build_query(array('keyword'=>$keyword,'order'=>($order==4 ? 5 : 4))));?>" class="sb_a <?php if(in_array($order,array(4,5))):?>sb_on<?php endif;?>  <?php if($order==4):?>sup<?php endif;?>">
-				    	<em class="pr10">价格</em>
-				    	<i class="rjg"></i>
-				    </a>
-				    <a href="<?php echo site_url('goods/search?'.http_build_query(array('keyword'=>$keyword,'order'=>2)));?>" class="sb_a <?php if($order==2):?>sb_on<?php endif;?>">热销</a>
-				    <a href="<?php echo site_url('goods/search?'.http_build_query(array('keyword'=>$keyword,'order'=>3)));?>" class="sb_a <?php if($order==3):?>sb_on<?php endif;?>">热门</a>
-				</div>
-				<?php if ($all_pg>1):?>
-				<div class="prt right"> 
-					<span class="left mr10"><?php echo $pg_now?>/<?php echo $all_pg;?></span>
-					<?php if($pg_now>1) :?>
-						<a class="pr_a" href="<?php echo site_url('goods/search/'.($pg_now-1).'?'.http_build_query($this->input->get()));?>" >上一页</a> 
-					<?php endif;?>
-					<?php if($pg_now<$all_pg):?>
-						<a class="pr_a" href="<?php echo site_url('goods/search/'.($pg_now+1).'?'.http_build_query($this->input->get()));?>">下一页</a>
-					<?php endif;?>
-				</div>
-				<?php endif;?>
-			</div>
-		</div>
-	</div>
+    
+   	<?php $this->load->view('goods/searchHeader');?>
+   	
 	<div class="gdls" id="gdls">
-	    <?php foreach ($page_list as $goods) :?>
+	    <?php foreach ($goods->result() as $goods) :?>
 		<dl class="gl">
 			<dt>
 			    <?php $img_arr = array_filter(explode('|',$goods->goods_img));?>

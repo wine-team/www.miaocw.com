@@ -42,4 +42,17 @@ class Mall_category_model extends CI_Model{
 		$this->db->where('is_show',1);
 	    return $this->db->get();
 	}
+	
+	/**
+	 * 
+	 * @param string $f
+	 * @param unknown $cat_id
+	 */
+	public function findCatById($f='*',$cat_id) {
+		
+		$this->db->select($f);
+		$this->db->from($this->table);
+		$this->db->where('cat_id',$cat_id);
+		return $this->db->get();
+	}
 }

@@ -94,7 +94,8 @@ class Mall_goods_base_model extends CI_Model{
 	    	$this->db->where('mall_goods_base.brand_id', (int)$search['brand_id']);
 	    }
 	    if (!empty($search['category_id'])) {
-	        $this->db->where('t.category_id', (int)$search['category_id']);
+	    	$category_id = (int)$search['category_id'];
+	    	$this->db->where("`mall_goods_base`.`goods_id` IN (SELECT DISTINCT goods_id FROM mall_category_product WHERE category_id=".$category_id.")");
 	    }
 	    if (!empty($search['price_range'])) {
 	    	
@@ -124,7 +125,8 @@ class Mall_goods_base_model extends CI_Model{
 	        $this->db->where("((`mall_goods_base`.`goods_name` LIKE '%{$keyword}%') OR (`mall_goods_base`.`goods_sku` LIKE '%{$keyword}%'))");
 	    }
 	    if (!empty($search['category_id'])) {
-	        $this->db->where('t.category_id', (int)$search['category_id']);
+	    	$category_id = (int)$search['category_id'];
+	        $this->db->where("`mall_goods_base`.`goods_id` IN (SELECT DISTINCT goods_id FROM mall_category_product WHERE category_id=".$category_id.")");
 	    }
 	    if (!empty($search['price_range'])) {
 	    	

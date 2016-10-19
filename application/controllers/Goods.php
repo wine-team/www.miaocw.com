@@ -27,8 +27,9 @@ class Goods extends MW_Controller
     {
         $page_num = 20;
         $num = ($pg-1)*$page_num;
-        $searchTotal = $this->mall_goods_base->searchTotal($this->input->get());
-        $config['first_url'] = base_url('goods/search').$this->pageGetParam($this->input->get());
+        $param = $this->input->get();
+        $searchTotal = $this->mall_goods_base->searchTotal($param);
+        $config['first_url'] = base_url('goods/search').$this->pageGetParam($param);
         $config['suffix'] = $this->pageGetParam($this->input->get());
         $config['base_url'] = base_url('goods/search');
         $config['total_rows'] = $searchTotal->num_rows();
@@ -36,14 +37,39 @@ class Goods extends MW_Controller
         $this->pagination->initialize($config);
         $data = $this->common();
         $data['pg_link'] = $this->pagination->create_links(); 
-        $data['page_list'] = $this->mall_goods_base->page_list($page_num, $num, $this->input->get())->result(); 
+        $data['goods'] = $this->mall_goods_base->page_list($page_num, $num, $param); 
         $data['all_pg'] = ceil($config['total_rows']/$page_num);
         $data['all_rows'] = $config['total_rows'];
         $data['pg_now'] = $pg;
-        $data['price_arr'] = get_priceRange();
-        $data['brand_arr'] = $this->mall_brand->findBrand();
-        $data['order_arr'] = array('1'=>'最新上架','2'=>'热销','3'=>'热门', '4'=>'价格从低到高', '5'=>'价格从高到低');
+        $data['ct_param'] = $this->get_ct_param($param);
+        $data['brand_arr'] = 
         $this->load->view('goods/search',$data);
+    }
+    
+     /**
+     * 分类 和  关键词搜索的时候 分别显示的不同类目
+     * @param unknown $param
+     */
+    private function get_ct_param($param) {
+    	
+    	$brand = '';
+    	$category = '';
+    	$keyword = '';
+    	if (!empty($param['category_id'])) {
+    		
+    		$bf = 'brand_id,brand_name';
+    		$brand = $this->mall_brand->findBrand($bf);
+    		
+    		$cf = 'cat_id,cat_name,parent_id';
+    		$ctRes = $this->mall_category->findCatById($cf,$param['category_id']);
+    		$ct = $ctRes->row(0);
+    		
+    		$parentId = ($ct->parent_id==0) ? $ct->cat_id : $ct->parent_id;
+    	    $category = $this->mall_category->getChildCat($parentId);
+    	    
+    	    $keyword = $ct->cat_name;
+    	}
+    	return array('brand'=>$brand,'category'=>$category,'keyword'=>$keyword);
     }
     
      /**
@@ -59,8 +85,11 @@ class Goods extends MW_Controller
         $this->load->view('goods/femal',$data);
     }
     
-    /*
-     * 产品详情
+    
+    
+     /**
+     * 
+     * @param unknown $goods_id
      */
     public function detail($goods_id)
     {
