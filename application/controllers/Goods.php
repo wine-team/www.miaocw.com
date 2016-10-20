@@ -28,6 +28,7 @@ class Goods extends MW_Controller
         $page_num = 20;
         $num = ($pg-1)*$page_num;
         $param = $this->input->get();
+        $keyword = $this->input->get('keyword');
         $searchTotal = $this->mall_goods_base->searchTotal($param);
         $config['first_url'] = base_url('goods/search').$this->pageGetParam($param);
         $config['suffix'] = $this->pageGetParam($this->input->get());
@@ -42,7 +43,7 @@ class Goods extends MW_Controller
         $data['all_rows'] = $config['total_rows'];
         $data['pg_now'] = $pg;
         $data['ct_param'] = $this->get_ct_param($param);
-        $data['brand_arr'] = 
+        $data['headTittle'] = empty($keyword) ? ($data['ct_param']['keyword'] ? $data['ct_param']['keyword'] : '情趣商城' ): $keyword;
         $this->load->view('goods/search',$data);
     }
     
