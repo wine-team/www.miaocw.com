@@ -190,10 +190,10 @@
 			<div id="description" class="gdes lh25">
 			    <?php if(!empty($attr_value)):?>
 				<div class="g_attr mb10">
-				    <?php foreach ($attr_value as $group_id=>$val):?>
-					    <?php foreach ($val['group_value'] as $attr_value_id=>$item):?>
-							<p title="<?php echo $item; ?>">
-								<?php echo $attribute_value[$attr_value_id]; ?>：<?php echo $item; ?>
+				    <?php foreach ($attr_value as $val):?>
+					    <?php foreach ($val['group_value'] as $item):?>
+							<p title="<?php echo $item['attr_name'];?>">
+								<?php echo $item['attr_name']; ?>：<?php echo $item['attr_value']; ?>
 							</p>
 						<?php endforeach;?>
 					<?php endforeach;?>

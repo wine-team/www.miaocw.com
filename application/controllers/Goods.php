@@ -104,47 +104,16 @@ class Goods extends MW_Controller
         $goodsbase = $res->row(0);
         $this->seeHistory($goodsbase); //设置浏览记录
         $attrValue = json_decode($goodsbase->attr_value, true);
-        //pr($attrValue);
         $this->mall_goods_base->setMallCount($goods_id); //设置产品浏览量
         $data = $this->common();
         $data['goods'] = $goodsbase;
         $data['ewm'] = $this->productEwm($goods_id); //生成二维码
         $data['enshrine'] = $this->isEnshrine($goods_id);
         $data['attr_value'] = $attrValue;
-        $data['attribute_value'] = $this->getAttrValues($attrValue);
         $data['countReviews'] = $this->getReviewsArray($goods_id);
         $this->load->view('goods/detail',$data);
     }
-    
-     /**
-     * 获取所有的规格属性
-     * @param unknown $attr_set_id
-     */
-    public function getAttrValues($attrValue)
-    {
-        if (empty($attrValue)) {
-            return false;
-        }
-        $idArray = array();
-        foreach($attrValue as $group_id=>$val) {
-            foreach ($val['group_value'] as $attr_value_id=>$item) {
-                $idArray[] = $attr_value_id;
-            }
-        }
-        if (empty($idArray)) {
-            return false;
-        }
-        $res = $this->mall_attribute_value->findByRes(array('attr_value_id'=>$idArray), 'attr_value_id,attr_name');
-        if ($res->num_rows()<=0){
-            return false;
-        }
-        $attr = array();
-        foreach ($res->result() as $item){
-            $attr[$item->attr_value_id] = $item->attr_name;
-        }
-        return $attr;
-    }
-    
+
     /**
      * 推荐产品
      */
