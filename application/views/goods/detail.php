@@ -322,18 +322,11 @@
 		<div class="glb same-hot" cat="<?php echo $goods->attr_set_id;?>">
 			 <?php //$this->load->view('goods/samehot');?>
 		</div>
-		<p class="glh3">
-			<em class="f f16">&#xe636;</em>
-			<b>整站热卖</b>
-		</p>
-		<div class="glb all-hot">
-		     <?php //$this->load->view('goods/allhot');?>
-		</div>
 	</div>
 	<div class="clear"></div>
 	<div class="fa_l clearfix mt35">
 		<?php echo $cms_block['foot_speed_key'];?>
 	</div>
 </div>
-<?php $this->load->view('goods/detailLogin');?>
+<?php $this->load->view('layout/login');?>
 <?php $this->load->view('layout/footer');?>
