@@ -31,7 +31,7 @@ class Goods extends MW_Controller
         $keyword = $this->input->get('keyword');
         $searchTotal = $this->mall_goods_base->searchTotal($param);
         $config['first_url'] = base_url('goods/search').$this->pageGetParam($param);
-        $config['suffix'] = $this->pageGetParam($this->input->get());
+        $config['suffix'] = $this->pageGetParam($param);
         $config['base_url'] = base_url('goods/search');
         $config['total_rows'] = $searchTotal->num_rows();
         $config['uri_segment'] = 3;
@@ -92,7 +92,7 @@ class Goods extends MW_Controller
      * 
      * @param unknown $goods_id
      */
-    public function detail($goods_id)
+    public function detail($goods_id='')
     {
         if (empty($goods_id)) {
             show_404();
@@ -111,6 +111,7 @@ class Goods extends MW_Controller
         $data['enshrine'] = $this->isEnshrine($goods_id);
         $data['attr_value'] = $attrValue;
         $data['countReviews'] = $this->getReviewsArray($goods_id);
+        $data['headTittle'] = $goodsbase->goods_name;
         $this->load->view('goods/detail',$data);
     }
 
