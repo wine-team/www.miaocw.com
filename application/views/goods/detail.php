@@ -46,7 +46,7 @@
 						<dd>
 							已销售<b class="blue"><?php echo $goods->sale_count;?></b>件
 							<span class="vline">|</span>
-							<a href="javascript:;"  class="gray <?php if($goods->review_count>0):?>review-count<?php endif;?>" rel="nofollow">(<b class="blue"><?php echo $goods->review_count;?></b>人已评</a>)
+							<a href="javascript:;" class="gray <?php if($countReviews['all']>0):?>review-count<?php endif;?>" rel="nofollow">(<b class="blue "><?php echo $countReviews['all'];?></b>人已评</a>)
 						</dd>
 					</dl>
 				</div>
@@ -54,23 +54,13 @@
 					<dt>配送至</dt>
 					<dd>
 						<?php $this->load->view('goods/region');?>
-						<div class="dx_d lh18" id="dx_d">
-							<h4 class="red f14">短信订购指南</h4>
-							<p>&nbsp;</p>
-							<p>用短信编辑以下内容发送到：159-8817-3721</p>
-							<p class="red">商品货号#数量#规格#收件人姓名#收件地址</p>
-							<p>&nbsp;</p>
-							<p class="bg_gray">例如： Q8164#1#白色#张三#北京朝阳区XX路XX小区XX号</p>
-							<p>&nbsp;</p>
-							<p class="c9">注意：发送前请认真核对好货号信息，如该商品没有规格信息，则不用填写。</p>
-						</div>
 					</dd>
 				</dl>
 				<dl class="gdl">
 					<dt>服务</dt>
 					<dd>
 						<p class="c9">
-							私密配送<em class="vline">|</em>
+							保密配送<em class="vline">|</em>
 							正品保障<em class="vline">|</em>
 							满99元包邮
 						</p>
@@ -171,7 +161,7 @@
 					</li>
 					<li  rel="comment">
 						<a href="javascript:;">
-							用户评论 <em class="blue"><?php echo $goods->review_count;?></em>
+							用户评论 <em class="blue"><?php echo $countReviews['all'];?></em>
 						</a>
 					</li>
 					<li rel="shouhou">
@@ -291,9 +281,6 @@
 					<p>妙处网打造完美服务，精选正规商品，确保每一位用户都买得安心，用得放心，如果您对妙处网服务方面有任何疑问，欢迎致电妙处网电话888-888-8889，或点击网站上方"联系客服"栏详细了解，我们竭诚为你服务！</p>
 					<p>&nbsp;</p>
 				</div>
-				<p class="alC">
-					<img src="miaow/images/fuwu.png" width="690" height="552"/>
-				</p>
 			</div>
 		</div>
 	</div>
@@ -344,16 +331,9 @@
 		</div>
 	</div>
 	<div class="clear"></div>
-	<div class="tpk over">
-	    <?php echo $cms_block['foot_recommend_img'];?>
-	</div>
-	<p class="alC">
-		<a href="javascript:;" class="hbtn c9 mt15" target="_blank" rel="nofollow">查看更多活动</a>
-	</p>
 	<div class="fa_l clearfix mt35">
 		<?php echo $cms_block['foot_speed_key'];?>
 	</div>
 </div>
-<?php $this->load->view('layout/login'); //弹框登陆HTML ?>
-<p id="mask" class="mask hid"></p>
+<?php $this->load->view('goods/detailLogin');?>
 <?php $this->load->view('layout/footer');?>

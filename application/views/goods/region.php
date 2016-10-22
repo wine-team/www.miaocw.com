@@ -61,3 +61,13 @@
 	</div>
 </div>
 <span class="pl10 c9">运费<em class="cost">0.00</em></span>
+<div class="dx_d lh18" id="dx_d">
+	<h4 class="red f14">短信订购指南</h4>
+	<p>&nbsp;</p>
+	<p>用短信编辑以下内容发送到：159-8817-3721</p>
+	<p class="red">商品货号#数量#规格#收件人姓名#收件地址</p>
+	<p>&nbsp;</p>
+	<p class="bg_gray">例如： Q8164#1#白色#张三#北京朝阳区XX路XX小区XX号</p>
+	<p>&nbsp;</p>
+	<p class="c9">注意：发送前请认真核对好货号信息，如该商品没有规格信息，则不用填写。</p>
+</div>
