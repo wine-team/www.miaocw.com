@@ -57,7 +57,9 @@
 	         	<div class="zfu zon left"  data-id="1">
 	         	    <input type="radio" class="hid pay" name="pay_bank" value="1"  checked="checked"/>
 	         		<b class="f14">支付宝</b>
+	         		
 	          	</div>
+	          	<!--  
 	            <div class="zfu left"  data-id="2">
 	            	<input type="radio" class="hid pay" name="pay_bank" value="2" />
 	            	<b class="f14">微信支付</b>
@@ -65,8 +67,9 @@
 	            <div class="zfu left"  data-id="3">
 	            	<input type="radio" class="hid pay" name="pay_bank" value="3" />
 	            	<b class="f14">银联支付</b>
-	            	<!-- <p>99元包邮</p> -->
+	            	<p>99元包邮</p>
 	          	</div>
+	          	 -->
 	         </div>
 	         <div class="clear"></div>
 	       </div>

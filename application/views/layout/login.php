@@ -26,3 +26,4 @@
         </table>
     </form>
 </div>
+<p id="mask" class="mask hid"></p>

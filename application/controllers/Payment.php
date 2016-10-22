@@ -293,7 +293,7 @@ class Payment extends CS_Controller {
      	$params['order_status'] = 1;
      	$params['seller_uid'] = $key;
      	$params['payer_uid'] = $this->uid;
-     	$params['user_name'] = $this->userName;
+     	$params['user_name'] = $this->aliasName;
      	$params['pay_method'] = 1;
      	$params['pay_bank'] = $orderParam['pay_bank'];
      	$params['deliver_order_id'] = 0;
