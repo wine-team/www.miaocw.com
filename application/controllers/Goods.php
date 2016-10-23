@@ -233,12 +233,6 @@ class Goods extends MW_Controller
     {
         $uid = $this->uid;
         $goods_id = base64_decode($this->input->post('goods_id',true));
-        if (empty($uid)) {
-            echo json_encode(array(
-              'status' => false,
-              'message' => $this->config->passport_url
-            ));exit;
-        }
         $insert = false;
         $delete = false;
         $result = $this->mall_enshrine->findByEnshrine(array('uid'=>$uid, 'goods_id'=>$goods_id));
@@ -268,12 +262,6 @@ class Goods extends MW_Controller
     {
         delete_cookie('cart');
         $uid = $this->uid;
-        if (!$uid) {
-            echo json_encode(array(
-                'status' => 1,
-                'msg'    => '请先登录'
-            )); exit;
-        }
         $specArray = '';
         $spec = $this->input->post('spec');
         $goods_id = $this->input->post('goods_id') ? (int)(base64_decode($this->input->post('goods_id'))) : 0;

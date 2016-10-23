@@ -43,13 +43,6 @@ class Home extends MW_Controller{
 		
 		$uid = $this->uid;
 		$callback = $this->input->get('callback');
-		if (!$uid) {
-			$jsonData = json_encode(array(
-					'status' => 1,
-					'msg'    => '请先登录'
-			));
-			echo $callback . '(' . $jsonData . ')';exit;
-		}
 		$specArray = '';
 		$spec = $this->input->get('spec');
 		$param['uid'] = $uid;

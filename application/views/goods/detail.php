@@ -11,7 +11,13 @@
 				</li>
 				<?php endforeach;?>
 			</ul>
-			<a href="javascript:;" class="afav left hand <?php if($enshrine):?>active<?php endif;?>" goods-id="<?php echo base64_encode($goods->goods_id);?>">
+			<a 
+			    <?php if(empty($this->uid)):?>
+				href="<?php echo $this->config->passport_url;?>" 
+				<?php else:?>
+				href="javascript:;" 
+				<?php endif;?>
+				class="afav left hand <?php if($enshrine):?>active<?php endif;?>" goods-id="<?php echo base64_encode($goods->goods_id);?>">
 				<i class="f f18 iconfont">&#xe60d;</i>
 				<p>收藏</p>
 			</a>
@@ -134,8 +140,20 @@
 							</tbody>
 						</table>
 					</div>
-					<a href="javascript:;" class="fu_btn add_to_cart"  title="点击加入购物车">加入购物车</a>
-				    <a href="javascript:;" class="red_btn shopping-s-submit"  title="点击立即购买，直接结算">立即订购</a>
+					<a 
+						<?php if(empty($this->uid)):?>
+						href="<?php echo $this->config->passport_url;?>" 
+						<?php else:?>
+						href="javascript:;" 
+						<?php endif;?>
+						class="fu_btn add_to_cart"  title="点击加入购物车">加入购物车</a>
+				    <a 
+				    	<?php if(empty($this->uid)):?>
+						href="<?php echo $this->config->passport_url;?>" 
+						<?php else:?>
+						href="javascript:;" 
+						<?php endif;?>
+				    	class="red_btn shopping-s-submit"  title="点击立即购买，直接结算">立即订购</a>
 				</div>
 				<div class="lh25 c9 yahei f14 pl10">订购电话: <em title="您可以拨打我们的全国免费服务热线:888-8888-8888" class="f16 red">888-8888-8888</em>
 				<span class="dx_tip hand" id="dx_tip">短信订购：<em class="tre f16">15988173721</em></span></div>
@@ -170,7 +188,15 @@
 						</a>
 					</li>
 				</ul>
-				<a class="rbuy right hid " href="javascript:;"><i class="f pr5 iconfont">&#xe603;</i>立即订购</a>
+				<a class="rbuy right hid " 
+					<?php if(empty($this->uid)):?>
+					href="<?php echo $this->config->passport_url;?>" 
+					<?php else:?>
+					href="javascript:;" 
+					<?php endif;?>
+				>
+					<i class="f pr5 iconfont">&#xe603;</i>立即订购
+				</a>
 			</div>
 		</div>
 		<div class="des" id="detail">

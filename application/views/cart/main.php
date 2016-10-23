@@ -12,12 +12,12 @@
     <?php foreach ($item['goods'] as $val):?>
     <tr>
 		<td> 
-			<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank">
+			<a href="<?php echo site_url('goods/detail/'.$val->goods_id);?>" target="_blank">
         		<img class="lazy" src="miaow/images/load.jpg"  data-original="<?php echo $this->config->show_image_thumb_url('mall',strstr($val->goods_img,'|',true),'60')?>" title="<?php echo $val->goods_name;?>" width="60" height="60" />
 		    </a> 
 		</td>
 		<td> 
-            <a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank" class="pr50">
+            <a href="<?php echo site_url('goods/detail/'.$val->goods_id);?>" target="_blank" class="pr50">
 	            <?php echo $val->goods_name;?>
             	<?php if(!empty($val->attribute_value)):?>
             		<p class="green"><?php echo $val->attribute_value;?></p>
