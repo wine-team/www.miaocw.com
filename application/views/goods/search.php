@@ -41,23 +41,24 @@
 		</dl>
 		<?php endforeach;?>
 	</div>
+	<div class="page" id="pager">
+  		<span class="yemr">总计<b><?php echo $all_rows;?></b> 条记录</span>              
+  		<?php echo $pg_link;?>
+    </div>
 	<?php else:?>
 	<?php 
 		$keyword = $this->input->get('keyword');
 		$headKeyword = empty($keyword) ?  $ct_param['keyword'] : $keyword;
 	?>
 	<div class="no-find lack-goods">
-		<i></i>
+		<img src="help/images/panda.jpg" />
 		<div class="no-messages">
 			<h3>非常抱歉！没有找到与<em class="highlight"><?php echo $headKeyword;?></em> 相关的商品。</h3>
 			建议您：变换关键词或筛选条件重新搜索 
 		</div>
 	</div>
 	<?php endif;?>
-	<div class="page" id="pager">
-  		<span class="yemr">总计<b><?php echo $all_rows;?></b> 条记录</span>              
-  		<?php echo $pg_link;?>
-    </div>
+	
     
     <div class="ftj mt35 b_li">
 		<?php echo $cms_block['search_keyword'];?>
