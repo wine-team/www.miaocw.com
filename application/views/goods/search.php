@@ -66,8 +66,5 @@
 	    <?php echo $cms_block['foot_recommend_img'];?>
 	</div>
 	
-	<div class="fa_l clearfix mt35">
-		<?php echo $cms_block['foot_speed_key'];?>
-	</div>
 </div>
 <?php $this->load->view('layout/footer');?>
