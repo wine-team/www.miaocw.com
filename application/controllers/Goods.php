@@ -173,9 +173,8 @@ class Goods extends MW_Controller
                     case '1' : $low += $item->total;break; //差评
                 }
             }
-            return array('up'=>$up,'middle'=>$middle,'low'=>$low,'all'=>$up+$middle+$low);
         }
-        return array();
+        return array('up'=>$up,'middle'=>$middle,'low'=>$low,'all'=>$up+$middle+$low);
     }
     
     /**
