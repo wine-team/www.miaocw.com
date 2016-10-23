@@ -199,22 +199,24 @@
 			<div class="g_t over alR">
 				<div class="left fB">
 					<em class="red"></em> 用户评论
-					<em class="gray pl10"></em>
 				</div>
 				<div class="right c9">
 					<em class="c3 f14">好评度：</em>
-					<b class="red"><?php echo count($countReviews) > 0 ? (bcdiv($countReviews['up'],$countReviews['all'],2)*100).'%' : 0;?></b>
+					<b class="red">
+						<?php echo $countReviews['all'] > 0 ? bcdiv($countReviews['up'], $countReviews['all'], 2)*100 : 100; ?>%
+					</b>
 					<em class="vline f12">|</em>
 					<em class="f14">评论/晒单可赠送20/30积分</em>
 				</div>
 			</div>
-			<ul id="whatchoose" class="u_q clearfix comment-type">
-				<li data-id="0" class="first on" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['all'] : '0';?>">全部 (<?php echo count($countReviews) > 0  ?  $countReviews['all'] : '0';?>)</li>
-				<li data-id="1" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['up'] : '0';?>">好评 (<?php echo count($countReviews) > 0  ?  $countReviews['up'] : '0';?>)</li>
-				<li data-id="2" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>">中评 (<?php echo count($countReviews) > 0  ?  $countReviews['middle'] : '0';?>)</li>
-				<li data-id="3" data-s="<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>">差评 (<?php echo count($countReviews) > 0  ?  $countReviews['low'] : '0';?>)</li>
-			</ul>
-			<p class="lh16">&nbsp;</p>
+			<?php if ($countReviews['all'] > 0) : ?>
+				<ul id="whatchoose" class="u_q clearfix comment-type">
+					<li data-id="0" class="first on" data-s="<?php echo $countReviews['all'] ?>">全部 (<?php echo $countReviews['all'] ?>)</li>
+					<li data-id="1" data-s="<?php echo $countReviews['up'] ?>">好评 (<?php echo $countReviews['up'] ?>)</li>
+					<li data-id="2" data-s="<?php echo $countReviews['middle'] ?>">中评 (<?php echo $countReviews['middle'] ?>)</li>
+					<li data-id="3" data-s="<?php echo $countReviews['low'] ?>">差评 (<?php echo $countReviews['low'] ?>)</li>
+				</ul>
+			<?php endif; ?>
 			<div class="product-review">
 			   <?php //$this->load->view('goods/reviews');?>
 			</div>
