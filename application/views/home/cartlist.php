@@ -3,7 +3,7 @@
 <?php $num=0;$total=0;?>
 <?php foreach ($cart_goods->result() as $key=>$item):?>
     <li>
-		<a href="javascript:;">
+		<a href="<?php echo site_url('goods/detail/'.$item->goods_id)?>" target="_blank">
 			<img class="left" width="60" height="60" alt="妙处网" src="<?php echo $this->config->show_image_thumb_url('mall',strstr($item->goods_img,'|',true));?>" />
 			<p><?php echo $item->goods_name;?></p>
 			<p class="red">

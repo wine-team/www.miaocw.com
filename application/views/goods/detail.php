@@ -120,7 +120,7 @@
 							<tbody>
 								<tr>
 									<td width="30" valign="top" rowspan="3">
-										<p class="f green f24">&#xe638;</p>
+										<p class="f green f24 iconfont">&#xe60f;</p>
 									</td>
 									<td>
 										<h4 class="f16px c3">恭喜，您已成功将该商品加入购物车！</h4>
