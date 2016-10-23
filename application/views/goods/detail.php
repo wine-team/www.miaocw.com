@@ -12,7 +12,7 @@
 				<?php endforeach;?>
 			</ul>
 			<a href="javascript:;" class="afav left hand <?php if($enshrine):?>active<?php endif;?>" goods-id="<?php echo base64_encode($goods->goods_id);?>">
-				<i class="f f18">&#xe636;</i>
+				<i class="f f18 iconfont">&#xe60d;</i>
 				<p>收藏</p>
 			</a>
 			<div class="clear"></div>
@@ -170,10 +170,7 @@
 						</a>
 					</li>
 				</ul>
-				<a class="rbuy right hid " href="javascript:;"><i class="f pr5">&#xe634;</i>立即订购</a>
-				<a href="javascript:;" class="right pr10 c9">
-					<img src="miaow/images/rkf1.png" width="21" height="44" class="mr5" >在线客服
-				</a>
+				<a class="rbuy right hid " href="javascript:;"><i class="f pr5 iconfont">&#xe603;</i>立即订购</a>
 			</div>
 		</div>
 		<div class="des" id="detail">
@@ -230,7 +227,7 @@
 				<table width="100%" border="0" class="lh35">
 				  <tr>
 					  <td width="50%">
-				    	<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="g_bza" rel="nofollow">
+				    	<a href="<?php echo site_url('goods/detail/'.$goods->goods_id);?>" class="g_bza" rel="nofollow">
 				    		<img src="miaow/images/gbz1.jpg" width="150" height="190" class="left mr10">
 				    		<p>&nbsp;</p><p>360度严密包装, 保密配送</p>
 				    		<b class="f24 red">保密配送</b>
@@ -238,7 +235,7 @@
 				    	</a>
 					  </td>
 				  	  <td>
-				  	  	<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="g_bza" rel="nofollow">
+				  	  	<a href="<?php echo site_url('goods/detail/'.$goods->goods_id);?>" class="g_bza" rel="nofollow">
 				  	  		<img src="miaow/images/gbz2.jpg" width="150" height="190" class="left mr10"/>
 				  	  		<p>&nbsp;</p>
 				  	  		<p>正规品牌采购， 官方品牌授权</p>
@@ -249,7 +246,7 @@
 				  </tr>
 				  <tr>
 				      <td>
-				      	<a href="<?php echo site_url('goods/detail?goods_id='.$goods->goods_id);?>" class="g_bza" rel="nofollow">
+				      	<a href="<?php echo site_url('goods/detail/'.$goods->goods_id);?>" class="g_bza" rel="nofollow">
 				      		<img src="miaow/images/gbz3.jpg" width="150" height="190" class="left mr10">
 				      		<p>&nbsp;</p>
 				      		<p></p>
@@ -258,12 +255,11 @@
 				      	 </a>
 				      </td>
 				      <td>
-				      	<a href="javascript:;"  class="g_bza" rel="nofollow">
+				      	<a href="http://wpa.qq.com/msgrd?v=3&uin=3552892797&site=qq&menu=yes"  class="g_bza" rel="nofollow" target="_blank">
 				      		<img src="miaow/images/gbz4.jpg" width="150" height="190" class="left mr10">
 				      		<p>&nbsp;</p>
-				      		<p>7*24小时客服在线服务</p>
 				      		<b class="f24 red">优质客服</b>
-				      		<p>服务热线888-888-8889</p>
+				      		<p>7*24小时客服在线服务</p>
 				      	</a>
 				      </td>
 				  </tr>
@@ -288,7 +284,7 @@
 	</div>
 	<div class="g_l right">
 		<p class="glh3">
-			<em class="f f16">&#xe648;</em>
+			<em class="f f16 iconfont">&#xe608;</em>
 			<b>手机扫描查看该商品</b>
 		</p>
 		<div class="glb alC">
@@ -297,7 +293,7 @@
 		    </a>
 		</div>
 		<p class="glh3">
-			<em class="f f16">&#xe63b;</em>
+			<em class="f f16 iconfont">&#xe605;</em>
 			<b>在线客服</b>
 		</p>
 		<div class="glb lh30">
@@ -318,7 +314,7 @@
 			</div>
 		</div>
 		<p class="glh3">
-			<em class="f f16">&#xe636;</em> 
+			<em class="f f16 iconfont">&#xe60d;</em> 
 		    <b>同类热卖</b>
 		</p>
 		<div class="glb same-hot" cat="<?php echo $goods->attr_set_id;?>">
@@ -330,5 +326,4 @@
 		<?php echo $cms_block['foot_speed_key'];?>
 	</div>
 </div>
-<?php $this->load->view('layout/login');?>
 <?php $this->load->view('layout/footer');?>

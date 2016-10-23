@@ -51,7 +51,7 @@
 		$headKeyword = empty($keyword) ?  $ct_param['keyword'] : $keyword;
 	?>
 	<div class="no-find lack-goods">
-		<img src="help/images/panda.jpg" />
+		<img src="miaow/images/panda.jpg" />
 		<div class="no-messages">
 			<h3>非常抱歉！没有找到与<em class="highlight"><?php echo $headKeyword;?></em> 相关的商品。</h3>
 			建议您：变换关键词或筛选条件重新搜索 
