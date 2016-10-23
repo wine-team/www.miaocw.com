@@ -11,9 +11,9 @@
 <title><?php echo isset($headTittle) ? $headTittle.',妙处网,妙处,妙,处,性用品,性保健品,正品成人用品网站' : '妙处网,妙处,妙,处,性用品,性保健品,正品成人用品网站';?></title> 
 <base href="<?php echo $this->config->skins_url;?>"/>
 <link type="image/x-icon" rel="shortcut icon" href="miaow/images/logo.png"/>
-<?php css('common','common', '20160416');?>
-<?php css('miaow', 'reset', '20160416');?>
-<?php css('miaow', 'style', '20160416');?>
+<?php css('common','common', '20161023');?>
+<?php css('miaow', 'reset', '20161023');?>
+<?php css('miaow', 'style', '20161023');?>
 
 <?php js('miaow', 'jquery-1.10.2');?>
 <?php js('miaow', 'layer/layer');?>
