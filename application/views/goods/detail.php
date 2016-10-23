@@ -215,7 +215,7 @@
 					<li data-id="1" data-s="<?php echo $countReviews['up'] ?>">好评 (<?php echo $countReviews['up'] ?>)</li>
 					<li data-id="2" data-s="<?php echo $countReviews['middle'] ?>">中评 (<?php echo $countReviews['middle'] ?>)</li>
 					<li data-id="3" data-s="<?php echo $countReviews['low'] ?>">差评 (<?php echo $countReviews['low'] ?>)</li>
-				</ul>
+				</ul> 
 			<?php endif; ?>
 			<div class="product-review">
 			   <?php //$this->load->view('goods/reviews');?>
