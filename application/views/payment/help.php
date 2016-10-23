@@ -21,10 +21,6 @@
 				<tr>
 			        <td><b class="c5">收快递的时候会不会尴尬？</b></td>
 			        <td><b class="c5">商品不满意，怎么退/换货？</b></td>
-			        <td rowspan="2"><b class="c5">如何在手机上看</b><img src="" width="100" height="100" class="left mr5">
-			          <p>私密访问</p>
-			          <p>下载APP</p>
-			        </td>
       			</tr>
       			<tr>
 			        <td>包装与普通包裹无异，货物名称会写“礼品”、“日用品”等，您尽管放心。如果您非要当着朋友面拆货我们就帮不了了 -_-！</td>

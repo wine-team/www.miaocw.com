@@ -1,12 +1,12 @@
 <?php $this->load->view('layout/cartHeader');?>
 <div class="w9 payment" id="content"> 
-	<div class="bgwd over order-creat" style="padding:30px 30px 30px 80px;">
+	<div class="bgwd over order-creat">
 		<div class="rel">
 		    <?php if($mainOrder->status==2):?>
-				<p class="f green l_icon">&#xe638;</p>
+				<p class="f green l_icon iconfont">&#xe60f;</p>
 				<h1 class="f18 yahei c3">支付成功！我们马上安排给你发货，请耐心等待！</h1>
 			<?php else:?>
-				<p class="f green l_icon">&#xe638;</p>
+				<p class="f green l_icon iconfont">&#xe610;</p>
 				<h1 class="f18 yahei c3">支付失败！请到个人中心重新支付！</h1>
 			<?php endif;?>
 		</div>

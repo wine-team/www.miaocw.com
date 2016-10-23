@@ -1,8 +1,8 @@
 <?php $this->load->view('layout/cartHeader');?>
 <div class="w9 payment" id="content"> 
-	<div class="bgwd over order-creat" style="padding:30px 30px 30px 80px;">
+	<div class="bgwd over order-creat">
 		<div class="rel">
-			<p class="f green l_icon">&#xe638;</p>
+			<p class="f green l_icon iconfont">&#xe60f;</p>
 			<h1 class="f18 yahei c3">恭喜！订单提交成功，请尽快付款！</h1>
 		</div>
 		<p class="lh18">&nbsp;</p>
@@ -18,7 +18,7 @@
 			<?php foreach ($orderProduct as $val):?>
 			<tr> 
 				<td width="350"> 
-					<a href="<?php echo site_url('goods/detail?goods_id='.$val->goods_id);?>" target="_blank">
+					<a href="<?php echo site_url('goods/detail/'.$val->goods_id);?>" target="_blank">
 						<?php echo $val->goods_name;?> <b class="red pl10"><?php echo $val->attr_value;?></b>
 					</a> 
 	  			</td>
@@ -40,6 +40,5 @@
 	    </form> 
 	</div>
     <?php $this->load->view('payment/help');?>
-	<div class="clear"></div>
 </div>
 <?php $this->load->view('layout/cartFooter');?>
