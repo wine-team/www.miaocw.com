@@ -58,6 +58,7 @@
   		<span class="yemr">总计<b><?php echo $all_rows;?></b> 条记录</span>              
   		<?php echo $pg_link;?>
     </div>
+    
     <div class="ftj mt35 b_li">
 		<?php echo $cms_block['search_keyword'];?>
 	</div>
