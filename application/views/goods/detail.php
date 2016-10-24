@@ -155,8 +155,6 @@
 						<?php endif;?>
 				    	class="red_btn shopping-s-submit"  title="点击立即购买，直接结算">立即订购</a>
 				</div>
-				<div class="lh25 c9 yahei f14 pl10">订购电话: <em title="您可以拨打我们的全国免费服务热线:888-8888-8888" class="f16 red">888-8888-8888</em>
-				<span class="dx_tip hand" id="dx_tip">短信订购：<em class="tre f16">15988173721</em></span></div>
 		</div>
 		<div class="kan">
 			<p class="lh35 mt10 c9">看了又看<a href="javascript:;" id="s_next" class="c9 nua kan_i change" from="<?php echo base64_encode($goods->supplier_id);?>" pg="1">换一换</a></p>
@@ -302,7 +300,7 @@
 					<p class="f18 c3"><b>任何质量问题无条件免费退换</b></p>
 					<p>如果您收到的商品有质量问题，请在签收后48小时内联系我们，我们将为您提供一次免费更换的服务，更换时请确保产品没有使用过且包装完好无损。为了保证您和其他消费者的健康，对因质量问题而退回的产品，将一律销毁，绝不二次销售。</p>
 					<p class="f18 c3"><b>360°购物保障，放心购买，安心使用</b></p>
-					<p>妙处网打造完美服务，精选正规商品，确保每一位用户都买得安心，用得放心，如果您对妙处网服务方面有任何疑问，欢迎致电妙处网电话888-888-8889，或点击网站上方"联系客服"栏详细了解，我们竭诚为你服务！</p>
+					<p>妙处网打造完美服务，精选正规商品，确保每一位用户都买得安心，用得放心，如果您对妙处网服务方面有任何疑问，欢迎致电妙处网电话，或点击网站上方"联系客服"栏详细了解，我们竭诚为你服务！</p>
 					<p>&nbsp;</p>
 				</div>
 			</div>
@@ -324,19 +322,26 @@
 		</p>
 		<div class="glb lh30">
 			<div title="点击咨询在线客服" class="rel hand">
-				<table width="160" height="140" border="0" class="alR kftab">
-				  <tr>
-				    <td width="44"><img src="miaow/images/zkf.gif" width="14" height="20"></td>
-				    <td width="60"><img src="miaow/images/zkf.gif" width="14" height="20"></td>
-				    <td><img src="miaow/images/zkf.gif" width="14" height="20"></td>
-				  </tr>
-				  <tr>
-				    <td><img src="miaow/images/zkf.gif" width="14" height="20"></td>
-				    <td><img src="miaow/images/zkf.gif" width="14" height="20"></td>
-				    <td><img src="miaow/images/zkf.gif" width="14" height="20"></td>
-				  </tr>
+				<table width="160" height="70" border="0" class="alR kftab">
+					  <tr>
+						    <td>
+						    	<a href="http://wpa.qq.com/msgrd?v=3&uin=2665892628&site=qq&menu=yes"  target="_blank">
+						    		<img src="miaow/images/zkf.gif" width="14" height="20" />
+						    	</a>
+						    </td>
+						    <td>
+						    	<a href="http://wpa.qq.com/msgrd?v=3&uin=3552892797&site=qq&menu=yes"  target="_blank">
+						    		<img src="miaow/images/zkf.gif" width="14" height="20" />
+						    	</a>
+						    </td>
+						    <td>
+							    <a href="http://wpa.qq.com/msgrd?v=3&uin=2644720895&site=qq&menu=yes"  target="_blank">
+							    	<img src="miaow/images/zkf.gif" width="14" height="20" />
+							    </a>
+						    </td>
+					  </tr>
 				</table>
-				<img src="miaow/images/glkf.png" width="160" height="140">
+				<img src="miaow/images/glkf.png" width="160" height="70">
 			</div>
 		</div>
 		<p class="glh3">

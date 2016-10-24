@@ -19,11 +19,10 @@ class Mall_cart_goods_model extends CI_Model{
 				           mall_goods_base.limit_num,mall_goods_base.goods_weight,
 				           mall_goods_base.freight_cost,mall_goods_base.freight_id,
 				           mall_cart_goods.goods_id,mall_cart_goods.goods_num,
-				           mall_cart_goods.attribute_value,user.alias_name'
+				           mall_cart_goods.attribute_value'
 	                      );
 		$this->db->from($this->table);
 		$this->db->join('mall_goods_base','mall_goods_base.goods_id=mall_cart_goods.goods_id','inner');
-		$this->db->join('user','user.uid=mall_goods_base.supplier_id','left');
 		$this->db->where('mall_goods_base.is_check','2');//审核通过
 		$this->db->where('mall_goods_base.is_on_sale','1');//上架
 		if (!empty($param['uid'])) {

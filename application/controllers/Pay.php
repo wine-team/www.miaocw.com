@@ -4,7 +4,6 @@ class Pay extends CS_Controller {
 	public function _init() {
 		
 		$this->load->library('encrypt');
-		$this->load->library('chinapay/chinapay', null, 'chinapay');
 		$this->load->library('alipay/alipaypc', null, 'alipaypc');
 		$this->load->model('mall_goods_base_model','mall_goods_base');
 		$this->load->model('mall_order_pay_model','mall_order_pay');
@@ -18,21 +17,21 @@ class Pay extends CS_Controller {
 	public function grid()
 	{
 		$pay_id = $this->input->post('pay_id');
-		$pay_bank = $this->input->post('pay_bank');
+		$pay_bank = (int)$this->input->post('pay_bank');
 		$result = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'pay_id'=>$pay_id));
 		if ($result->num_rows() <= 0) {
 			$this->alertJumpPre('订单信息不对');
 		}
 		$orderInfo = $result->row(0);
 		switch ($pay_bank) {
-			case '2' :  //微信支付
+			
+			case 1 :
+				$alipayParameter = $this->alipayParameter($pay_bank, $orderInfo);
+				$this->alipaypc->callAlipayApi($alipayParameter);
+				break;
+			case 2 :  //微信支付
 				$data['orderInfo'] = $orderInfo;
 				$this->load->view('payment/balancePay', $data);
-				break;
-			case '3' :  //银联支付
-				$BgRetUrl = site_url('paycallback/chinapayReturn');
-				$PageRetUrl = site_url('paycallback/chinapayReturn');
-				$objPay = $this->chinapay->callChinapayApi($pay_id, $orderInfo->order_amount, 'notcart', $BgRetUrl, $PageRetUrl);
 				break;
 			default :   //支付宝支付
 				$alipayParameter = $this->alipayParameter($pay_bank, $orderInfo);
