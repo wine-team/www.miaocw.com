@@ -71,7 +71,6 @@ class Cart extends CS_Controller {
      	$cartArr = array();
      	foreach ($cart->result() as $val) {
      		$cartArr[$val->supplier_id]['supplier_id'] = $val->supplier_id;
-     		$cartArr[$val->supplier_id]['shop_name'] = $val->alias_name;
      		$cartArr[$val->supplier_id]['goods'][] = $val;
      		$total_price = $this->getTotalPrice($val);
      		$total += bcmul($val->goods_num,$total_price,2);
