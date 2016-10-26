@@ -16,8 +16,11 @@ class Pay extends CS_Controller {
 	 */
 	public function grid()
 	{
-		$pay_id = $this->input->post('pay_id');
+		$pay_id = $this->input->post('pay_id',true);
 		$pay_bank = (int)$this->input->post('pay_bank');
+		if (empty($pay_bank) || empty($pay_id)) {
+			show_404();
+		}
 		$result = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'pay_id'=>$pay_id));
 		if ($result->num_rows() <= 0) {
 			$this->alertJumpPre('订单信息不对');
@@ -55,7 +58,7 @@ class Pay extends CS_Controller {
 				'subject'      => $orderInfo->pay_id,
 				'total_fee'    => $orderInfo->order_amount,
 				'body'         => $orderInfo->pay_id,
-				'show_url'     => base_url(),
+				'show_url'     => site_url(),
 				'notify_url'   => base_url('paycallback/alipayNotify'),
 				'return_url'   => base_url('pay/alipayReturn'),
 				'pay_method'   => $pay_bank,

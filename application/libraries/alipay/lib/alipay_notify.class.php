@@ -1,5 +1,6 @@
 <?php
 /* *
+ * 
  * 类名：AlipayNotify
  * 功能：支付宝通知处理类
  * 详细：处理支付宝各接口通知返回
@@ -45,7 +46,7 @@ class AlipayNotify {
 			//生成签名结果
 			$isSign = $this->getSignVeryfy($_POST, $_POST["sign"]);
 			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
-			$responseTxt = 'true';
+			$responseTxt = 'false';
 			if (! empty($_POST["notify_id"])) {$responseTxt = $this->getResponse($_POST["notify_id"]);}
 			
 			//写日志记录
@@ -75,7 +76,6 @@ class AlipayNotify {
      * @return 验证结果
      */
 	function verifyReturn(){
-	    
 		if(empty($_GET)) {//判断POST来的数组是否为空
 			return false;
 		}
@@ -83,7 +83,7 @@ class AlipayNotify {
 			//生成签名结果
 			$isSign = $this->getSignVeryfy($_GET, $_GET["sign"]);
 			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
-			$responseTxt = 'true';
+			$responseTxt = 'false';
 			if (! empty($_GET["notify_id"])) {$responseTxt = $this->getResponse($_GET["notify_id"]);}
 			
 			//写日志记录

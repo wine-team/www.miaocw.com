@@ -27,7 +27,7 @@ class Alipaypc
             
             "service"           => 'create_direct_pay_by_user', //接口名称，不需要修改
             "partner"			=> $alipay_config['partner'],
-            "seller_email"		=> $alipay_config['seller_email'],
+            "seller_id"			=> $alipay_config['seller_id'],
             "payment_type"      => '1',  //交易类型，不需要修改
             "return_url"        => $alipayParameter['return_url'],
             "notify_url"		=> $alipayParameter['notify_url'],
@@ -40,14 +40,10 @@ class Alipaypc
             "show_url"			=> $alipayParameter['show_url'],
             "anti_phishing_key"	=> $this->anti_phishing_key,     
             "exter_invoke_ip"	=> $this->exter_invoke_ip,
-            "_input_charset"	=> $alipay_config['input_charset'],
-             /*
-            "buyer_email"		=> $this->buyer_email,
-            "extra_common_param"=> $this->extra_common_param,
-            "royalty_type"		=> $this->royalty_type,
-            "royalty_parameters"=> $this->royalty_parameters,
-            */
+            "_input_charset"	=> trim(strtolower($alipay_config['input_charset'])),
         );
+       $parameter['sign'] = $this->getSign($parameter); // 提出sign  和   md5 参数
+       $parameter['sign_type'] = $alipay_config['sign_type'];
        $alipaySubmit = new AlipaySubmit($alipay_config);
        $html_text = $alipaySubmit->buildRequestForm($parameter,"post","确认");
        echo $html_text;
@@ -87,5 +83,48 @@ class Alipaypc
             echo "fail";
             return false;
         }
+    }
+    
+    /**
+     * 获取签名  sign
+     * @param unknown $param
+     * @return string
+     */
+    public function getSign($param) {
+    	
+    	$firstParam = $this->argSort($param);
+    	$twoParam = $this->createLinkstring($firstParam);
+    	return md5($twoParam);
+    }
+    
+    /**
+     * 对数组ASCII码进行字母升序排序
+     * @param unknown $para
+     * @return unknown
+     */
+    public function argSort($para) {
+    	
+    	ksort($para);
+    	reset($para);
+    	return $para;
+    }
+    
+    /**
+     * 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
+     * @param $para 需要拼接的数组
+     * return 拼接完成以后的字符串
+     */
+    public function createLinkstring($para) {
+    	$arg  = "";
+    	while (list ($key, $val) = each ($para)) {
+    		$arg.=$key."=".$val."&";
+    	}
+    	//去掉最后一个&字符
+    	$arg = substr($arg,0,count($arg)-2);
+    
+    	//如果存在转义字符，那么去掉转义
+    	if(get_magic_quotes_gpc()){$arg = stripslashes($arg);}
+    
+    	return $arg;
     }
 }
