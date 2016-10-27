@@ -67,6 +67,9 @@ class Pay extends CS_Controller {
 		return $parameter;
 	}
 	
+	
+	
+	
 	 /**
 	 * 获取订单是否支付
 	 */
@@ -89,6 +92,21 @@ class Pay extends CS_Controller {
 	}
 	
 	 /**
+	 * 支付宝同步
+	 */
+	public function alipayReturn() {
+		
+	    $response = $this->alipaypc->responseAlipayReturn();
+	    $payId = $_GET['out_trade_no'];
+	    if ($response) { 
+	        $this->redirect(site_url('pay/orderComplete/'.$payId)); 
+	    } else {
+	        $this->redirect(site_url('pay/orderComplete/'.$payId));
+	    }
+	    
+	}
+	
+	 /**
 	 *支付完成区分结果
 	 */
 	public function complete() {
@@ -98,21 +116,33 @@ class Pay extends CS_Controller {
 			$this->alertJumpPre('非法参数');
 		}
 		$payId = base64_decode($pay);
-		$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
-		if ($mainRes->num_rows()<=0) {
-			$this->alertJumpPre('主订单不存在');
-		}
-		$data['mainOrder'] = $mainRes->row(0);
-		$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
-		if ($orderRes->num_rows()<=0) {
-			$this->alertJumpPre('订单不存在');
-		}
-		$data['order'] = $orderRes->row(0);
-		$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'pay_id'=>$payId));
-		if ($productRes->num_rows()<=0) {
-			$this->alertJumpPre('订单产品表不存在');
-		}
-		$data['orderProduct'] = $productRes->result();
-		$this->load->view('payment/complete',$data);
+		$this->redirect(site_url('pay/orderComplete/'.$payId)); 
+	}
+	
+	  /**
+	 * 订单支付跳转
+	 * @param unknown $payId
+	 */
+	public function orderComplete($payId) {
+		
+	    if(empty($payId)) {
+	    	show_404();
+	    }
+	    $mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
+	    if ($mainRes->num_rows()<=0) {
+	        $this->alertJumpPre('主订单不存在');
+	    }
+	    $data['mainOrder'] = $mainRes->row(0);
+	    $orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->uid,'pay_id'=>$payId));
+	    if ($orderRes->num_rows()<=0) {
+	        $this->alertJumpPre('订单不存在');
+	    }
+	    $data['order'] = $orderRes->row(0);
+	    $productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->uid,'pay_id'=>$payId));
+	    if ($productRes->num_rows()<=0) {
+	        $this->alertJumpPre('订单产品表不存在');
+	    }
+	    $data['orderProduct'] = $productRes->result();
+	    $this->load->view('payment/complete',$data);
 	}
 }
