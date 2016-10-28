@@ -107,15 +107,21 @@ function send_email($recipient, $subject = 'Test email', $message = 'Hello World
 	return mail($recipient, $subject, $message);
 }
 
-/**
+ /**
  * 获取所有的分类
  * 菜单栏需要
+ * memcache 缓存
  */
-function getAllCategory(){
+function getAllCategory() {
 	
 	$CI = & get_instance();
 	$CI->load->model('mall_category_model','mall_category');
-	$allCategory = $CI->mall_category->getAllCategory();
+	if (!$CI->cache->memcached->get('categoryCache')) {
+	    $allCategory = $CI->mall_category->getAllCategory();
+	    $CI->cache->memcached->save('categoryCache',$allCategory);
+	} else {
+	    $allCategory = $CI->cache->memcached->get('categoryCache');
+	}
 	return $allCategory;
 }
 
