@@ -58,15 +58,15 @@ class Goods extends MW_Controller
     	$keyword = '';
     	if (!empty($param['category_id'])) {
     		
-    		$bf = 'brand_id,brand_name';
-    		$brand = $this->mall_brand->findBrand($bf);
-    		
     		$cf = 'cat_id,cat_name,parent_id';
     		$ctRes = $this->mall_category->findCatById($cf,$param['category_id']);
     		$ct = $ctRes->row(0);
     		
     		$parentId = ($ct->parent_id==0) ? $ct->cat_id : $ct->parent_id;
     	    $category = $this->mall_category->getChildCat($parentId);
+    	    
+    	    $bf = 'brand_id,brand_name';
+    	    $brand = $this->mall_brand->findBrand($bf,array('cat_id'=>$parentId));
     	    
     	    $keyword = $ct->cat_name;
     	}
