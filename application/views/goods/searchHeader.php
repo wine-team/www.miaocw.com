@@ -27,6 +27,7 @@
 			<dt>分类</dt> 
 			<dd class="brand_dl">
 				<div id="list_b" class="over">
+					<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'category_id').'&category_id='.$ct_param['parentId']);?>" class="<?php if($ct_param['parentId']==$category_id):?>on<?php endif;?>">不限</a>
 					<?php foreach($ct_param['category']->result() as $val):?>
     				<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'category_id').'&category_id='.$val->cat_id);?>" class="<?php if($category_id==$val->cat_id):?>on<?php endif;?>"><?php echo $val->cat_name;?></a>
     				<?php endforeach;?>
@@ -42,6 +43,7 @@
 			<dt>品牌</dt>
 			<dd id="brand_dl" class="brand_dl">
 				<div id="list_b" class="over">
+					<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'brand_id'));?>" class="<?php if(empty($brand_id)):?>on<?php endif;?>">不限</a>
 				    <?php foreach ($ct_param['brand']->result() as $item):?>
 					<a href="<?php echo site_url('goods/search?'.create_suffix($this->input->get(), 'brand_id').'&brand_id='.$item->brand_id);?>" class="<?php if($brand_id==$item->brand_id):?>on<?php endif;?>"><?php echo $item->brand_name;?></a>
 					<?php endforeach;?>
