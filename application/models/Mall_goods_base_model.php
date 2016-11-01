@@ -4,7 +4,7 @@ class Mall_goods_base_model extends CI_Model{
 	private $table = 'mall_goods_base';
 	private $table1 = 'mall_brand';
 	private $table2 = 'mall_category';
-	
+	 
 	 /**
 	 * 获取购物车内容
 	 * @param unknown $uid
@@ -27,7 +27,7 @@ class Mall_goods_base_model extends CI_Model{
 	 */
 	public function getRecommend($uid,$num,$pgNum){ 
 		
-		$this->db->select('goods_id,goods_name,promote_price,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,freight_id,in_stock,freight_cost,sale_count,review_count');
+		$this->db->select('goods_id,goods_name,promote_price,shop_price,promote_start_date,promote_end_date,goods_img,goods_sku,market_price,goods_brief,goods_desc,goods_img,freight_id,in_stock,freight_cost,sale_count,review_count');
 		$this->db->from($this->table);
 		$this->db->where('supplier_id',$uid);
 		$this->db->where('is_on_sale',1);
@@ -44,7 +44,7 @@ class Mall_goods_base_model extends CI_Model{
  	 */
 	public function getRecommendGoodsBase($param=array()){
 		
- 	     $this->db->select('goods_id,goods_name,market_price,promote_price,goods_img,sale_count,review_count');
+ 	     $this->db->select('goods_id,goods_name,market_price,promote_price,shop_price,promote_start_date,promote_end_date,goods_img,sale_count,review_count');
  	     $this->db->from($this->table);
  	     $this->db->where('is_on_sale',1);
  	     $this->db->where('is_check',2);
