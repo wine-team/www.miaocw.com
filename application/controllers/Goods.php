@@ -56,6 +56,7 @@ class Goods extends MW_Controller
     	$brand = '';
     	$category = '';
     	$keyword = '';
+    	$parentId = '';
     	if (!empty($param['category_id'])) {
     		
     		$cf = 'cat_id,cat_name,parent_id';
@@ -70,7 +71,7 @@ class Goods extends MW_Controller
     	    
     	    $keyword = $ct->cat_name;
     	}
-    	return array('brand'=>$brand,'category'=>$category,'keyword'=>$keyword);
+    	return array('brand'=>$brand,'category'=>$category,'keyword'=>$keyword,'parentId'=>$parentId);
     }
     
      /**
