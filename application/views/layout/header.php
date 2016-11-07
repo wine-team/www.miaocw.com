@@ -170,6 +170,7 @@
             <li><a href="<?php echo site_url('goods/search?category_id=23');?>">双人情趣</a></li>
             <li><a href="<?php echo site_url('goods/search?category_id=24');?>">润滑液</a></li>
             <li><a href="<?php echo site_url('goods/search?category_id=26');?>">丰胸缩阴</a></li>
+            <li><a href="<?php echo $this->config->help_url.'notice/index.html';?>" target="_blank">两性频道</a></li>
         </ul>
         <div class="clear"></div>
     </div>
