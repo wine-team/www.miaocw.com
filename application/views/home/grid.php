@@ -39,12 +39,11 @@
 	</div>
 	<?php endif;?>
 	
-	<?php if (!empty($cms_block['head_hot_keyword'])):?>
+	<!--  
 	<div class="hotk ov">
-		<?php echo $cms_block['head_hot_keyword'];?>
+		<?php // echo $cms_block['head_hot_keyword']; ?>
 	</div>
-	<?php endif;?>
-	
+	-->
 	<div class="chosen-box clf condom">
         <?php $this->load->view('home/condom')?>
     </div>
