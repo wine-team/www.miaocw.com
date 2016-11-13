@@ -13,10 +13,6 @@
              <li>
                   <a href="<?php echo site_url('goods/search?category_id=31');?>" target="_blank" title="延时湿巾">情欲提升</a>
              </li>
-             <li>
-                  <a href="<?php echo site_url('goods/search?category_id=32');?>" target="_blank" title="女用催情">助勃增大器</a>
-             </li>
-                 
         </ul>
         <a href="<?php echo site_url('goods/search?category_id=21');?>" target="_blank" class="chosen-list-more">更多<i class="chosen-list-arrow"></i></a>
      </div>
