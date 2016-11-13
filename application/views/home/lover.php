@@ -6,28 +6,19 @@
     <div class="chosen-list-cate relative">
         <ul>
             <li>
-                  <a href="<?php echo site_url('goods/search?category_id=39');?>" target="_blank" title="体位道具">体位道具</a>
+                  <a href="<?php echo site_url('goods/search?category_id=46');?>" target="_blank" title="润滑液">润滑液</a>
             </li>
             <li>
-                  <a href="<?php echo site_url('goods/search?category_id=40');?>" target="_blank" title="男女共震器">男女共震器</a>
+                  <a href="<?php echo site_url('goods/search?category_id=50');?>" target="_blank" title="玩具清洗液">玩具清洗液</a>
             </li>
             <li>
-                  <a href="<?php echo site_url('goods/search?category_id=41');?>" target="_blank" title="捆绑束缚">捆绑束缚</a>
+                  <a href="<?php echo site_url('goods/search?category_id=94');?>" target="_blank" title="按摩油">按摩油</a>
             </li>
             <li>
-                  <a href="<?php echo site_url('goods/search?category_id=42');?>" target="_blank" title="贞操裤">贞操裤</a>
+                  <a href="<?php echo site_url('goods/search?category_id=95');?>" target="_blank" title="调情香水">调情香水</a>
             </li>
-            <li>
-                  <a href="<?php echo site_url('goods/search?category_id=43');?>" target="_blank" title="同性用品">同性用品</a>
-            </li>   
-            <li>
-                  <a href="<?php echo site_url('goods/search?category_id=44');?>" target="_blank" title="手脚拷环">手脚拷环</a>
-            </li> 
-            <li>
-                  <a href="<?php echo site_url('goods/search?category_id=45');?>" target="_blank" title="项圈脖套">项圈脖套</a>
-            </li> 
         </ul>
-        <a href="<?php echo site_url('goods/search?category_id=23');?>" target="_blank" class="chosen-list-more">更多<i class="chosen-list-arrow"></i></a>
+        <a href="<?php echo site_url('goods/search?category_id=24');?>" target="_blank" class="chosen-list-more">更多<i class="chosen-list-arrow"></i></a>
     </div>
     <ul class="chosen-list relative clf">
         <li class="chosen-item" style="left: 0px; top: 0px; width: 558px; height: 460px;">
