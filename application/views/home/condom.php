@@ -37,22 +37,22 @@
     </div>
     <ul class="chosen-list relative clf">
              <li class="chosen-item" style="left: 0px; top: 0px; width: 558px; height: 460px;">
-                <a href="javascript:;" target="_blank" title="螺纹颗粒避孕套专题">
+                <a href="http://www.miaocw.com/goods/search.html?category_id=58" target="_blank" title="螺纹颗粒避孕套专题">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/c11.jpg" alt="螺纹颗粒避孕套专题" rel="nofollow" />
                 </a>
              </li>
              <li class="chosen-item" style="left: 558px; top: 0px; width: 418px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="杜蕾斯激爽四合一32只 · 低至0.9元/片">
+                <a href="http://www.miaocw.com/goods/detail/42.html" target="_blank" title="杜蕾斯激爽四合一32只 · 低至0.9元/片">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/c12.jpg" alt="杜蕾斯激爽四合一32只 · 低至0.9元/片" rel="nofollow" />
                 </a>
              </li>
              <li class="chosen-item" style="left: 558px; top: 230px; width: 210px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="冈本激薄/纯/酷玩27只 · 全网最低2元/片">
+                <a href="http://www.miaocw.com/goods/detail/60.html" target="_blank" title="冈本激薄/纯/酷玩27只 · 全网最低2元/片">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/c13.jpg" alt="冈本激薄/纯/酷玩27只 · 全网最低2元/片" rel="nofollow" />
                 </a>
              </li>
              <li class="chosen-item" style="left: 768px; top: 230px; width: 208px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="陌陌铁罐38只超值装 · 马口铁盒精致高端">
+                <a href="http://www.miaocw.com/goods/detail/63.html" target="_blank" title="陌陌铁罐38只超值装 · 马口铁盒精致高端">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/c14.jpg" alt="陌陌铁罐38只超值装 · 马口铁盒精致高端" rel="nofollow" />
                 </a>
              </li>
