@@ -33,22 +33,22 @@
      </div>
      <ul class="chosen-list relative clf">
            <li class="chosen-item" style="left: 0px; top: 0px; width: 346px; height: 460px;">
-               <a href="javascript:;" target="_blank" title="雪纺浴袍情趣睡衣3件套 · 若隐若现的性感">
+               <a href="http://www.miaocw.com/goods/detail/210.html" target="_blank" title="雪纺浴袍情趣睡衣3件套 · 若隐若现的性感">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/l11.jpg" alt="雪纺浴袍情趣睡衣3件套 · 若隐若现的性感" rel="nofollow" />
                </a>
            </li>
            <li class="chosen-item" style="left: 346px; top: 0px; width: 309px; height: 234px;">
-                <a href="javascript:;" target="_blank" title="艾丝葵精致刺绣T裤 · 透视诱惑免脱开干">
+                <a href="http://www.miaocw.com/goods/detail/124.html" target="_blank" title="艾丝葵精致刺绣T裤 · 透视诱惑免脱开干">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/l12.jpg" alt="艾丝葵精致刺绣T裤 · 透视诱惑免脱开干" rel="nofollow" />
                 </a>
            </li>
            <li class="chosen-item" style="left: 346px; top: 234px; width: 309px; height: 226px;">
-                <a href="javascript:;" target="_blank" title="薄款过膝长筒丝袜 · 极致肤感防勾丝">
+                <a href="http://www.miaocw.com/goods/detail/218.html" target="_blank" title="薄款过膝长筒丝袜 · 极致肤感防勾丝">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/l13.jpg" alt="薄款过膝长筒丝袜 · 极致肤感防勾丝" rel="nofollow" />
                 </a>
            </li>
            <li class="chosen-item" style="left: 655px; top: 0px; width: 321px; height: 460px;">
-                <a href="javascript:;" target="_blank" title="空姐女警职业装制服 · 性感修身爆乳诱惑">
+                <a href="http://www.miaocw.com/goods/detail/93.html" target="_blank" title="空姐女警职业装制服 · 性感修身爆乳诱惑">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/l14.jpg" alt="空姐女警职业装制服 · 性感修身爆乳诱惑" rel="nofollow" />
                 </a>
            </li>        
