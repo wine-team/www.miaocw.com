@@ -36,22 +36,22 @@
     </div>
     <ul class="chosen-list relative clf">
           <li class="chosen-item" style="left: 0px; top: 0px; width: 558px; height: 460px;">
-                <a href="javascript:;" target="_blank" title="怪兽趴智能健康震蛋 健康版（智能APP遥控）">
+                <a href="http://www.miaocw.com/goods/detail/110.html" target="_blank" title="怪兽趴智能健康震蛋 健康版（智能APP遥控）">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/w11.jpg" alt="怪兽趴智能健康震蛋 健康版（智能APP遥控）" rel="nofollow" />
                 </a>
           </li>
           <li class="chosen-item" style="left: 558px; top: 0px; width: 418px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="雷霆Lucy(露西)四叶草i智能震动棒女用穿戴震蝴蝶">
+                <a href="http://www.miaocw.com/goods/detail/182.html" target="_blank" title="雷霆Lucy(露西)四叶草i智能震动棒女用穿戴震蝴蝶">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/w12.jpg" alt="雷霆Lucy(露西)四叶草i智能震动棒女用穿戴震蝴蝶" rel="nofollow" />
                 </a>
           </li>
           <li class="chosen-item" style="left: 558px; top: 230px; width: 210px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="【新品】iogle 大白智能震动棒">
+                <a href="http://www.miaocw.com/goods/detail/190.html" target="_blank" title="【新品】iogle 大白智能震动棒">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/w13.jpg" alt="【新品】iogle 大白智能震动棒" rel="nofollow" />
                 </a>
           </li>
           <li class="chosen-item" style="left: 768px; top: 230px; width: 208px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="EVO 多娜G点外阴双刺激震动按摩棒女性奢华双震棒">
+                <a href="http://www.miaocw.com/goods/detail/282.html" target="_blank" title="EVO 多娜G点外阴双刺激震动按摩棒女性奢华双震棒">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/w14.jpg" alt="EVO 多娜G点外阴双刺激震动按摩棒女性奢华双震棒" rel="nofollow" />
                 </a>
           </li>        

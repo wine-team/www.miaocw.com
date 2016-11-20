@@ -39,22 +39,22 @@
     </div>
     <ul class="chosen-list relative clf">
          <li class="chosen-item" style="left: 0px; top: 0px; width: 558px; height: 460px;">
-                <a href="javascript:;" target="_blank" title="BKK智能飞机杯">
+                <a href="http://www.miaocw.com/goods/detail/163.html" target="_blank" title="BKK智能飞机杯">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/m11.jpg" alt="BKK智能飞机杯" rel="nofollow" />
                 </a>
          </li>
          <li class="chosen-item" style="left: 558px; top: 0px; width: 418px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="日本Rends 负压语音男用自慰器飞机杯">
+                <a href="http://www.miaocw.com/goods/detail/175.html" target="_blank" title="日本Rends 负压语音男用自慰器飞机杯">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/m12.jpg" alt="日本Rends 负压语音男用自慰器飞机杯" rel="nofollow" />
                 </a>
          </li>
          <li class="chosen-item" style="left: 558px; top: 230px; width: 210px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="EVO豪华版阴茎增大器助勃器电动训练神器">
+                <a href="http://www.miaocw.com/goods/detail/197.html" target="_blank" title="EVO豪华版阴茎增大器助勃器电动训练神器">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/m13.jpg" alt="EVO豪华版阴茎增大器助勃器电动训练神器" rel="nofollow" />
                 </a>
          </li>
          <li class="chosen-item" style="left: 768px; top: 230px; width: 208px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="日本AVSTAR波多野结衣名器倒模">
+                <a href="http://www.miaocw.com/goods/detail/260.html" target="_blank" title="日本AVSTAR波多野结衣名器倒模">
                   <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/m14.jpg" alt="日本AVSTAR波多野结衣名器倒模" rel="nofollow" />
                 </a>
          </li>          
