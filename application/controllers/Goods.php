@@ -204,7 +204,7 @@ class Goods extends MW_Controller
             if (!in_array($mallGoods->goods_id, $historyPram)) {
                 array_unshift($historyPram, $mallGoods->goods_id);
             }
-            if (count($historyPram) > 16) {
+            if (count($historyPram) > 6) {
                 array_pop($historyPram);
             }
         } else {
