@@ -18,23 +18,23 @@
      </div>
      <ul class="chosen-list relative clf">
         <li class="chosen-item" style="left: 500px; top: 1px; width: 475px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="德国 树志机宜 男仕活力外用喷剂 15Ml">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y11.jpg" alt="德国 树志机宜 男仕活力外用喷剂 15Ml" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/329.html" target="_blank" >
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y12.jpg" rel="nofollow" />
                 </a>
         </li>
         <li class="chosen-item" style="left: 500px; top: 231px; width: 238px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="美国KEYO 女用快感增强液 激发性欲助情助兴15ml">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y12.jpg" alt="美国KEYO 女用快感增强液 激发性欲助情助兴15ml" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/318.html" target="_blank" >
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y13.jpg"  rel="nofollow" />
                 </a>
         </li>
         <li class="chosen-item" style="left: 738px; top: 231px; width: 237px; height: 230px;">
-                <a href="javascript:;" target="_blank" title="美国Sensuva女用活力唤醒凝胶 提升性欲敏感度 5ml">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y13.jpg" alt="美国Sensuva女用活力唤醒凝胶 提升性欲敏感度 5ml" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/328.html" target="_blank" >
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y14.jpg"  rel="nofollow" />
                 </a>
         </li>
         <li class="chosen-item" style="left: 0px; top: 0px; width: 501px; height: 460px;">
-                <a href="javascript:;" target="_blank" title="藏帝 纯植物男用喷剂 藏药秘方男用喷剂 15ml">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y14.jpg" alt="藏帝 纯植物男用喷剂 藏药秘方男用喷剂 15ml" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/316.html" target="_blank" >
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/y11.jpg" rel="nofollow" />
                 </a>
         </li> 
     </ul>
