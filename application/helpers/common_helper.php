@@ -112,8 +112,8 @@ function send_email($recipient, $subject = 'Test email', $message = 'Hello World
  * 菜单栏需要
  * memcache 缓存
  */
-function getAllCategory() {
-	
+function getAllCategory()
+{
 	$CI = & get_instance();
 	$CI->load->model('mall_category_model','mall_category');
 	if (!$CI->cache->memcached->get('categoryCache')) {
