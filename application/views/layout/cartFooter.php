@@ -13,7 +13,7 @@
 		<span class="vline">|</span>
 		<a href="<?php echo site_url('goods/search?category_id=21');?>" rel="nofollow" target="_blank">延时助情</a>
 		<span class="vline">|</span>
-		<a href="<?php echo $this->config->help_url?>" target="_blank" rel="nofollow">正品,隐私保障</a>
+		<a href="<?php echo $this->config->help_url.'help_center';?>" target="_blank" rel="nofollow">正品,隐私保障</a>
 	</p>
 	<p class="alC gray">Copyright © 2016 ICP经营性许可证:浙ICP备16035696号</p>
 </div>

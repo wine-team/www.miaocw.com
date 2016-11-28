@@ -79,7 +79,7 @@
             </li>
              -->
             <li class="nbt">
-                <a href="<?php echo $this->config->help_url;?>" rel="nofollow">客户服务<em class="rdop"></em></a>
+                <a href="<?php echo $this->config->help_url.'help_center';?>" rel="nofollow">客户服务<em class="rdop"></em></a>
                 <div class="tuln">
                 	<a href="<?php echo $this->config->help_url.'help_center/index/9.html';?>" rel="nofollow" target="_blank">如何订购</a>
                 	<a href="<?php echo $this->config->help_url.'help_center/index/23.html';?>" rel="nofollow" target="_blank">在线支付</a>
