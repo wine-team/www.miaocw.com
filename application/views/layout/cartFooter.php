@@ -1,4 +1,4 @@
-<div class="w9 lh30">
+<div class="w9 lh30"> 
 	<p class="btp"></p>
 	<p class="alC mt10">
 		<a target="_blank" href="<?php echo site_url();?>">首页</a>

@@ -34,7 +34,7 @@
 </div>
 <?php endif;?>
 
-<div id="top">
+<div id="top"> 
     <div class="w">
         <div class="left c8">
             <?php if ($this->uid):?>
