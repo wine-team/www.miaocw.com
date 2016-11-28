@@ -10,14 +10,19 @@ class Test extends MW_Controller
     public function index()
     {
         require_once APPPATH.'libraries/phpQuery.php';
+        $productUrl = array();
         for ($i=1; $i<=12; $i++) {
             phpQuery::newDocumentFile('http://www.taohv.cn/category.php?top_cat_id=2&page='.$i);
             $items = pq('.plist ul li');
-            $ret = array();
             foreach ($items as $item) {
-                $ret[] = pq($item)->find('.ptupian a')->attr('href');
+                $productUrl[] = 'http://www.taohv.cn'.pq($item)->find('.ptupian a')->attr('href');
             }
-            print_r($ret);exit;
+        }
+        if (!empty($productUrl)) {
+            foreach ($productUrl as $url) {
+                phpQuery::newDocumentFile($url);
+                
+            }
         }
     }
 
