@@ -153,7 +153,7 @@
 						<?php else:?>
 						href="javascript:;" 
 						<?php endif;?>
-				    	class="red_btn shopping-s-submit"  title="点击立即购买，直接结算">立即订购</a>
+				    	class="red_btn <?php if($this->uid):?>shopping-s-submit<?php endif;?>"  title="点击立即购买，直接结算">立即订购</a>
 				</div>
 		</div>
 		<div class="kan">
