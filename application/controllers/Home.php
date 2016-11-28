@@ -28,7 +28,7 @@ class Home extends MW_Controller{
 				'advert' => $this->advert->findBySourceState($source_state=1)->result_array(),
 			    'cms_block' => $this->cms_block->findByBlockIds($cms_block),
 			);
-			$this->cache->memcached->save('hostHomePageCache',$data, 24 * 60 * 60);
+			$this->cache->memcached->save('hostHomePageCache',$data,365*24*3600);
 		} else {
 			$data = $this->cache->memcached->get('hostHomePageCache');
 		}
