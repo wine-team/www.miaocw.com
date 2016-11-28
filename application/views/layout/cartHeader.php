@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head> 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,7 @@
 		<a href="<?php echo site_url();?>" title="妙处网" target="_blank" class="left">
 			<img src="miaow/images/mcw2.png">
 		</a>
-		<a href="<?php echo $this->config->help_url;?>" target="_blank" class="xhb right">
+		<a href="<?php echo $this->config->help_url.'help_center';?>" target="_blank" class="xhb right">
 			联系客服
 		</a>
 		<a href="<?php echo $this->config->ucenter_url;?>" target="_blank" class="xhb right mr10">
