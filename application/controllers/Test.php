@@ -19,7 +19,7 @@ class Test extends MW_Controller
             }
         }
         if (!empty($productUrl)) {
-            foreach ($productUrl as $url) {
+            foreach ($productUrl as $url) { 
                 phpQuery::newDocumentFile($url);
                 
             }
