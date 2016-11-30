@@ -22,23 +22,23 @@
     </div>
     <ul class="chosen-list relative clf">
         <li class="chosen-item" style="left: 0px; top: 0px; width: 558px; height: 460px;">
-                <a href="http://www.miaocw.com/goods/detail/289.html" target="_blank" title="杜蕾斯 冰火快感人体润滑液 快感/热感 50ml">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo11.jpg" alt="杜蕾斯 冰火快感人体润滑液 快感/热感 50ml" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/289.html" target="_blank" >
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo11.jpg"  rel="nofollow" />
                 </a>
         </li>
         <li class="chosen-item" style="left: 558px; top: 0px; width: 418px; height: 230px;">
-                <a href="http://www.miaocw.com/goods/detail/358.html" target="_blank" title="美国MOVO 挑逗型费洛蒙男女香水 80ml">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo12.jpg" alt="美国MOVO 挑逗型费洛蒙男女香水 80ml" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/358.html" target="_blank">
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo12.jpg" rel="nofollow" />
                 </a>
         </li>
         <li class="chosen-item" style="left: 768px; top: 230px; width: 208px; height: 230px;">
-                <a href="http://www.miaocw.com/goods/detail/335.html" target="_blank" title="骇客 SM多功能激情十件套 超值套装 SM情趣挑逗必备">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo13.jpg" alt="骇客 SM多功能激情十件套 超值套装 SM情趣挑逗必备" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/335.html" target="_blank" >
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo13.jpg"  rel="nofollow" />
                 </a>
         </li>
         <li class="chosen-item" style="left: 558px; top: 230px; width: 210px; height: 230px;">
-                <a href="http://www.miaocw.com/goods/detail/352.html" target="_blank" title="韩国ZINI 伊斯顿男用自慰乳膏 润滑按摩兴奋膏 200ml">
-                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo14.jpg" alt="韩国ZINI 伊斯顿男用自慰乳膏 润滑按摩兴奋膏 200ml" rel="nofollow" />
+                <a href="http://www.miaocw.com/goods/detail/352.html" target="_blank" >
+                  <img src="miaow/images/load.gif" class="lazy" data-original="miaow/images/lo14.jpg"  rel="nofollow" />
                 </a>
         </li>         
     </ul>
