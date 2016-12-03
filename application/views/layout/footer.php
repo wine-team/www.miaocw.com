@@ -46,7 +46,7 @@
 		</ul>
 		<ul class="m_mid" id="m_fid">
 			<li class="m_li">
-				<a href="<?php echo $this->config->help_url.'user_feedback/index';?>" class="f" target="_blank">
+				<a href="<?php echo $this->config->help_url.'user_feedback/index.html';?>" class="f" target="_blank">
 					<i class="iconfont">&#xe601;</i>
 				</a>
 				<p class="r_av m_tr">意见反馈
