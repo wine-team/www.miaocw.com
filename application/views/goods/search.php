@@ -11,12 +11,12 @@
 			<dt>
 			    <?php $img_arr = array_filter(explode('|',$goods->goods_img));?>
 				<a href="<?php echo site_url('goods/detail/'.$goods->goods_id);?>" target="_blank">
-					<img src="miaow/images/load.jpg" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img_arr[0]);?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_name;?>" />
+					<img src="miaow/images/load.jpg" data-original="<?php echo (strpos($img_arr[0], 'http://') === FALSE) ? $this->config->show_image_thumb_url('mall', $img_arr[0]) : $img_arr[0];?>" width="270" height="270" class="sbm lazy" alt="<?php echo $goods->goods_name;?>" />
 				</a>
 			</dt>
 			<dd class="simg">
 			    <?php foreach($img_arr as $img):?>
-					<img class="lazy" src="miaow/images/load.jpg" width="30" height="30" data-original="<?php echo $this->config->show_image_thumb_url('mall',$img,60);?>" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
+					<img class="lazy" src="miaow/images/load.jpg" width="30" height="30" data-original="<?php echo (strpos($img, 'http://') === FALSE) ? $this->config->show_image_thumb_url('mall', $img, 60) : $img;?>" data-s="<?php echo $this->config->show_image_thumb_url('mall',$img);?>"/>
 			    <?php endforeach;?>
 			</dd>
 			<dd class="mb10">

@@ -3,11 +3,11 @@
 	<div class="goods rel">
 	    <?php $images = array_filter(explode('|',$goods->goods_img));?>
 		<div class="gd_l left goods-image" id="gd_l">
-			<img width="430" height="430" id="preview" class="goods-main-pic"  alt="<?php echo $goods->goods_name;?>" src="<?php echo $this->config->show_image_url('mall',$images[0]);?>"/>
+			<img width="430" height="430" id="preview" class="goods-main-pic"  alt="<?php echo $goods->goods_name;?>" src="<?php echo (strpos($images[0], 'http://') === FALSE) ?  $this->config->show_image_url('mall',$images[0]) : $images[0];?>"/>
 			<ul id="spic" class="left goods-pic">   
 			    <?php foreach ($images as $key=>$val):?>
-				<li <?php if($key==0):?>class="on"<?php endif;?> data-src="<?php echo $this->config->show_image_url('mall',$val);?>">
-					<img src="<?php echo $this->config->show_image_thumb_url('mall',$val,60);?>" height="50" width="50" />
+				<li <?php if($key==0):?>class="on"<?php endif;?> data-src="<?php echo (strpos($val, 'http://') === FALSE) ?  $this->config->show_image_url('mall', $val) : $val;?>">
+					<img src="<?php echo (strpos($val, 'http://') === FALSE) ?  $this->config->show_image_thumb_url('mall', $val, 60) : $val;?>" height="50" width="50" />
 				</li>
 				<?php endforeach;?>
 			</ul>
