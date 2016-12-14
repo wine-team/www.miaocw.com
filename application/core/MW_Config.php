@@ -7,7 +7,7 @@ class MW_Config extends CI_Config
     public $passport_url   =  'http://passport.miaocw.com/';
     public $help_url       =  'http://help.miaocw.com/';
     public $ucenter_url    =  'http://ucenter.miaocw.com/';
-    public $m_url          =  'http://m.miaocw.com/';
+    public $m_base_url     =  'http://m.miaocw.com/';
 
     
      /**
@@ -30,6 +30,9 @@ class MW_Config extends CI_Config
      */
     public function show_image_url($dirname, $imageName = '')
     {
+        if (strpos($imageName, 'http://') !== FALSE) {
+            return $imageName;
+        }
         if (!empty($imageName)) {
             return $this->images_url.$dirname.'/'.$imageName;
         }
@@ -57,6 +60,9 @@ class MW_Config extends CI_Config
      */
     public function show_image_thumb_url($dirname, $imageName = '',$resize='400')
     {
+        if (strpos($imageName, 'http://') !== FALSE) {
+            return $imageName;
+        }
         if (!empty($imageName)) {
             $imageName = $this->get_thumb_image_name($imageName,$resize);
             return $this->images_url.$dirname.'/'.$imageName;
