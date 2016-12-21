@@ -19,4 +19,6 @@ class Home extends MW_Controller {
 		$advert = $result->result();
 		$this->jsonMessage('',$advert);
 	}
+	
+	
 }
