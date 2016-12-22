@@ -3,7 +3,7 @@ class Home extends MW_Controller {
 	
 	public function _init() {
 		
-		$this->load->model('advert_model','advert');
+		$this->load->model('m/advert_model','advert');
 	}
  	
 	 /**
