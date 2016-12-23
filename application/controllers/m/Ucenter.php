@@ -33,11 +33,15 @@ class Ucenter extends MW_Controller {
 		if (empty($this->d['address_id'])) {
 			$this->jsonMessage('请传地址ID');
 		}
-		$result = $this->mall_address->delete($this->d['address_id']);
+		$param = array(
+			'uid' => $this->d['uid'],
+			'address_id' => $this->d['address_id']
+		);
+		$result = $this->mall_address->delete($param);
 		if ($result) {
-			$this->jsonMessage('操作失败');
+			$this->jsonMessage('','操作成功');
 		}
-		$this->jsonMessage('操作成功');
+		$this->jsonMessage('操作失败');
 	}
 	
 	 /**

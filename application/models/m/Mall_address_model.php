@@ -30,9 +30,14 @@ class Mall_address_model extends CI_Model
      /**
      * delete
      */
-    public function delete($address_id) {
+    public function delete($param=array()) {
     	
-    	$this->db->where('address_id',$address_id);
+    	if (!empty($param['address_id'])) {
+    		$this->db->where('address_id',$param['address_id']);
+    	}
+    	if (!empty($param['uid'])) {
+    		$this->db->where('uid',$param['uid']);
+    	}
     	return $this->db->delete($this->table);
     }
 }
