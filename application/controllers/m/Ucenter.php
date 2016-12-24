@@ -252,5 +252,19 @@ class Ucenter extends MW_Controller {
     	$this->jsonMessage('收藏失败');
     }
     
-	
+     /**
+     * 获取历史列表
+     */
+	public function getHistory() {
+
+		$goods = array();
+		$history = unserialize(base64_decode(get_cookie('historyPram')));  // 存取goods_id数组
+		if (empty($history)) {
+		   $this->jsonMessage('',$goods); 	
+		}
+		$f = 'goods_id,goods_name,shop_price,market_price,promote_price,promote_start_date,promote_end_date,goods_img';
+		$result = $this->mall_goods_base->getGoodsByGoodsId($history,$f);
+		$goods = $result->result_array();
+		$this->jsonMessage('',$goods);
+	}
 }
