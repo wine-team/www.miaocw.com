@@ -8,6 +8,7 @@ class Ucenter extends MW_Controller {
         $this->d = $this->input->post();
         $this->load->model('m/user_model','user');
 		$this->load->model('m/mall_address_model','mall_address');
+		$this->load->model('m/mall_enshrine_model', 'mall_enshrine');
 		$this->load->model('m/user_coupon_get_model', 'user_coupon_get');
 	}
 
@@ -190,6 +191,66 @@ class Ucenter extends MW_Controller {
 		$this->jsonMessage('正在开发中');
 	}
 	
-	
+	 /**
+	  * 获取收藏列表
+	 */
+    public function enshrineList() {
+    	
+    	if (empty($this->d['uid'])) {
+    		$this->jsonMessage('请传用户UID');
+    	}
+    	$pg = isset($this->d['pg']) ? $this->d['pg'] : 1;
+    	$pgNum = isset($this->d['pgNum']) ? $this->d['pgNum'] : 20;
+    	$num = ($pg-1)*$pgNum;
+    	$result = $this->mall_enshrine->enshrineList($num, $pgNum, $this->d['uid']);
+        $enshrine = $result->result();
+        $this->jsonMessage('',$enshrine);
+    }
+    
+    /**
+     * 删除用户收藏
+     */
+    public function deleteMallEnshrine() {
+    	
+    	if (empty($this->d['uid'])) {
+    		$this->jsonMessage('请传用户UID');
+    	}
+    	if (empty($this->d['enshrine_id'])) {
+    		$this->jsonMessage('请传收藏商品');
+    	}
+    	$param = array(
+    		'uid' => $this->d['uid'],
+    		'id'  => $this->d['enshrine_id']
+    	);
+    	$result = $this->mall_enshrine->delete($param);
+    	if ($result) {
+    		$this->jsonMessage('','删除成功');
+    	}
+    	$this->jsonMessage('删除失败');
+    }
+    
+     /**
+     * 添加收藏
+     */
+    public function insertMallEnshrine() {
+    	
+    	if (empty($this->d['uid'])) {
+    		$this->jsonMessage('请传用户UID');
+    	}
+    	if (empty($this->d['goods_id'])) {
+    		$this->jsonMessage('请传商品ID');
+    	}
+    	$param = array(
+    		'uid' => $this->d['uid'],
+    		'goods_id' => $this->d['goods_id'],
+    		'created_at' => date('Y-m-d H:i:s')
+    	);
+    	$result = $this->mall_enshrine->insert($param);
+    	if ($result) {
+    		$this->jsonMessage('','收藏成功');
+    	}
+    	$this->jsonMessage('收藏失败');
+    }
+    
 	
 }
