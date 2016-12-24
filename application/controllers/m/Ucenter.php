@@ -6,6 +6,7 @@ class Ucenter extends MW_Controller {
 	public function _init() {
 		
         $this->d = $this->input->post();
+        $this->load->model('m/user_model','user');
 		$this->load->model('m/mall_address_model','mall_address');
 	}
 
@@ -114,6 +115,51 @@ class Ucenter extends MW_Controller {
 			$this->jsonMessage('','添加成功');
 		}
 		$this->jsonMessage('添加失败');
+	}
+	
+	 /**
+	 * 修改登陆密码
+	 */
+	public function modifyPass() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		if (empty($this->d['oldPw'])) {
+			$this->jsonMessage('请传原始密码');
+		}
+		if (empty($this->d['newPw'])) {
+			$this->jsonMessage('请传新密码');
+		}
+		if (empty($this->d['newConfirmPw'])) {
+			$this->jsonMessage('请传确认密码');
+		}
+		if (strlen($this->d['newPw'])<6) {
+			$this->jsonMessage('新密码长度小于6位');
+		}
+		if (strlen($this->d['newConfirmPw'])<6) {
+			$this->jsonMessage('确认密码长度小于6位');
+		}
+		$result = $this->user->findByUid($this->d['uid'],'uid,password');
+		if ($result->num_rows()<=0) {
+			$this->jsonMessage('没有该用户信息');
+		}
+		$user = $result->row(0);
+		if ($user->password != sha1(base64_encode($this->d['oldPw']))) {
+			$this->jsonMessage('原始密码不对');
+		}
+		if ($this->d['newPw'] != $this->d['newConfirmPw']) {
+			$this->jsonMessage('密码不一致');
+		}
+		$param = array(
+			'uid' => $this->d['uid'],
+			'password' => sha1(base64_encode($this->d['newPw']))
+		);
+		$result = $this->user->updateUser($param);
+		if ($result) {
+			$this->jsonMessage('','操作成功');
+		}
+		$this->jsonMessage('操作失败');
 	}
 	
 }
