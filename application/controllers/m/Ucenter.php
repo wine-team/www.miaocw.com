@@ -8,6 +8,7 @@ class Ucenter extends MW_Controller {
         $this->d = $this->input->post();
         $this->load->model('m/user_model','user');
 		$this->load->model('m/mall_address_model','mall_address');
+		$this->load->model('m/user_coupon_get_model', 'user_coupon_get');
 	}
 
 	 /**
@@ -161,5 +162,34 @@ class Ucenter extends MW_Controller {
 		}
 		$this->jsonMessage('操作失败');
 	}
+	
+	 /**
+	 * 用户优惠劵
+	 */
+	public function userCoupn() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		$f = 'coupon_name,uid,amount,condition,start_time,end_time,status';
+	    $result = $this->user_coupon_get->getUserCoupn($this->d,$f)->result();
+	    $this->jsonMessage('',$result);
+	}
+	
+	 /**
+	 * 获取优惠劵
+	 */
+	public function getUserCoupn() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		if (empty($this->d['userCoupnNumber'])) {
+			$this->jsonMessage('请传优惠劵序列号');
+		}
+		$this->jsonMessage('正在开发中');
+	}
+	
+	
 	
 }
