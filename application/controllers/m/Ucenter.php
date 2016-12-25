@@ -10,6 +10,7 @@ class Ucenter extends MW_Controller {
 		$this->load->model('m/mall_address_model','mall_address');
 		$this->load->model('m/mall_enshrine_model', 'mall_enshrine');
 		$this->load->model('m/user_coupon_get_model', 'user_coupon_get');
+		$this->load->model('m/getpwd_phone_model', 'getpwd_phone');
 	}
 
 	 /**
@@ -293,6 +294,33 @@ class Ucenter extends MW_Controller {
 		if (empty($this->d['uid'])) {
 			$this->jsonMessage('请传用户UID');
 		}   
+		if (!empty($this->d['phone'])) {
+			if (!valid_mobile($this->d['phone'])) {
+				$this->jsonMessage('手机号码格式有误');
+			}
+			$f = 'uid,phone';
+			$userResult = $this->user->findByParam(array('phone'=>$this->d['phone']),$f);
+			if ($userResult->num_rows()>0) {
+				$this->jsonMessage('该电话号码已存在');
+			}
+			if (empty($this->d['verify'])) {
+				$this->jsonMessage('请传验证码');
+			}
+			$yzm = $this->getpwd_phone->validatePhone(array('phone'=>$this->d['phone'],'verify'=>$this->d['verify']), true);
+			if ($yzm->num_rows()<=0) {
+				$this->jsonMessage('验证码错误');
+			}
+		}
+		if (!empty($this->d['email'])) {
+			if (!valid_email($this->d['email'])) {
+				$this->jsonMessage('邮箱格式有误');
+			}
+			$f = 'uid,email';
+			$userResult = $this->user->findByParam(array('email'=>$this->d['email']),$f);
+			if ($userResult->num_rows()>0) {
+				$this->jsonMessage('该邮箱已存在');
+			}
+		}
 		$result = $this->user->updateUser($this->d);
 		if ($result) {
 			$this->jsonMessage('','更新成功');
@@ -300,4 +328,32 @@ class Ucenter extends MW_Controller {
 		$this->jsonMessage('更新失败');
 	}
 	
+	 /**
+	  * 发送验证码
+	 */
+	public function sendYzm() {
+		
+		$phone = $this->d['phone'];
+		if (empty($phone)) {
+			$this->jsonMessage('请传电话号码');
+		}
+		if (!valid_mobile($phone)) {
+			$this->jsonMessage('手机号码格式有误');
+		}
+		$code = mt_rand(100000, 999999);
+		$this->db->trans_start();
+		$result = $this->getpwd_phone->validatePhone(array('phone'=>$phone));
+		if ($result->num_rows() > 0) {
+			$result1 = $this->getpwd_phone->update(array('phone'=>$phone, 'code'=>$code));
+		} else {
+			$result1 = $this->getpwd_phone->insert(array('phone'=>$phone, 'code'=>$code));
+		}
+		$this->sendToSms($phone, '验证码为:'.$code.'，有效期为10分钟。打死也不要告诉别人');
+		$this->db->trans_complete();
+		if ($this->db->trans_status() === TRUE) {
+			echo json_encode(array('status'=> true));exit;
+		} else {
+			$this->jsonMessage('网络繁忙，请稍后重新获取验证码');
+		}
+	}
 }
