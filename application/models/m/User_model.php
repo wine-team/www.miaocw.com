@@ -23,6 +23,9 @@ class User_model extends CI_Model
     	if (!empty($param['password'])) {
     		$data['password'] = $param['password'];
     	}
+    	if (!empty($param['sex'])) {
+    		$data['sex'] = $param['sex'];
+    	}
     	if (!empty($param['uid'])) {
     		$this->db->where('uid',$param['uid']);
     	}

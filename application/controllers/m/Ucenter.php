@@ -260,11 +260,44 @@ class Ucenter extends MW_Controller {
 		$goods = array();
 		$history = unserialize(base64_decode(get_cookie('historyPram')));  // 存取goods_id数组
 		if (empty($history)) {
-		   $this->jsonMessage('',$goods); 	
+		   $this->jsonMessage('',$goods);
 		}
 		$f = 'goods_id,goods_name,shop_price,market_price,promote_price,promote_start_date,promote_end_date,goods_img';
 		$result = $this->mall_goods_base->getGoodsByGoodsId($history,$f);
 		$goods = $result->result_array();
 		$this->jsonMessage('',$goods);
 	}
+	
+	/**
+	 * 修改用户信息
+	*/
+	public function userInfor() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		$f = 'alias_name,phone,email,sex,photo';
+		$result = $this->user->findByUid($this->d['uid'],$f);
+		if ($result->num_rows()<=0) {
+			$this->jsonMessage('暂无该用户信息');
+		}
+		$user = $result->row(0);
+		$this->jsonMessage('',$user);
+	}
+	
+     /**
+     * 更新用户信息
+     */
+	public function updateUserInfor() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}   
+		$result = $this->user->updateUser($this->d);
+		if ($result) {
+			$this->jsonMessage('','更新成功');
+		}
+		$this->jsonMessage('更新失败');
+	}
+	
 }
