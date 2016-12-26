@@ -11,6 +11,8 @@ class Ucenter extends MW_Controller {
 		$this->load->model('m/mall_enshrine_model', 'mall_enshrine');
 		$this->load->model('m/user_coupon_get_model', 'user_coupon_get');
 		$this->load->model('m/getpwd_phone_model', 'getpwd_phone');
+		$this->load->model('m/mall_order_base_model', 'mall_order_base');
+		$this->load->model('m/mall_order_product_model', 'mall_order_product');
 	}
 
 	 /**
@@ -355,5 +357,42 @@ class Ucenter extends MW_Controller {
 		} else {
 			$this->jsonMessage('网络繁忙，请稍后重新获取验证码');
 		}
+	}
+	
+	 /**
+	 * 获取订单列表页
+	 */
+	public function getOrderList() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		$result = $this->mall_order_base->getMallOrderProduct($this->d);
+		$mallOrder = $result->result();
+		$this->jsonMessage('',$mallOrder);
+	}
+	
+	 /**
+	 * 获取订单详情
+	 */
+	public function getOrderDetail() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		if (empty($this->d['order_id'])) {
+			$this->jsonMessage('请传订单ID');
+		}
+		$of = 'order_id,pay_id,order_state,order_status,pay_bank,delivery_address,order_supply_price,order_shop_price,actual_price,order_pay_price,deliver_price,coupon_code,coupon_price,integral';
+		$orderResult = $this->mall_order_base->getMallOrder(array('order_id'=>$this->d['order_id'],'payer_uid'=>$this->d['uid']),$of);
+		if ($orderResult->num_rows()<=0) {
+			$this->jsonMessage('订单数据不存在');
+		}
+		$opf = 'goods_id,goods_name,attr_value,goods_img,number,barter_num,refund_num,market_price,shop_price,supply_price,integral,pay_amount';
+		$orderProductResult = $this->mall_order_product->getMallOrderProduct(array('order_id'=>$this->d['order_id']),$opf);
+		if ($orderProductResult->num_rows()<=0) {
+			$this->jsonMessage('订单产品数据不存在');
+		}
+	    $this->jsonMessage('',array('orderResult'=>$orderResult->row(0),'orderProductResult'=>$orderProductResult->result()));
 	}
 }
