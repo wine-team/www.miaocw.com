@@ -33,4 +33,19 @@ class Mall_order_base_model extends CI_Model
     	$this->db->where('payer_uid',$param['payer_uid']);
     	return $this->db->get();
     }
+    
+    /**
+     * 更新时间
+     * @param unknown $param
+     * @param unknown $order_id
+     */
+    public function update($param=array(),$order_id) {
+    	
+    	if (!empty($param['order_status'])) {
+    		$data['order_status'] = $param['order_status'];
+    	}
+    	$data['updated_at'] = date('Y-m-d H:i:s');
+    	$this->db->where('order_id',$order_id);
+    	return $this->db->update($this->table,$data);
+    }
 }

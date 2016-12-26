@@ -13,6 +13,7 @@ class Ucenter extends MW_Controller {
 		$this->load->model('m/getpwd_phone_model', 'getpwd_phone');
 		$this->load->model('m/mall_order_base_model', 'mall_order_base');
 		$this->load->model('m/mall_order_product_model', 'mall_order_product');
+		$this->load->model('m/mall_order_history_model', 'mall_order_history');
 	}
 
 	 /**
@@ -394,5 +395,45 @@ class Ucenter extends MW_Controller {
 			$this->jsonMessage('订单产品数据不存在');
 		}
 	    $this->jsonMessage('',array('orderResult'=>$orderResult->row(0),'orderProductResult'=>$orderProductResult->result()));
+	}
+	
+	 /**
+	 * 取消订单
+	 */
+	public function cancelOrder() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		if (empty($this->d['order_id'])) {
+			$this->jsonMessage('请传订单ID');
+		}
+		$of = 'order_id,order_state,order_status,coupon_code,integral';
+		$orderResult = $this->mall_order_base->getMallOrder(array('order_id'=>$this->d['order_id'],'payer_uid'=>$this->d['uid']),$of);
+		if ($orderResult->num_rows()<=0) {
+			$this->jsonMessage('订单数据不存在');
+		}
+		$this->db->trans_start();
+		$orderResult = $this->mall_order_base->update(array('order_status'=>1),$this->d['order_id']);
+		$orderHistory = $this->order_history($this->d['order_id'], 6, '取消订单'); //订单状态记录
+		$this->db->trans_complete();
+		if ($this->db->trans_status()===FALSE) {
+			$this->jsonMessage('取消失败');
+		}
+		$this->jsonMessage('','取消成功');
+		
+	}
+	
+	 /**
+	 * 订单状态记录
+	 **/
+	private function order_history($order_id, $operate_type, $comment)
+	{
+		$history['order_id']      = $order_id;
+		$history['operate_time']  = date('Y-m-d H:i:s');
+		$history['uid']           = $this->uid;
+		$history['operate_type']  = $operate_type;
+		$history['comment']       = $comment;
+		return  $this->mall_order_history->insert($history);
 	}
 }
