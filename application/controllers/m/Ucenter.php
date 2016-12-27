@@ -12,6 +12,7 @@ class Ucenter extends MW_Controller {
 		$this->load->model('m/user_coupon_get_model', 'user_coupon_get');
 		$this->load->model('m/getpwd_phone_model', 'getpwd_phone');
 		$this->load->model('m/mall_order_base_model', 'mall_order_base');
+		$this->load->model('m/mall_goods_base_model', 'mall_goods_base');
 		$this->load->model('m/mall_order_product_model', 'mall_order_product');
 		$this->load->model('m/mall_order_history_model', 'mall_order_history');
 	}
@@ -416,8 +417,8 @@ class Ucenter extends MW_Controller {
 		$order = $orderResult->row(0);
 		$this->db->trans_start();
 		$orderResult = $this->mall_order_base->update(array('order_status'=>1),$this->d['order_id']);
-		$orderHistory = $this->order_history($this->d['order_id'], 6, '取消订单'); //订单状态记录
-		$CoupnIntegralGoods = $this->coupn_integral_goods($this->d['order_id'],$order);
+		$orderHistory = $this->order_history($this->d, 6, '取消订单'); //订单状态记录
+		$CoupnIntegralGoods = $this->coupn_integral_goods($this->d,$order);
 		$this->db->trans_complete();
 		if ($this->db->trans_status()===FALSE) {
 			$this->jsonMessage('取消失败');
@@ -428,11 +429,11 @@ class Ucenter extends MW_Controller {
 	 /**
 	 * 订单状态记录
 	 **/
-	private function order_history($order_id, $operate_type, $comment)
+	private function order_history($d, $operate_type, $comment)
 	{
-		$history['order_id']      = $order_id;
+		$history['order_id']      = $d['order_id'];
 		$history['operate_time']  = date('Y-m-d H:i:s');
-		$history['uid']           = $this->uid;
+		$history['uid']           = $d['uid'];
 		$history['operate_type']  = $operate_type;
 		$history['comment']       = $comment;
 		return  $this->mall_order_history->insert($history);
@@ -443,10 +444,10 @@ class Ucenter extends MW_Controller {
 	 * @param unknown $order_id
 	 * @param unknown $order
 	 */
-	private function coupn_integral_goods($order_id,$order) {
+	private function coupn_integral_goods($d,$order) {
 		
 		$opf = 'goods_id,number';
-		$result = $this->mall_order_product->getMallOrderProduct(array('order_id'=>$order_id),$opf);
+		$result = $this->mall_order_product->getMallOrderProduct(array('order_id'=>$d['order_id']),$opf);
 	    if ($result->num_rows()<=0) {
 	    	$this->jsonMessage('订单产品数据不存在');
 	    }
@@ -457,7 +458,7 @@ class Ucenter extends MW_Controller {
 	    	$this->user_coupon_get->updateStatus($order->coupon_code);
 	    }
 	    if (!empty($order->integral)) {
-	    	 $this->user->updatePoints($this->uid, $order->integral);
+	    	 $this->user->updatePoints($d['uid'],$order->integral);
 	    }
 	}
 }
