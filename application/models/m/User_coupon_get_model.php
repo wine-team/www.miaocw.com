@@ -22,7 +22,7 @@ class User_coupon_get_model extends CI_Model
      * 更新数据
      * @param unknown $coupon_id
      */
-    public function updateStatus($coupon_id){
+    public function updateStatus($coupon_id) {
     	
     	$this->db->where('coupon_get_id', $coupon_id);
     	return $this->db->update($this->table, array('status'=>1));

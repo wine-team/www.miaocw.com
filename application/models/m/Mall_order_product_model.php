@@ -12,7 +12,9 @@ class Mall_order_product_model extends CI_Model
     {
     	$this->db->select($opf);
     	$this->db->from($this->table);
-    	$this->db->where('order_id',$param['order_id']);
+    	if (!empty($param['order_id'])) {
+    		$this->db->where('order_id',$param['order_id']);
+    	}
     	return $this->db->get();
     }
     

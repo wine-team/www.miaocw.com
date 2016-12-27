@@ -458,7 +458,71 @@ class Ucenter extends MW_Controller {
 	    	$this->user_coupon_get->updateStatus($order->coupon_code);
 	    }
 	    if (!empty($order->integral)) {
-	    	 $this->user->updatePoints($d['uid'],$order->integral);
+	    	$this->user->updatePoints($d['uid'],$order->integral);
 	    }
 	}
+	
+	 /**
+	 * 订单评价
+	 */
+	public function orderReview() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		if (empty($this->d['user_name'])) {
+			$this->jsonMessage('请传用户姓名');
+		}
+		if (empty($this->d['order_id'])) {
+			$this->jsonMessage('请传订单ID');
+		}
+		if (empty($this->d['content'])) {
+			$this->jsonMessage('请传评价内容');
+		}
+		if (empty($this->d['score'])) {
+			$this->jsonMessage('请传评价内容');
+		}
+		$of = 'order_id,order_state,order_status';
+		$orderResult = $this->mall_order_base->getMallOrder(array('order_id'=>$this->d['order_id'],'payer_uid'=>$this->d['uid']),$of);
+		if ($orderResult->num_rows()<=0) {
+			$this->jsonMessage('订单数据不存在');
+		}
+		$order = $orderResult->row(0);
+		if ($order->order_status < 4 || $order->order_status==6) {
+			$this->jsonMessage('该订单不可以评价');
+		}
+		$opf = 'order_product_id,order_id,goods_id,goods_name,attr_value';
+		$result = $this->mall_order_product->getMallOrderProduct(array('order_id'=>$this->d['order_id']),$opf);
+	    if ($result->num_rows()<=0) {
+	    	$this->jsonMessage('订单产品数据不存在');
+	    }
+	    foreach ($result->result() as $key=>$val) {
+	    	$review[$key]['order_product_id'] = $val->order_product_id;
+	    	$review[$key]['order_id'] = $val->order_id;
+	    	$review[$key]['goods_id'] = $val->goods_id;
+	    	$review[$key]['goods_name'] = $val->goods_name;
+	    	$review[$key]['goods_attr'] = $val->attr_value;
+	    	$review[$key]['uid'] = $this->d['uid'];
+	    	$review[$key]['user_name'] = $this->d['user_name'];
+	    	$review[$key]['content'] = $this->d['content'];
+	    	$review[$key]['score'] = $this->d['score'];
+	    	$review[$key]['slide_show'] = '';
+	    	$review[$key]['status'] = 1;
+	    	$review[$key]['created_at'] = date('Y-m-d H:i:s');
+	    	$review[$key]['updated_at'] = date('Y-m-d H:i:s');
+	    }
+	    if (empty($review)) {
+	    	$this->jsonMessage('评论数据不存在');
+	    }
+	    $this->db->trans_start();
+	    $this->mall_order_reviews->insertArray($review);
+	    $this->order_history($this->d, 5, '评价');
+	    $this->mall_order_base->update(array('order_status'=>6,'order_state'=>4),$this->d['order_id']);
+	    $this->db->trans_complete();
+	    if ($this->db->trans_status()===FALSE) { 
+	    	$this->jsonMessage('评论失败');
+	    }
+	    $this->jsonMessage('','评论成功');
+	}
+	
 }

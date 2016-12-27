@@ -44,6 +44,9 @@ class Mall_order_base_model extends CI_Model
     	if (!empty($param['order_status'])) {
     		$data['order_status'] = $param['order_status'];
     	}
+    	if (!empty($param['order_state'])) {
+    		$data['order_state'] = $param['order_state'];
+    	}
     	$data['updated_at'] = date('Y-m-d H:i:s');
     	$this->db->where('order_id',$order_id);
     	return $this->db->update($this->table,$data);
