@@ -58,4 +58,16 @@ class User_model extends CI_Model
     	}
     	return $this->db->update($this->table,$data);
     }
+    
+    /**
+     * 更新积分
+     * @param unknown $uid
+     * @param unknown $pay_points
+     */
+    public function updatePoints($uid, $pay_points){
+    	
+    	$this->db->set("pay_points", "pay_points + {$pay_points}", false);
+    	$this->db->where('uid',$uid);
+    	return $this->db->update($this->table);
+    }
 }

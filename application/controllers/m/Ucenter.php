@@ -413,15 +413,16 @@ class Ucenter extends MW_Controller {
 		if ($orderResult->num_rows()<=0) {
 			$this->jsonMessage('订单数据不存在');
 		}
+		$order = $orderResult->row(0);
 		$this->db->trans_start();
 		$orderResult = $this->mall_order_base->update(array('order_status'=>1),$this->d['order_id']);
 		$orderHistory = $this->order_history($this->d['order_id'], 6, '取消订单'); //订单状态记录
+		$CoupnIntegralGoods = $this->coupn_integral_goods($this->d['order_id'],$order);
 		$this->db->trans_complete();
 		if ($this->db->trans_status()===FALSE) {
 			$this->jsonMessage('取消失败');
 		}
 		$this->jsonMessage('','取消成功');
-		
 	}
 	
 	 /**
@@ -435,5 +436,28 @@ class Ucenter extends MW_Controller {
 		$history['operate_type']  = $operate_type;
 		$history['comment']       = $comment;
 		return  $this->mall_order_history->insert($history);
+	}
+	
+	/**
+	 * 归还积分和购物劵和商品库存
+	 * @param unknown $order_id
+	 * @param unknown $order
+	 */
+	private function coupn_integral_goods($order_id,$order) {
+		
+		$opf = 'goods_id,number';
+		$result = $this->mall_order_product->getMallOrderProduct(array('order_id'=>$order_id),$opf);
+	    if ($result->num_rows()<=0) {
+	    	$this->jsonMessage('订单产品数据不存在');
+	    }
+	    foreach ($result->result() as $val) {
+	    	$this->mall_goods_base->updateStock($val->goods_id,$val->number);
+	    }
+	    if (!empty($order->coupon_code)) {
+	    	$this->user_coupon_get->updateStatus($order->coupon_code);
+	    }
+	    if (!empty($order->integral)) {
+	    	 $this->user->updatePoints($this->uid, $order->integral);
+	    }
 	}
 }
