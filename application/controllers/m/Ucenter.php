@@ -587,6 +587,7 @@ class Ucenter extends MW_Controller {
 	    if (empty($refund)) {
 	    	$this->jsonMessage('退款数据不存在');
 	    }
+	    
 	    $res = $this->mall_order_refund->insertArray($refund);
 	    $this->order_history($this->d, 7, '申请退货');
 	    $this->db->trans_complete();
