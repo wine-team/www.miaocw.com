@@ -15,6 +15,8 @@ class Ucenter extends MW_Controller {
 		$this->load->model('m/mall_goods_base_model', 'mall_goods_base');
 		$this->load->model('m/mall_order_product_model', 'mall_order_product');
 		$this->load->model('m/mall_order_history_model', 'mall_order_history');
+		$this->load->model('m/mall_order_reviews_model', 'mall_order_reviews');
+		$this->load->model('m/mall_order_refund_model', 'mall_order_refund');
 	}
 
 	 /**
@@ -523,6 +525,74 @@ class Ucenter extends MW_Controller {
 	    	$this->jsonMessage('评论失败');
 	    }
 	    $this->jsonMessage('','评论成功');
+	}
+	
+	 /**
+	 * 退款
+	 */
+	public function orderRefund() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		if (empty($this->d['user_name'])) {
+			$this->jsonMessage('请传用户姓名');
+		}
+		if (empty($this->d['order_id'])) {
+			$this->jsonMessage('请传订单ID');
+		}
+		if (empty($this->d['cellphone'])) {
+			$this->jsonMessage('请传电话号码');
+		}
+		if (empty($this->d['refund_content'])) {
+			$this->jsonMessage('请传退款原因');
+		}
+		$result = $this->mall_order_refund->findByOrderId($this->d['order_id'],'refund_id'); 
+	    if ($result->num_rows()>0) {
+	    	$this->jsonMessage('已申请退款');
+	    }
+	    $of = 'order_id,order_state,order_status,seller_uid';
+	    $orderResult = $this->mall_order_base->getMallOrder(array('order_id'=>$this->d['order_id'],'payer_uid'=>$this->d['uid']),$of);
+	    if ($orderResult->num_rows()<=0) {
+	    	$this->jsonMessage('订单数据不存在');
+	    }
+	    $order = $orderResult->row(0);
+	    if ($order->order_status < 3) {
+	    	$this->jsonMessage('该订单不可以退款');
+	    }
+	    $opf = 'order_product_id,order_id,goods_id,goods_name,attr_value,number';
+	    $result = $this->mall_order_product->getMallOrderProduct(array('order_id'=>$this->d['order_id']),$opf);
+	    if ($result->num_rows()<=0) {
+	    	$this->jsonMessage('订单产品数据不存在');
+	    }
+	    foreach ($result->result() as $key=>$val) {
+	    	$refund[$key]['order_product_id'] = $val->order_product_id;
+	    	$refund[$key]['order_id'] = $val->order_id;
+	    	$refund[$key]['goods_id'] = $val->goods_id;
+	    	$refund[$key]['existing'] = $val->number;
+	    	$refund[$key]['number'] = $val->number;
+	    	$refund[$key]['seller_uid'] = $order->seller_uid;
+	    	$refund[$key]['uid'] = $this->d['uid'];
+	    	$refund[$key]['user_name'] = $this->d['user_name'];
+	    	$refund[$key]['cellphone'] = $this->d['cellphone'];
+	    	$refund[$key]['status'] = 1;
+	    	$refund[$key]['deliver_order_id'] = ($order->order_status > 3) ? 1 : 0;
+	    	$refund[$key]['images'] = '';
+	    	$refund[$key]['flag'] = 1;
+	    	$refund[$key]['refund_content'] = $this->d['refund_content'];
+	    	$refund[$key]['created_at'] = date('Y-m-d H:i:s');
+	    }
+	    if (empty($refund)) {
+	    	$this->jsonMessage('退款数据不存在');
+	    }
+	    $this->db->trans_start();
+	    $res = $this->mall_order_refund->insertArray($refund);
+	    $this->order_history($this->d, 7, '申请退货');
+	    $this->db->trans_complete();
+	    if ($this->db->trans_status()) {
+	    	$this->jsonMessage('','申请退款成功，稍后客服会联系您...');
+	    }
+	    $this->jsonMessage('申请退款失败，请再次申请');
 	}
 	
 }
