@@ -565,6 +565,7 @@ class Ucenter extends MW_Controller {
 	    if ($result->num_rows()<=0) {
 	    	$this->jsonMessage('订单产品数据不存在');
 	    }
+	    $this->db->trans_start();
 	    foreach ($result->result() as $key=>$val) {
 	    	$refund[$key]['order_product_id'] = $val->order_product_id;
 	    	$refund[$key]['order_id'] = $val->order_id;
@@ -581,16 +582,16 @@ class Ucenter extends MW_Controller {
 	    	$refund[$key]['flag'] = 1;
 	    	$refund[$key]['refund_content'] = $this->d['refund_content'];
 	    	$refund[$key]['created_at'] = date('Y-m-d H:i:s');
+	        $this->mall_order_product->update(array('refund_num'=>0),$val->order_product_id);
 	    }
 	    if (empty($refund)) {
 	    	$this->jsonMessage('退款数据不存在');
 	    }
-	    $this->db->trans_start();
 	    $res = $this->mall_order_refund->insertArray($refund);
 	    $this->order_history($this->d, 7, '申请退货');
 	    $this->db->trans_complete();
 	    if ($this->db->trans_status()) {
-	    	$this->jsonMessage('','申请退款成功，稍后客服会联系您...');
+	    	$this->jsonMessage('','申请退款成功，稍后客服会联系您');
 	    }
 	    $this->jsonMessage('申请退款失败，请再次申请');
 	}

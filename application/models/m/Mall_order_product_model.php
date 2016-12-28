@@ -18,4 +18,16 @@ class Mall_order_product_model extends CI_Model
     	return $this->db->get();
     }
     
+     /**
+     * 更新数据
+     */
+    public function update($param=array(),$orderProductId) {
+    	
+    	if (isset($param['refund_num'])) {
+    		$data['refund_num'] = $param['refund_num'];
+    	}
+    	$data['updated_at'] = date('Y-m-d H:i:s');
+    	$this->db->where('order_product_id',$orderProductId);
+    	return $this->db->update($this->table,$data);
+    }
 }
