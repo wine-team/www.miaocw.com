@@ -354,7 +354,7 @@ class Payment extends CS_Controller {
      		$param['city_name'] =  $regionNames[1];
      		$param['district_id'] = $postData['district_id'];
      		$param['district_name'] = $regionNames[2];
-     		$param['detailed'] = $postData['detailed'];
+     		$param['detailed'] = htmlspecialchars($postData['detailed']);
      		$param['code'] = isset($postData['code']) ? $postData['code'] : '000000';
      		$param['receiver_name'] = $postData['receiver_name'];
      		$param['tel'] = $postData['tel'];
