@@ -11,6 +11,7 @@ class Home extends MW_Controller {
 		$this->load->model('m/mall_goods_base_model','mall_goods_base');
 		$this->load->model('m/sales_topic_model','sales_topic');
 		$this->load->model('m/sales_topic_category_model','sales_topic_category');
+	    $this->load->model('m/mall_category_model','mall_category');
 	}
  	
 	 /**
@@ -59,7 +60,7 @@ class Home extends MW_Controller {
 	    $goodResult = $gResult->result();
 	    $this->jsonMessage('',$goodResult);
 	} 
-	
+		
 	/**
 	 ** 获取购物车
 	*/
@@ -71,6 +72,39 @@ class Home extends MW_Controller {
 		$result = $this->mall_cart_goods->getCartGoodsByRes($this->d);
 		$cartGoods = $result->result();
 		$this->jsonMessage('',$cartGoods);
+	}
+	
+	 /**
+	  * 分类名称
+	 */
+	public function category() {
+		
+		$f = 'cat_id,cat_name,parent_id,cat_img';
+		$result = $this->mall_category->getMallCategory('',$f);
+	    $cate = $this->getCategory($result->result_array());
+	    $this->jsonMessage('',$cate);
+	}
+	
+	/**
+	 * 获取所要分类数据
+	 * @param unknown $cate
+	 */
+	private function getCategory($cateArray) {
+		
+		$ctParent = array();
+		$ctChild = array();
+		foreach ($cateArray as $key => $val) {
+			if ($val['parent_id'] ==0) {
+				$ctParent[] = $val;
+			}
+			if ($val['parent_id'] !=0) {
+				$ctChild[$val['parent_id']][] = $val;
+			}
+		}
+		foreach ($ctParent as $key=>$item) {
+			$ctParent[$key]['child'] = $ctChild[$item['cat_id']];
+		}
+		return $ctParent;
 	}
 	
 	 /**
