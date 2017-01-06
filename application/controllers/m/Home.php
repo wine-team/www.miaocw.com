@@ -123,9 +123,29 @@ class Home extends MW_Controller {
 		);
 		$result = $this->mall_goods_base->page_list($pgNum,$num,$param,$f);
 	    $goodsResult = $result->result();
-	    $this->jsonMessage('',$goodsResult);
+	    $cateReult = $this->get_ct_param($this->d);
+	    $this->jsonMessage('',array('ct'=>$cateReult,'goods'=>$goodsResult));
 	}
 	
+	 /**
+	 * 获取分类
+	 * @param unknown $param
+	 */
+	private function get_ct_param($param) {
+		
+		if (!empty($param['cateid'])) {
+			
+			$cf = 'cat_id,cat_name,parent_id,full_name';
+			$ctRes = $this->mall_category->findCatById($cf,$param['cateid']);
+			$ct = $ctRes->row(0);
+			
+			$parentId = ($ct->parent_id==0) ? $ct->cat_id : $ct->parent_id;
+			$categoryResult = $this->mall_category->getChildCat($parentId,$cf);
+			$category = $categoryResult->result();
+			return array('self'=>$ct,'child'=>$category);
+		}
+		return array();
+	}
 	
 	 /**
 	 * 删除购物的产品

@@ -48,11 +48,26 @@ class Mall_goods_base_model extends CI_Model{
     	}
     	if (isset($search['order'])) {
     		switch ($search['order']) {
-    			case 1 : $this->db->order_by('goods_id', 'DESC');break;
-    			case 2 : $this->db->order_by('sale_count', 'DESC');break;
-    			case 3 : $this->db->order_by('tour_count', 'DESC');break;
-    			case 4 : $this->db->order_by('shop_price', 'ASC');break;
-    			case 5 : $this->db->order_by('shop_price', 'DESC');break;
+    			case 1 : 
+    				$this->db->order_by('sale_count', 'DESC');
+    				$this->db->order_by('review_count', 'DESC');
+    			break;
+    			case 2 :
+    				$this->db->order_by('sale_count', 'ASC');
+    				$this->db->order_by('review_count', 'ASC');
+    			break;
+    			case 3 : 
+    				$this->db->order_by('sale_count', 'DESC');
+    			break;
+    			case 4 : 
+    				$this->db->order_by('sale_count', 'ASC');
+    			break;
+    			case 5 : 
+    				$this->db->order_by('shop_price', 'ASC');
+    			break;
+    			case 6 : 
+    				$this->db->order_by('shop_price', 'DESC');
+    			break;
     		}
     	}
     	$this->db->where('is_on_sale', 1);
