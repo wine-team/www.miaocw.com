@@ -21,6 +21,27 @@ class Mall_goods_base_model extends CI_Model{
 	}
 	
 	/**
+	 * 
+	 * @param unknown $param
+	 * @param string $f
+	 */
+	public function getByParam($param=array(),$f='*') {
+		
+		$this->db->select($f);
+		$this->db->from($this->table);
+		if (!empty($param['attr_set_id'])) {
+			$this->db->where('attr_set_id',$param['attr_set_id']);
+		}
+		$this->db->where('is_on_sale', 1);
+		$this->db->where('is_check', 2);
+		if (!empty($param['num'])) {
+		    $this->db->limit($param['num']);
+		}
+		$this->db->order_by('mall_goods_base.sort_order', 'ASC');
+		return $this->db->get();
+	}
+	
+	/**
 	 * 更新库存
 	 * @param unknown $goods_id
 	 * @param unknown $in_stock
@@ -75,5 +96,16 @@ class Mall_goods_base_model extends CI_Model{
     	$this->db->order_by('mall_goods_base.sort_order', 'ASC');
     	$this->db->limit($page_num, $num);
     	return $this->db->get();
+    }
+    
+     /**
+     * 更新浏览量
+     * @param unknown $param
+     */
+    public function setMallCount($id)
+    {
+    	$this->db->where('goods_id',$id);
+    	$this->db->set('tour_count', 'tour_count+1', FALSE);
+    	return $this->db->update($this->table);
     }
 }

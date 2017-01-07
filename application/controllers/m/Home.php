@@ -12,6 +12,7 @@ class Home extends MW_Controller {
 		$this->load->model('m/sales_topic_model','sales_topic');
 		$this->load->model('m/sales_topic_category_model','sales_topic_category');
 	    $this->load->model('m/mall_category_model','mall_category');
+	    $this->load->model('m/mall_order_reviews_model','mall_order_reviews');
 	}
  	
 	 /**
@@ -145,6 +146,68 @@ class Home extends MW_Controller {
 			return array('self'=>$ct,'child'=>$category);
 		}
 		return array();
+	}
+	
+	 /**
+	 * 详情
+	 */
+	public function detail() {
+		
+		if (empty($this->d['goods_id'])) {
+			$this->jsonMessage('请传产品ID');
+		}
+		$f = 'goods_id,goods_name,goods_img,goods_sku,market_price,shop_price,provide_price,
+			  promote_price,promote_start_date,promote_end_date,attr_set_id,goods_desc,wap_goods_desc,
+			  attr_spec,attr_value,booking_limit,limit_num,freight_id,freight_cost,
+			  sale_count';
+		$result = $this->mall_goods_base->getGoodsByGoodsId($this->d['goods_id'],$f);
+	    if ($result->num_rows()<=0) {
+	    	$this->jsonMessage('无产品');
+	    }
+	    $goods = $result->row(0);
+	    $this->seeHistory($goods); //设置浏览记录
+	    $this->mall_goods_base->setMallCount($goods->goods_id); //设置产品浏览量
+	    $mf = 'goods_id,goods_name,goods_img,shop_price,promote_price,promote_start_date,promote_end_date';
+	    $more = $this->mall_goods_base->getByParam(array('attr_set_id'=>$goods->attr_set_id,'num'=>6),$mf);
+	    $this->jsonMessage('',array('goods'=>$goods,'more'=>$more->result()));
+	}
+	
+	 /**
+	 * 获取产品评价
+	 */
+	public function goodsReview() {
+		
+		if (empty($this->d['goods_id'])) {
+			$this->jsonMessage('请传产品ID');
+		}
+		$pg = isset($this->d['pg']) ? $this->d['pg'] : 1;
+		$pgNum = isset($this->d['pgNum']) ? $this->d['pgNum'] : 20;
+		$num = ($pg-1)*$pgNum;
+		$result = $this->mall_order_reviews->page_list($pgNum, $num, array('goods_id'=>$this->d['goods_id'],'status'=>2));
+	    $review = $result->result();
+	    $this->jsonMessage('',$review);
+	}
+	
+	/**
+	 * 浏览记录
+	 * @param unknown $tourismGoods
+	 */
+	public function seeHistory($mallGoods)
+	{
+		$historyPram = array();
+		$historyCookie = get_cookie('historyPram');
+		if (!empty($historyCookie)) {
+			$historyPram = unserialize(base64_decode($historyCookie));
+			if (!in_array($mallGoods->goods_id, $historyPram)) {
+				array_unshift($historyPram, $mallGoods->goods_id);
+			}
+			if (count($historyPram) > 6) {
+				array_pop($historyPram);
+			}
+		} else {
+			$historyPram[] = $mallGoods->goods_id;
+		}
+		set_cookie('historyPram', base64_encode(serialize($historyPram)), 14400);
 	}
 	
 	 /**
