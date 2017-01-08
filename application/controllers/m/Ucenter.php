@@ -334,6 +334,38 @@ class Ucenter extends MW_Controller {
 		$this->jsonMessage('更新失败');
 	}
 	
+	/**
+	 *  判断是否电话号码是否注册
+	*/
+	public function isExist() {
+		
+		if (empty($this->d)) {
+			$this->jsonMessage('请传电话号码或者邮箱');
+		}
+		if (!empty($this->d['phone'])) {
+			if (!valid_mobile($this->d['phone'])) {
+				$this->jsonMessage('手机号码格式有误');
+			}
+			$f = 'uid,phone';
+			$userResult = $this->user->findByParam(array('phone'=>$this->d['phone']),$f);
+			if ($userResult->num_rows()>0) {
+				$this->jsonMessage('该电话号码已存在');
+			}
+			$this->jsonMessage('','该电话号码没被注册');
+		}
+		if (!empty($this->d['email'])) {
+			if (!valid_email($this->d['email'])) {
+				$this->jsonMessage('邮箱格式有误');
+			}
+			$f = 'uid,email';
+			$userResult = $this->user->findByParam(array('email'=>$this->d['email']),$f);
+			if ($userResult->num_rows()>0) {
+				$this->jsonMessage('该邮箱已存在');
+			}
+			$this->jsonMessage('','该邮箱没被注册');
+		}
+	}
+	
 	 /**
 	  * 发送验证码
 	 */
