@@ -149,7 +149,9 @@ class Home extends MW_Controller {
 	}
 	
 	 /**
-	 * 详情
+	  * 
+	  * http://m.qu.cn/goods-4965.html
+	 * 详情  http://m.qu.cn/goods-10266.html
 	 */
 	public function detail() {
 		
@@ -233,6 +235,55 @@ class Home extends MW_Controller {
 	 */
 	public function addCart() {
 		
-		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		if (empty($this->d['goods_id'])) {
+			$this->jsonMessage('请传产品ID');
+		}
+		$specArray = '';
+	    $qty = empty($this->d['qty']) ? 1 : (int)$this->d['qty'];
+	    if (!empty($this->d['spec'])) {
+	    	$specArray = implode(',',$this->d['spec']);
+	    }
+	    $f = 'goods_id,limit_num,in_stock';
+	    $result = $this->mall_goods_base->getGoodsByGoodsId($this->d['goods_id'],$f);
+	    if ($result->num_rows()<=0) {
+	    	$this->jsonMessage('该产品不存在');
+	    }
+	    $goods = $result->row(0);
+	    if (!isset($goods->in_stock) || $goods->in_stock < $qty) {
+	    	$this->jsonMessage('库存不足');
+	    }
+	    if ($goods->limit_num > 0){
+	    	if($goods->limit_num < $qty){
+	    		$this->jsonMessage('限购'.$goods->limit_num.'件');
+	    	}
+	    }
+	    $limit_num = $goods->limit_num;
+	    $info = $this->mall_cart_goods->getCartGoods(array('uid'=>$this->d['uid'],'goods_id'=>$this->d['goods_id']));
+	    if ($info->num_rows()>0) {
+	    	$info = $info->row(0);
+	    	if ($info->goods_num + $qty < $goods->in_stock){
+	    		if ( ($info->goods_num >= $limit_num) && ($limit_num>0)) {
+	    			$status = $this->mall_cart_goods->updateCart($info->id,$limit_num,$specArray);
+	    		} else {
+	    			$qty = $limit_num > 0 ? ( (($info->goods_num + $qty) >= $limit_num ) ? ($limit_num-($info->goods_num)) : $qty ) :  $qty;
+	    			$status = $this->mall_cart_goods->updateQty($info->id,$qty,$specArray);
+	    		}
+	    	} else {
+	    		$status = $this->mall_cart_goods->updateCart($info->id,$goods->in_stock,$specArray);
+	    	}
+	    } else {
+	    	$params['uid'] = $this->d['uid'];
+	    	$params['attribute_value'] = $specArray;
+	    	$params['goods_id'] = $this->d['goods_id'];
+	    	$params['goods_num'] = $qty;
+	    	$status = $this->mall_cart_goods->addQty($params);
+	    }
+	    if ($status) {
+	    	$this->jsonMessage('','加入购物车成功');
+	    }
+	    $this->jsonMessage('加入购物车失败');
 	}
 }
