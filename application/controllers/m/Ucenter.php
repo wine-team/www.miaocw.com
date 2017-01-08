@@ -339,7 +339,7 @@ class Ucenter extends MW_Controller {
 	*/
 	public function isExist() {
 		
-		if (empty($this->d)) {
+		if (empty($this->d)) {  
 			$this->jsonMessage('请传电话号码或者邮箱');
 		}
 		if (!empty($this->d['phone'])) {
