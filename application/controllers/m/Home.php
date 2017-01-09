@@ -286,4 +286,6 @@ class Home extends MW_Controller {
 	    }
 	    $this->jsonMessage('加入购物车失败');
 	}
+	
+	
 }

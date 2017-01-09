@@ -12,10 +12,22 @@ class User_coupon_get_model extends CI_Model
     	
     	$this->db->select($f);
     	$this->db->from($this->table);
+    	$this->checkWhere($param);
+    	return $this->db->get();
+    }
+    
+    public function checkWhere($param=array()) {
+    	
     	if (!empty($param['uid'])) {
     		$this->db->where('uid',$param['uid']);
     	}
-    	return $this->db->get();
+    	if (!empty($param['status'])) {
+    		$this->db->where('status',$param['status']);
+    	}
+    	if (!empty($param['date'])) {
+    		$this->db->where('start_time<=',$param['date']);
+    		$this->db->where('end_time>=',$param['date']);
+    	}
     }
     
      /**
