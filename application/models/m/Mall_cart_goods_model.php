@@ -13,8 +13,8 @@ class Mall_cart_goods_model extends CI_Model{
 		
 		$this->db->select('mall_cart_goods.goods_id,uid,attribute_value,goods_num,
 				           supplier_id,goods_name,goods_img,shop_price,promote_price,
-				           promote_start_date,promote_end_date,integral,minus_stock,
-				           extension_code,in_stock,limit_num,goods_weight,freight_cost,freight_id
+				           promote_start_date,promote_end_date,integral,
+				           in_stock,limit_num,goods_weight,freight_cost,freight_id
 				         ');
 		$this->db->from($this->table);
 		$this->db->join('mall_goods_base','mall_goods_base.goods_id=mall_cart_goods.goods_id');
