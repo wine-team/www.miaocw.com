@@ -70,4 +70,30 @@ class User_model extends CI_Model
     	$this->db->where('uid',$uid);
     	return $this->db->update($this->table);
     }
+    
+    /**
+     * 重新设置积分
+     * @param unknown $pay_points
+     * @param unknown $uid
+     */
+    public function setPayPoints($pay_points,$uid){
+    	 
+    	$this->db->set('pay_points','pay_points-'.$pay_points,false);
+    	$this->db->where('uid',$uid);
+    	return $this->db->update($this->table);
+    }
+    
+     /**
+     * 获取用户信息
+     * @param unknown $param
+     * @param string $f
+     */
+    public function getPayPoints($uid) {
+    	 
+    	$this->db->select('pay_points');
+    	$this->db->from($this->table);
+    	$this->db->where('uid',$uid);
+    	$result = $this->db->get();
+    	return ($result->num_rows() > 0) ?  $result->row(0)->pay_points : 0;
+    }
 }

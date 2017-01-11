@@ -21,6 +21,13 @@ class Mall_cart_goods_model extends CI_Model{
 		if (!empty($param['uid'])) {
 			$this->db->where('uid',$param['uid']);
 		}
+		if (!empty($param['goods_id'])) {
+			if (is_array($param['goods_id'])) {
+				$this->db->where_in('mall_cart_goods.goods_id',$param['goods_id']);
+			} else {
+				$this->db->where('mall_cart_goods.goods_id',$param['goods_id']);
+			}
+		}
 		return $this->db->get();
 	}
 	

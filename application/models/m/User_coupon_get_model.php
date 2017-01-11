@@ -39,4 +39,32 @@ class User_coupon_get_model extends CI_Model
     	$this->db->where('coupon_get_id', $coupon_id);
     	return $this->db->update($this->table, array('status'=>1));
     }
+    
+    /**
+     * 根据coupon_id更新这个已用
+     * @param unknown $coupon_id
+     */
+    public function setStatus($coupon_id,$uid) {
+    	 
+    	$data['status'] = 2;//已用
+    	$this->db->where('uid',$uid);
+    	$this->db->where('coupon_get_id',$coupon_id);
+    	return $this->db->update($this->table,$data);
+    }
+    
+    /**
+     * 根据多个id进行选取结果
+     * @param unknown $coupon_get_id
+     * @param unknown $uid
+     */
+    public function getCouponById($coupon_get_id,$uid) {
+    	 
+    	$this->db->select('coupon_get_id,amount,condition,status');
+    	$this->db->from($this->table);
+    	$this->db->where('coupon_get_id',$coupon_get_id);
+    	$this->db->where('uid',$uid);
+    	$this->db->where('user_coupon_get.start_time <=',date('Y-m-d H:i:s'));
+    	$this->db->where('user_coupon_get.end_time >=',date('Y-m-d H:i:s'));
+    	return $this->db->get();
+    }
 }

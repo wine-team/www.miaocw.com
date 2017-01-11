@@ -104,8 +104,19 @@ class Mall_goods_base_model extends CI_Model{
      */
     public function setMallCount($id)
     {
-    	$this->db->where('goods_id',$id);
     	$this->db->set('tour_count', 'tour_count+1', FALSE);
+    	$this->db->where('goods_id',$id);
+    	return $this->db->update($this->table);
+    }
+    
+    /**
+     * 商品修改 创建订单时候使用变更库存
+     * @param unknown $param
+     */
+    public function setMallNum($param)
+    {
+    	$this->db->set('in_stock', 'in_stock-' . $param['number'], FALSE);
+    	$this->db->where('goods_id', $param['goods_id']);
     	return $this->db->update($this->table);
     }
 }

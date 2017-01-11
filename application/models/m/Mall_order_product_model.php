@@ -3,6 +3,15 @@ class Mall_order_product_model extends CI_Model
 {
     private $table   = 'mall_order_product';
    
+    /**
+     * 添加产品订单
+     * @param unknown $params
+     */
+    public function addOrderProduct($params)
+    {
+    	$this->db->insert($this->table, $params);
+    	return $this->db->insert_id();
+    }
      /**
      * 获取订单产品
      * @param unknown $param
