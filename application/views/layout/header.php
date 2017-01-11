@@ -40,7 +40,7 @@
             <?php if ($this->uid):?>
                                          你好：<a class="c3" title="会员等级v1" href="<?php echo $this->config->ucenter_url;?>"><?php echo $this->aliasName;?></a>
 			   <span class="vline">|</span>
-			   <a class="c8" href="<?php echo $this->config->passport_url.'login/logout.html';?>">退出</a>
+			   <a class="c8" href="<?php echo $this->config->passport_url.'pc/login/logout.html';?>">退出</a>
             <?php else:?>
                <a rel="nofollow" class="c9" href="<?php echo $this->config->passport_url;?>">你好，请登录</a>
 	           <span class="vline">|</span>
