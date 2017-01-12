@@ -72,4 +72,21 @@ class Mall_order_base_model extends CI_Model
     	$this->db->insert($this->table, $params);
     	return $this->db->insert_id();
     }
+    
+    /**
+     * 获取订单信息
+     * @param unknown $param
+     */
+    public function getOrderBaseByRes($param=array()){
+    	 
+    	$this->db->select('SUM(deliver_price) AS transport_cost,SUM(actual_price) AS actual_pay,delivery_address');
+    	$this->db->from($this->table);
+    	if (!empty($param['uid'])) {
+    		$this->db->where('payer_uid',$param['uid']);
+    	}
+    	if (!empty($param['pay_id'])) {
+    		$this->db->where('pay_id',$param['pay_id']);
+    	}
+    	return $this->db->get();
+    }
 }

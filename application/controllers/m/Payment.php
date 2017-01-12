@@ -191,6 +191,43 @@ class Payment extends MW_Controller {
      	$this->jsonMessage('',base64_encode($payId));//生产订单---
      }
      
+      /**
+       * 支付页面--订单信息
+      */
+     public function order() {
+     	
+     	if (empty($this->d['uid'])) {
+     		$this->jsonMessage('请传用户UID');
+     	}
+     	if (empty($this->d['pay'])) {
+     		$this->jsonMessage('请传总订单ID');
+     	}
+     	$payId = base64_decode($this->d['pay']);
+     	$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->d['uid'],'pay_id'=>$payId));
+     	if ($mainRes->num_rows()<=0) {
+     		$this->jsonMessage('主订单不存在');
+     	}
+     	$mainOrder = $mainRes->row(0);
+     	$orderRes = $this->mall_order_base->getOrderBaseByRes(array('uid'=>$this->d['uid'],'pay_id'=>$payId));
+     	if ($orderRes->num_rows()<=0) {
+     		$this->jsonMessage('订单不存在');
+     	}
+     	$order = $orderRes->row(0);
+     	$productRes = $this->mall_order_product->getOrderProduct(array('uid'=>$this->d['uid'],'pay_id'=>$payId));
+     	if ($productRes->num_rows()<=0) {
+     		$this->jsonMessage('订单产品表不存在');
+     	}
+     	$orderProduct = $productRes->result();
+     	$info = array(
+     		'pay_id' => $mainOrder->pay_id,
+     		'transport_cost' => $order->transport_cost,
+     		'actual_pay' => $order->actual_pay,
+     		'delivery_address' => $order->delivery_address
+     	);
+     	$this->jsonMessage('',array('goods'=>$orderProduct,'order'=>$info));
+     }
+     
+     
      /**
       * 创建主订单
       * @param unknown $orderMainSn
