@@ -12,8 +12,8 @@ class Mall_cart_goods_model extends CI_Model{
 	public function getCartGoodsByRes($param=array(),$f='*'){
 		
 		$this->db->select('mall_cart_goods.goods_id,uid,attribute_value,goods_num,
-				           supplier_id,goods_name,goods_img,shop_price,promote_price,
-				           promote_start_date,promote_end_date,integral,
+				           supplier_id,goods_name,goods_img,market_price,provide_price,shop_price,promote_price,
+				           promote_start_date,promote_end_date,integral,extension_code,minus_stock,
 				           in_stock,limit_num,goods_weight,freight_cost,freight_id
 				         ');
 		$this->db->from($this->table);

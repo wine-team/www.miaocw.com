@@ -7,6 +7,7 @@ class Payment extends MW_Controller {
 		
 		$this->d = $this->input->post();
 		$this->load->model('m/user_model','user');
+		$this->load->model('m/region_model','region');
 		$this->load->model('m/mall_address_model','mall_address');
 		$this->load->model('m/mall_order_pay_model','mall_order_pay');
 		$this->load->model('m/mall_cart_goods_model','mall_cart_goods');
@@ -14,6 +15,8 @@ class Payment extends MW_Controller {
 		$this->load->model('m/mall_order_base_model','mall_order_base');
 		$this->load->model('m/mall_freight_tpl_model','mall_freight_tpl');
 		$this->load->model('m/mall_freight_price_model','mall_freight_price');
+		$this->load->model('m/mall_goods_base_model','mall_goods_base');
+		$this->load->model('m/mall_order_product_model','mall_order_product');
 		$this->load->model('m/mall_order_product_profit_model','mall_order_product_profit');
 	}
  	
@@ -82,6 +85,7 @@ class Payment extends MW_Controller {
      public function createOrder() {
      	
      	$this->validate($this->d);
+     	$couponId = $this->input->post('couponId');
      	$deliveryArray = $this->getAddress($this->d);
      	if (empty($deliveryArray)) {
      		$this->jsonMessage('收货地址出错');
@@ -154,19 +158,19 @@ class Payment extends MW_Controller {
      			$userPoints = bcsub($userPoints,$orderActualIntegral);//剩余积分
      		}
      		 
-     		if (!empty($this->d['couponId'])) { //优惠劵的使用 
+     		if (!empty($couponId)) { //优惠劵的使用 
      			 
-     			$couponRes = $this->user_coupon_get->getCouponById($this->d['couponId'],$this->d['uid']);
+     			$couponRes = $this->user_coupon_get->getCouponById($couponId,$this->d['uid']);
      			if ($couponRes->num_rows()<=0) {
      				$this->jsonMessage('优惠劵不存在');
      			}
      			$coupon = $couponRes->row(0);
      			if ( (bcsub(bcsub($orderActualPrice,$coupon->amount,2),$orderActualIntegral/100,2)>=0) && ($coupon->status==1) ) {
      				$orderActualCoupn = $coupon->amount;
-     				$this->user_coupon_get->setStatus($this->d['couponId'],$this->d['uid']);
+     				$this->user_coupon_get->setStatus($couponId,$this->d['uid']);
      			}
      		}
-     		$updateOrder = $this->updateMallOrder($order_id,$this->d['couponId'],$orderSupplyPrice,$orderShopPrice,$orderActualPrice,$orderActualIntegral,$orderActualCoupn);
+     		$updateOrder = $this->updateMallOrder($order_id,$couponId,$orderSupplyPrice,$orderShopPrice,$orderActualPrice,$orderActualIntegral,$orderActualCoupn);
      		if (!$updateOrder) {
      			$this->db->trans_rollback();
      			$this->jsonMessage('更新订单失败');
@@ -195,7 +199,7 @@ class Payment extends MW_Controller {
       */
      private function creat_main_order($payId,$subtotal,$pay_bank) {
      
-     	$main_params['uid'] = $this->uid;
+     	$main_params['uid'] = $this->d['uid'];
      	$main_params['pay_bank'] = $pay_bank; //支付银行
      	$main_params['pay_id'] = $payId;
      	$main_params['created_at'] = date('Y-m-d H:i:s');
@@ -375,7 +379,7 @@ class Payment extends MW_Controller {
      		$argc[$supplier_id]['supplier_id'] = $supplier_id;
      		$argc[$supplier_id]['goods'][] = $item;
      	}
-     	$argc = $this->getFreight($argc,$area,$total);
+     	$argc = $this->getFreight($argc,$area,$total,$flag=2);
      	return array(
      		'order' => $argc,
      		'total' => $total  //总价多少钱
@@ -399,7 +403,7 @@ class Payment extends MW_Controller {
      		$regionNames[] = $item->region_name;
      	}
      	if (empty($postData['addressId'])) {
-     		$param['uid'] = $this->uid;
+     		$param['uid'] = $postData['uid'];
      		$param['province_id'] = $postData['province_id'];
      		$param['province_name'] = $regionNames[0];
      		$param['city_id'] = $postData['city_id'];
@@ -477,15 +481,29 @@ class Payment extends MW_Controller {
      }
      
      /**
-      * 获取运维信息
+      * flag =1 为产品购买页获取运费
+      * flag =2 为生成订单的时候返回运费和产品信息
       * @param unknown $cartArr
+      * @param unknown $area
+      * @param unknown $totalPrice
+      * @param number $flag
+      * @return number|unknown|Ambigous <number, unknown>
       */
-     private function getFreight($cartArr,$area,$totalPrice) {
+     private function getFreight($cartArr,$area,$totalPrice,$flag=1) {
      
      	$freight = array(); //获取商品是哪个模板 哪个地区 是否是
-     	$tranCost = 0; //总运费
-     	if (bcsub($totalPrice,99,2)>=0) { //满99元包邮
-     		return $tranCost;
+     	if ($flag==1) {
+     		$tranCost = 0; //总运费
+     		if (bcsub($totalPrice,99,2)>=0) { //满99元包邮
+     			return $tranCost;
+     		}
+     	} else {
+     		if (bcsub($totalPrice,99,2)>=0) { //满99元包邮
+     			foreach ($cartArr as $key => $item) {
+     				$cartArr[$key]['sub'] = 0; // 每个商品运费为零
+     			}
+     			return $cartArr;
+     		}
      	}
      	foreach ($cartArr as $key => $item) {
      		foreach ($item['goods'] as $val) {//循环店铺
@@ -557,9 +575,13 @@ class Payment extends MW_Controller {
      		}
      		$cartArr[$key]['sub'] = $sub;  //每个供应商下的产品的运费
      	}
-     	foreach ($cartArr as $seller_uid=>$val) {
-     		$tranCost += $val['sub'];
+     	if ($flag == 1) {
+     		foreach ($cartArr as $seller_uid=>$val) {
+     			$tranCost += $val['sub'];
+     		}
+     		return $tranCost; // 购买页面返回运费
+     	} else {
+     		return $cartArr;// 订单填写页面返回产品信息
      	}
-     	return $tranCost;
      }
 }
