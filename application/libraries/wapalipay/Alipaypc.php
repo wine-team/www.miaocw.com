@@ -82,13 +82,17 @@ class Alipaypc
             }
             if(!empty($doc->getElementsByTagName( "notify" )->item(0)->nodeValue)) {
                 $out_trade_no = $doc->getElementsByTagName( "out_trade_no" )->item(0)->nodeValue;// 商户订单号  pay_id
+                $trade_no = $doc->getElementsByTagName( "trade_no" )->item(0)->nodeValue;// 支付宝订单号  
                 $total_fee = $doc->getElementsByTagName( "total_fee" )->item(0)->nodeValue; //总价
                 $gmt_payment = $doc->getElementsByTagName( "gmt_payment" )->item(0)->nodeValue;
                 $trade_status = $doc->getElementsByTagName( "trade_status" )->item(0)->nodeValue; //交易状态
             }
             if ($trade_status == "TRADE_FINISHED" || $trade_status == "TRADE_SUCCESS") {
                 echo "success";
-                return $out_trade_no;
+                return array(
+                	'out_trade_no' => $out_trade_no,
+                	'trade_no' => $trade_no
+                );
             }
         } else {
             echo "fail";

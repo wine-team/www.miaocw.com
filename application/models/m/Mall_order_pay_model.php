@@ -11,6 +11,17 @@ class Mall_order_pay_model extends CI_Model
     {
        return $this->db->insert($this->table, $params);
     }
+
+    /**
+     * 更新订单信息
+     * @param unknown $order_sn
+     * @param unknown $param
+     */
+    public function updatePayOrderInfo($pay_id,$param){
+    	 
+    	$this->db->where('pay_id',$pay_id);
+    	return $this->db->update($this->table,$param);
+    }
     
      /**
      * 获取总订单信息

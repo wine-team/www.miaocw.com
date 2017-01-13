@@ -71,4 +71,19 @@ class Mall_order_product_model extends CI_Model
     	}
     	return $this->db->get();
     }
+    
+    /**
+     * 根据pay_id产品信息
+     * @param unknown $pay_id
+     */
+    public function getOrderProductByPayId($pay_id) {
+    	 
+    	$this->db->select('user.phone,mall_order_product.goods_id,mall_order_product.refund_num,mall_goods_base.minus_stock');
+    	$this->db->from($this->table);
+    	$this->db->join('mall_goods_base','mall_goods_base.goods_id=mall_order_product.goods_id');
+    	$this->db->join('mall_order_base','mall_order_base.order_id=mall_order_product.order_id');
+    	$this->db->join('user','mall_order_base.seller_uid=user.uid');
+    	$this->db->where('mall_order_base.pay_id',$pay_id);
+    	return $this->db->get();
+    }
 }

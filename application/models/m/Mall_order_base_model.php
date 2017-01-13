@@ -64,6 +64,17 @@ class Mall_order_base_model extends CI_Model
     }
     
     /**
+     * 根据pay_id更新内容
+     * @param unknown $pay_id
+     * @param unknown $param
+     */
+    public function updateByPayId($pay_id,$param) {
+    	 
+    	$this->db->where('pay_id',$pay_id);
+    	return $this->db->update($this->table,$param);
+    }
+    
+    /**
      * 生产订单
      * @param unknown $params
      */

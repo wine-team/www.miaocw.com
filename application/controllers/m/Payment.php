@@ -6,6 +6,7 @@ class Payment extends MW_Controller {
 	public function _init() {
 		
 		$this->d = $this->input->post();
+		$this->load->library('wapalipay/alipaypc', null, 'alipaypc');
 		$this->load->model('m/user_model','user');
 		$this->load->model('m/region_model','region');
 		$this->load->model('m/mall_address_model','mall_address');
@@ -226,6 +227,63 @@ class Payment extends MW_Controller {
      	);
      	$this->jsonMessage('',array('goods'=>$orderProduct,'order'=>$info));
      }
+     
+      /**
+      * 支付宝支付
+      */
+     public function alipayPay() {
+     	
+     	if (empty($this->d['uid'])) {
+     		$this->jsonMessage('请传用户UID');
+     	}
+     	if (empty($this->d['pay'])) {
+     		$this->jsonMessage('请传总订单ID');
+     	}
+     	$payId = base64_decode($this->d['pay']);
+     	$mainRes = $this->mall_order_pay->findOrderPayByRes(array('uid'=>$this->d['uid'],'pay_id'=>$payId));
+     	if ($mainRes->num_rows()<=0) {
+     		$this->jsonMessage('主订单不存在');
+     	}
+     	$mainOrder = $mainRes->row(0);
+     	$alipayParameter = $this->alipayParameter($mainOrder, $pay_bank=1);
+     	$this->alipaypc->callAlipayApi($alipayParameter);
+     }
+     
+      /**
+      * 支付宝同步回掉
+      */
+     public function alipayReturn() {
+     	
+     	$respons = $this->alipaypc->responseAlipayReturn();
+     	if ($respons) {
+     		header('Location:'.$this->config->m_base_url.'sex/home/success');// 成功页面
+     	}
+     	header('Location:'.$this->config->m_base_url.'sex/home/fail');// 失败页面
+     }
+     
+     /**
+      * 获取支付宝需要参数。
+      * @param object $payRecord
+      * @param paybank $pay_bank
+      * @param object $balancePay --- 订单支付总金额
+      * @return array
+      */
+     private function alipayParameter($mainOrder, $pay_bank)
+     {
+     	$parameter = array(
+     			'out_trade_no' => $mainOrder->pay_id,
+     			'subject'      => $mainOrder->pay_id,
+     			'total_fee'    => $mainOrder->order_amount,
+     			'body'         => '妙处网商品',
+     			'show_url'     => $_SERVER['HTTP_REFERER'],
+     			'notify_url'   => base_url('m/paycallback/alipayNotify'),
+     			'call_back_url'=> base_url('m/payment/alipayReturn'),
+     			'pay_method'   => $pay_bank,
+     			'defaultbank'  => $pay_bank
+     	);
+     	return $parameter;
+     }
+     
      
      
      /**

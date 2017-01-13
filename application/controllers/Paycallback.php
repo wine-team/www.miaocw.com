@@ -30,7 +30,7 @@ class Paycallback extends MW_Controller {
 			if ($mallPay->row(0)->pay_status >1 ) { 
 			    return false; // 已经支付
 			}
-			$updatePay = $this->mall_order_pay->updatePayOrderInfo($pay_id,array('pay_status'=>2, 'other_trade_no'=>$_POST['trade_no']));
+			$updatePay = $this->mall_order_pay->updatePayOrderInfo($pay_id,array('pay_status'=>2, 'other_trade_no'=>$_POST['trade_no']));// 支付宝他网订单号
 			$updateMallOrder = $this->mall_order_base->updateByPayId($pay_id,array('order_state'=>2,'order_status'=>3,'pay_time'=>date('Y-m-d H:i:s',time()),'updated_at'=>date('Y-m-d H:i:s',time())));
 			$productRes = $this->mall_order_product->getOrderProductByPayId($pay_id);
 			foreach ($productRes->result() as $item) {
