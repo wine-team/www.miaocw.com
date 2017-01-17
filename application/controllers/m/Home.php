@@ -34,7 +34,7 @@ class Home extends MW_Controller {
 	 */
 	public function homeCategory() {
 		
-		$salesId = array(2,3);
+		$salesId = array(2,3,5,6,7);
 		$sf = 'sales_id,sales_name,link_url,image';
 		$cf = 'sales_id,title,link_url';
 		$result = $this->sales_topic->getSalesTopic($salesId,$sf);
@@ -56,7 +56,7 @@ class Home extends MW_Controller {
 	    foreach ($result->result() as $val) {
 	    	$goodsId[] = $val->product_id;
 	    }
-	    $f = 'goods_id,goods_name,goods_img,shop_price,promote_price,promote_start_date,promote_end_date';
+	    $f = 'goods_id,goods_name,goods_img,shop_price,promote_price,promote_start_date,promote_end_date,sale_count';
 	    $gResult = $this->mall_goods_base->getGoodsByGoodsId($goodsId,$f);
 	    $goodResult = $gResult->result();
 	    $this->jsonMessage('',$goodResult);
