@@ -158,7 +158,7 @@ class Home extends MW_Controller {
 		if (empty($this->d['goods_id'])) {
 			$this->jsonMessage('请传产品ID');
 		}
-		$f = 'goods_id,goods_name,goods_img,goods_sku,market_price,shop_price,provide_price,
+		$f = 'goods_id,goods_name,goods_img,goods_sku,market_price,shop_price,provide_price,in_stock,
 			  promote_price,promote_start_date,promote_end_date,attr_set_id,goods_desc,wap_goods_desc,
 			  attr_spec,attr_value,booking_limit,limit_num,freight_id,freight_cost,
 			  sale_count';
@@ -287,5 +287,41 @@ class Home extends MW_Controller {
 	    $this->jsonMessage('加入购物车失败');
 	}
 	
+	 /**
+	 * 获取购物车信息--统计
+	 */
+	public function getCartInfor() {
+		
+		if (empty($this->d['uid'])) {
+			$this->jsonMessage('请传用户UID');
+		}
+		$res = $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->d['uid']));
+		$num = 0;
+		$sum = 0;
+		foreach ($res->result() as $item) {
+			$num += $item->goods_num;
+			$total_price = $this->getTotalPrice($item);
+			$sum += bcmul($total_price,$item->goods_num,2);
+		}
+		echo json_encode(array(
+				'status' => true,
+				'num' => $num,
+				'sum' => $sum
+		));exit;
+	}
+	
+	/**
+	 * 获取实际价格  促销价和妙处网销售价
+	 * @param unknown $val
+	 */
+	private function getTotalPrice($val)
+	{
+		if( !empty($val->promote_price) && !empty($val->promote_start_date) && !empty($val->promote_end_date) && ($val->promote_start_date<=time()) && ($val->promote_end_date>=time())) {
+			$total_price =  $val->promote_price;
+		} else {
+			$total_price = $val->shop_price;
+		}
+		return $total_price;
+	}
 	
 }
