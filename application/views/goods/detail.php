@@ -25,7 +25,8 @@
 		</div>
 		<div class="gd_r rel left">
 				<div class="wb">
-					<h1 class="gh1"><?php echo $goods->goods_name;?></h1><span class="pl5 pr5 gh1"><em class="c_blue">(货号:<i id="ECS_GOODS_SKU"><?php echo $goods->goods_sku;?></i>)</em></span>
+					<h1 class="gh1"><?php echo $goods->goods_name;?></h1>
+					<span class="pl5 pr5 gh1"><em class="c_blue">(货号:<i id="ECS_GOODS_SKU"><?php echo $goods->goods_sku;?></i>)</em></span>
 				</div>
 				<h2 class="gh2 yahei f14"><?php echo $goods->goods_brief;?></h2>
 				<div class="cg_bg">
@@ -82,7 +83,9 @@
 						    <?php if(!empty($val['spec_value'])):?>
 							<dl class="gdl dato">
 								<dt>
-									<span class="c5"><?php echo $val['spec_name'];?></span>
+									<span class="c5">
+										<?php echo $val['spec_name'];?>
+									</span>
 								</dt>
 								<dd>
 									<div class="catt over">

@@ -91,7 +91,7 @@ class Payment extends MW_Controller {
      	if (empty($deliveryArray)) {
      		$this->jsonMessage('收货地址出错');
      	}
-     	$goods = $this->encryptGoods($this->d['goods'],$deliveryArray['area']);// 检验商品数量和限制购买数量
+     	$goods = $this->encryptGoods(json_decode($this->d['goods'],true),$deliveryArray['area']);// 检验商品数量和限制购买数量
      	if (empty($goods)) {
      		$this->jsonMessage('产品生成出错');
      	}
@@ -446,7 +446,7 @@ class Payment extends MW_Controller {
       * 产品订单生成
       */
      private function encryptGoods($goods,$area) {
-     	
+  
      	$goodsIdArr = array_keys($goods);
      	$goodsRes = $this->mall_cart_goods->getCartGoodsByRes(array('uid'=>$this->d['uid'],'goods_id'=>$goodsIdArr));
      	if ($goodsRes->num_rows()<=0) {
@@ -532,7 +532,7 @@ class Payment extends MW_Controller {
      	if (empty($postData['aliasName'])) {
      		$this->jsonMessage('请传用户名');
      	}
-     	if (empty($postData['goods']) || !is_array($postData['goods'])) {
+     	if (empty($postData['goods'])) {
      		$this->jsonMessage('快去选购产品哦');
      	}
      	if (empty($postData['receiver_name'])) {
