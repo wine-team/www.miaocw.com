@@ -7,6 +7,7 @@ class Home extends MW_Controller {
 		
 		$this->d = $this->input->post();
 		$this->load->model('m/advert_model','advert');
+		$this->load->model('m/user_feedback_model','user_feedback');
 		$this->load->model('m/mall_cart_goods_model','mall_cart_goods');
 		$this->load->model('m/mall_goods_base_model','mall_goods_base');
 		$this->load->model('m/sales_topic_model','sales_topic');
@@ -322,6 +323,18 @@ class Home extends MW_Controller {
 			$total_price = $val->shop_price;
 		}
 		return $total_price;
+	}
+	
+	/**
+	 * 意见反馈表单提交
+	 **/
+	public function feedback() {
+	
+		$res = $this->user_feedback->insert($this->d);
+		if ($res) {
+			$this->jsonMessage('','插入成功');
+		}
+		$this->jsonMessage('网络繁忙，请稍后再试');
 	}
 	
 }
