@@ -62,6 +62,35 @@ class Home extends MW_Controller {
 	    $goodResult = $gResult->result();
 	    $this->jsonMessage('',$goodResult);
 	} 
+	
+	 /**
+	 * 获取推销产品
+	 */
+	public function getSale() {
+		
+		if (empty($this->d['sales_id'])) {
+			$this->jsonMessage('请传促销ID');
+		}
+		$sales = $this->sales_topic->getSalesTopic($this->d['sales_id'],'image')->result();
+		$cate = $this->sales_topic_category->getSalesTopicCate($this->d['sales_id'],'sales_id,category_id,title,note');
+		$productId = $this->sales_topic_category->getSalesProduct($this->d['sales_id'],true);
+	    foreach ($productId as $key => $val) {
+	    	foreach ($val as $jj) {
+	    		$goodsIdArray[] = $jj;
+	    	}
+	    }
+	    $f = 'goods_id,goods_name,shop_price,promote_price,promote_start_date,promote_end_date,goods_img,sale_count';
+	    $goods = $this->mall_goods_base->getGoodsByGoodsId($goodsIdArray,$f);
+	    foreach ($goods->result() as $i=>$item) {
+	    	$goodsArray[$item->goods_id] = $item;
+	    }
+	    foreach ($productId as $key=>$val) {
+	    	foreach ($val as $jj) {
+	    		$product[$key][] = $goodsArray[$jj];
+	    	}
+	    }
+	    $this->jsonMessage('',array('sales'=>$sales,'cate'=>$cate,'goods'=>$product));
+	}
 		
 	/**
 	 ** 获取购物车
