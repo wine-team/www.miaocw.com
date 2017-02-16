@@ -79,7 +79,7 @@ class Home extends MW_Controller {
 	    		$goodsIdArray[] = $jj;
 	    	}
 	    }
-	    $f = 'goods_id,goods_name,shop_price,promote_price,promote_start_date,promote_end_date,goods_img,sale_count';
+	    $f = 'goods_id,goods_name,goods_brief,market_price,shop_price,promote_price,promote_start_date,promote_end_date,goods_img,sale_count';
 	    $goods = $this->mall_goods_base->getGoodsByGoodsId($goodsIdArray,$f);
 	    foreach ($goods->result() as $i=>$item) {
 	    	$goodsArray[$item->goods_id] = $item;
