@@ -99,6 +99,23 @@ class Mall_goods_base_model extends CI_Model{
     }
     
      /**
+     * 总数
+     * @param unknown $search
+     */
+    public function total($search=array()) {
+    	
+    	if (!empty($search['keyword'])) {
+    		$this->db->where("((`mall_goods_base`.`goods_name` LIKE '%{$search['keyword']}%') OR (`mall_goods_base`.`goods_sku` LIKE '%{$search['keyword']}%'))");
+    	}
+    	if (!empty($search['category_id'])) {
+    		$this->db->where("`mall_goods_base`.`goods_id` IN (SELECT DISTINCT goods_id FROM mall_category_product WHERE category_id=".$search['category_id'].")");
+    	}
+    	$this->db->where('is_on_sale', 1);
+    	$this->db->where('is_check', 2);
+    	return $this->db->count_all_results($this->table);
+    }
+    
+     /**
      * 更新浏览量
      * @param unknown $param
      */
