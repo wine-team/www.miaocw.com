@@ -146,7 +146,7 @@ class Home extends MW_Controller {
 		$pg = isset($this->d['pg']) ? $this->d['pg'] : 1;
 		$pgNum = isset($this->d['pgNum']) ? $this->d['pgNum'] : 20;
 		$num = ($pg-1)*$pgNum;
-		$f = 'goods_id,goods_name,goods_img,shop_price,promote_price,promote_start_date,promote_end_date,freight_id,freight_cost,sale_count,review_count';
+		$f = 'goods_id,goods_name,goods_img,shop_price,provide_price,promote_price,promote_start_date,promote_end_date,freight_id,freight_cost,sale_count,review_count';
 		$param = array(
 			'order' => isset($this->d['order']) ? (int)$this->d['order'] : 1,
 			'keyword' => empty($this->d['keyword']) ? '' : trim(addslashes($this->d['keyword'])),
@@ -155,8 +155,16 @@ class Home extends MW_Controller {
 		$result = $this->mall_goods_base->page_list($pgNum,$num,$param,$f);
 	    $goodsResult = $result->result();
 	    $cateReult = $this->get_ct_param($this->d);
-	    $this->jsonMessage('',array('ct'=>$cateReult,'goods'=>$goodsResult));
+	    $total = $this->mall_goods_base->total($param);
+	    $pgSum = ceil($total/$pgNum);
+	    $infor = array(
+	    	'total' => $total,
+	    	'pgSum' => $pgSum,
+	    	'pg' => $pg
+	    );
+	    $this->jsonMessage('',array('infor'=>$infor,'ct'=>$cateReult,'goods'=>$goodsResult));
 	}
+	
 	
 	 /**
 	 * 获取分类
