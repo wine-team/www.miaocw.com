@@ -3,7 +3,6 @@ class Home extends MW_Controller
 {
     public function _init()
     {
-        $this->load->library('user_agent');
         $this->load->model('advert_model','advert');
         $this->load->model('cms_block_model','cms_block');
         $this->load->model('mall_brand_model','mall_brand');
