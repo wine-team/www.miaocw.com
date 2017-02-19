@@ -14,6 +14,7 @@ class Mall_address_model extends CI_Model
     		$this->db->where('uid',$param['uid']);
     	}
     	$this->db->order_by('is_default','desc'); // 2为默认  1为非默认
+    	$this->db->order_by('address_id','desc'); //
     	return $this->db->get($this->table);
     }
 

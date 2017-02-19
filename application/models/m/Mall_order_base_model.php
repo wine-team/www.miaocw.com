@@ -11,7 +11,7 @@ class Mall_order_base_model extends CI_Model
     	$this->db->select('mall_order_base.order_id,mall_order_base.pay_id,mall_order_base.order_state,
     					   mall_order_base.order_status,mall_order_base.user_name,mall_order_base.pay_method,
     			           mall_order_base.pay_bank,mall_order_base.deliver_price,mall_order_base.order_supply_price,
-    			           mall_order_base.order_shop_price,mall_order_base.actual_price,mall_order_base.order_pay_price,
+    			           mall_order_base.order_shop_price,mall_order_base.actual_price,mall_order_base.order_pay_price,mall_order_base.created_at,
     			           mall_order_product.goods_id,mall_order_product.goods_name,mall_order_product.attr_value,
     			           mall_order_product.goods_img
     			         ');
@@ -19,6 +19,7 @@ class Mall_order_base_model extends CI_Model
     	$this->db->join('mall_order_product','mall_order_base.order_id=mall_order_product.order_id');
         $this->db->where('mall_order_base.payer_uid',$param['uid']);
         $this->db->group_by('mall_order_product.order_id');
+        $this->db->order_by('mall_order_product.order_id','desc');
         return $this->db->get();
     }
     
