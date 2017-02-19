@@ -30,4 +30,16 @@ class Mall_enshrine_model extends CI_Model
     	return $this->db->insert($this->table,$param);
     }
     
+    /**
+     * 总数
+     * @param unknown $param
+     */
+    public function total($param=array()){
+    	
+    	if(!empty($param['uid'])) {
+    		$this->db->where('uid',$param['uid']);
+    	}
+    	return $this->db->count_all_results($this->table);
+    }
+    
 }

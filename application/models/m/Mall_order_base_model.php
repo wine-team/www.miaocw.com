@@ -100,4 +100,13 @@ class Mall_order_base_model extends CI_Model
     	}
     	return $this->db->get();
     }
+    
+    public function getOrderTotal($param=array()) {
+    	
+    	if (!empty($param['uid'])) {
+    		$this->db->where('payer_uid',$param['uid']);
+    	}
+    	return $this->db->count_all_results($this->table);
+    }
+    
 }
