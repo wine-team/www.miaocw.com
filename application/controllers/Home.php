@@ -18,9 +18,6 @@ class Home extends MW_Controller
     */
     public function grid()
     {
-        if ($this->agent->is_mobile()) {
-            redirect($this->config->mian_base_url.'m/home/index');
-        }
         $cms_block = array(
             'home_keyword', 'head_right_advert','head_today_recommend',
             'head_recommend_down','head_hot_keyword','homepage_advert',
