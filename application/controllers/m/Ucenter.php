@@ -283,12 +283,14 @@ class Ucenter extends MW_Controller {
 		if (empty($this->d['uid'])) {
 			$this->jsonMessage('请传用户UID');
 		}
-		$f = 'alias_name,phone,email,sex,photo';
+		$f = 'alias_name,phone,email,sex,photo,pay_points,user_money,frozen_money';
 		$result = $this->user->findByUid($this->d['uid'],$f);
 		if ($result->num_rows()<=0) {
 			$this->jsonMessage('暂无该用户信息');
 		}
 		$user = $result->row(0);
+		$user->shireTotal = $this->mall_enshrine->total(array('uid'=>$this->d['uid']));
+		$user->orderTotal = $this->mall_order_base->getOrderTotal(array('uid'=>$this->d['uid']));
 		$this->jsonMessage('',$user);
 	}
 	
