@@ -1,3 +1,4 @@
+<img src="miaow/images/sxqq.png" id="erma" style="position: fixed; right: -150px; z-index: 19; bottom: 0px;" width="150" height="auto" />
 <div id="minbar" class="minbar">
 	<div class="r_panel">
 		<ul class="m_mid" id="m_mid">
