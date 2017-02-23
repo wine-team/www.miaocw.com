@@ -184,7 +184,7 @@ class Goods extends MW_Controller
      */
     public function productEwm($goods_id)
     {
-        $url = $this->config->main_base_url.'goods/detail?goods_id='.$goods_id.'.html';
+        $url = $this->config->m_base_url.'sex/home/goods/'.$goods_id.'.html';
         $name = 'shangpin-'.$goods_id.'.png';
         $path = $this->config->upload_image_path('common/ewm').$name;
         $this->QRcode->png($url,$path,4,10);
