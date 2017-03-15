@@ -164,8 +164,10 @@
             <li><a href="<?php echo site_url();?>" rel="nofollow">首页</a></li>
             <li><a href="<?php echo site_url('goods/search?category_id=25');?>">避孕套</a></li>
             <li><a href="<?php echo site_url('goods/search?category_id=22');?>">情趣内衣</a></li>
+            <!--
             <li><a href="<?php echo site_url('goods/search?category_id=1');?>">男性玩具</a></li>
             <li><a href="<?php echo site_url('goods/search?category_id=2');?>">女性玩具</a></li>
+             -->
             <li><a href="<?php echo site_url('goods/search?category_id=21');?>">延时助情</a></li>
             <li><a href="<?php echo site_url('goods/search?category_id=23');?>">双人情趣</a></li>
             <li><a href="<?php echo site_url('goods/search?category_id=24');?>">润滑液</a></li>
